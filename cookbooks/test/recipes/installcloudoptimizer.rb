@@ -3,10 +3,11 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "=== Starting Install CloudOptimizer ==="
+log "========== Ending CloudOptimizer Installation =========="
 
 # Prepare EULA Acceptance
 
+log "Noting EULA acceptance."
 directory "/etc/cloudoptimizer" do
 	owner "root"
 	group "root"
@@ -24,9 +25,10 @@ end
 
 # Set up CloudOpt repository
 
+log "Adding CloudOpt software repositories."
 case node[:platform]
 when "ubuntu"
-	log "Installing on Ubuntu"
+	log "Installing on Ubuntu; using apt repository."
 	remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
 		source "http://apt.cloudopt.com/cloudopt.maverick.list"
 	end
@@ -39,9 +41,10 @@ when "ubuntu"
 	execute "apt-get" do
 		command "apt-get update"
 	end
+	log "Installing rsyslog for better compatibility on Ubuntu."
 	package "rsyslog"
 when "centos"
-	log "Installing on CentOS"
+	log "Installing on CentOS; using yum repository."
 	remote_file "/var/tmp/CloudOpt.selfextracting" do
 		source "https://s3.amazonaws.com/rpm-cloudopt/CloudOpt.selfextracting"
 		mode "0755"
@@ -53,6 +56,7 @@ end
 
 # Set up firewall rules
 
+log "Modifying firewall rules to allow CloudOptimizer ports."
 if node[:sys_firewall][:enabled] == "enabled"
 	include_recipe "iptables"
 	sys_firewall "9001"
@@ -62,6 +66,7 @@ end
 
 # Install CloudOptimizer
 
+log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-log "=== Ending Install CloudOptimizer ==="
+log "========== Ending CloudOptimizer Installation =========="
