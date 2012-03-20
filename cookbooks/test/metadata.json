@@ -24,7 +24,8 @@
   "groupings": {
   },
   "recipes": {
-    "test::helloworld": "Hello World program"
+    "test::helloworld": "Hello World program",
+    "test::installcloudoptimizer": "Main installer for cloudoptimizer package"
   },
   "version": "0.0.1"
 }
