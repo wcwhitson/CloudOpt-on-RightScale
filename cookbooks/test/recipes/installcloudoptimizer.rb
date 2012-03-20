@@ -69,7 +69,7 @@ end
 log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-co_config = node[:test][:configuration][:stored][:cloudoptimizer]
+co_config = "node[:test][:configuration][:stored][:cloudoptimizer]"
 log "Installing saved configuration #{co_config}"
 
 remote_file "/etc/cloudoptimizer.conf" do
