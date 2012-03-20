@@ -24,7 +24,9 @@ end
 
 # Set up CloudOpt repository
 
-if node[:platform] == "ubuntu"
+case node[:platform]
+	when "ubuntu"
+	log "Installing on Ubuntu"
 	execute "wget" do
 		command "wget http://apt.cloudopt.com/cloudopt.maverick.list --directory-prefix=/etc/apt/sources.list.d"
 		action :run
@@ -41,8 +43,8 @@ if node[:platform] == "ubuntu"
 		command "apt-get update"
 		action :run
 	end
-end
-if node[:platform] == "centos"
+	when "centos"
+	log "Installing on CentOS"
 	execute "wget" do
 		command "wget https://s3.amazonaws.com/rpm-cloudopt/CloudOpt.selfextracting"
 		action :run
@@ -55,6 +57,8 @@ if node[:platform] == "centos"
 		command "./CloudOpt.selfextracting"
 		action :run
 	end
+	else
+	log "Can't install.  This node is neither Ubuntu nor CentOS."
 end
 
 # Install CloudOptimizer
