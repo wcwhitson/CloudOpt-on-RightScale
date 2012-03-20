@@ -18,4 +18,5 @@ attribute "test/configuration/stored/vtun",
   :display_name => "Stored vtun configuration",
   :description => "URL to a vtund.conf file containing your saved configuration",
   :required => "optional",
+  :default => "none",
   :recipes => [ "test::installcloudoptimizer" ]

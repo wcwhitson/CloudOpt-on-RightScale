@@ -74,6 +74,7 @@ package "cloudoptimizer"
 if node[:test][:configuration][:stored][:cloudoptimizer] == 'none'
 	log "No stored cloudoptimizer configuration specified."
 else
+	$reload_config = "yes"
 	log "Installing saved cloudoptimizer configuration node[:test][:configuration][:stored][:cloudoptimizer]"
 	remote_file "/etc/cloudoptimizer.conf" do
 		source node[:test][:configuration][:stored][:cloudoptimizer]
@@ -83,15 +84,23 @@ else
 	end
 end
 
-#remote_file "/etc/vtund.conf" do
-#        source node[:test][:configuration][:stored][:vtun]
-#        owner "root"
-#        group "root"
-#        mode "0644"
-#end
+if node[:test][:configuration][:stored][:vtun] == 'none'
+        log "No stored vtun configuration specified."
+else
+	$reload_config = "yes"
+        log "Installing saved vtun configuration node[:test][:configuration][:stored][:vtun]"
+        remote_file "/etc/vtund.conf" do
+                source node[:test][:configuration][:stored][:vtun]
+                owner "root"
+                group "root"
+                mode "0644"
+        end
+end
 
-service "cloudoptimizer" do
-	action :restart
+if $reload_config == "yes"
+	service "cloudoptimizer" do
+		action :restart
+	end
 end
 
 log "========== Ending CloudOptimizer Installation =========="
