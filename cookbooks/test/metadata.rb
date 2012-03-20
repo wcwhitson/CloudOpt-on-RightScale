@@ -10,13 +10,11 @@ recipe		"test::installcloudoptimizer", "Main installer for cloudoptimizer packag
 attribute "test/configuration/stored/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
   :description => "URL to a cloudoptimizer.conf file containing your saved configuration",
-  :type => "string",
   :required => "optional", 
   :recipes => [ "test::installcloudoptimizer" ]
 
 attribute "test/configuration/stored/vtun",
   :display_name => "Stored vtun configuration",
   :description => "URL to a vtund.conf file containing your saved configuration",
-  :type => "string",
   :required => "optional",
   :recipes => [ "test::installcloudoptimizer" ]
