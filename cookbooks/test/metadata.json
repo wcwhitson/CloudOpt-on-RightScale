@@ -20,7 +20,7 @@
   "replacing": {
   },
   "attributes": {
-    "test/configuration/stored/cloudoptimizer.conf": {
+    "test/configuration/stored/cloudoptimizer": {
       "display_name": "Stored configuration",
       "description": "URL to a cloudoptimizer.conf file containing your saved configuration",
       "type": "string",
