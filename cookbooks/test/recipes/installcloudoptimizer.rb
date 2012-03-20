@@ -3,7 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "========== Ending CloudOptimizer Installation =========="
+log "========== Beginning CloudOptimizer Installation =========="
 
 # Prepare EULA Acceptance
 
