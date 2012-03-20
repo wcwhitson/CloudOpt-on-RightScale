@@ -69,21 +69,25 @@ end
 log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-log "Installing saved configuration {node[:test][:configuration][:stored][:cloudoptimizer]}"
-remote_file "/etc/cloudoptimizer.conf" do
-	source node[:test][:configuration][:stored][:cloudoptimizer]
-	only_if #{node[:test][:configuration][:stored][:cloudoptimizer]}
-	owner "root"
-	group "root"
-	mode "0644"
+if node[:test][:configuration][:stored][:cloudoptimizer]
+	log "Test point 1"
 end
 
-remote_file "/etc/vtund.conf" do
-        source node[:test][:configuration][:stored][:vtun]
-        owner "root"
-        group "root"
-        mode "0644"
-end
+#log "Installing saved configuration {node[:test][:configuration][:stored][:cloudoptimizer]}"
+#remote_file "/etc/cloudoptimizer.conf" do
+#	source node[:test][:configuration][:stored][:cloudoptimizer]
+#	only_if #{node[:test][:configuration][:stored][:cloudoptimizer]}
+#	owner "root"
+#	group "root"
+#	mode "0644"
+#end
+#
+#remote_file "/etc/vtund.conf" do
+#        source node[:test][:configuration][:stored][:vtun]
+#        owner "root"
+#        group "root"
+#        mode "0644"
+#end
 
 service "cloudoptimizer" do
 	action :restart
