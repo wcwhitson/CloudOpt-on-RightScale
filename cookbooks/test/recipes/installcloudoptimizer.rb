@@ -69,7 +69,9 @@ end
 log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-if node[:test][:configuration][:stored][:cloudoptimizer] 
+if node[:test][:configuration][:stored][:cloudoptimizer] == nil
+	log "No saved cloudoptimizer configuration specified." 
+else
 	co_config = "node[:test][:configuration][:stored][:cloudoptimizer]"
 	log "Installing saved configuration #{co_config}"
 
