@@ -7,7 +7,7 @@ version          "0.0.1"
 recipe		"test::helloworld", "Hello World program"
 recipe		"test::installcloudoptimizer", "Main installer for cloudoptimizer package"
 
-attribute "config/stored",
+attribute "test/configuration/stored/cloudoptimizer.conf",
   :display_name => "Stored configuration",
   :description => "URL to a cloudoptimizer.conf file containing your saved configuration",
   :required => false,
