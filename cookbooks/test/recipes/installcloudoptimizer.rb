@@ -69,18 +69,15 @@ end
 log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-if node[:test][:configuration][:stored][:cloudoptimizer] == nil
-	log "No saved cloudoptimizer configuration specified." 
-else
-	co_config = "node[:test][:configuration][:stored][:cloudoptimizer]"
-	log "Installing saved configuration #{co_config}"
+co_config = "node[:test][:configuration][:stored][:cloudoptimizer]"
+log "Installing saved configuration #{co_config}"
 
-	remote_file "/etc/cloudoptimizer.conf" do
-		source node[:test][:configuration][:stored][:cloudoptimizer]
-		owner "root"
-		group "root"
-		mode "0644"
-	end
+remote_file "/etc/cloudoptimizer.conf" do
+	source node[:test][:configuration][:stored][:cloudoptimizer]
+	only_if node[:test][:configuration][:stored][:cloudoptimizer]
+	owner "root"
+	group "root"
+	mode "0644"
 end
 
 remote_file "/etc/vtund.conf" do
