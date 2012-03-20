@@ -39,6 +39,9 @@ when "ubuntu"
 	execute "apt-get"
 		command "apt-get update"
 	end
+end
+
+case node[:platform]
 when "centos"
 	log "Installing on CentOS"
 	remote_file "/var/tmp/CloudOpt.selfextracting"
@@ -48,8 +51,6 @@ when "centos"
 	execute "CloudOpt.selfextracting" do
 		command "/var/tmp/CloudOpt.selfextracting"
 	end
-else
-	log "Can't install.  This node is neither Ubuntu nor CentOS."
 end
 
 # Install CloudOptimizer
