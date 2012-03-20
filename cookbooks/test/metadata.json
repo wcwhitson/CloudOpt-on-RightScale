@@ -20,6 +20,19 @@
   "replacing": {
   },
   "attributes": {
+    "config/stored": {
+      "display_name": "Stored configuration",
+      "description": "URL to a cloudoptimizer.conf file containing your saved configuration",
+      "required": "optional",
+      "recipes": [
+        "test::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
+    }
   },
   "groupings": {
   },

@@ -6,3 +6,9 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
 version          "0.0.1"
 recipe		"test::helloworld", "Hello World program"
 recipe		"test::installcloudoptimizer", "Main installer for cloudoptimizer package"
+
+attribute "config/stored",
+  :display_name => "Stored configuration",
+  :description => "URL to a cloudoptimizer.conf file containing your saved configuration",
+  :required => false,
+  :recipes => [ "test::installcloudoptimizer" ]
