@@ -25,7 +25,7 @@ end
 # Set up CloudOpt repository
 
 case node[:platform]
-	when "ubuntu"
+when "ubuntu"
 	log "Installing on Ubuntu"
 	remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
 		source "http://apt.cloudopt.com/cloudopt.maverick.list"
@@ -39,22 +39,16 @@ case node[:platform]
 	execute "apt-get"
 		command "apt-get update"
 	end
-	end
-	when "centos"
+when "centos"
 	log "Installing on CentOS"
-#	execute "wget" do
-#		command "wget https://s3.amazonaws.com/rpm-cloudopt/CloudOpt.selfextracting"
-#		action :run
-#	end
-#	execute "chmod" do
-#		command "chmod u+x CloudOpt.selfextracting"
-#		action :run
-#	end
-#	execute "CloudOpt.selfextracting" do
-#		command "./CloudOpt.selfextracting"
-#		action :run
-#	end
-	else
+	remote_file "/var/tmp/CloudOpt.selfextracting"
+		source "https://s3.amazonaws.com/rpm-cloudopt/CloudOpt.selfextracting"
+		mode "0755"
+	end
+	execute "CloudOpt.selfextracting" do
+		command "/var/tmp/CloudOpt.selfextracting"
+	end
+else
 	log "Can't install.  This node is neither Ubuntu nor CentOS."
 end
 
