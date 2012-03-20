@@ -11,6 +11,7 @@ attribute "test/configuration/stored/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
   :description => "URL to a cloudoptimizer.conf file containing your saved configuration",
   :required => "optional", 
+  :default => "none",
   :recipes => [ "test::installcloudoptimizer" ]
 
 attribute "test/configuration/stored/vtun",
