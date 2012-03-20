@@ -1,5 +1,5 @@
-maintainer       "YOUR_COMPANY_NAME"
-maintainer_email "YOUR_EMAIL"
+maintainer       "CloudOpt, Inc."
+maintainer_email "support@cloudopt.com"
 license          "All rights reserved"
 description      "Installs/Configures test"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
@@ -10,5 +10,6 @@ recipe		"test::installcloudoptimizer", "Main installer for cloudoptimizer packag
 attribute "test/configuration/stored/cloudoptimizer.conf",
   :display_name => "Stored configuration",
   :description => "URL to a cloudoptimizer.conf file containing your saved configuration",
-  :required => false,
+  :type => "string",
+  :required => "optional", 
   :recipes => [ "test::installcloudoptimizer" ]

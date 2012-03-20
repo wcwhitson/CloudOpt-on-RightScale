@@ -2,8 +2,8 @@
   "name": "test",
   "description": "Installs/Configures test",
   "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
-  "maintainer": "YOUR_COMPANY_NAME",
-  "maintainer_email": "YOUR_EMAIL",
+  "maintainer": "CloudOpt, Inc.",
+  "maintainer_email": "support@cloudopt.com",
   "license": "All rights reserved",
   "platforms": {
   },
@@ -23,6 +23,7 @@
     "test/configuration/stored/cloudoptimizer.conf": {
       "display_name": "Stored configuration",
       "description": "URL to a cloudoptimizer.conf file containing your saved configuration",
+      "type": "string",
       "required": "optional",
       "recipes": [
         "test::installcloudoptimizer"
@@ -30,8 +31,7 @@
       "choice": [
 
       ],
-      "calculated": false,
-      "type": "string"
+      "calculated": false
     }
   },
   "groupings": {
