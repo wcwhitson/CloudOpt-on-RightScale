@@ -51,6 +51,15 @@ when "centos"
 	end
 end
 
+# Set up firewall rules
+
+if node[:sys_firewall][:enabled] == "enabled"
+	include_recipe "iptables"
+	sys_firewall "9001"
+	sys_firewall "9002"
+	sys_firewall "9003"
+end
+
 # Install CloudOptimizer
 
 package "cloudoptimizer"
