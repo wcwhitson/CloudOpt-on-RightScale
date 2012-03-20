@@ -69,9 +69,7 @@ end
 log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-if node[:test][:configuration][:stored][:cloudoptimizer]
-	log "Test point 1"
-end
+log "node[:test][:configuration][:stored][:cloudoptimizer]"
 
 #log "Installing saved configuration {node[:test][:configuration][:stored][:cloudoptimizer]}"
 #remote_file "/etc/cloudoptimizer.conf" do
