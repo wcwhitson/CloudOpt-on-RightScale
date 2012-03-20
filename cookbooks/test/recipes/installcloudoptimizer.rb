@@ -8,15 +8,15 @@ log "=== Starting Install CloudOptimizer ==="
 # Prepare EULA Acceptance
 
 directory "/etc/cloudoptimizer" do
-	owner "cloudoptimizer"
-	group "cloudoptimizer"
+	owner "root"
+	group "root"
 	mode "0755"
 	action :create
 end
 
 file "/etc/cloudoptimizer/accept-eula.txt" do
-	owner "cloudoptimizer"
-	group "cloudoptimizer"
+	owner "root"
+	group "root"
 	mode "0755"
 	content "RS Accepted EULA"
 	action :create
