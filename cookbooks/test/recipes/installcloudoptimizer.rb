@@ -70,13 +70,24 @@ log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
 co_config = node[:test][:configuration][:stored][:cloudoptimizer]
-log "Installing saved configuration #(co_config)"
+log "Installing saved configuration #{co_config}"
 
 remote_file "/etc/cloudoptimizer.conf" do
 	source node[:test][:configuration][:stored][:cloudoptimizer]
-	owner "cloudoptimizer"
-	group "cloudoptimizer"
+	owner "root"
+	group "root"
 	mode "0644"
+end
+
+remote_file "/etc/vtund.conf" do
+        source node[:test][:configuration][:stored][:vtun]
+        owner "root"
+        group "root"
+        mode "0644"
+end
+
+service "cloudoptimizer" do
+	action :restart
 end
 
 log "========== Ending CloudOptimizer Installation =========="
