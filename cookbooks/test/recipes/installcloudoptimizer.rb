@@ -41,8 +41,8 @@ if node[:platform] == "ubuntu"
 		command "apt-get update"
 		action :run
 	end
-
-else node[:platform] == "centos"
+end
+if node[:platform] == "centos"
 	execute "wget" do
 		command "wget https://s3.amazonaws.com/rpm-cloudopt/CloudOpt.selfextracting"
 		action :run
