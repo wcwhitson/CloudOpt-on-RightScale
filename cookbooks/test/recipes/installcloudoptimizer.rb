@@ -69,10 +69,14 @@ end
 log "Installing the cloudoptimizer package."
 package "cloudoptimizer"
 
-log "Installing saved configuration (if selected by input)"
+co_config = node[:test][:configuration][:stored][:cloudoptimizer]
+log "Installing saved configuration #(co_config)"
 
 remote_file "/etc/cloudoptimizer.conf" do
 	source node[:test][:configuration][:stored][:cloudoptimizer]
+	owner "cloudoptimizer"
+	group "cloudoptimizer"
+	mode "0644"
 end
 
 log "========== Ending CloudOptimizer Installation =========="
