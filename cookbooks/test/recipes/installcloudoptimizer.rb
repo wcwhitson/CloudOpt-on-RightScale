@@ -39,6 +39,7 @@ when "ubuntu"
 	execute "apt-get" do
 		command "apt-get update"
 	end
+	package "rsyslog"
 when "centos"
 	log "Installing on CentOS"
 	remote_file "/var/tmp/CloudOpt.selfextracting" do
