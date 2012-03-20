@@ -39,6 +39,7 @@ case node[:platform]
 	execute "apt-get"
 		command "apt-get update"
 	end
+	end
 	when "centos"
 	log "Installing on CentOS"
 #	execute "wget" do
