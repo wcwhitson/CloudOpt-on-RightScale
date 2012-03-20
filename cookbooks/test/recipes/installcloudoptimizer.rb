@@ -36,15 +36,12 @@ when "ubuntu"
 	execute "apt-key" do
 		command "apt-key add /var/tmp/cloudopt.key.asc"
 	end
-	execute "apt-get"
+	execute "apt-get" do
 		command "apt-get update"
 	end
-end
-
-case node[:platform]
 when "centos"
 	log "Installing on CentOS"
-	remote_file "/var/tmp/CloudOpt.selfextracting"
+	remote_file "/var/tmp/CloudOpt.selfextracting" do
 		source "https://s3.amazonaws.com/rpm-cloudopt/CloudOpt.selfextracting"
 		mode "0755"
 	end
