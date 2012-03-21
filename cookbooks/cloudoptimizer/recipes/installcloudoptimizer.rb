@@ -75,7 +75,7 @@ package "cloudoptimizer"
 
 # Install stored configurations
 
-if node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer] == 'none'
+if node[:cloudoptimizer][:stored][:cloudoptimizer] == 'none'
 	log "No stored cloudoptimizer configuration specified."
 else
 	$reload_config = "yes"
@@ -88,7 +88,7 @@ else
 	end
 end
 
-if node[:cloudoptimizer][:configuration][:stored][:vtun] == 'none'
+if node[:cloudoptimizer][:stored][:vtun] == 'none'
         log "No stored vtun configuration specified."
 else
 	$reload_config = "yes"
