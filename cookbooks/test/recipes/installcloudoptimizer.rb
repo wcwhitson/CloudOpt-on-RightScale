@@ -64,6 +64,10 @@ if node[:sys_firewall][:enabled] == "enabled"
 	sys_firewall "9003"
 end
 
+# Set up security groups
+
+#if ENV.has_key?('EC2_HOME')
+
 # Install CloudOptimizer
 
 log "Installing the cloudoptimizer package."
