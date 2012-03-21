@@ -97,6 +97,36 @@ else
         end
 end
 
+template "/etc/cloudoptimzer.conf" do
+  source "cloudoptimizer.conf.erb"
+  mode "0644"
+  owner "root"
+  group "root"
+  variables(
+	:home_directory => node[:test][:configuration][:home_directory],
+	:default_cache_size => node[:test][:configuration][:default_cache_size],
+	:socket_location => node[:test][:configuration][:socket_location],
+	:bitmap_size => node[:test][:configuration][:bitmap_size],
+	:db_memory_size => node[:test][:configuration][:db_memory_size],
+	:log_directory => node[:test][:configuration][:log_directory],
+	:log_key => node[:test][:configuration][:log_key],
+	:compression_engine => node[:test][:configuration][:compression_engine],
+	:default_compression_level => node[:test][:configuration][:default_compression_level],
+	:optimistic_deduplication => node[:test][:configuration][:optimistic_deduplication],
+	:cache_promotion => node[:test][:configuration][:cache_promotion],
+	:compress_cache => node[:test][:configuration][:compress_cache],
+	:thread_count => node[:test][:configuration][:thread_count],
+	:intelligent_mesh => node[:test][:configuration][:intelligent_mesh],
+	:local_proxy_address => node[:test][:configuration][:local_proxy_address],
+	:peer_proxy_port => node[:test][:configuration][:peer_proxy_port],
+	:peer_encryption => node[:test][:configuration][:peer_encryption],
+	:ssl_key => node[:test][:configuration][:ssl_key],
+	:ssl_cert => node[:test][:configuration][:ssl_cert],
+	:ssl_ca => node[:test][:configuration][:ssl_ca],
+	:peer_statement => node[:test][:configuration][:peer_statement]
+  )
+end
+
 if $reload_config == "yes"
 	service "cloudoptimizer" do
 		action :restart
