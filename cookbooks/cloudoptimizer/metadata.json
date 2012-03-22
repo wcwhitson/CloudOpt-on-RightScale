@@ -341,6 +341,23 @@
       ],
       "calculated": false,
       "type": "string"
+    },
+    "cloudoptimizer/version": {
+      "display_name": "Version lock",
+      "description": "Lock this server to a particular CloudOptimizer version",
+      "required": "optional",
+      "default": "latest",
+      "choice": [
+        "latest",
+        "0.9.3.2",
+        "0.9.3.1",
+        "0.9.3"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
     }
   },
   "groupings": {

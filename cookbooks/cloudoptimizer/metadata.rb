@@ -166,3 +166,11 @@ attribute "cloudoptimizer/configuration/peer_statement",
   :required => "optional",
   :default => "",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/version",
+  :display_name => "Version lock",
+  :description => "Lock this server to a particular CloudOptimizer version",
+  :required => "optional",
+  :default => "latest",
+  :choice => [ "latest", "0.9.3.2", "0.9.3.1", "0.9.3" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]

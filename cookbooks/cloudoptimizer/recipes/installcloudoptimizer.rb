@@ -70,8 +70,97 @@ end
 
 # Install CloudOptimizer
 
-log "Installing the cloudoptimizer package."
-package "cloudoptimizer"
+if node[:cloudoptimizer][:version] == 'latest'
+	log "Installing the latest cloudoptimizer package."
+	package "cloudoptimizer"
+else
+	case node[:platform]
+	when "ubuntu"
+		case node[:cloudoptimizer][:version]
+		when "0.9.3.2"
+			case node[:languages][:ruby][:host_cpu]
+			when "x86_64"
+				package "cloudoptimizer" do
+					version "0.9.3.2-49"
+					action :install
+				end
+			when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.2-53"
+                                        action :install
+                                end
+			end
+		when "0.9.3.1"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.1"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.1"
+                                        action :install
+                                end
+                        end
+		when "0.9.3"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.3-997"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.3-906"
+                                        action :install
+                                end
+                        end
+		end
+	when "centos"
+                case node[:cloudoptimizer][:version] 
+                when "0.9.3.2"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.2-52"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.2-48"
+                                        action :install
+                                end
+                        end
+                when "0.9.3.1"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.1-41"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.1-38"
+                                        action :install
+                                end
+                        end
+                when "0.9.3"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.2-598"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.3-488"
+                                        action :install
+                                end
+                        end
+                end
+	end
+end
 
 # Install stored configurations
 
