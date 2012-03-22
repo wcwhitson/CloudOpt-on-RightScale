@@ -122,12 +122,12 @@ else
                 when "0.9.3.2"
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
-                                package "cloudoptimizer.x86_64" do
+                                package "cloudoptimizer" do
                                         version "0.9.3.2-52"
                                         action :install
                                 end
                         when "i686"
-                                package "cloudoptimizer.i386" do
+                                package "cloudoptimizer" do
                                         version "0.9.3.2-48"
                                         action :install
                                 end
@@ -135,12 +135,12 @@ else
                 when "0.9.3.1"
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
-                                package "cloudoptimizer.x86_64" do
-                                        version "0.9.3.1-41"
+                                package "cloudoptimizer" do
+                                        version "0.9.3.1-48"
                                         action :install
                                 end
                         when "i686"
-                                package "cloudoptimizer.i386" do
+                                package "cloudoptimizer" do
                                         version "0.9.3.1-38"
                                         action :install
                                 end
@@ -148,12 +148,12 @@ else
                 when "0.9.3"
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
-                                package "cloudoptimizer.x86_64" do
-                                        version "0.9.3-598"
+                                package "cloudoptimizer" do
+                                        version "0.9.3-597"
                                         action :install
                                 end
                         when "i686"
-                                package "cloudoptimizer.i386" do
+                                package "cloudoptimizer" do
                                         version "0.9.3-488"
                                         action :install
                                 end
