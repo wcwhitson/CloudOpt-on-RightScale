@@ -123,33 +123,33 @@ else
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
                         	execute "yum" do
-					command "yum install cloudoptimizer-0.9.3.2"
+					command "yum -y install cloudoptimizer-0.9.3.2"
 				end
 			when "i686"
                                 execute "yum" do
-                                        command "yum install cloudoptimizer-0.9.3.2"
+                                        command "yum -y install cloudoptimizer-0.9.3.2"
                                 end
                         end
                 when "0.9.3.1"
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
                                 execute "yum" do
-                                        command "yum install cloudoptimizer-0.9.3.1"
+                                        command "yum -y install cloudoptimizer-0.9.3.1"
                                 end
                         when "i686"
                                 execute "yum" do
-                                        command "yum install cloudoptimizer-0.9.3.1"
+                                        command "yum -y install cloudoptimizer-0.9.3.1"
                                 end
                         end
                 when "0.9.3"
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
                                 execute "yum" do
-                                        command "yum install cloudoptimizer-0.9.3"
+                                        command "yum -y install cloudoptimizer-0.9.3"
                                 end	
                         when "i686"
                                 execute "yum" do
-                                        command "yum install cloudoptimizer-0.9.3"
+                                        command "yum -y install cloudoptimizer-0.9.3"
                                 end
                         end
                 end
