@@ -124,11 +124,13 @@ else
                         when "x86_64"
                                 package "cloudoptimizer" do
                                         version "0.9.3.2-52"
+					arch "x86_64"
                                         action :install
                                 end
                         when "i686"
                                 package "cloudoptimizer" do
                                         version "0.9.3.2-48"
+                                        arch "i386"
                                         action :install
                                 end
                         end
@@ -137,11 +139,13 @@ else
                         when "x86_64"
                                 package "cloudoptimizer" do
                                         version "0.9.3.1-41"
+                                        arch "x86_64"
                                         action :install
                                 end
                         when "i686"
                                 package "cloudoptimizer" do
                                         version "0.9.3.1-38"
+                                        arch "i386"
                                         action :install
                                 end
                         end
@@ -150,11 +154,13 @@ else
                         when "x86_64"
                                 package "cloudoptimizer" do
                                         version "0.9.3.2-598"
+                                        arch "x86_64"
                                         action :install
                                 end
                         when "i686"
                                 package "cloudoptimizer" do
                                         version "0.9.3-488"
+                                        arch "i386"
                                         action :install
                                 end
                         end
