@@ -101,7 +101,7 @@ else
         end
 end
 
-template "/etc/cloudoptimzer.conf" do
+template "/etc/cloudoptimizer.conf" do
   source "cloudoptimizer.conf.erb"
   mode "0644"
   owner "root"
