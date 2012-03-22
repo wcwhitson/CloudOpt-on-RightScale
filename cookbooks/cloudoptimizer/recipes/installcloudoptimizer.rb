@@ -81,12 +81,12 @@ else
 			case node[:languages][:ruby][:host_cpu]
 			when "x86_64"
 				package "cloudoptimizer" do
-					version "0.9.3.2-49"
+					version "0.9.3.2-53"
 					action :install
 				end
 			when "i686"
                                 package "cloudoptimizer" do
-                                        version "0.9.3.2-53"
+                                        version "0.9.3.2-49"
                                         action :install
                                 end
 			end
