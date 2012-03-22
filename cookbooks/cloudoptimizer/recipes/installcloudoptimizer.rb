@@ -151,7 +151,6 @@ else
                                 execute "yum" do
                                         command "yum install cloudoptimizer-0.9.3"
                                 end
-                                end
                         end
                 end
 	end
