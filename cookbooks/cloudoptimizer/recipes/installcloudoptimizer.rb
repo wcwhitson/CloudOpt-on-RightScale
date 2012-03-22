@@ -123,12 +123,12 @@ else
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
                                 package "cloudoptimizer" do
-                                        version "0.9.3.2-52"
+                                        version "0.9.3.2"
                                         action :install
                                 end
                         when "i686"
                                 package "cloudoptimizer" do
-                                        version "0.9.3.2-48"
+                                        version "0.9.3.2"
                                         action :install
                                 end
                         end
@@ -136,12 +136,12 @@ else
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
                                 package "cloudoptimizer" do
-                                        version "0.9.3.1-48"
+                                        version "0.9.3.1"
                                         action :install
                                 end
                         when "i686"
                                 package "cloudoptimizer" do
-                                        version "0.9.3.1-38"
+                                        version "0.9.3.1"
                                         action :install
                                 end
                         end
@@ -149,12 +149,12 @@ else
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
                                 package "cloudoptimizer" do
-                                        version "0.9.3-597"
+                                        version "0.9.3"
                                         action :install
                                 end
                         when "i686"
                                 package "cloudoptimizer" do
-                                        version "0.9.3-488"
+                                        version "0.9.3"
                                         action :install
                                 end
                         end
