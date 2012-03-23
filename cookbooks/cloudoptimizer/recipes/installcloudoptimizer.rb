@@ -116,6 +116,20 @@ else
                                         action :install
                                 end
                         end
+                when "0.9.2.3"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.2.3"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.2.3"
+                                        action :install
+                                end
+                        end
+
 		end
 	when "centos"
                 case node[:cloudoptimizer][:version] 
@@ -152,8 +166,34 @@ else
                                         command "yum -y install cloudoptimizer-0.9.3"
                                 end
                         end
+                when "0.9.2.3"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                execute "yum" do
+                                        command "yum -y install cloudoptimizer-0.9.2.3"
+                                end
+                        when "i686"
+                                execute "yum" do
+                                        command "yum -y install cloudoptimizer-0.9.2.3"
+                                end
+                        end
+
                 end
 	end
+end
+
+# Install additional packages
+
+if node[:cloudoptimizer][:packages][:optional][:vtun] == 'Install'
+	package "vtun"
+end
+
+if node[:cloudoptimizer][:packages][:optional][:frox] == 'Install'
+        package "frox"
+end
+
+if node[:cloudoptimizer][:packages][:optional][:mysql_proxy] == 'Install'
+        package "mysql-proxy"
 end
 
 # Install stored configurations

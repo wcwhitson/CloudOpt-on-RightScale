@@ -1,9 +1,9 @@
 maintainer       "CloudOpt, Inc."
 maintainer_email "support@cloudopt.com"
 license          "All rights reserved"
-description      "Installs/Configures test"
+description      "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version          "0.0.1"
+version          "0.1.1"
 recipe		"cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
@@ -31,7 +31,7 @@ attribute "cloudoptimizer/configuration/default_cache_size",
   :display_name => "Byte cache size",
   :description => "CloudOptimizer byte cache size in megabytes",
   :required => "optional",
-  :default => "8000",
+  :default => "4000",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/socket_location",
@@ -52,7 +52,7 @@ attribute "cloudoptimizer/configuration/db_memory_size",
   :display_name => "Index size",
   :description => "CloudOptimizer cache memory index size",
   :required => "optional",
-  :default => "540",
+  :default => "384",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/log_directory",
@@ -74,6 +74,7 @@ attribute "cloudoptimizer/configuration/compression_engine",
   :description => "CloudOptimizer compression engine",
   :required => "optional",
   :default => "snappy",
+  :choice => [ "snappy", "zlib", "null" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/default_compression_level",
@@ -81,6 +82,7 @@ attribute "cloudoptimizer/configuration/default_compression_level",
   :description => "CloudOptimizer compression level",
   :required => "optional",
   :default => "0",
+  :choice => [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/optimistic_deduplication",
@@ -88,6 +90,7 @@ attribute "cloudoptimizer/configuration/optimistic_deduplication",
   :description => "CloudOptimizer first pass optimization",
   :required => "optional",
   :default => "false",
+  :choice => [ "false", "true" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/cache_promotion",
@@ -95,6 +98,7 @@ attribute "cloudoptimizer/configuration/cache_promotion",
   :description => "CloudOptimizer cache promotion",
   :required => "optional",
   :default => "true",
+  :choice => [ "true", "false" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/compress_cache",
@@ -102,6 +106,7 @@ attribute "cloudoptimizer/configuration/compress_cache",
   :description => "CloudOptimizer byte cache compression",
   :required => "optional",
   :default => "true",
+  :choice => [ "true", "false" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/thread_count",
@@ -116,6 +121,7 @@ attribute "cloudoptimizer/configuration/intelligent_mesh",
   :description => "CloudOptimizer intelligent mesh",
   :required => "optional",
   :default => "false",
+  :choice => [ "false", "true" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/local_proxy_address",
@@ -137,6 +143,7 @@ attribute "cloudoptimizer/configuration/peer_encryption",
   :description => "CloudOptimizer peer encryption",
   :required => "optional",
   :default => "self_signed",
+  :choice => [ "self_signed", "ca_signed", "off" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/ssl_key",
@@ -162,7 +169,7 @@ attribute "cloudoptimizer/configuration/ssl_ca",
 
 attribute "cloudoptimizer/configuration/peer_statement",
   :display_name => "Peer statement",
-  :description => "CloudOptimizer peer statement for endpoint mode",
+  :description => "CloudOptimizer peer statement for Client edition (for Cloud edition, use a stored configuration)",
   :required => "optional",
   :default => "",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
@@ -172,5 +179,29 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "0.9.3.2", "0.9.3.1", "0.9.3" ],
+  :choice => [ "latest", "0.9.4", "0.9.3.2", "0.9.3.1", "0.9.3", "0.9.2.3" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/optional/vtun",
+  :display_name => "VTun",
+  :description => "Install the vtun package",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/optional/frox",
+  :display_name => "Frox",
+  :description => "Install the frox package",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/optional/mysql-proxy",
+  :display_name => "MySQL Proxy",
+  :description => "Install the mysql-proxy package",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]

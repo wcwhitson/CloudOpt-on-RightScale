@@ -1,6 +1,6 @@
 {
   "name": "cloudoptimizer",
-  "description": "Installs/Configures test",
+  "description": "Installs/Configures CloudOptimizer",
   "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
   "maintainer": "CloudOpt, Inc.",
   "maintainer_email": "support@cloudopt.com",
@@ -66,7 +66,7 @@
       "display_name": "Byte cache size",
       "description": "CloudOptimizer byte cache size in megabytes",
       "required": "optional",
-      "default": "8000",
+      "default": "4000",
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
       ],
@@ -108,7 +108,7 @@
       "display_name": "Index size",
       "description": "CloudOptimizer cache memory index size",
       "required": "optional",
-      "default": "540",
+      "default": "384",
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
       ],
@@ -151,11 +151,13 @@
       "description": "CloudOptimizer compression engine",
       "required": "optional",
       "default": "snappy",
+      "choice": [
+        "snappy",
+        "zlib",
+        "null"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -165,11 +167,20 @@
       "description": "CloudOptimizer compression level",
       "required": "optional",
       "default": "0",
+      "choice": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -179,11 +190,12 @@
       "description": "CloudOptimizer first pass optimization",
       "required": "optional",
       "default": "false",
+      "choice": [
+        "false",
+        "true"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -193,11 +205,12 @@
       "description": "CloudOptimizer cache promotion",
       "required": "optional",
       "default": "true",
+      "choice": [
+        "true",
+        "false"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -207,11 +220,12 @@
       "description": "CloudOptimizer byte cache compression",
       "required": "optional",
       "default": "true",
+      "choice": [
+        "true",
+        "false"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -235,11 +249,12 @@
       "description": "CloudOptimizer intelligent mesh",
       "required": "optional",
       "default": "false",
+      "choice": [
+        "false",
+        "true"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -277,11 +292,13 @@
       "description": "CloudOptimizer peer encryption",
       "required": "optional",
       "default": "self_signed",
+      "choice": [
+        "self_signed",
+        "ca_signed",
+        "off"
+      ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
       ],
       "calculated": false,
       "type": "string"
@@ -330,7 +347,7 @@
     },
     "cloudoptimizer/configuration/peer_statement": {
       "display_name": "Peer statement",
-      "description": "CloudOptimizer peer statement for endpoint mode",
+      "description": "CloudOptimizer peer statement for Client edition (for Cloud edition, use a stored configuration)",
       "required": "optional",
       "default": "",
       "recipes": [
@@ -349,9 +366,56 @@
       "default": "latest",
       "choice": [
         "latest",
+        "0.9.4",
         "0.9.3.2",
         "0.9.3.1",
-        "0.9.3"
+        "0.9.3",
+        "0.9.2.3"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/optional/vtun": {
+      "display_name": "VTun",
+      "description": "Install the vtun package",
+      "required": "optional",
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/optional/frox": {
+      "display_name": "Frox",
+      "description": "Install the frox package",
+      "required": "optional",
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/optional/mysql-proxy": {
+      "display_name": "MySQL Proxy",
+      "description": "Install the mysql-proxy package",
+      "required": "optional",
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
       ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
@@ -365,5 +429,5 @@
   "recipes": {
     "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package"
   },
-  "version": "0.0.1"
+  "version": "0.1.1"
 }
