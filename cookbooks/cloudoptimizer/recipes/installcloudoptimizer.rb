@@ -37,6 +37,14 @@ end
 
 log "Adding CloudOpt software repositories."
 
+# Test block
+log node[:platform]
+log "node[:platform]"
+log "The platform is node[:platform]"
+$plat = node[:platform]
+log "$plat"
+log "The platform is $plat"
+
 # CloudOpt runs on both Ubuntu and CentOS linux, which require different repositories.  Here we detect
 # the linux distribution and then install the appropriate repository.
 case node[:platform]
@@ -271,36 +279,46 @@ end
 
 # Install additional packages
 
+# Install the CloudController package if selected
 if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizers3] == 'Install'
 	package "cloudoptimizer-s3"
 end
 
+# Install the cloudoptimizer-tools package if selected
 if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizertools] == 'Install'
 	package "cloudoptimizer-tools"
 end
 
+# Install the CloudOptimizer stats GUI
 if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizerstat] == 'Install'
 	package "cloudoptimizer-stat"
 end
 
+# Install vtun to support tunneling traffic to CloudOptimizer for interception
 if node[:cloudoptimizer][:packages][:optional][:vtun] == 'Install'
 	package "vtun"
 end
 
+# Install the frox package to proxy regular FTP
 if node[:cloudoptimizer][:packages][:optional][:frox] == 'Install'
         package "frox"
 end
 
+# Install mysql-proxy for the MySQL interception solution
 if node[:cloudoptimizer][:packages][:optional][:mysql_proxy] == 'Install'
         package "mysql-proxy"
 end
 
 # Install stored configurations
 
+# Here we give the user the option to retrieve stored configuration files for a truly persistent CloudOptimizer
+# installation that can be stopped and started without requiring reconfiguration.  Files must be provided on an
+# unprotected HTTP server.
+
+# Stored CloudOptimizer configuration file
 if node[:cloudoptimizer][:stored][:cloudoptimizer] == 'none'
 	log "No stored cloudoptimizer configuration specified."
 else
-	$reload_config = "yes"
 	log "Installing saved cloudoptimizer configuration node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer]"
 	remote_file "/etc/cloudoptimizer.conf" do
 		source node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer]
@@ -310,10 +328,10 @@ else
 	end
 end
 
+# Stored vtun configuration file
 if node[:cloudoptimizer][:stored][:vtun] == 'none'
         log "No stored vtun configuration specified."
 else
-	$reload_config = "yes"
         log "Installing saved vtun configuration node[:cloudoptimizer][:configuration][:stored][:vtun]"
         remote_file "/etc/vtund.conf" do
                 source node[:cloudoptimizer][:configuration][:stored][:vtun]
@@ -323,6 +341,11 @@ else
         end
 end
 
+# Here we set the public and private addresses to use when the transparent proxy is enabled.  By default, we use the
+# first returned IP address for each, as there will generally be only one.  If the user has specified an address, we
+# use that instead.
+
+# Set the private/internal IP address
 if node[:cloudoptimizer][:configuration][:transp_int_ip] == 'First private IP address'
 	log "Setting internal IP address to node[:cloud][:private_ips][0]."
 	$transp_int_ip = node[:cloud][:private_ips][0]
@@ -331,6 +354,7 @@ else
 	$transp_int_ip = node[:cloudoptimizer][:configuration][:transp_int_ip]
 end
 
+# Set the public/external IP address
 if node[:cloudoptimizer][:configuration][:transp_ext_ip] == 'First public IP address'
         log "Setting external IP address to $node[:cloud][:public_ips][0]."
         $transp_ext_ip = node[:cloud][:public_ips][0]
@@ -413,10 +437,12 @@ else
         end
 end
 
-if $reload_config == "yes"
-	service "cloudoptimizer" do
-		action :restart
-	end
+# Reload the CloudOptimizer configuration.  This will put any changes into the running config and will 
+# be harmless otherwise.
+
+log "Restarting CloudOptimizer to pick up configuration changes."
+service "cloudoptimizer" do
+	action :restart
 end
 
 log "========== Ending CloudOptimizer Installation =========="
