@@ -1,5 +1,5 @@
 #
-# Cookbook Name: Test
+# Cookbook Name: Install CloudOptimizer 
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
@@ -116,19 +116,19 @@ else
 	case node[:platform]
 	when "ubuntu"
 		case node[:cloudoptimizer][:version]
-#                when "0.9.4.1"
-#                        case node[:languages][:ruby][:host_cpu]
-#                        when "x86_64"
-#                                package "cloudoptimizer" do
-#                                        version "0.9.4.1"
-#                                        action :install
-#                                end
-#                        when "i686"
-#                                package "cloudoptimizer" do
-#                                        version "0.9.4.1"
-#                                        action :install
-#                                end
-#                        end
+                when "0.9.4.1"
+                        case node[:languages][:ruby][:host_cpu]
+                        when "x86_64"
+                                package "cloudoptimizer" do
+                                        version "0.9.4.1"
+                                        action :install
+                                end
+                        when "i686"
+                                package "cloudoptimizer" do
+                                        version "0.9.4.1"
+                                        action :install
+                                end
+                        end
                 when "0.9.4"
                         case node[:languages][:ruby][:host_cpu]
                         when "x86_64"
@@ -323,6 +323,22 @@ else
         end
 end
 
+if node[:cloudoptimizer][:configuration][:transp_int_ip] == 'First private IP address'
+	log "Setting internal IP address to node[:cloud][:private_ips][0]."
+	$transp_int_ip = node[:cloud][:private_ips][0]
+else
+	log "Setting internal IP address to user specified node[:cloudoptimizer][:configuration][:transp_int_ip]."
+	$transp_int_ip = node[:cloudoptimizer][:configuration][:transp_int_ip]
+end
+
+if node[:cloudoptimizer][:configuration][:transp_ext_ip] == 'First public IP address'
+        log "Setting external IP address to node[:cloud][:public_ips][0]."
+        $transp_ext_ip = node[:cloud][:public_ips][0]
+else
+        log "Setting external IP address to user specified node[:cloudoptimizer][:configuration][:transp_ext_ip]."
+        $transp_ext_ip = node[:cloudoptimizer][:configuration][:transp_ext_ip]
+end  
+
 # We use chef templates to build the configuration file.  When new options are added to the configuration file, we must
 # add a new template to match.  When multiple versions of the configuration file are supported at the same time, we must
 # determine the CloudOptimizer version that we are installing and use the appropriate template for that version.
@@ -386,8 +402,8 @@ else
 		:socks_proxy_port => node[:cloudoptimizer][:configuration][:socks_proxy_port],
 		:socks_username => node[:cloudoptimizer][:configuration][:socks_username],
 		:source_transparency => node[:cloudoptimizer][:configuration][:source_transparency], 
-		:transp_int_ip => node[:cloudoptimizer][:configuration][:transp_int_ip],
-		:transp_ext_ip => node[:cloudoptimizer][:configuration][:transp_ext_ip],
+		:transp_int_ip => $transp_int_ip,
+		:transp_ext_ip => $transp_ext_ip,
                 :peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
                 :ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
                 :ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],

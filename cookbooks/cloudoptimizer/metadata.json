@@ -1,7 +1,9 @@
 {
   "name": "cloudoptimizer",
   "description": "Installs/Configures CloudOptimizer",
-  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
+  "long_description": "= DESCRIPTION:
+	This script installs CloudOptimizer on RightScale Ubuntu and CentOS servers.\n\n= REQUIREMENTS:
+	See kb.cloudopt.com for system and instance requirements.\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
   "maintainer": "CloudOpt, Inc.",
   "maintainer_email": "support@cloudopt.com",
   "license": "All rights reserved",
@@ -66,7 +68,7 @@
       "display_name": "Byte cache size",
       "description": "CloudOptimizer byte cache size in megabytes",
       "required": "optional",
-      "default": "4000",
+      "default": "8000",
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
       ],
@@ -306,7 +308,7 @@
       "display_name": "SOCKS proxy port",
       "description": "CloudOptimizer SOCKS4 proxy listening port",
       "required": "optional",
-      "default": "9001",
+      "default": "9002",
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
       ],
@@ -349,7 +351,7 @@
       "display_name": "Internal IP address",
       "description": "Internal/private IP address to use with source transparency",
       "required": "optional",
-      "default": "",
+      "default": "First private IP address":,
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
       ],
@@ -363,7 +365,7 @@
       "display_name": "External IP address",
       "description": "External/public IP address to use with source transparency",
       "required": "optional",
-      "default": "",
+      "default": "First public IP address",
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
       ],
