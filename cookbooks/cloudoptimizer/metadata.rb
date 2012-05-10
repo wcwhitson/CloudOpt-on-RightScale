@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.1.5"
+version "0.1.6"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
@@ -250,7 +250,7 @@ attribute "cloudoptimizer/configuration/transp_ext_ip",
   :default => "First public IP address",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
-attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-s3",
+attribute "cloudoptimizer/packages/supplemental/cloudoptimizers3",
   :display_name => "CloudController",
   :description => "Install the CloudController package for Amazon S3",
   :required => "optional",
@@ -258,7 +258,7 @@ attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-s3",
   :choice => [ "Do not install", "Install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
-attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-tools",
+attribute "cloudoptimizer/packages/supplemental/cloudoptimizertools",
   :display_name => "CloudOptimizer Tools",
   :description => "Install additional scripts and tools for the command line",
   :required => "optional",
@@ -266,7 +266,7 @@ attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-tools",
   :choice => [ "Do not install", "Install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
-attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-stat",
+attribute "cloudoptimizer/packages/supplemental/cloudoptimizerstat",
   :display_name => "CloudOptimizer Web Statistics",
   :description => "Install a web statistics interface",
   :required => "optional",
