@@ -481,7 +481,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/transp_int_ip": {
+    "cloudoptimizer/configuration/transp_intip": {
       "display_name": "Internal IP address",
       "description": "Internal/private IP address to use with source transparency",
       "required": "optional",
@@ -495,7 +495,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/transp_ext_ip": {
+    "cloudoptimizer/configuration/transp_extip": {
       "display_name": "External IP address",
       "description": "External/public IP address to use with source transparency",
       "required": "optional",
@@ -560,5 +560,5 @@
   "recipes": {
     "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package"
   },
-  "version": "0.1.6"
+  "version": "0.1.7"
 }

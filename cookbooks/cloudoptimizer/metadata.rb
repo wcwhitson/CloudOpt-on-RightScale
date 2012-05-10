@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.1.6"
+version "0.1.7"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
@@ -236,14 +236,14 @@ attribute "cloudoptimizer/configuration/source_transparency",
   :choice => [ "false", "true" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
-attribute "cloudoptimizer/configuration/transp_int_ip",
+attribute "cloudoptimizer/configuration/transp_intip",
   :display_name => "Internal IP address",
   :description => "Internal/private IP address to use with source transparency",
   :required => "optional",
   :default => "First private IP address",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
-attribute "cloudoptimizer/configuration/transp_ext_ip",
+attribute "cloudoptimizer/configuration/transp_extip",
   :display_name => "External IP address",
   :description => "External/public IP address to use with source transparency",
   :required => "optional",

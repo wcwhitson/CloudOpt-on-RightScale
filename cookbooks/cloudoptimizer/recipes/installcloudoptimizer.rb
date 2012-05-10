@@ -306,30 +306,30 @@ end
 # use that instead.
 
 # Set the private/internal IP address
-if node[:cloudoptimizer][:configuration][:transp_int_ip] == 'First private IP address'
+if node[:cloudoptimizer][:configuration][:transp_intip] == 'First private IP address'
 	log "Setting internal IP address to:"
 	log node[:cloud][:private_ips][0]
-	node.set[':cloudoptimizer'][':internalip'] = node[:cloud][:private_ips][0]
+	$internal_ip = node[:cloud][:private_ips][0]
 else
 	log "Setting internal IP address to user specified:"
 	log node[:cloudoptimizer][:configuration][:transp_int_ip]
-	node.set[':cloudoptimizer'][':internalip'] = node[:cloudoptimizer][:configuration][:transp_int_ip]
+	$internal_ip = node[:cloudoptimizer][:configuration][:transp_intip]
 end
 
 # Set the public/external IP address
-if node[:cloudoptimizer][:configuration][:transp_ext_ip] == 'First public IP address'
+if node[:cloudoptimizer][:configuration][:transp_extip] == 'First public IP address'
         log "Setting external IP address to:"
 	log node[:cloud][:public_ips][0]
-        node.set[':cloudoptimizer'][':externalip'] = node[:cloud][:public_ips][0]
+        $external_ip = node[:cloud][:public_ips][0]
 else
         log "Setting external IP address to user specified:"
-	log $node[:cloudoptimizer][:configuration][:transp_ext_ip]
-        node.set[':cloudoptimizer'][':externalip'] = node[:cloudoptimizer][:configuration][:transp_ext_ip]
+	log node[:cloudoptimizer][:configuration][:transp_ext_ip]
+        $external_ip = node[:cloudoptimizer][:configuration][:transp_extip]
 end  
 
 log "Test node set:"
-log node[:cloudoptimizer][:internalip]
-log node[:cloudoptimizer][:externalip]
+log $external_ip
+log $internal_ip
 
 # We use chef templates to build the configuration file.  When new options are added to the configuration file, we must
 # add a new template to match.  When multiple versions of the configuration file are supported at the same time, we must
@@ -394,8 +394,8 @@ else
 		:socks_proxy_port => node[:cloudoptimizer][:configuration][:socks_proxy_port],
 		:socks_username => node[:cloudoptimizer][:configuration][:socks_username],
 		:source_transparency => node[:cloudoptimizer][:configuration][:source_transparency], 
-		:transp_int_ip => node[:cloudoptimizer][:internalip],
-		:transp_ext_ip => node[:cloudoptimizer][:externalip],
+		:transp_int_ip => $internal_ip,
+		:transp_ext_ip => $external_ip,
                 :peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
                 :ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
                 :ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
