@@ -271,15 +271,15 @@ end
 
 # Install additional packages
 
-if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizer-s3] == 'Install'
+if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizers3] == 'Install'
 	package "cloudoptimizer-s3"
 end
 
-if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizer-tools] == 'Install'
+if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizertools] == 'Install'
 	package "cloudoptimizer-tools"
 end
 
-if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizer-stat] == 'Install'
+if node[:cloudoptimizer][:packages][:supplemental][:cloudoptimizerstat] == 'Install'
 	package "cloudoptimizer-stat"
 end
 
@@ -344,74 +344,74 @@ end
 # determine the CloudOptimizer version that we are installing and use the appropriate template for that version.
 
 # Use the template for CloudOptimizer versions 0.9.3.2 and earlier
-if node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1' || node[:cloudoptimizer][:version] == '0.9.3' || node[:cloudoptimizer][:version] == '0.9.2.3'
-	template "/etc/cloudoptimizer.conf" do
-	  source "cloudoptimizer.conf.0.9.4.erb"
-	  mode "0644"
-	  owner "root"
-	  group "root"
-	  variables(
-		:home_directory => node[:cloudoptimizer][:configuration][:home_directory],
-		:default_cache_size => node[:cloudoptimizer][:configuration][:default_cache_size],
-		:socket_location => node[:cloudoptimizer][:configuration][:socket_location],
-		:bitmap_size => node[:cloudoptimizer][:configuration][:bitmap_size],
-		:db_memory_size => node[:cloudoptimizer][:configuration][:db_memory_size],
-		:log_directory => node[:cloudoptimizer][:configuration][:log_directory],
-		:log_key => node[:cloudoptimizer][:configuration][:log_key],
-		:compression_engine => node[:cloudoptimizer][:configuration][:compression_engine],
-		:default_compression_level => node[:cloudoptimizer][:configuration][:default_compression_level],
-		:optimistic_deduplication => node[:cloudoptimizer][:configuration][:optimistic_deduplication],
-		:cache_promotion => node[:cloudoptimizer][:configuration][:cache_promotion],
-		:compress_cache => node[:cloudoptimizer][:configuration][:compress_cache],
-		:thread_count => node[:cloudoptimizer][:configuration][:thread_count],
-		:intelligent_mesh => node[:cloudoptimizer][:configuration][:intelligent_mesh],
-		:local_proxy_address => node[:cloudoptimizer][:configuration][:local_proxy_address],
-		:peer_proxy_port => node[:cloudoptimizer][:configuration][:peer_proxy_port],
-		:peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
-		:ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
-		:ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
-		:ssl_ca => node[:cloudoptimizer][:configuration][:ssl_ca],
-		:peer_statement => node[:cloudoptimizer][:configuration][:peer_statement]
-	  )
-	end
-# Use the template for version 0.9.4 and later
-else
-        template "/etc/cloudoptimizer.conf" do
-          source "cloudoptimizer.conf.0.9.4.erb"
-          mode "0644"
-          owner "root"
-          group "root"
-          variables(
-                :home_directory => node[:cloudoptimizer][:configuration][:home_directory],
-                :default_cache_size => node[:cloudoptimizer][:configuration][:default_cache_size],
-                :socket_location => node[:cloudoptimizer][:configuration][:socket_location],
-                :bitmap_size => node[:cloudoptimizer][:configuration][:bitmap_size],
-                :db_memory_size => node[:cloudoptimizer][:configuration][:db_memory_size],
-                :log_directory => node[:cloudoptimizer][:configuration][:log_directory],
-                :log_key => node[:cloudoptimizer][:configuration][:log_key],
-                :compression_engine => node[:cloudoptimizer][:configuration][:compression_engine],
-                :default_compression_level => node[:cloudoptimizer][:configuration][:default_compression_level],
-                :optimistic_deduplication => node[:cloudoptimizer][:configuration][:optimistic_deduplication],
-                :cache_promotion => node[:cloudoptimizer][:configuration][:cache_promotion],
-                :compress_cache => node[:cloudoptimizer][:configuration][:compress_cache],
-                :thread_count => node[:cloudoptimizer][:configuration][:thread_count],
-                :intelligent_mesh => node[:cloudoptimizer][:configuration][:intelligent_mesh],
-                :local_proxy_address => node[:cloudoptimizer][:configuration][:local_proxy_address],
-                :peer_proxy_port => node[:cloudoptimizer][:configuration][:peer_proxy_port],
-		:socks_proxy => node[:cloudoptimizer][:configuration][:socks_proxy],
-		:socks_proxy_port => node[:cloudoptimizer][:configuration][:socks_proxy_port],
-		:socks_username => node[:cloudoptimizer][:configuration][:socks_username],
-		:source_transparency => node[:cloudoptimizer][:configuration][:source_transparency], 
-		:transp_int_ip => $transp_int_ip,
-		:transp_ext_ip => $transp_ext_ip,
-                :peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
-                :ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
-                :ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
-                :ssl_ca => node[:cloudoptimizer][:configuration][:ssl_ca],
-                :peer_statement => node[:cloudoptimizer][:configuration][:peer_statement]
-          )
-        end
-end
+#if node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1' || node[:cloudoptimizer][:version] == '0.9.3' || node[:cloudoptimizer][:version] == '0.9.2.3'
+#	template "/etc/cloudoptimizer.conf" do
+#	  source "cloudoptimizer.conf.0.9.4.erb"
+#	  mode "0644"
+#	  owner "root"
+#	  group "root"
+#	  variables(
+#		:home_directory => node[:cloudoptimizer][:configuration][:home_directory],
+#		:default_cache_size => node[:cloudoptimizer][:configuration][:default_cache_size],
+#		:socket_location => node[:cloudoptimizer][:configuration][:socket_location],
+#		:bitmap_size => node[:cloudoptimizer][:configuration][:bitmap_size],
+#		:db_memory_size => node[:cloudoptimizer][:configuration][:db_memory_size],
+#		:log_directory => node[:cloudoptimizer][:configuration][:log_directory],
+#		:log_key => node[:cloudoptimizer][:configuration][:log_key],
+#		:compression_engine => node[:cloudoptimizer][:configuration][:compression_engine],
+#		:default_compression_level => node[:cloudoptimizer][:configuration][:default_compression_level],
+#		:optimistic_deduplication => node[:cloudoptimizer][:configuration][:optimistic_deduplication],
+#		:cache_promotion => node[:cloudoptimizer][:configuration][:cache_promotion],
+#		:compress_cache => node[:cloudoptimizer][:configuration][:compress_cache],
+#		:thread_count => node[:cloudoptimizer][:configuration][:thread_count],
+#		:intelligent_mesh => node[:cloudoptimizer][:configuration][:intelligent_mesh],
+#		:local_proxy_address => node[:cloudoptimizer][:configuration][:local_proxy_address],
+#		:peer_proxy_port => node[:cloudoptimizer][:configuration][:peer_proxy_port],
+#		:peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
+#		:ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
+#		:ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
+#		:ssl_ca => node[:cloudoptimizer][:configuration][:ssl_ca],
+#		:peer_statement => node[:cloudoptimizer][:configuration][:peer_statement]
+#	  )
+#	end
+## Use the template for version 0.9.4 and later
+#else
+#        template "/etc/cloudoptimizer.conf" do
+#          source "cloudoptimizer.conf.0.9.4.erb"
+#          mode "0644"
+#          owner "root"
+#          group "root"
+#          variables(
+#                :home_directory => node[:cloudoptimizer][:configuration][:home_directory],
+#                :default_cache_size => node[:cloudoptimizer][:configuration][:default_cache_size],
+#                :socket_location => node[:cloudoptimizer][:configuration][:socket_location],
+#                :bitmap_size => node[:cloudoptimizer][:configuration][:bitmap_size],
+#                :db_memory_size => node[:cloudoptimizer][:configuration][:db_memory_size],
+#                :log_directory => node[:cloudoptimizer][:configuration][:log_directory],
+#                :log_key => node[:cloudoptimizer][:configuration][:log_key],
+#                :compression_engine => node[:cloudoptimizer][:configuration][:compression_engine],
+#                :default_compression_level => node[:cloudoptimizer][:configuration][:default_compression_level],
+#                :optimistic_deduplication => node[:cloudoptimizer][:configuration][:optimistic_deduplication],
+#                :cache_promotion => node[:cloudoptimizer][:configuration][:cache_promotion],
+#                :compress_cache => node[:cloudoptimizer][:configuration][:compress_cache],
+#                :thread_count => node[:cloudoptimizer][:configuration][:thread_count],
+#                :intelligent_mesh => node[:cloudoptimizer][:configuration][:intelligent_mesh],
+#                :local_proxy_address => node[:cloudoptimizer][:configuration][:local_proxy_address],
+#                :peer_proxy_port => node[:cloudoptimizer][:configuration][:peer_proxy_port],
+#		:socks_proxy => node[:cloudoptimizer][:configuration][:socks_proxy],
+#		:socks_proxy_port => node[:cloudoptimizer][:configuration][:socks_proxy_port],
+#		:socks_username => node[:cloudoptimizer][:configuration][:socks_username],
+#		:source_transparency => node[:cloudoptimizer][:configuration][:source_transparency], 
+#		:transp_int_ip => $transp_int_ip,
+#		:transp_ext_ip => $transp_ext_ip,
+#                :peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
+#                :ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
+#                :ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
+#                :ssl_ca => node[:cloudoptimizer][:configuration][:ssl_ca],
+#                :peer_statement => node[:cloudoptimizer][:configuration][:peer_statement]
+#          )
+#        end
+#end
 
 if $reload_config == "yes"
 	service "cloudoptimizer" do
