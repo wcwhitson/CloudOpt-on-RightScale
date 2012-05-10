@@ -327,6 +327,10 @@ else
         node.set[':cloudoptimizer'][':externalip'] = node[:cloudoptimizer][:configuration][:transp_ext_ip]
 end  
 
+log "Test node set:"
+log node[:cloudoptimizer][:internalip]
+log node[:cloudoptimizer][:externalip]
+
 # We use chef templates to build the configuration file.  When new options are added to the configuration file, we must
 # add a new template to match.  When multiple versions of the configuration file are supported at the same time, we must
 # determine the CloudOptimizer version that we are installing and use the appropriate template for that version.
@@ -390,8 +394,8 @@ else
 		:socks_proxy_port => node[:cloudoptimizer][:configuration][:socks_proxy_port],
 		:socks_username => node[:cloudoptimizer][:configuration][:socks_username],
 		:source_transparency => node[:cloudoptimizer][:configuration][:source_transparency], 
-		:transp_int_ip => node[':cloudoptimizer'][':internalip'],
-		:transp_ext_ip => node[':cloudoptimizer'][':externalip'],
+		:transp_int_ip => node[:cloudoptimizer][:internalip],
+		:transp_ext_ip => node[:cloudoptimizer][:externalip],
                 :peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
                 :ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
                 :ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
