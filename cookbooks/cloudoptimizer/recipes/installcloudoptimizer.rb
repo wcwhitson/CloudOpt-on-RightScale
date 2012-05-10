@@ -309,22 +309,22 @@ end
 if node[:cloudoptimizer][:configuration][:transp_int_ip] == 'First private IP address'
 	log "Setting internal IP address to:"
 	log node[:cloud][:private_ips][0]
-	$transp_int_ip = node[:cloud][:private_ips][0]
+	node.set[':cloudoptimizer'][':internalip'] = node[:cloud][:private_ips][0]
 else
 	log "Setting internal IP address to user specified:"
 	log node[:cloudoptimizer][:configuration][:transp_int_ip]
-	$transp_int_ip = node[:cloudoptimizer][:configuration][:transp_int_ip]
+	node.set[':cloudoptimizer'][':internalip'] = node[:cloudoptimizer][:configuration][:transp_int_ip]
 end
 
 # Set the public/external IP address
 if node[:cloudoptimizer][:configuration][:transp_ext_ip] == 'First public IP address'
         log "Setting external IP address to:"
 	log node[:cloud][:public_ips][0]
-        $transp_ext_ip = node[:cloud][:public_ips][0]
+        node.set[':cloudoptimizer'][':externalip'] = node[:cloud][:public_ips][0]
 else
         log "Setting external IP address to user specified:"
 	log $node[:cloudoptimizer][:configuration][:transp_ext_ip]
-        $transp_ext_ip = node[:cloudoptimizer][:configuration][:transp_ext_ip]
+        node.set[':cloudoptimizer'][':externalip'] = node[:cloudoptimizer][:configuration][:transp_ext_ip]
 end  
 
 # We use chef templates to build the configuration file.  When new options are added to the configuration file, we must
@@ -390,8 +390,8 @@ else
 		:socks_proxy_port => node[:cloudoptimizer][:configuration][:socks_proxy_port],
 		:socks_username => node[:cloudoptimizer][:configuration][:socks_username],
 		:source_transparency => node[:cloudoptimizer][:configuration][:source_transparency], 
-		:transp_int_ip => $transp_int_ip,
-		:transp_ext_ip => $transp_ext_ip,
+		:transp_int_ip => node[':cloudoptimizer'][':internalip'],
+		:transp_ext_ip => node[':cloudoptimizer'][':externalip'],
                 :peer_encryption => node[:cloudoptimizer][:configuration][:peer_encryption],
                 :ssl_key => node[:cloudoptimizer][:configuration][:ssl_key],
                 :ssl_cert => node[:cloudoptimizer][:configuration][:ssl_cert],
