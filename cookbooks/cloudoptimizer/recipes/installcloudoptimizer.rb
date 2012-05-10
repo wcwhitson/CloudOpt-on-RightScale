@@ -331,6 +331,7 @@ end
 # add a new template to match.  When multiple versions of the configuration file are supported at the same time, we must
 # determine the CloudOptimizer version that we are installing and use the appropriate template for that version.
 
+log node[:cloudoptimizer][:version]
 # Use the template for CloudOptimizer versions 0.9.3.2 and earlier
 if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:version] == '0.9.3.1' or node[:cloudoptimizer][:version] == '0.9.3' or node[:cloudoptimizer][:version] == '0.9.2.3'
 	template "/etc/cloudoptimizer.conf" do
