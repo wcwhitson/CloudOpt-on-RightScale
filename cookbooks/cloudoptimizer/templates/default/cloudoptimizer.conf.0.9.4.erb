@@ -145,7 +145,7 @@
                  */
                 "enable_socks": <%= node[:cloudoptimizer][:configuration][:socks_proxy] %>,
                 "socks_proxy_port": <%= node[:cloudoptimizer][:configuration][:socks_proxy_port] %>,
-                "socks_username": <%= node[:cloudoptimizer][:configuration][:socks_username] %>,
+                "socks_username": "<%= node[:cloudoptimizer][:configuration][:socks_username] %>",
 
                 /*
                  * Connect to the origin server using the original source address.

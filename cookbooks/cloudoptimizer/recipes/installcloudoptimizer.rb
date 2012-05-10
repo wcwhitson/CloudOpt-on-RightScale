@@ -41,7 +41,9 @@ log "Adding CloudOpt software repositories."
 log node[:platform]
 log "node[:platform]"
 log "The platform is node[:platform]"
+log "The platform is" node[:platform]
 $plat = node[:platform]
+log $plat
 log "$plat"
 log "The platform is $plat"
 
