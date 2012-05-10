@@ -332,10 +332,10 @@ else
 end
 
 if node[:cloudoptimizer][:configuration][:transp_ext_ip] == 'First public IP address'
-        log "Setting external IP address to node[:cloud][:public_ips][0]."
+        log "Setting external IP address to $node[:cloud][:public_ips][0]."
         $transp_ext_ip = node[:cloud][:public_ips][0]
 else
-        log "Setting external IP address to user specified node[:cloudoptimizer][:configuration][:transp_ext_ip]."
+        log "Setting external IP address to user specified $node[:cloudoptimizer][:configuration][:transp_ext_ip]."
         $transp_ext_ip = node[:cloudoptimizer][:configuration][:transp_ext_ip]
 end  
 
