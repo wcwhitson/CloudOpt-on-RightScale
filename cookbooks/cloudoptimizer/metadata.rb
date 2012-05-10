@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license          "All rights reserved"
 description      "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version          "0.1.1"
+version          "0.1.4"
 recipe		"cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
