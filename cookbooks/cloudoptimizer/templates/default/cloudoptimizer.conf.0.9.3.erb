@@ -1,0 +1,251 @@
+{
+
+        /* 
+         * The CloudCopy service configuration file. 
+         * See http://www.cloudopt.com for more information.
+         *
+         * This format is JSON (http://www.json.org/), and we allow comments
+         * (like this one).
+         *
+         * If you change any of the options in this file, the CloudCopy service
+         * should be restarted with the command:
+         *
+         *    sudo service cloudoptimizer restart
+         *
+         * Individual options may require additional actions, please read the
+         * comments carefully.
+         */
+        "config": {
+
+                /*                                                      
+                 * This directory will contain all the cache files etc. 
+                 * This directory will have contents deleted when the cache
+                 * is cleared ('sudo service cloudoptimizer clear-cache').
+                 */
+                "home": "<%= node[:cloudoptimizer][:configuration][:home_directory] %>",
+
+                /*                                                      
+                 * Default cache size for new caches, the value is in   
+                 * megabytes.                                           
+                 */
+                "default_cache_size": <%= node[:cloudoptimizer][:configuration][:default_cache_size] %>,
+
+                /*                                                      
+                 * Path for the UNIX Socket.
+                 */
+                "socket_location": "<%= node[:cloudoptimizer][:configuration][:socket_location] %>",
+
+                /*
+                 * Memory allocated for bitmap.
+                 * Must be power of 2.
+                 */
+                "bitmap_size": <%= node[:cloudoptimizer][:configuration][:bitmap_size] %>,
+
+                /*
+                 * How much memory in MB to use the db index.
+                 */
+                "db_memory_size": <%= node[:cloudoptimizer][:configuration][:db_memory_size] %>,
+
+                /*
+                 * Which directory should log files go to?
+                 */
+                "log_dir": "<%= node[:cloudoptimizer][:configuration][:log_directory] %>",
+
+                /*
+                 * The logging uses a shared memory segment, this is the key
+                 * we will for that segment. Change it if it conflicts with
+                 * another shared memory key already in use on your system.
+                 */
+                "log_key": <%= node[:cloudoptimizer][:configuration][:log_key] %>,
+
+                /*
+                 * The compression engine to use. Options are:
+                 *
+                 * 'null'   - which does no compression at all
+                 *            and is the fastest option
+                 *
+                 * 'snappy' - which is very fast but does 
+                 *            not compress as well as 'zlib'
+                 *
+                 * 'zlib'   - which is slower than 'snappy'
+                 *            but compresses better.
+                 */
+                "compression_engine": "<%= node[:cloudoptimizer][:configuration][:compression_engine] %>",
+
+                /*
+                 * The default compression level to use for zlib. 
+                 * 0 means no compression, 9 means maximum compression.
+                 * Higher compressions levels use more CPU time but provide
+                 * better compression, therefore less bandwidth is used.
+                 */
+                "default_compression_level": <%= node[:cloudoptimizer][:configuration][:default_compression_level] %>,
+
+                /*
+                 * Enable optimistic data deduplication. This may be
+                 * appropriate if you have several sites exchanging
+                 * similar content, and want Site B to benefit from
+                 * optimizations already performed for Site A.
+                 *
+                 * If enabled, all nodes in the system will use a single
+                 * shared cache. The system will aggressively send data
+                 * references, even if there is no reference in the local
+                 * cache. 
+                 *
+                 * IMPORTANT: When this option is changed, you must run
+                 *            the following command:
+                 *
+                 *                sudo service cloudoptimizer clear-cache
+                 *
+                 *            This replaces, and includes the functionality
+                 *            of, the normal 'restart' call described at
+                 *            the top of this configuration file.
+                 */
+                "optimistic_deduplication": <%= node[:cloudoptimizer][:configuration][:optimistic_deduplication] %>,
+
+                /*
+                 * Enable cache promotion. If enabled, this will prevent
+                 * frequently referenced content being pushed from the cache
+                 * by newer traffic. This may impact performance in return
+                 * for increased data deduplication over time.
+                 */
+                "cache_promotion": <%= node[:cloudoptimizer][:configuration][:cache_promotion] %>,
+
+                /*
+		 * Compress data stored in the cache. With this option turned
+		 * on the cache will need less disk space, however there is
+		 * small performance penalty with respect to throughput.
+		 */
+                "compress_cache": <%= node[:cloudoptimizer][:configuration][:compress_cache] %>,
+
+                /*
+                 * The number of threads to launch.
+                 */
+                "thread_count": <%= node[:cloudoptimizer][:configuration][:thread_count] %>,
+
+                /*
+                 * Enable intelligent mesh.  If enabled, this will attempt to
+                 * accelerate to applications without any explicit config.
+                 */
+                "intelligent_mesh": <%= node[:cloudoptimizer][:configuration][:intelligent_mesh] %>,
+
+                /*
+                 * The address for CloudOptimizer to listen for client
+                 * connections on.
+                 */
+                "local_proxy_address": "<%= node[:cloudoptimizer][:configuration][:local_proxy_address] %>",
+
+                /*
+                 * The default port for CloudOptimzer to listen for connections
+                 * from a peer system on.
+                 */
+                "peer_proxy_port": <%= node[:cloudoptimizer][:configuration][:peer_proxy_port] %>,
+
+                /*
+                 * Should tunnels between peer systems be encrypted with SSL?
+                 *
+                 * The encryption options are:
+                 *
+                 * off           The tunnels between peer systems will not use
+                 *               any encryption.
+                 *
+                 * self_signed   The tunnels between peer systems will use SSL
+                 *               encryption. Both self-signed certificates and
+                 *               Certificate Authority (CA) signed certificates 
+                 *               may be used for encryption.
+                 *
+                 * ca_signed     The tunnels between peer systems will use SSL
+                 *               encryption. Only Certificate Authority (CA) 
+                 *               signed certificates with an accompanying 
+                 *               CA certificate may be used for encryption.
+                 *
+                 * If encryption is to be used, then see the section below,
+                 * 'SSL certificate locations for peer encryption.' 
+                 */
+                "peer_encryption": "<%= node[:cloudoptimizer][:configuration][:peer_encryption] %>",
+
+                /*
+                 * SSL certificate locations for peer encryption.
+                 *
+                 * If 'peer_encryption' is set to 'off', then the values below
+                 * are not used, and may be left empty.
+                 *
+                 * If 'peer_encryption' is set to 'self_signed', then the 
+                 * values below may be left empty and CloudCopy will generate
+                 * its own self-signed certificates.
+                 *
+                 * If 'peer_encryption' is set to 'ca_signed', then the values
+                 * below must be supplied. Each should be a path to a valid
+                 * .pem file, for example:
+                 *         "ssl_key":  "/path/to/your/server-key.pem",
+                 *         "ssl_cert": "/path/to/your/server-cert.pem",
+                 *         "ssl_ca":   "/path/to/your/cacert.pem",
+                 */
+                "ssl_key": "<%= node[:cloudoptimizer][:configuration][:ssl_key] %>",
+                "ssl_cert": "<%= node[:cloudoptimizer][:configuration][:ssl_cert] %>",
+                "ssl_ca": "<%= node[:cloudoptimizer][:configuration][:ssl_ca] %>",
+
+                /*
+                 * Peer proxy addresses
+                 *
+                 * Example of case where the peer *is* the endpoint:
+                 *
+                 *       "peers": {
+                 *           "enabled": ["174.129.144.190"]
+                 *       }
+                 *
+                 * Example of case where the peer accelerates to a list of endpoints:
+                 *
+                 *       "peers": {
+                 *           "enabled": ["174.129.144.190"],
+                 *           "endpoints": {
+                 *               "174.129.144.190": ["72.21.203.148", "72.21.211.173"]
+                 *           }
+                 *       }
+                 *
+                 * Endpoints can also be expressed as a subnet in CIDR format:
+                 *
+                 *       "peers": {
+                 *           "enabled": ["174.129.144.190"],
+                 *           "endpoints": {
+                 *               "174.129.144.190": ["72.21.0.0/16"]
+                 *           }
+                 *       }
+                 */
+                "peers": [
+			<%= node[:cloudoptimizer][:configuration][:peer_statement] %>
+                ]
+        },
+        "logging": {
+
+                /*
+                 * Logging can be to syslog, and the facility to which
+                 * messages will be written can be configured in case
+                 * this default facility is already in use on your system. 
+                 *
+                 * This value may be used when configuring /etc/syslog.conf
+                 * during install. Messages will be filtered from this
+                 * facility to an application specific log directory; see
+                 * 'log_dir' configuration entry above.
+                 *
+                 * The value should be of the form "LOG_LOCALn" where
+                 * "n" is in the range "0" to "7", see 'man syslog'
+                 */
+                "syslog_facility": "LOG_LOCAL5",
+                "default_level": "fatal",
+                "cloudoptimizer": {
+                        "default_level": "error",
+                        "license": "info",
+                        "stats": "info"
+                },
+                "cloudcopy": {
+                        "default_level": "error",
+                        "license": "info",
+                        "stats": "info"
+                },
+                "cloudlicense": {
+                        "default_level": "error",
+                        "license": "info",
+                        "stats": "info"
+                }
+        }
+}

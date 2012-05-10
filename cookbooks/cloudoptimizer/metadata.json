@@ -287,6 +287,92 @@
       "calculated": false,
       "type": "string"
     },
+    "cloudoptimizer/configuration/socks_proxy": {
+      "display_name": "SOCKS proxy",
+      "description": "CloudOptimizer acts as a SOCKS4 proxy",
+      "required": "optional",
+      "default": "false",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/configuration/socks_proxy_port": {
+      "display_name": "SOCKS proxy port",
+      "description": "CloudOptimizer SOCKS4 proxy listening port",
+      "required": "optional",
+      "default": "9001",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/configuration/socks_username": {
+      "display_name": "SOCKS proxy user name",
+      "description": "CloudOptimizer SOCKS4 proxy user name",
+      "required": "optional",
+      "default": "",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/configuration/source_transparency": {
+      "display_name": "Source transparency",
+      "description": "CloudOptimizer acts as a transparent proxy",
+      "required": "optional",
+      "default": "false",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/configuration/transp_int_ip": {
+      "display_name": "Internal IP address",
+      "description": "Internal/private IP address to use with source transparency",
+      "required": "optional",
+      "default": "",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/configuration/transp_ext_ip": {
+      "display_name": "External IP address",
+      "description": "External/public IP address to use with source transparency",
+      "required": "optional",
+      "default": "",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
+    },
     "cloudoptimizer/configuration/peer_encryption": {
       "display_name": "Peer encryption",
       "description": "CloudOptimizer peer encryption",
@@ -366,11 +452,57 @@
       "default": "latest",
       "choice": [
         "latest",
+	"0.9.4.1",
         "0.9.4",
         "0.9.3.2",
         "0.9.3.1",
         "0.9.3",
         "0.9.2.3"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/supplemental/cloudoptimizer-s3": {
+      "display_name": "CloudController",
+      "description": "Install the CloudController optimization package for Amazon S3",
+      "required": "optional",
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/supplemental/cloudoptimizer-tools": {
+      "display_name": "CloudOptimizer Tools",
+      "description": "Install the CloudOptimizer Tools package (additional command line tools and scripts)",
+      "required": "optional",
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/supplemental/cloudoptimizer-stat": {
+      "display_name": "CloudOptimizer Web Stats",
+      "description": "Install the CloudOptimizer Web Stats package",
+      "required": "optional", 
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
       ],
       "recipes": [
         "cloudoptimizer::installcloudoptimizer"
