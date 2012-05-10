@@ -1,15 +1,15 @@
-maintainer       "CloudOpt, Inc."
+maintainer "CloudOpt, Inc."
 maintainer_email "support@cloudopt.com"
-license          "All rights reserved"
-description      "Installs/Configures CloudOptimizer"
+license "All rights reserved"
+description "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version          "0.1.4"
-recipe		"cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
+version "0.1.5"
+recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
   :description => "URL to a cloudoptimizer.conf file containing your saved configuration",
-  :required => "optional", 
+  :required => "optional",
   :default => "none",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
@@ -31,7 +31,7 @@ attribute "cloudoptimizer/configuration/default_cache_size",
   :display_name => "Byte cache size",
   :description => "CloudOptimizer byte cache size in megabytes",
   :required => "optional",
-  :default => "4000",
+  :default => "8000",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer/configuration/socket_location",
@@ -204,4 +204,48 @@ attribute "cloudoptimizer/packages/optional/mysql-proxy",
   :required => "optional",
   :default => "Do not install",
   :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/configuration/socks_proxy",
+  :display_name => "SOCKS proxy",
+  :description => "CloudOptimizer acts as a SOCKS4 proxy",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/configuration/socks_proxy_port",
+  :display_name => "SOCKS proxy port",
+  :description => "CloudOptimizer SOCKS4 proxy listening port",
+  :required => "optional",
+  :default => "9002",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/configuration/socks_username",
+  :display_name => "SOCKS proxy user name",
+  :description => "CloudOptimizer SOCKS4 proxy user name",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/configuration/source_transparency",
+  :display_name => "Source transparency",
+  :description => "CloudOptimizer acts as a transparent proxy",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/configuration/transp_int_ip",
+  :display_name => "Internal IP address",
+  :description => "Internal/private IP address to use with source transparency",
+  :required => "optional",
+  :default => "First private IP address",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/configuration/transp_ext_ip",
+  :display_name => "External IP address",
+  :description => "External/public IP address to use with source transparency",
+  :required => "optional",
+  :default => "First public IP address",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
