@@ -37,16 +37,6 @@ end
 
 log "Adding CloudOpt software repositories."
 
-# Test block
-log node[:platform]
-log "node[:platform]"
-log "The platform is node[:platform]"
-log "The platform is" node[:platform]
-$plat = node[:platform]
-log $plat
-log "$plat"
-log "The platform is $plat"
-
 # CloudOpt runs on both Ubuntu and CentOS linux, which require different repositories.  Here we detect
 # the linux distribution and then install the appropriate repository.
 case node[:platform]
@@ -311,57 +301,29 @@ if node[:cloudoptimizer][:packages][:optional][:mysql_proxy] == 'Install'
         package "mysql-proxy"
 end
 
-# Install stored configurations
-
-# Here we give the user the option to retrieve stored configuration files for a truly persistent CloudOptimizer
-# installation that can be stopped and started without requiring reconfiguration.  Files must be provided on an
-# unprotected HTTP server.
-
-# Stored CloudOptimizer configuration file
-if node[:cloudoptimizer][:stored][:cloudoptimizer] == 'none'
-	log "No stored cloudoptimizer configuration specified."
-else
-	log "Installing saved cloudoptimizer configuration node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer]"
-	remote_file "/etc/cloudoptimizer.conf" do
-		source node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer]
-		owner "root"
-		group "root"
-		mode "0644"
-	end
-end
-
-# Stored vtun configuration file
-if node[:cloudoptimizer][:stored][:vtun] == 'none'
-        log "No stored vtun configuration specified."
-else
-        log "Installing saved vtun configuration node[:cloudoptimizer][:configuration][:stored][:vtun]"
-        remote_file "/etc/vtund.conf" do
-                source node[:cloudoptimizer][:configuration][:stored][:vtun]
-                owner "root"
-                group "root"
-                mode "0644"
-        end
-end
-
 # Here we set the public and private addresses to use when the transparent proxy is enabled.  By default, we use the
 # first returned IP address for each, as there will generally be only one.  If the user has specified an address, we
 # use that instead.
 
 # Set the private/internal IP address
 if node[:cloudoptimizer][:configuration][:transp_int_ip] == 'First private IP address'
-	log "Setting internal IP address to node[:cloud][:private_ips][0]."
+	log "Setting internal IP address to:"
+	log node[:cloud][:private_ips][0]
 	$transp_int_ip = node[:cloud][:private_ips][0]
 else
-	log "Setting internal IP address to user specified node[:cloudoptimizer][:configuration][:transp_int_ip]."
+	log "Setting internal IP address to user specified:"
+	log node[:cloudoptimizer][:configuration][:transp_int_ip]
 	$transp_int_ip = node[:cloudoptimizer][:configuration][:transp_int_ip]
 end
 
 # Set the public/external IP address
 if node[:cloudoptimizer][:configuration][:transp_ext_ip] == 'First public IP address'
-        log "Setting external IP address to $node[:cloud][:public_ips][0]."
+        log "Setting external IP address to:"
+	log node[:cloud][:public_ips][0]
         $transp_ext_ip = node[:cloud][:public_ips][0]
 else
-        log "Setting external IP address to user specified $node[:cloudoptimizer][:configuration][:transp_ext_ip]."
+        log "Setting external IP address to user specified:"
+	log $node[:cloudoptimizer][:configuration][:transp_ext_ip]
         $transp_ext_ip = node[:cloudoptimizer][:configuration][:transp_ext_ip]
 end  
 
@@ -436,6 +398,44 @@ else
                 :ssl_ca => node[:cloudoptimizer][:configuration][:ssl_ca],
                 :peer_statement => node[:cloudoptimizer][:configuration][:peer_statement]
           )
+        end
+end
+
+# Install stored configurations
+
+# Here we give the user the option to retrieve stored configuration files for a truly persistent CloudOptimizer
+# installation that can be stopped and started without requiring reconfiguration.  Files must be provided on an
+# unprotected HTTP server.
+
+# Stored configuration files take precedence over all other configuration.  Thus, if the user sets individual
+# configuration options, but also specifies a stored config file, the individual configuration options will be
+# ignored.
+
+# Stored CloudOptimizer configuration file
+if node[:cloudoptimizer][:stored][:cloudoptimizer] == 'none'
+        log "No stored cloudoptimizer configuration specified."
+else
+        log "Installing saved cloudoptimizer configuration from:"
+	log  node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer]
+        remote_file "/etc/cloudoptimizer.conf" do
+                source node[:cloudoptimizer][:configuration][:stored][:cloudoptimizer]
+                owner "root"
+                group "root"
+                mode "0644"
+        end
+end
+
+# Stored vtun configuration file
+if node[:cloudoptimizer][:stored][:vtun] == 'none'
+        log "No stored vtun configuration specified."
+else
+        log "Installing saved vtun configuration from:"
+	log node[:cloudoptimizer][:configuration][:stored][:vtun]
+        remote_file "/etc/vtund.conf" do
+                source node[:cloudoptimizer][:configuration][:stored][:vtun]
+                owner "root"
+                group "root"
+                mode "0644"
         end
 end
 
