@@ -249,3 +249,27 @@ attribute "cloudoptimizer/configuration/transp_ext_ip",
   :required => "optional",
   :default => "First public IP address",
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-s3",
+  :display_name => "CloudController",
+  :description => "Install the CloudController package for Amazon S3",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-tools",
+  :display_name => "CloudOptimizer Tools",
+  :description => "Install additional scripts and tools for the command line",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/supplemental/cloudoptimizer-stat",
+  :display_name => "CloudOptimizer Web Statistics",
+  :description => "Install a web statistics interface",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
