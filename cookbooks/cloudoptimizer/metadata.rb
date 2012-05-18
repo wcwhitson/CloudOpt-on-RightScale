@@ -288,13 +288,6 @@ attribute "cloudoptimizer/packages/beta",
   :choice => [ "Do not install", "Install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
 
-attribute "cloudoptimizer/packages/special",
-  :display_name => "Install Special Versions",
-  :description => "Install special versions of CloudOptimizer packages",
-  :required => "optional",
-  :default => "Do not install",
-  :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
-
 attribute "cloudoptimizer/packages/remove",
   :display_name => "Remove CloudOptimizer Packages",
   :description => "Remove all or part of the CloudOptimizer configuration",
@@ -302,3 +295,11 @@ attribute "cloudoptimizer/packages/remove",
   :default => "Do not remove",
   :choice => [ "Do not remove", "All Packages and Files", "All Packages (Retain Files)", "CloudController", "Web GUI" ],
   :recipes => [ "cloudoptimizer::removecloudoptimizer", ]
+
+attribute "cloudoptimizer/packages/special",
+  :display_name => "Install Special Versions",
+  :description => "Install special versions of CloudOptimizer packages",
+  :required => "optional",
+  :default => "Do not install",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
+
