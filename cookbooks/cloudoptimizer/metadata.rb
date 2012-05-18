@@ -1,12 +1,16 @@
 maintainer "CloudOpt, Inc."
 maintainer_email "support@cloudopt.com"
 license "All rights reserved"
-description "Installs/Configures CloudOptimizer"
+description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.20"
+version "0.21"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
 recipe "cloudoptimizer::showcloudoptimizer", "Display the CloudOptimizer configuration in the Audit Log"
+recipe "cloudoptimizer::clearcache", "Clear the CloudOptimizer byte cache"
+recipe "cloudoptimizer::reloadcloudoptimizer", "Reload the CloudOptimizer configuration"
+recipe "cloudoptimizer::restartcloudoptimizer", "Restart the CloudOptimizer service"
+recipe "cloudoptimizer::removecloudoptimizer", "Remove CloudOptimizer packages"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
