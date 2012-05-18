@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.1.8"
+version "0.20"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
 recipe "cloudoptimizer::showcloudoptimizer", "Display the CloudOptimizer configuration in the Audit Log"
@@ -275,3 +275,26 @@ attribute "cloudoptimizer/packages/supplemental/cloudoptimizerstat",
   :default => "Do not install",
   :choice => [ "Do not install", "Install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
+
+attribute "cloudoptimizer/packages/beta",
+  :display_name => "Install Beta Versions",
+  :description => "Install beta versions of CloudOptimizer packages",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
+
+attribute "cloudoptimizer/packages/special",
+  :display_name => "Install Special Versions",
+  :description => "Install special versions of CloudOptimizer packages",
+  :required => "optional",
+  :default => "Do not install",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
+
+attribute "cloudoptimizer/packages/remove",
+  :display_name => "Remove CloudOptimizer Packages",
+  :description => "Remove all or part of the CloudOptimizer configuration",
+  :required => "optional",
+  :default => "Do not remove",
+  :choice => [ "Do not remove", "All Packages and Files", "All Packages (Retain Files)", "CloudController", "Web GUI" ],
+  :recipes => [ "cloudoptimizer::removecloudoptimizer", ]

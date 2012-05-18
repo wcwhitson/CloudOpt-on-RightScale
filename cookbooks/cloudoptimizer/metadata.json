@@ -588,6 +588,53 @@
       ],
       "calculated": false,
       "type": "string"
+    },
+    "cloudoptimizer/packages/beta": {
+      "display_name": "Install Beta Versions",
+      "description": "Install beta versions of CloudOptimizer packages",
+      "required": "optional",
+      "default": "Do not install",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/special": {
+      "display_name": "Install Special Versions",
+      "description": "Install special versions of CloudOptimizer packages",
+      "required": "optional",
+      "default": "Do not install",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/remove": {
+      "display_name": "Remove CloudOptimizer Packages",
+      "description": "Remove all or part of the CloudOptimizer configuration",
+      "required": "optional",
+      "default": "Do not remove",
+      "choice": [
+        "Do not remove",
+        "All Packages and Files",
+        "All Packages (Retain Files)",
+        "CloudController",
+        "Web GUI"
+      ],
+      "recipes": [
+        "cloudoptimizer::removecloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
     }
   },
   "groupings": {
@@ -597,5 +644,5 @@
     "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration",
     "cloudoptimizer::showcloudoptimizer": "Display the CloudOptimizer configuration in the Audit Log"
   },
-  "version": "0.1.8"
+  "version": "0.20.0"
 }
