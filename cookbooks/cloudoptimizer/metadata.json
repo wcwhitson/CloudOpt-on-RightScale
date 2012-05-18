@@ -604,20 +604,6 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/special": {
-      "display_name": "Install Special Versions",
-      "description": "Install special versions of CloudOptimizer packages",
-      "required": "optional",
-      "default": "Do not install",
-      "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
-      ],
-      "choice": [
-
-      ],
-      "calculated": false,
-      "type": "string"
-    },
     "cloudoptimizer/packages/remove": {
       "display_name": "Remove CloudOptimizer Packages",
       "description": "Remove all or part of the CloudOptimizer configuration",
@@ -632,6 +618,20 @@
       ],
       "recipes": [
         "cloudoptimizer::removecloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/packages/special": {
+      "display_name": "Install Special Versions",
+      "description": "Install special versions of CloudOptimizer packages",
+      "required": "optional",
+      "default": "Do not install",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
       ],
       "calculated": false,
       "type": "string"
