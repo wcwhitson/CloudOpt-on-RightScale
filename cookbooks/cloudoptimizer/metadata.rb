@@ -3,9 +3,10 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.1.7"
+version "0.1.8"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
+recipe "cloudoptimizer::showcloudoptimizer", "Display the CloudOptimizer configuration in the Audit Log"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",

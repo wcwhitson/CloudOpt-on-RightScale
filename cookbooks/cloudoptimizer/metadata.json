@@ -594,7 +594,8 @@
   },
   "recipes": {
     "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package",
-    "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration"
+    "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration",
+    "cloudoptimizer::showcloudoptimizer": "Display the CloudOptimizer configuration in the Audit Log"
   },
-  "version": "0.1.7"
+  "version": "0.1.8"
 }
