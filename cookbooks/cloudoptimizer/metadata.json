@@ -1,6 +1,6 @@
 {
   "name": "cloudoptimizer",
-  "description": "Installs/Configures CloudOptimizer",
+  "description": "Installs/Configures/Removes CloudOptimizer",
   "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
   "maintainer": "CloudOpt, Inc.",
   "maintainer_email": "support@cloudopt.com",
@@ -642,7 +642,11 @@
   "recipes": {
     "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package",
     "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration",
-    "cloudoptimizer::showcloudoptimizer": "Display the CloudOptimizer configuration in the Audit Log"
+    "cloudoptimizer::showcloudoptimizer": "Display the CloudOptimizer configuration in the Audit Log",
+    "cloudoptimizer::clearcache": "Clear the CloudOptimizer byte cache",
+    "cloudoptimizer::reloadcloudoptimizer": "Reload the CloudOptimizer configuration",
+    "cloudoptimizer::restartcloudoptimizer": "Restart the CloudOptimizer service",
+    "cloudoptimizer::removecloudoptimizer": "Remove CloudOptimizer packages"
   },
-  "version": "0.20.0"
+  "version": "0.21.0"
 }
