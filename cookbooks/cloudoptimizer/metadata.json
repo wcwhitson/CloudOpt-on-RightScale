@@ -26,7 +26,8 @@
       "required": "optional",
       "default": "none",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -40,7 +41,8 @@
       "required": "optional",
       "default": "none",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -54,7 +56,8 @@
       "required": "optional",
       "default": "/home/cloudoptimizer",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -68,7 +71,8 @@
       "required": "optional",
       "default": "8000",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -82,7 +86,8 @@
       "required": "optional",
       "default": "/var/run/cloudoptimizer/cloudoptimizer_socket",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -96,7 +101,8 @@
       "required": "optional",
       "default": "512",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -110,7 +116,8 @@
       "required": "optional",
       "default": "384",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -124,7 +131,8 @@
       "required": "optional",
       "default": "/var/log/cloudoptimizer",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -138,7 +146,8 @@
       "required": "optional",
       "default": "12345678",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -157,7 +166,8 @@
         "null"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -180,7 +190,8 @@
         "9"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -195,7 +206,8 @@
         "true"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -210,7 +222,8 @@
         "false"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -225,7 +238,8 @@
         "false"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -236,7 +250,8 @@
       "required": "optional",
       "default": "1",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -254,7 +269,8 @@
         "true"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -265,7 +281,8 @@
       "required": "optional",
       "default": "0.0.0.0:9000",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -279,7 +296,8 @@
       "required": "optional",
       "default": "9001",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -298,7 +316,8 @@
         "off"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -309,7 +328,8 @@
       "required": "optional",
       "default": "",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -323,7 +343,8 @@
       "required": "optional",
       "default": "",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -337,7 +358,8 @@
       "required": "optional",
       "default": "",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -351,7 +373,8 @@
       "required": "optional",
       "default": "",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -388,7 +411,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -403,7 +427,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -418,7 +443,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -433,7 +459,8 @@
         "true"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -444,7 +471,8 @@
       "required": "optional",
       "default": "9002",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -458,7 +486,8 @@
       "required": "optional",
       "default": "",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -476,7 +505,8 @@
         "true"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -487,7 +517,8 @@
       "required": "optional",
       "default": "First private IP address",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -501,7 +532,8 @@
       "required": "optional",
       "default": "First public IP address",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -519,7 +551,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimize",
+        "cloudoptimizer::configurecloudoptimizerr"
       ],
       "calculated": false,
       "type": "string"
@@ -534,7 +567,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -549,7 +583,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -558,7 +593,8 @@
   "groupings": {
   },
   "recipes": {
-    "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package"
+    "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package",
+    "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration"
   },
   "version": "0.1.7"
 }
