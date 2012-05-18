@@ -117,8 +117,8 @@ execute "cloudconfig" do
         command "cloudconfig get /config/verify_upstream_certificate"
 end
 
-service "cloudoptimizer" do
-	action :show-version
+execute "service" do
+	command "service cloudoptimizer show-version"
 end
 
 log "========== Ending CloudOptimizer Configuration Retrieval =========="
