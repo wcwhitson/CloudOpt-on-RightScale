@@ -6,7 +6,7 @@
 log "========== Retrieving CloudOptimizer Configuration  =========="
 
 execute "cloudconfig" do
-	command "cloudconfig get /config/home_directory"
+	command "cloudconfig get /config/home"
 end
 
 execute "cloudconfig" do
@@ -26,7 +26,7 @@ execute "cloudconfig" do
 end
 
 execute "cloudconfig" do
-        command "cloudconfig get /config/log_directory"
+        command "cloudconfig get /config/log_dir"
 end
 
 execute "cloudconfig" do
@@ -70,7 +70,7 @@ execute "cloudconfig" do
 end
 
 execute "cloudconfig" do
-        command "cloudconfig get /config/socks_proxy"
+        command "cloudconfig get /config/enable_socks"
 end
 
 execute "cloudconfig" do
@@ -86,11 +86,7 @@ execute "cloudconfig" do
 end
 
 execute "cloudconfig" do
-        command "cloudconfig get /config/internal_ip"
-end
-
-execute "cloudconfig" do
-        command "cloudconfig get /config/external_ip"
+        command "cloudconfig get /config/source_remap"
 end
 
 execute "cloudconfig" do
@@ -110,7 +106,15 @@ execute "cloudconfig" do
 end
 
 execute "cloudconfig" do
-        command "cloudconfig get /config/peer_statement"
+        command "cloudconfig get /config/peers"
+end
+
+execute "cloudconfig" do
+        command "cloudconfig get /config/terminate_ssl"
+end
+
+execute "cloudconfig" do
+        command "cloudconfig get /config/verify_upstream_certificate"
 end
 
 service "cloudoptimizer" do
