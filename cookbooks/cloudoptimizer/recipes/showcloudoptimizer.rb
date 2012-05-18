@@ -208,7 +208,7 @@ log "--------------------------------------------------------------"
 log "--------------------------------------------------------------"
 log "PEERS:"
 execute "cloudconfig" do
-        command "cloudconfig get /config/peers"
+        command "cloudconfig peer_list"
         returns [0, 1]
 end
 log "--------------------------------------------------------------"
