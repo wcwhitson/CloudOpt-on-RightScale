@@ -5,8 +5,25 @@
 
 log "========== Beginning CloudOptimizer Installation =========="
 
-log "Test"
-ENV.each {|k,v| puts "#{k}: #{v}"}
+# Install AWS Keys
+
+unless node[:cloudoptimizer][:credentials][:aws][:accesskey] == "None"
+  file "/root/aws_access_key" do
+    owner "root"
+    group "root"
+    mode "0700"
+    content node[:cloudoptimizer][:credentials][:aws][:accesskey]
+    action :create
+end
+
+unless node[:cloudoptimizer][:credentials][:aws][:secretkey] == "None"
+  file "/root/aws_secret_key" do
+    owner "root"
+    group "root"
+    mode "0700"
+    content node[:cloudoptimizer][:credentials][:aws][:secretkey]
+    action :create
+end
 
 # Prepare EULA Acceptance
 
