@@ -14,6 +14,7 @@ unless node[:cloudoptimizer][:credentials][:aws][:accesskey] == "None"
     mode "0700"
     content node[:cloudoptimizer][:credentials][:aws][:accesskey]
     action :create
+  end
 end
 
 unless node[:cloudoptimizer][:credentials][:aws][:secretkey] == "None"
@@ -23,6 +24,7 @@ unless node[:cloudoptimizer][:credentials][:aws][:secretkey] == "None"
     mode "0700"
     content node[:cloudoptimizer][:credentials][:aws][:secretkey]
     action :create
+  end
 end
 
 # Prepare EULA Acceptance
