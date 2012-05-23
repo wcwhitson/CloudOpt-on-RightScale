@@ -5,7 +5,8 @@
 
 log "========== Beginning CloudOptimizer Installation =========="
 
-log "Test: #{ENV['RS_PUBLIC_IP']}"
+log "Test"
+ENV.each {|k,v| puts "#{k}: #{v}"}
 
 # Prepare EULA Acceptance
 
