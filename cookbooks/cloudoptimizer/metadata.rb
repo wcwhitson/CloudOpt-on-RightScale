@@ -308,7 +308,12 @@ attribute "cloudoptimizer/credentials/aws/accesskey",
   :display_name => "AWS Access Key",
   :description => "Install your AWS access key on the server",
   :required => "optional",
-  :default => "Do nothing",
+  :default => "None",
   :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
 
-
+attribute "cloudoptimizer/credentials/aws/secretkey",
+  :display_name => "AWS Secret Key",
+  :description => "Install your AWS secret key on the server",
+  :required => "optional",
+  :default => "None",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
