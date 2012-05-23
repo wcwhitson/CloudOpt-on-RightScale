@@ -6,7 +6,7 @@
 log "========== Beginning Reload CloudOptimizer Configuration  =========="
 
 execute "service" do
-	command "service cloudoptimizer reload"
+  command "service cloudoptimizer reload"
 end
 
 log "========== Ending Reload CloudOptimizer Configuration  =========="

@@ -6,7 +6,7 @@
 log "========== Beginning Restart CloudOptimizer Service  =========="
 
 execute "service" do
-	command "service cloudoptimizer restart"
+  command "service cloudoptimizer restart"
 end
 
 log "========== Ending Restart CloudOptimizer Service  =========="

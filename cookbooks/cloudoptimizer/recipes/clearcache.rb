@@ -6,7 +6,7 @@
 log "========== Beginning Clear CloudOptimizer Cache  =========="
 
 execute "service" do
-	command "service cloudoptimizer clear-cache"
+  command "service cloudoptimizer clear-cache"
 end
 
 log "========== Ending Clear CloudOptimizer Cache  =========="

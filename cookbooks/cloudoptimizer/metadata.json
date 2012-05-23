@@ -635,6 +635,20 @@
       ],
       "calculated": false,
       "type": "string"
+    },
+    "cloudoptimizer/credentials/aws/accesskey": {
+      "display_name": "AWS Access Key",
+      "description": "Install your AWS access key on the server",
+      "required": "optional",
+      "default": "Do nothing",
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer"
+      ],
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string"
     }
   },
   "groupings": {
@@ -646,7 +660,8 @@
     "cloudoptimizer::clearcache": "Clear the CloudOptimizer byte cache",
     "cloudoptimizer::reloadcloudoptimizer": "Reload the CloudOptimizer configuration",
     "cloudoptimizer::restartcloudoptimizer": "Restart the CloudOptimizer service",
-    "cloudoptimizer::removecloudoptimizer": "Remove CloudOptimizer packages"
+    "cloudoptimizer::removecloudoptimizer": "Remove CloudOptimizer packages",
+    "cloudoptimizer::supportview": "Create/upload a SupportView diagnostics archive"
   },
-  "version": "0.21.0"
+  "version": "0.22.0"
 }

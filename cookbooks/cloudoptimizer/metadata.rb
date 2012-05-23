@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.21"
+version "0.22"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
 recipe "cloudoptimizer::showcloudoptimizer", "Display the CloudOptimizer configuration in the Audit Log"
@@ -11,6 +11,7 @@ recipe "cloudoptimizer::clearcache", "Clear the CloudOptimizer byte cache"
 recipe "cloudoptimizer::reloadcloudoptimizer", "Reload the CloudOptimizer configuration"
 recipe "cloudoptimizer::restartcloudoptimizer", "Restart the CloudOptimizer service"
 recipe "cloudoptimizer::removecloudoptimizer", "Remove CloudOptimizer packages"
+recipe "cloudoptimizer::supportview", "Create/upload a SupportView diagnostics archive"
 
 attribute "cloudoptimizer/stored/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
@@ -302,4 +303,12 @@ attribute "cloudoptimizer/packages/special",
   :required => "optional",
   :default => "Do not install",
   :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
+
+attribute "cloudoptimizer/credentials/aws/accesskey",
+  :display_name => "AWS Access Key",
+  :description => "Install your AWS access key on the server",
+  :required => "optional",
+  :default => "Do nothing",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
+
 
