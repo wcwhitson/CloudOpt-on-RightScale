@@ -23,7 +23,7 @@ end
 unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   log "===== Beginning SupportView for RightScale Audit Log ====="
 
-  log "HOSTNAME:
+  log "HOSTNAME:"
   execute "hostname" do
     command "hostname"
   end
