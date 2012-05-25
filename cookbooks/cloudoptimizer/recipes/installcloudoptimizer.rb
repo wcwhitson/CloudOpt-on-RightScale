@@ -16,7 +16,7 @@ unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
     owner "root"
     group "root"
     mode "0700"
-    content node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey]
+    content "#{node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey]}"
     action :create
   end
 end
@@ -26,7 +26,7 @@ unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
     owner "root"
     group "root"
     mode "0700"
-    content node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey]
+    content "#{node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey]}"
     action :create
   end
 end
