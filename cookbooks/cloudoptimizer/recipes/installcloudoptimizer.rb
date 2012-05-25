@@ -447,7 +447,7 @@ else
       :socks_username => node[:cloudoptimizer_configuration][:socks][:socks_username],
       :source_transparency => node[:cloudoptimizer_configuration][:transparency][:source_transparency],
       :transp_int_ip => "$internal_ip",
-      :transp_ext_ip => "$external_ip",
+      :transp_ext_ip => "$external_ip"
     )
   end
 end
