@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.29"
+version "0.30"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
 recipe "cloudoptimizer::showcloudoptimizer", "Display the CloudOptimizer configuration in the Audit Log"
@@ -304,14 +304,14 @@ attribute "cloudoptimizer_packages/special",
   :default => "Do not install",
   :recipes => [ "cloudoptimizer::installcloudoptimizer", ]
 
-attribute "cloudoptimizer/credentials/aws/accesskey",
+attribute "cloudoptimizer/cloud_credentials/aws/accesskey",
   :display_name => "AWS Access Key",
   :description => "Install your AWS access key on the server",
   :required => "optional",
   :default => "None",
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer" ]
 
-attribute "cloudoptimizer/credentials/aws/secretkey",
+attribute "cloudoptimizer/cloud_credentials/aws/secretkey",
   :display_name => "AWS Secret Key",
   :description => "Install your AWS secret key on the server",
   :required => "optional",

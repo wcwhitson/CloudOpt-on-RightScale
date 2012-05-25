@@ -637,7 +637,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/credentials/aws/accesskey": {
+    "cloudoptimizer/cloud_credentials/aws/accesskey": {
       "display_name": "AWS Access Key",
       "description": "Install your AWS access key on the server",
       "required": "optional",
@@ -652,7 +652,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/credentials/aws/secretkey": {
+    "cloudoptimizer/cloud_credentials/aws/secretkey": {
       "display_name": "AWS Secret Key",
       "description": "Install your AWS secret key on the server",
       "required": "optional",
@@ -699,5 +699,5 @@
     "cloudoptimizer::removecloudoptimizer": "Remove CloudOptimizer packages",
     "cloudoptimizer::supportview": "Create/upload a SupportView diagnostics archive"
   },
-  "version": "0.29.0"
+  "version": "0.30.0"
 }
