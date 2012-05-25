@@ -20,7 +20,7 @@
   "replacing": {
   },
   "attributes": {
-    "cloudoptimizer/stored/cloudoptimizer": {
+    "cloudoptimizer/stored_configuration/cloudoptimizer": {
       "display_name": "Stored CloudOptimizer configuration",
       "description": "URL to a cloudoptimizer.conf file containing your saved configuration",
       "required": "optional",
@@ -35,7 +35,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/stored/vtun": {
+    "cloudoptimizer/stored_configuration/vtun": {
       "display_name": "Stored vtun configuration",
       "description": "URL to a vtund.conf file containing your saved configuration",
       "required": "optional",
@@ -50,14 +50,15 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/home_directory": {
+    "cloudoptimizer_configuration/file_locations/home_directory": {
       "display_name": "Home directory",
       "description": "CloudOptimizer home directory - contains byte cache",
       "required": "optional",
       "default": "/home/cloudoptimizer",
       "recipes": [
         "cloudoptimizer::installcloudoptimizer",
-        "cloudoptimizer::configurecloudoptimizer"
+        "cloudoptimizer::configurecloudoptimizer",
+        "cloudoptimizer::supportview"
       ],
       "choice": [
 
@@ -65,7 +66,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/default_cache_size": {
+    "cloudoptimizer_configuration/byte_cache/default_cache_size": {
       "display_name": "Byte cache size",
       "description": "CloudOptimizer byte cache size in megabytes",
       "required": "optional",
@@ -80,7 +81,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/socket_location": {
+    "cloudoptimizer_configuration/file_locations/socket_location": {
       "display_name": "Socket location",
       "description": "Location of the CloudOptimizer socket file",
       "required": "optional",
@@ -95,7 +96,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/bitmap_size": {
+    "cloudoptimizer_configuration/byte_cache/bitmap_size": {
       "display_name": "Bitmap size",
       "description": "CloudOptimizer cache memory map size",
       "required": "optional",
@@ -110,7 +111,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/db_memory_size": {
+    "cloudoptimizer_configuration/byte_cache/db_memory_size": {
       "display_name": "Index size",
       "description": "CloudOptimizer cache memory index size",
       "required": "optional",
@@ -125,7 +126,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/log_directory": {
+    "cloudoptimizer_configuration/logs/log_directory": {
       "display_name": "Log directory",
       "description": "Location of CloudOptimizer log files",
       "required": "optional",
@@ -140,7 +141,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/log_key": {
+    "cloudoptimizer_configuration/logs/log_key": {
       "display_name": "Log key",
       "description": "Key for CloudOptimizer shared memory",
       "required": "optional",
@@ -155,7 +156,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/compression_engine": {
+    "cloudoptimizer_configuration/compression/compression_engine": {
       "display_name": "Compression engine",
       "description": "CloudOptimizer compression engine",
       "required": "optional",
@@ -172,7 +173,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/default_compression_level": {
+    "cloudoptimizer_configuration/compression/default_compression_level": {
       "display_name": "Compression level",
       "description": "CloudOptimizer compression level",
       "required": "optional",
@@ -196,7 +197,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/optimistic_deduplication": {
+    "cloudoptimizer_configuration/optimistic_deduplication": {
       "display_name": "First pass optimization",
       "description": "CloudOptimizer first pass optimization",
       "required": "optional",
@@ -212,7 +213,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/cache_promotion": {
+    "cloudoptimizer_configuration/byte_cache/cache_promotion": {
       "display_name": "Cache promotion",
       "description": "CloudOptimizer cache promotion",
       "required": "optional",
@@ -228,7 +229,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/compress_cache": {
+    "cloudoptimizer_configuration/byte_cache/compress_cache": {
       "display_name": "Cache compression",
       "description": "CloudOptimizer byte cache compression",
       "required": "optional",
@@ -244,7 +245,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/thread_count": {
+    "cloudoptimizer_configuration/thread_count": {
       "display_name": "Thread count",
       "description": "CloudOptimizer thread count",
       "required": "optional",
@@ -259,7 +260,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/intelligent_mesh": {
+    "cloudoptimizer_configuration/intelligent_mesh": {
       "display_name": "Intelligent mesh",
       "description": "CloudOptimizer intelligent mesh",
       "required": "optional",
@@ -275,7 +276,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/local_proxy_address": {
+    "cloudoptimizer_configuration/local_proxy_address": {
       "display_name": "Local proxy address",
       "description": "CloudOptimizer local proxy address",
       "required": "optional",
@@ -290,7 +291,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/peer_proxy_port": {
+    "cloudoptimizer_configuration/peer_proxy_port": {
       "display_name": "Peer proxy port",
       "description": "CloudOptimizer peer proxy port",
       "required": "optional",
@@ -305,7 +306,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/peer_encryption": {
+    "cloudoptimizer_configuration/encryption/peer_encryption": {
       "display_name": "Peer encryption",
       "description": "CloudOptimizer peer encryption",
       "required": "optional",
@@ -322,7 +323,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/ssl_key": {
+    "cloudoptimizer_configuration/encryption/ssl_key": {
       "display_name": "SSL key",
       "description": "CloudOptimizer SSL key file",
       "required": "optional",
@@ -337,7 +338,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/ssl_cert": {
+    "cloudoptimizer_configuration/encryption/ssl_cert": {
       "display_name": "SSL certificate",
       "description": "CloudOptimizer SSL certificate file",
       "required": "optional",
@@ -352,7 +353,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/ssl_ca": {
+    "cloudoptimizer_configuration/encryption/ssl_ca": {
       "display_name": "SSL CA certificate",
       "description": "CloudOptimizer SSL CA certificate file",
       "required": "optional",
@@ -367,7 +368,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/peer_statement": {
+    "cloudoptimizer_configuration/peer_statement": {
       "display_name": "Peer statement",
       "description": "CloudOptimizer peer statement for Client edition (for Cloud edition, use a stored configuration)",
       "required": "optional",
@@ -401,7 +402,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/optional/vtun": {
+    "cloudoptimizer_packages/optional/vtun": {
       "display_name": "VTun",
       "description": "Install the vtun package",
       "required": "optional",
@@ -417,7 +418,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/optional/frox": {
+    "cloudoptimizer_packages/optional/frox": {
       "display_name": "Frox",
       "description": "Install the frox package",
       "required": "optional",
@@ -433,7 +434,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/optional/mysql-proxy": {
+    "cloudoptimizer_packages/optional/mysql-proxy": {
       "display_name": "MySQL Proxy",
       "description": "Install the mysql-proxy package",
       "required": "optional",
@@ -449,7 +450,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/socks_proxy": {
+    "cloudoptimizer_configuration/socks/socks_proxy": {
       "display_name": "SOCKS proxy",
       "description": "CloudOptimizer acts as a SOCKS4 proxy",
       "required": "optional",
@@ -465,7 +466,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/socks_proxy_port": {
+    "cloudoptimizer_configuration/socks/socks_proxy_port": {
       "display_name": "SOCKS proxy port",
       "description": "CloudOptimizer SOCKS4 proxy listening port",
       "required": "optional",
@@ -480,7 +481,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/socks_username": {
+    "cloudoptimizer_configuration/socks/socks_username": {
       "display_name": "SOCKS proxy user name",
       "description": "CloudOptimizer SOCKS4 proxy user name",
       "required": "optional",
@@ -495,7 +496,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/source_transparency": {
+    "cloudoptimizer_configuration/transparency/source_transparency": {
       "display_name": "Source transparency",
       "description": "CloudOptimizer acts as a transparent proxy",
       "required": "optional",
@@ -511,7 +512,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/transp_intip": {
+    "cloudoptimizer_configuration/transparency/transp_intip": {
       "display_name": "Internal IP address",
       "description": "Internal/private IP address to use with source transparency",
       "required": "optional",
@@ -526,7 +527,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/configuration/transp_extip": {
+    "cloudoptimizer_configuration/transparency/transp_extip": {
       "display_name": "External IP address",
       "description": "External/public IP address to use with source transparency",
       "required": "optional",
@@ -541,7 +542,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/supplemental/cloudoptimizers3": {
+    "cloudoptimizer_packages/additional/cloudoptimizers3": {
       "display_name": "CloudController",
       "description": "Install the CloudController package for Amazon S3",
       "required": "optional",
@@ -557,7 +558,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/supplemental/cloudoptimizertools": {
+    "cloudoptimizer_packages/additional/cloudoptimizertools": {
       "display_name": "CloudOptimizer Tools",
       "description": "Install additional scripts and tools for the command line",
       "required": "optional",
@@ -573,7 +574,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/supplemental/cloudoptimizerstat": {
+    "cloudoptimizer_packages/additional/cloudoptimizerstat": {
       "display_name": "CloudOptimizer Web Statistics",
       "description": "Install a web statistics interface",
       "required": "optional",
@@ -589,7 +590,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/beta": {
+    "cloudoptimizer_packages/beta": {
       "display_name": "Install Beta Versions",
       "description": "Install beta versions of CloudOptimizer packages",
       "required": "optional",
@@ -604,7 +605,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/remove": {
+    "cloudoptimizer_packages/remove": {
       "display_name": "Remove CloudOptimizer Packages",
       "description": "Remove all or part of the CloudOptimizer configuration",
       "required": "optional",
@@ -622,7 +623,7 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/packages/special": {
+    "cloudoptimizer_packages/special": {
       "display_name": "Install Special Versions",
       "description": "Install special versions of CloudOptimizer packages",
       "required": "optional",
@@ -642,7 +643,8 @@
       "required": "optional",
       "default": "None",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
@@ -656,10 +658,30 @@
       "required": "optional",
       "default": "None",
       "recipes": [
-        "cloudoptimizer::installcloudoptimizer"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "choice": [
 
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/supportview": {
+      "display_name": "SupportView",
+      "description": "Create a support diagnostics file and, optionally, upload to CloudOpt",
+      "required": "optional",
+      "default": "Do not run SupportView",
+      "choice": [
+        "Do not run SupportView",
+        "Upload a full archive",
+        "Upload a light archive",
+        "Create a local archive",
+        "Report to Audit Log only"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"
@@ -677,5 +699,5 @@
     "cloudoptimizer::removecloudoptimizer": "Remove CloudOptimizer packages",
     "cloudoptimizer::supportview": "Create/upload a SupportView diagnostics archive"
   },
-  "version": "0.22.0"
+  "version": "0.26.0"
 }

@@ -22,41 +22,41 @@
                  * This directory will have contents deleted when the cache
                  * is cleared ('sudo service cloudoptimizer clear-cache').
                  */
-                "home": "<%= node[:cloudoptimizer][:configuration][:home_directory] %>",
+                "home": "<%= node[:cloudoptimizer_configuration][:file_locations][:home_directory] %>",
 
                 /*                                                      
                  * Default cache size for new caches, the value is in   
                  * megabytes.                                           
                  */
-                "default_cache_size": <%= node[:cloudoptimizer][:configuration][:default_cache_size] %>,
+                "default_cache_size": <%= node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size] %>,
 
                 /*                                                      
                  * Path for the UNIX Socket.
                  */
-                "socket_location": "<%= node[:cloudoptimizer][:configuration][:socket_location] %>",
+                "socket_location": "<%= node[:cloudoptimizer_configuration][:file_locations][:socket_location] %>",
 
                 /*
                  * Memory allocated for bitmap.
                  * Must be power of 2.
                  */
-                "bitmap_size": <%= node[:cloudoptimizer][:configuration][:bitmap_size] %>,
+                "bitmap_size": <%= node[:cloudoptimizer_configuration][:byte_cache][:bitmap_size] %>,
 
                 /*
                  * How much memory in MB to use the db index.
                  */
-                "db_memory_size": <%= node[:cloudoptimizer][:configuration][:db_memory_size] %>,
+                "db_memory_size": <%= node[:cloudoptimizer_configuration][:byte_cache][:db_memory_size] %>,
 
                 /*
                  * Which directory should log files go to?
                  */
-                "log_dir": "<%= node[:cloudoptimizer][:configuration][:log_directory] %>",
+                "log_dir": "<%= node[:cloudoptimizer_configuration][:logs][:log_directory] %>",
 
                 /*
                  * The logging uses a shared memory segment, this is the key
                  * we will for that segment. Change it if it conflicts with
                  * another shared memory key already in use on your system.
                  */
-                "log_key": <%= node[:cloudoptimizer][:configuration][:log_key] %>,
+                "log_key": <%= node[:cloudoptimizer_configuration][:logs][:log_key] %>,
 
                 /*
                  * The compression engine to use. Options are:
@@ -70,7 +70,7 @@
                  * 'zlib'   - which is slower than 'snappy'
                  *            but compresses better.
                  */
-                "compression_engine": "<%= node[:cloudoptimizer][:configuration][:compression_engine] %>",
+                "compression_engine": "<%= node[:cloudoptimizer_configuration][:compression][:compression_engine] %>",
 
                 /*
                  * The default compression level to use for zlib. 
@@ -78,7 +78,7 @@
                  * Higher compressions levels use more CPU time but provide
                  * better compression, therefore less bandwidth is used.
                  */
-                "default_compression_level": <%= node[:cloudoptimizer][:configuration][:default_compression_level] %>,
+                "default_compression_level": <%= node[:cloudoptimizer_configuration][:compression][:default_compression_level] %>,
 
                 /*
                  * Enable optimistic data deduplication. This may be
@@ -100,7 +100,7 @@
                  *            of, the normal 'restart' call described at
                  *            the top of this configuration file.
                  */
-                "optimistic_deduplication": <%= node[:cloudoptimizer][:configuration][:optimistic_deduplication] %>,
+                "optimistic_deduplication": <%= node[:cloudoptimizer_configuration][:optimistic_deduplication] %>,
 
                 /*
                  * Enable cache promotion. If enabled, this will prevent
@@ -108,37 +108,37 @@
                  * by newer traffic. This may impact performance in return
                  * for increased data deduplication over time.
                  */
-                "cache_promotion": <%= node[:cloudoptimizer][:configuration][:cache_promotion] %>,
+                "cache_promotion": <%= node[:cloudoptimizer_configuration][:byte_cache][:cache_promotion] %>,
 
                 /*
 		 * Compress data stored in the cache. With this option turned
 		 * on the cache will need less disk space, however there is
 		 * small performance penalty with respect to throughput.
 		 */
-                "compress_cache": <%= node[:cloudoptimizer][:configuration][:compress_cache] %>,
+                "compress_cache": <%= node[:cloudoptimizer_configuration][:byte_cache][:compress_cache] %>,
 
                 /*
                  * The number of threads to launch.
                  */
-                "thread_count": <%= node[:cloudoptimizer][:configuration][:thread_count] %>,
+                "thread_count": <%= node[:cloudoptimizer_configuration][:thread_count] %>,
 
                 /*
                  * Enable intelligent mesh.  If enabled, this will attempt to
                  * accelerate to applications without any explicit config.
                  */
-                "intelligent_mesh": <%= node[:cloudoptimizer][:configuration][:intelligent_mesh] %>,
+                "intelligent_mesh": <%= node[:cloudoptimizer_configuration][:intelligent_mesh] %>,
 
                 /*
                  * The address for CloudOptimizer to listen for client
                  * connections on.
                  */
-                "local_proxy_address": "<%= node[:cloudoptimizer][:configuration][:local_proxy_address] %>",
+                "local_proxy_address": "<%= node[:cloudoptimizer_configuration][:local_proxy_address] %>",
 
                 /*
                  * The default port for CloudOptimzer to listen for connections
                  * from a peer system on.
                  */
-                "peer_proxy_port": <%= node[:cloudoptimizer][:configuration][:peer_proxy_port] %>,
+                "peer_proxy_port": <%= node[:cloudoptimizer_configuration][:peer_proxy_port] %>,
 
                 /*
                  * Should tunnels between peer systems be encrypted with SSL?
@@ -161,7 +161,7 @@
                  * If encryption is to be used, then see the section below,
                  * 'SSL certificate locations for peer encryption.' 
                  */
-                "peer_encryption": "<%= node[:cloudoptimizer][:configuration][:peer_encryption] %>",
+                "peer_encryption": "<%= node[:cloudoptimizer_configuration][:encryption][:peer_encryption] %>",
 
                 /*
                  * SSL certificate locations for peer encryption.
@@ -180,9 +180,9 @@
                  *         "ssl_cert": "/path/to/your/server-cert.pem",
                  *         "ssl_ca":   "/path/to/your/cacert.pem",
                  */
-                "ssl_key": "<%= node[:cloudoptimizer][:configuration][:ssl_key] %>",
-                "ssl_cert": "<%= node[:cloudoptimizer][:configuration][:ssl_cert] %>",
-                "ssl_ca": "<%= node[:cloudoptimizer][:configuration][:ssl_ca] %>",
+                "ssl_key": "<%= node[:cloudoptimizer_configuration][:encryption][:ssl_key] %>",
+                "ssl_cert": "<%= node[:cloudoptimizer_configuration][:encryption][:ssl_cert] %>",
+                "ssl_ca": "<%= node[:cloudoptimizer_configuration][:encryption][:ssl_ca] %>",
 
                 /*
                  * Peer proxy addresses
@@ -212,7 +212,7 @@
                  *       }
                  */
                 "peers": [
-			<%= node[:cloudoptimizer][:configuration][:peer_statement] %>
+			<%= node[:cloudoptimizer_configuration][:peer_statement] %>
                 ]
         },
         "logging": {
