@@ -92,6 +92,7 @@ end
 log "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
 # Use the template for CloudOptimizer versions 0.9.3.2 and earlier
 if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:version] == '0.9.3.1' or node[:cloudoptimizer][:version] == '0.9.3' or node[:cloudoptimizer][:version] == '0.9.2.3'
+  log "Using template cloudoptimizer.conf.0.9.3.erb."
   template "/etc/cloudoptimizer.conf" do
     source "cloudoptimizer.conf.0.9.3.erb"
     mode "0644"
@@ -124,6 +125,7 @@ if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:versio
 
 # Use the template for version 0.9.4 and later
 else
+  log "Using template cloudoptimizer.conf.0.9.4.erb."
   template "/etc/cloudoptimizer.conf" do
     source "cloudoptimizer.conf.0.9.4.erb"
     mode "0644"

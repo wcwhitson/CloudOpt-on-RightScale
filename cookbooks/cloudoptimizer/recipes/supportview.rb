@@ -64,7 +64,7 @@ unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   end
 
   log "CLOUDOPTIMIZER.CONF:"
-  execute "more cloudoptimizer.conf" dp
+  execute "more cloudoptimizer.conf" do
     command "more /etc/cloudoptimizer.conf"
   end
 
