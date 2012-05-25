@@ -150,8 +150,7 @@ else
       :ssl_key => node[:cloudoptimizer_configuration][:encryption][:ssl_key],
       :ssl_cert => node[:cloudoptimizer_configuration][:encryption][:ssl_cert],
       :ssl_ca => node[:cloudoptimizer_configuration][:encryption][:ssl_ca],
-      :peer_statement => node[:cloudoptimizer_configuration][:peer_statement]
-
+      :peer_statement => node[:cloudoptimizer_configuration][:peer_statement],
       :socks_proxy => node[:cloudoptimizer_configuration][:socks][:socks_proxy],
       :socks_proxy_port => node[:cloudoptimizer_configuration][:socks][:socks_proxy_port],
       :socks_username => node[:cloudoptimizer_configuration][:socks][:socks_username],
