@@ -552,8 +552,8 @@
         "Install"
       ],
       "recipes": [
-        "cloudoptimizer::installcloudoptimize",
-        "cloudoptimizer::configurecloudoptimizerr"
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
       ],
       "calculated": false,
       "type": "string"

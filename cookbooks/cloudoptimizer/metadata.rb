@@ -263,7 +263,7 @@ attribute "cloudoptimizer_packages/additional/cloudoptimizers3",
   :required => "optional",
   :default => "Do not install",
   :choice => [ "Do not install", "Install" ],
-  :recipes => [ "cloudoptimizer::installcloudoptimize", "cloudoptimizer::configurecloudoptimizerr" ]
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
 
 attribute "cloudoptimizer_packages/additional/cloudoptimizertools",
   :display_name => "CloudOptimizer Tools",
