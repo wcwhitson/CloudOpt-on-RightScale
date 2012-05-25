@@ -22,8 +22,8 @@ end
 
 # Create alternate log directory
 
-unless node[:cloudoptimizer_configuration][:file_locations][:log_directory] == "/var/log/cloudoptimizer"
-  directory node[:cloudoptimizer_configuration][:file_locations][:log_directory] do
+unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/cloudoptimizer"
+  directory node[:cloudoptimizer_configuration][:logs][:log_directory] do
     owner "root"
     group "root"
     mode "0700"
