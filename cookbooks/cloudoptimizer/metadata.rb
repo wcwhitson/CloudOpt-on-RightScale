@@ -325,3 +325,11 @@ attribute "cloudoptimizer/supportview",
   :default => "Do not run SupportView",
   :choice => [ "Do not run SupportView", "Upload a full archive", "Upload a light archive", "Create a local archive", "Report to Audit Log only" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer" ]
+
+attribute "cloudoptimizer/automatic_feedback",
+  :display_name => "Product Feedback",
+  :description => "Automatically provide CloudOpt with information about how you use CloudOptimizer",
+  :required => "optional",
+  :default => "Detailed feedback",
+  :choice => [ "Detailed feedback", "Basic feedback", "No feedback" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer" ]
