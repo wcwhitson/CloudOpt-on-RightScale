@@ -334,3 +334,11 @@ attribute "cloudoptimizer/automatic_feedback",
   :default => "Detailed feedback",
   :choice => [ "Detailed feedback", "Basic feedback", "No feedback" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer" ]
+
+attribute "cloudoptimizer/security/securitygroup",
+  :display_name => "Create AWS Security Group",
+  :description => "Create a security group for AWS that opens the CloudOptimizer TCP ports",
+  :required => "optional",
+  :default => "Do not open ports",
+  :choice => [ "Do not open ports", "Open ports" ],
+  :recipes => [ "cloudoptimizer::addsecuritygroup" ]
