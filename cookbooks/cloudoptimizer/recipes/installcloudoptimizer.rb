@@ -115,7 +115,7 @@ if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer
     execute "CloudOpt.selfextracting" do
       command "/var/tmp/CloudOpt-Testing.selfextracting"
     end
-
+  end
 else
   case node[:platform]
   when "ubuntu"
@@ -161,6 +161,7 @@ else
     execute "CloudOpt.selfextracting" do
       command "/var/tmp/CloudOpt.selfextracting"
     end
+  end
 end
 
 # Set up firewall rules
@@ -324,7 +325,7 @@ else
         when "x86_64"
           execute "yum" do
             command "yum -y install cloudoptimizer-0.9.3"
-          end	
+          end  
         when "i686"
           execute "yum" do
             command "yum -y install cloudoptimizer-0.9.3"
