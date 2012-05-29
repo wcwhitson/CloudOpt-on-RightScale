@@ -702,6 +702,28 @@
       ],
       "calculated": false,
       "type": "string"
+    },
+    attribute "cloudoptimizer/security/securitygroup",
+  :display_name => "Create AWS Security Group",
+  :description => "Create a security group for AWS that opens the CloudOptimizer TCP ports",
+  :required => "optional",
+  :default => "Do not open ports",
+  :choice => [ "Do not open ports", "Open ports" ],
+  :recipes => [ "cloudoptimizer::addsecuritygroup" ]
+      "cloudoptimizer/security/securitygroup": {
+      "display_name": "Create AWS Security Group",
+      "description": "Create a security group for AWS that opens the CloudOptimizer TCP ports",
+      "required": "optional",
+      "default": "Do not open ports",
+      "choice": [
+        "Do not open ports",
+        "Open ports"
+      ],
+      "recipes": [
+        "cloudoptimizer::addsecuritygroup"
+      ],
+      "calculated": false,
+      "type": "string"
     }
   },
   "groupings": {
