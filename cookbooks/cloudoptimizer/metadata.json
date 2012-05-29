@@ -716,5 +716,5 @@
     "cloudoptimizer::removecloudoptimizer": "Remove CloudOptimizer packages",
     "cloudoptimizer::supportview": "Create/upload a SupportView diagnostics archive"
   },
-  "version": "0.33.0"
+  "version": "0.34.0"
 }
