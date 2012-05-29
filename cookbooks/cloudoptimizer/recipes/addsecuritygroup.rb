@@ -3,8 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-require 'ec2'
-require 'lib/ec2/right_ec2.rb'
+require 'right_ec2'
 
 log "========== Beginning Add Security Group  =========="
 
