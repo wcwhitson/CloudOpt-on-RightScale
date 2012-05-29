@@ -8,7 +8,7 @@ require 'lib/ec2/right_ec2.rb'
 
 log "========== Beginning Add Security Group  =========="
 
-if node[:cloudoptimizer][:security][:securitygroup] == "Open CloudOptimizer Ports"
+if node[:cloudoptimizer][:security][:securitygroup] == "Open ports"
   # Create group
   @group = 'CloudOptimizer'
   @ec2.create_security_group(@group,'CloudOptimizer proxy and tunnel ports')
