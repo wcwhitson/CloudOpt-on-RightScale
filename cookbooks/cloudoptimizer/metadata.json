@@ -732,5 +732,5 @@
     "cloudoptimizer::supportview": "Create/upload a SupportView diagnostics archive",
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports"
   },
-  "version": "0.35.0"
+  "version": "0.36.0"
 }
