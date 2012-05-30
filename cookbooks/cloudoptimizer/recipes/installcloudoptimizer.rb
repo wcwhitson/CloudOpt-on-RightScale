@@ -25,7 +25,7 @@ if node[:cloudoptimizer][:automatic_feeback] == "Detailed feedback"
 elsif node[:cloudoptimizer][:automatic_feeback] == "Basic feedback"
   Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation with: home_directory #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]} default_cache_size #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}')
 else
-  log "Automatic feedback disabled."
+  log "Automatic feedback disabled. #{node[:cloudoptimizer][:automatic_feeback]}"
 end
 
 # Install AWS Keys
