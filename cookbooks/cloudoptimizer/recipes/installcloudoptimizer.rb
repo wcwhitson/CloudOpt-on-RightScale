@@ -552,4 +552,9 @@ service "cloudoptimizer" do
   action :restart
 end
 
-rs_utils_marker :begin
+# Set up RightScale monitoring
+
+rs_utils_monitor_process "cloudlicense"
+rs_utils_monitor_process "cloudoptimizer"
+
+rs_utils_marker :end
