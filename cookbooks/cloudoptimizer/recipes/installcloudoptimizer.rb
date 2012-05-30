@@ -20,9 +20,11 @@ require 'pony'
 
 # Provide automatic feedback to cloudopt
 if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
-  Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation')
+  log "Sending detailed feedback."
+#  Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation')
 elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
-  Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation with: home_directory #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]} default_cache_size #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}')
+  log "Sending basic feedback."
+#  Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation with: home_directory #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]} default_cache_size #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}')
 else
   log "Automatic feedback disabled."
 end
