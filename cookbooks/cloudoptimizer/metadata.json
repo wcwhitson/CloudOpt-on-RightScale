@@ -687,7 +687,7 @@
       "type": "string"
     },
     "cloudoptimizer/automatic_feedback": {
-      "display_name": "Automatic Feedback",
+      "display_name": "Product Feedback",
       "description": "Automatically provide CloudOpt with information about how you use CloudOptimizer",
       "required": "optional",
       "default": "Detailed feedback",
