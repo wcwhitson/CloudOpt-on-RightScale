@@ -19,13 +19,12 @@ Gem.clear_paths
 require 'pony'
 
 # Provide automatic feedback to cloudopt
-
-if node[:cloudoptimizer][:automatic_feeback] == "Detailed feedback"
+if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
   Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation')
-elsif node[:cloudoptimizer][:automatic_feeback] == "Basic feedback"
+elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
   Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation with: home_directory #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]} default_cache_size #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}')
 else
-  log "Automatic feedback disabled. #{node[:cloudoptimizer][:automatic_feeback]}"
+  log "Automatic feedback disabled."
 end
 
 # Install AWS Keys
