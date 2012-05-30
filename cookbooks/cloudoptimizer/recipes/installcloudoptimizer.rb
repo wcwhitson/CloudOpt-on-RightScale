@@ -18,7 +18,35 @@ pony_inst.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
-Pony.mail(:to => 'bill@cloudopt.com', :subject => 'Test', :body => 'Test')
+module CloudOptFeedback
+  class EmailFeedback < Chef::Handler
+ 
+    def initialize(from_address, to_address)
+      @from_address = from_address
+      @to_address   = to_address
+    end
+ 
+    def report
+      # The Node is available as +node+
+      subject = "Chef run failed on #{node.name}\n"
+      # +run_status+ is a value object with all of the run status data
+      message = "#{run_status.formatted_exception}\n"
+      # Join the backtrace lines. Coerce to an array just in case.
+      message << Array(backtrace).join("\n")
+ 
+      Pony.mail(:to => @to_address, :from => @from_address, :subject => subject, :body => message)
+ 
+ 
+    end
+  end
+end
+
+chef_handler "CloudOptFeedback::EmailFeedback" do
+  arguments ["autofeedback@cloudopt.com", "bill@cloudopt.com"]
+  action :enable
+end
+
+#Pony.mail(:to => 'bill@cloudopt.com', :subject => 'Test', :body => 'Test')
 
 # Provide automatic feedback to cloudopt
 #if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
