@@ -8,6 +8,11 @@
 
 rs_utils_marker :begin
 
+# Install pony for mail support
+gem_package "pony" do
+  action :install
+end
+
 # Provide automatic feedback to cloudopt
 
 #if node[:cloudoptimizer][:automatic_feeback] == "Detailed feedback"
