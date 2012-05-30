@@ -5,7 +5,8 @@
 #require 'rubygems'
 #require 'pony'
 
-log "========== Beginning CloudOptimizer Installation =========="
+
+rs_utils_marker :begin
 
 # Provide automatic feedback to cloudopt
 
@@ -551,4 +552,4 @@ service "cloudoptimizer" do
   action :restart
 end
 
-log "========== Ending CloudOptimizer Installation =========="
+rs_utils_marker :begin
