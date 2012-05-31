@@ -9,12 +9,12 @@
 rs_utils_marker :begin
 
 # Install pony for mail support
-pony_inst = gem_package "pony" do
-  action :install
+g = gem_package "pony" do
+  action :nothing
 end
-
-pony_inst.run_action(:install)
-
+ 
+g.run_action(:install)
+ 
 Gem.clear_paths
 require 'pony'
 
