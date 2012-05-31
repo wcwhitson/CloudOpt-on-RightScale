@@ -3,7 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-require 'right_ec2'
+require 'right_aws'
 
 log "========== Beginning Add Security Group  =========="
 
