@@ -19,9 +19,9 @@ Gem.clear_paths
 require 'pony'
 
 def send_info
-  mail_body = ["ServerTemmplate version: node[:version]", "Platform: #{node[:platform]}", "Version: #{node[:platform_version]}", "Uptime: #{node[:uptime}"]]
+  mail_body = ["ServerTemmplate version: #{node[:version]}", "Platform: #{node[:platform]}", "Version: #{node[:platform_version]}", "Uptime: #{node[:uptime}"]]
   mail_body.each do |item|
-    puts "#{item}",""
+    puts "#{item}\n"
   end
 end
 
