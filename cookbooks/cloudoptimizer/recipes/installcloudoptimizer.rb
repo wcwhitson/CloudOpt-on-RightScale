@@ -18,17 +18,14 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
-# Try sending multiple items in body
 def send_info
-  mail_body = [node[:platform], node[:platform_version], node[:uptime]]
+  mail_body = ["ServerTemmplate version: node[:version]", "Platform: #{node[:platform]}", "Version: #{node[:platform_version]}", "Uptime: #{node[:uptime}"]]
   mail_body.each do |item|
-    puts "#{item}\n"
+    puts "#{item}",""
   end
 end
 
-Pony.mail(:to => 'bill@cloudopt.com', :subject => 'test', :body => send_info)
-
-#Pony.mail(:to => 'bill@cloudopt.com', :subject => 'Test', :body => 'Test')
+Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :body => send_info)
 
 # Provide automatic feedback to cloudopt
 #if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
