@@ -3,6 +3,9 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
+# This is an attempt to get postfix started before the chef run, so that we can use pony
+# from our scripts.
+
 rs_utils_marker :begin
 
 # Install postfix
