@@ -18,6 +18,7 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
+# Try sending multiple items in body
 def send_info
   mail_body = [node[:platform], node[:platform_version], node[:memory], node[:lsb], node[:chef_packages], node[:uptime]]
   mail_body.each do |item|
