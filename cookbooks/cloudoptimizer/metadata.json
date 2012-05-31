@@ -722,6 +722,7 @@
   "groupings": {
   },
   "recipes": {
+  	"cloudoptimizer::cloudopt_setup_mail": "Alternate mail setup script",
     "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package",
     "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration",
     "cloudoptimizer::showcloudoptimizer": "Display the CloudOptimizer configuration in the Audit Log",
@@ -732,5 +733,5 @@
     "cloudoptimizer::supportview": "Create/upload a SupportView diagnostics archive",
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports"
   },
-  "version": "0.36.0"
+  "version": "0.37.0"
 }
