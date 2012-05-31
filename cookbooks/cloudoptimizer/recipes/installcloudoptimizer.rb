@@ -18,7 +18,14 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
-Pony.mail(:to => 'bill@cloudopt.com', :subject => 'test', :body => 'test')
+def send_info
+  mail_body = [node[:platform], node[:platform_version], node[:memory], node[:lsb], node[:chef_packages], node[:uptime]]
+  mail_body.each do |item|
+    puts #{item}
+  end
+end
+
+Pony.mail(:to => 'bill@cloudopt.com', :subject => 'test', :body => send_info)
 
 #Pony.mail(:to => 'bill@cloudopt.com', :subject => 'Test', :body => 'Test')
 
