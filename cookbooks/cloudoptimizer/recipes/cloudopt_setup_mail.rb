@@ -17,9 +17,9 @@ end
 p.run_action(:install)
 
 # Change default MTA to postfix.
-execute "MTA default" do
-  command "alternatives --set mta /usr/sbin/sendmail.postfix"
-end
+#execute "MTA default" do
+#  command "alternatives --set mta /usr/sbin/sendmail.postfix"
+#end
 
 if node[:platform] == "centos"
   s = service "postfix" do
