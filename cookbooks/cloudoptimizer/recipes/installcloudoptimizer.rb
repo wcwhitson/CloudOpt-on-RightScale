@@ -18,25 +18,90 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
-def send_info
-  mail_body = ["ServerTemmplate version: #{node[:version]}", "Platform: #{node[:platform]}", "Version: #{node[:platform_version]}", "Uptime: #{node[:uptime]}"]
+def send_info (mail_body)
   mail_body.each do |item|
-    puts "#{item}",""
+    puts "#{item}<br>"
   end
 end
 
-Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :body => send_info)
-
 # Provide automatic feedback to cloudopt
-#if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
-#  log "Sending detailed feedback."
-#  Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation')
-#elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
-#  log "Sending basic feedback."
-#  Pony.mail(:to => 'bill@cloudopt.com', :from => 'autofeedback@cloudopt.com', :subject => 'Hello', :body => 'Beginning CloudOptimizer Installation with: home_directory #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]} default_cache_size #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}')
-#else
-#  log "Automatic feedback disabled."
-#end
+if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
+  log "Sending detailed feedback."
+  mail_body == Array.new
+  mail_body << "Platform: #{node[:platform]}"
+  mail_body << "Version: #{node[:platform_version]}"
+  mail_body << "Uptime: #{node[:uptime]}"
+  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}"
+  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
+  mail_body << "Special versions: #{node[:cloudoptimizer_packages][:special]}"
+  mail_body << "Stored config: #{node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]}"
+  mail_body << "Home directory: #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]}",
+  mail_body << "Cache size: #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}",
+  mail_body << "Socket location: #{node[:cloudoptimizer_configuration][:file_locations][:socket_location]}",
+  mail_body << "Bitmap size: #{node[:cloudoptimizer_configuration][:byte_cache][:bitmap_size]}",
+  mail_body << "DB memory size: #{node[:cloudoptimizer_configuration][:byte_cache][:db_memory_size]}",
+  mail_body << "Log directory: #{node[:cloudoptimizer_configuration][:logs][:log_directory]}",
+  mail_body << "Log key: #{node[:cloudoptimizer_configuration][:logs][:log_key]}",
+  mail_body << "Compression engine: #{node[:cloudoptimizer_configuration][:compression][:compression_engine]}",
+  mail_body << "Compression level: #{node[:cloudoptimizer_configuration][:compression][:default_compression_level]}",
+  mail_body << "Optimistic deduplication: #{node[:cloudoptimizer_configuration][:optimistic_deduplication]}",
+  mail_body << "Cache promotion: #{node[:cloudoptimizer_configuration][:byte_cache][:cache_promotion]}",
+  mail_body << "Compress cache: #{node[:cloudoptimizer_configuration][:byte_cache][:compress_cache]}",
+  mail_body << "Thread count: #{node[:cloudoptimizer_configuration][:thread_count]}",
+  mail_body << "Intelligent mesh: #{node[:cloudoptimizer_configuration][:intelligent_mesh]}",
+  mail_body << "Local proxy address: #{node[:cloudoptimizer_configuration][:local_proxy_address]}",
+  mail_body << "Peer proxy port: #{node[:cloudoptimizer_configuration][:peer_proxy_port]}",
+  mail_body << "Peer encryption: #{node[:cloudoptimizer_configuration][:encryption][:peer_encryption]}",
+  mail_body << "SSL key: #{node[:cloudoptimizer_configuration][:encryption][:ssl_key]}",
+  mail_body << "SSL cert: #{node[:cloudoptimizer_configuration][:encryption][:ssl_cert]}",
+  mail_body << "SSL CA: #{node[:cloudoptimizer_configuration][:encryption][:ssl_ca]}",
+  mail_body << "Peer statement: #{node[:cloudoptimizer_configuration][:peer_statement]}",
+  mail_body << "SOCKS proxy: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy]}",
+  mail_body << "SOCKS port: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}",
+  mail_body << "SOCKS username: #{node[:cloudoptimizer_configuration][:socks][:socks_username]}",
+  mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}",
+  mail_body << "Trans internal IP: #{$internal_ip}",
+  mail_body << "Trans external IP: #{$external_ip}"
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info mail_body)
+elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
+  log "Sending basic feedback."
+  mail_body == Array.new
+  mail_body << "Platform: #{node[:platform]}"
+  mail_body << "Version: #{node[:platform_version]}"
+  mail_body << "Uptime: #{node[:uptime]}"
+  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}"
+  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
+  mail_body << "Special versions: #{node[:cloudoptimizer_packages][:special]}"
+  mail_body << "Home directory: #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]}",
+  mail_body << "Cache size: #{node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size]}",
+  mail_body << "Socket location: #{node[:cloudoptimizer_configuration][:file_locations][:socket_location]}",
+  mail_body << "Bitmap size: #{node[:cloudoptimizer_configuration][:byte_cache][:bitmap_size]}",
+  mail_body << "DB memory size: #{node[:cloudoptimizer_configuration][:byte_cache][:db_memory_size]}",
+  mail_body << "Log directory: #{node[:cloudoptimizer_configuration][:logs][:log_directory]}",
+  mail_body << "Log key: #{node[:cloudoptimizer_configuration][:logs][:log_key]}",
+  mail_body << "Compression engine: #{node[:cloudoptimizer_configuration][:compression][:compression_engine]}",
+  mail_body << "Compression level: #{node[:cloudoptimizer_configuration][:compression][:default_compression_level]}",
+  mail_body << "Optimistic deduplication: #{node[:cloudoptimizer_configuration][:optimistic_deduplication]}",
+  mail_body << "Cache promotion: #{node[:cloudoptimizer_configuration][:byte_cache][:cache_promotion]}",
+  mail_body << "Compress cache: #{node[:cloudoptimizer_configuration][:byte_cache][:compress_cache]}",
+  mail_body << "Thread count: #{node[:cloudoptimizer_configuration][:thread_count]}",
+  mail_body << "Intelligent mesh: #{node[:cloudoptimizer_configuration][:intelligent_mesh]}",
+  mail_body << "Local proxy address: #{node[:cloudoptimizer_configuration][:local_proxy_address]}",
+  mail_body << "Peer proxy port: #{node[:cloudoptimizer_configuration][:peer_proxy_port]}",
+  mail_body << "Peer encryption: #{node[:cloudoptimizer_configuration][:encryption][:peer_encryption]}",
+  mail_body << "SSL key: #{node[:cloudoptimizer_configuration][:encryption][:ssl_key]}",
+  mail_body << "SSL cert: #{node[:cloudoptimizer_configuration][:encryption][:ssl_cert]}",
+  mail_body << "SSL CA: #{node[:cloudoptimizer_configuration][:encryption][:ssl_ca]}",
+  mail_body << "SOCKS proxy: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy]}",
+  mail_body << "SOCKS port: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}",
+  mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}",
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info mail_body)
+else
+  log "Automatic feedback disabled."
+  mail_body == Array.new
+  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info mail_body)
+end
 
 # Install AWS Keys
 
@@ -576,5 +641,31 @@ end
 
 rs_utils_monitor_process "cloudlicense"
 rs_utils_monitor_process "cloudoptimizer"
+
+# Provide automatic feedback to cloudopt
+if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
+  log "Sending detailed feedback."
+  mail_body == Array.new
+  mail_body << "Platform: #{node[:platform]}"
+  mail_body << "Version: #{node[:platform_version]}"
+  mail_body << "Uptime: #{node[:uptime]}"
+  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}"
+  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - End', :html_body => send_info mail_body)
+elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
+  log "Sending basic feedback."
+  mail_body == Array.new
+  mail_body << "Platform: #{node[:platform]}"
+  mail_body << "Version: #{node[:platform_version]}"
+  mail_body << "Uptime: #{node[:uptime]}"
+  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}"
+  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - End', :html_body => send_info mail_body)
+else
+  log "Automatic feedback disabled."
+  mail_body == Array.new
+  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - End', :html_body => send_info mail_body)
+end
 
 rs_utils_marker :end
