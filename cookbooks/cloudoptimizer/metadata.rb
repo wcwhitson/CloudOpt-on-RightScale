@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.38"
+version "0.39"
 recipe "cloudoptimizer::cloudopt_setup_mail", "Alternate mail setup script"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
