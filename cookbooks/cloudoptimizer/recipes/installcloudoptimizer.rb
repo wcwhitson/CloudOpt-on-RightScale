@@ -149,11 +149,20 @@ end
 
 # Create the EULA acceptance file.  The content of the file doesn't matter, but we set it to
 # "RS Accepted EULA" so that we can tell how it was generated.
+# For 0.9.4 and earlier
 file "/etc/cloudoptimizer/accept-eula.txt" do
   owner "root"
   group "root"
   mode "0755"
   content "RS Accepted EULA"
+  action :create
+end
+# For 1.1.5 and later
+file "/etc/cloudoptimizer/accepted-cloudoptimizer-eula" do
+  owner "root"
+  group "root"
+  mode "0755"
+  content "true"
   action :create
 end
 
