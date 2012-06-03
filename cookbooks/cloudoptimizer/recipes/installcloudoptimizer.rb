@@ -157,6 +157,12 @@ file "/etc/cloudoptimizer/accept-eula.txt" do
   action :create
 end
 
+# Install rsyslog.  Under certain circumstances, syslog-ng has caused problems with CloudOptimizer.
+# While those problems are solved at the time this comment was written, they have appeared as regressions
+# several times.  Installing rsyslog is a risk mitigation measure.
+log "Installing rsyslog for better compatibility with the installer."
+package "rsyslog"
+
 # Set up CloudOpt repository
 
 log "Adding CloudOpt software repositories."
@@ -225,14 +231,6 @@ else
     execute "apt-get" do
       command "apt-get update"
     end
-
-    # Install rsyslog.  Under certain circumstances, syslog-ng has caused problems with CloudOptimizer.
-    # While those problems are solved at the time this comment was written, they have appeared as regressions
-    # several times.  Installing rsyslog is a risk mitigation measure.  This is necessary only on Ubuntu, as
-    # CentOS uses rsyslog by default.  We may need to reconsider this step if we later provide the ability
-    # to run this RightScript on top of an existing server instance.
-    log "Installing rsyslog for better compatibility on Ubuntu."
-    package "rsyslog"
 
   when "centos"
     log "Installing on CentOS; using yum repository."
