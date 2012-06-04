@@ -18,8 +18,8 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
-def send_info (mail_body)
-  mail_body.each do |item|
+def send_info(body)
+  body.each do |item|
     puts "#{item}<br>"
   end
 end
@@ -66,7 +66,7 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info mail_body )
+  :body => send_info(mail_body) )
 elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
   mail_body == Array.new
@@ -103,7 +103,7 @@ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info mail_body )
+  :body => send_info(mail_body) )
 else
   log "Automatic feedback disabled."
   mail_body == Array.new
@@ -112,7 +112,7 @@ else
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info mail_body )
+  :body => send_info(mail_body) )
 end
 
 # Install AWS Keys
