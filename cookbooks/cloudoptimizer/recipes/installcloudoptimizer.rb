@@ -553,9 +553,9 @@ elsif node[:cloudoptimizer][:version] == '0.9.4'
     )
   end
 else
-  log "Using template cloudoptimizer.conf.1.1.5.erb."
+  log "Using template cloudoptimizer.conf.erb."
   template "/etc/cloudoptimizer.conf" do
-    source "cloudoptimizer.conf.1.1.5.erb"
+    source "cloudoptimizer.conf.erb"
     mode "0644"
     owner "root"
     group "root"
