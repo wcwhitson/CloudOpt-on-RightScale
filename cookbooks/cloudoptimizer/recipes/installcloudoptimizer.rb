@@ -149,6 +149,8 @@ end
 
 # Create the EULA acceptance file.  The content of the file doesn't matter, but we set it to
 # "RS Accepted EULA" so that we can tell how it was generated.
+# The file that the installation script checks changed in version 1.1.5, so for now, we just
+# set both files.
 # For 0.9.4 and earlier
 file "/etc/cloudoptimizer/accept-eula.txt" do
   owner "root"
@@ -288,16 +290,16 @@ else
   case node[:platform]
   when "ubuntu"
     case node[:cloudoptimizer][:version]
-    when "0.9.4.1"
+    when "1.1.5"
       case node[:languages][:ruby][:host_cpu]
         when "x86_64"
           package "cloudoptimizer" do
-            version "0.9.4.1"
+            version "1.1.5"
             action :install
           end
         when "i686"
           package "cloudoptimizer" do
-            version "0.9.4.1"
+            version "1.1.5"
             action :install
           end
       end
@@ -340,44 +342,18 @@ else
             action :install
           end
       end
-    when "0.9.3"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          package "cloudoptimizer" do
-            version "0.9.3-997"
-            action :install
-          end
-        when "i686"
-          package "cloudoptimizer" do
-            version "0.9.3-906"
-            action :install
-          end
-      end
-    when "0.9.2.3"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          package "cloudoptimizer" do
-            version "0.9.2.3"
-            action :install
-          end
-        when "i686"
-          package "cloudoptimizer" do
-            version "0.9.2.3"
-            action :install
-          end
-      end
   end
   when "centos"
     case node[:cloudoptimizer][:version] 
-    when "0.9.4.1"
+    when "1.1.5"
       case node[:languages][:ruby][:host_cpu]
         when "x86_64"
           execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.4.1"
+            command "yum -y install cloudoptimizer_1.1.5"
           end
         when "i686"
           execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.4.1"
+            command "yum -y install cloudoptimizer_1.1.5"
           end
         end
     when "0.9.4"
@@ -411,28 +387,6 @@ else
         when "i686"
           execute "yum" do
             command "yum -y install cloudoptimizer-0.9.3.1"
-          end
-        end
-    when "0.9.3"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.3"
-          end  
-        when "i686"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.3"
-          end
-        end
-    when "0.9.2.3"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.2.3"
-          end
-        when "i686"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.2.3"
           end
         end
       end
@@ -482,8 +436,8 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizertools] == 'Install
 end
 
 # Install the CloudOptimizer stats GUI
-if node[:cloudoptimizer_packages][:additional][:cloudoptimizerstat] == 'Install'
-  package "cloudoptimizer-stat"
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
+  package "cloudoptimizer-webui"
 end
 
 # Install vtun to support tunneling traffic to CloudOptimizer for interception
@@ -529,7 +483,7 @@ end
 
 log "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
 # Use the template for CloudOptimizer versions 0.9.3.2 and earlier
-if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:version] == '0.9.3.1' or node[:cloudoptimizer][:version] == '0.9.3' or node[:cloudoptimizer][:version] == '0.9.2.3'
+if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:version] == '0.9.3.1'
   log "Using template cloudoptimizer.conf.0.9.3.erb."
   template "/etc/cloudoptimizer.conf" do
     source "cloudoptimizer.conf.0.9.3.erb"
@@ -561,7 +515,7 @@ if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:versio
     )
   end
 # Use the template for version 0.9.4 and later
-else
+elsif node[:cloudoptimizer][:version] == '0.9.4'
   log "Using template cloudoptimizer.conf.0.9.4.erb."
   template "/etc/cloudoptimizer.conf" do
     source "cloudoptimizer.conf.0.9.4.erb"
@@ -596,6 +550,46 @@ else
       :source_transparency => node[:cloudoptimizer_configuration][:transparency][:source_transparency],
       :transp_int_ip => "$internal_ip",
       :transp_ext_ip => "$external_ip"
+    )
+  end
+else
+  log "Using template cloudoptimizer.conf.1.1.5.erb."
+  template "/etc/cloudoptimizer.conf" do
+    source "cloudoptimizer.conf.1.1.5.erb"
+    mode "0644"
+    owner "root"
+    group "root"
+    variables(
+      :home_directory => node[:cloudoptimizer_configuration][:file_locations][:home_directory],
+      :default_cache_size => node[:cloudoptimizer_configuration][:byte_cache][:default_cache_size],
+      :socket_location => node[:cloudoptimizer_configuration][:file_locations][:socket_location],
+      :bitmap_size => node[:cloudoptimizer_configuration][:byte_cache][:bitmap_size],
+      :db_memory_size => node[:cloudoptimizer_configuration][:byte_cache][:db_memory_size],
+      :log_directory => node[:cloudoptimizer_configuration][:logs][:log_directory],
+      :log_key => node[:cloudoptimizer_configuration][:logs][:log_key],
+      :compression_engine => node[:cloudoptimizer_configuration][:compression][:compression_engine],
+      :default_compression_level => node[:cloudoptimizer_configuration][:compression][:default_compression_level],
+      :optimistic_deduplication => node[:cloudoptimizer_configuration][:optimistic_deduplication],
+      :cache_promotion => node[:cloudoptimizer_configuration][:byte_cache][:cache_promotion],
+      :compress_cache => node[:cloudoptimizer_configuration][:byte_cache][:compress_cache],
+      :thread_count => node[:cloudoptimizer_configuration][:thread_count],
+      :intelligent_mesh => node[:cloudoptimizer_configuration][:intelligent_mesh],
+      :local_proxy_address => node[:cloudoptimizer_configuration][:local_proxy_address],
+      :peer_proxy_port => node[:cloudoptimizer_configuration][:peer_proxy_port],
+      :peer_encryption => node[:cloudoptimizer_configuration][:encryption][:peer_encryption],
+      :ssl_key => node[:cloudoptimizer_configuration][:encryption][:ssl_key],
+      :ssl_cert => node[:cloudoptimizer_configuration][:encryption][:ssl_cert],
+      :ssl_ca => node[:cloudoptimizer_configuration][:encryption][:ssl_ca],
+      :peer_statement => node[:cloudoptimizer_configuration][:peer_statement],
+      :socks_proxy => node[:cloudoptimizer_configuration][:socks][:socks_proxy],
+      :socks_proxy_port => node[:cloudoptimizer_configuration][:socks][:socks_proxy_port],
+      :socks_username => node[:cloudoptimizer_configuration][:socks][:socks_username],
+      :source_transparency => node[:cloudoptimizer_configuration][:transparency][:source_transparency],
+      :transp_int_ip => "$internal_ip",
+      :transp_ext_ip => "$external_ip",
+      :cifs_optimization => node[:cloudoptimizer_configuration][:cifs][:optimize_cifs],
+      :ssl_termination => node[:cloudoptimizer_configuration][:encryption][:terminate_ssl],
+      :upstream_verification => node[:cloudoptimizer_configuration][:encryption][:upstream_verification]
     )
   end
 end
