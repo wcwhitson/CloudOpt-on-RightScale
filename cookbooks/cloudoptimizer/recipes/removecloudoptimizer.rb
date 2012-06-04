@@ -22,8 +22,8 @@ when "CloudController"
     action :remove
   end
 when "Web GUI"
-  log "Removing Stats GUI only."
-  package "cloudoptimizer-stats" do
+  log "Removing web interface only."
+  package "cloudoptimizer-webui" do
     action :remove
   end
 end
