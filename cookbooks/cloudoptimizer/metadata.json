@@ -717,8 +717,7 @@
       ],
       "calculated": false,
       "type": "string"
-    }
-  },
+    },
     "cloudoptimizer_configuration/cifs/optimize_cifs": {
       "display_name": "CIFS optimization",
       "description": "Enable or disable CIFS optimization",
@@ -734,8 +733,7 @@
       ],
       "calculated": false,
       "type": "string"
-    }
-  },
+    },
     "cloudoptimizer_configuration/encryption/ssl_termination": {
       "display_name": "SSL termination",
       "description": "CloudOptimizer will terminate HTTPS connections to allow optimization",
@@ -751,8 +749,7 @@
       ],
       "calculated": false,
       "type": "string"
-    }
-  },
+    },
     "cloudoptimizer_configuration/encryption/upstream_verification": {
       "display_name": "Upstream certificate verification",
       "description": "CloudOptimizer will verify a valid server certificate when SSL termination is enabled",
@@ -768,8 +765,7 @@
       ],
       "calculated": false,
       "type": "string"
-    }
-  },
+    },
   "cloudoptimizer/web_interface/webui_login": {
       "display_name": "Web interface login",
       "description": "User name for the CloudOptimizer web interface",
