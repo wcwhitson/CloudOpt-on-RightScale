@@ -1,5 +1,4 @@
 {
-
         /* 
          * The CloudCopy service configuration file. 
          * See http://www.cloudopt.com for more information.
@@ -16,47 +15,46 @@
          * comments carefully.
          */
         "config": {
-
                 /*                                                      
                  * This directory will contain all the cache files etc. 
                  * This directory will have contents deleted when the cache
                  * is cleared ('sudo service cloudoptimizer clear-cache').
                  */
-                "home": "<%= node[:cloudoptimizer][:configuration][:home_directory] %>",
+                "home": "/home/cloudoptimizer",
 
                 /*                                                      
                  * Default cache size for new caches, the value is in   
                  * megabytes.                                           
                  */
-                "default_cache_size": <%= node[:cloudoptimizer][:configuration][:default_cache_size] %>,
+                "default_cache_size": 8000,
 
                 /*                                                      
                  * Path for the UNIX Socket.
                  */
-                "socket_location": "<%= node[:cloudoptimizer][:configuration][:socket_location] %>",
+                "socket_location": "/var/run/cloudoptimizer/cloudoptimizer_socket",
 
                 /*
                  * Memory allocated for bitmap.
                  * Must be power of 2.
                  */
-                "bitmap_size": <%= node[:cloudoptimizer][:configuration][:bitmap_size] %>,
+                "bitmap_size": 512,
 
                 /*
                  * How much memory in MB to use the db index.
                  */
-                "db_memory_size": <%= node[:cloudoptimizer][:configuration][:db_memory_size] %>,
+                "db_memory_size": 384,
 
                 /*
                  * Which directory should log files go to?
                  */
-                "log_dir": "<%= node[:cloudoptimizer][:configuration][:log_directory] %>",
+                "log_dir": "/var/log/cloudoptimizer",
 
                 /*
                  * The logging uses a shared memory segment, this is the key
                  * we will for that segment. Change it if it conflicts with
                  * another shared memory key already in use on your system.
                  */
-                "log_key": <%= node[:cloudoptimizer][:configuration][:log_key] %>,
+                "log_key": 12345678,
 
                 /*
                  * The compression engine to use. Options are:
@@ -70,7 +68,7 @@
                  * 'zlib'   - which is slower than 'snappy'
                  *            but compresses better.
                  */
-                "compression_engine": "<%= node[:cloudoptimizer][:configuration][:compression_engine] %>",
+                "compression_engine": "snappy",
 
                 /*
                  * The default compression level to use for zlib. 
@@ -78,7 +76,7 @@
                  * Higher compressions levels use more CPU time but provide
                  * better compression, therefore less bandwidth is used.
                  */
-                "default_compression_level": <%= node[:cloudoptimizer][:configuration][:default_compression_level] %>,
+                "default_compression_level": 0,
 
                 /*
                  * Enable optimistic data deduplication. This may be
@@ -100,45 +98,67 @@
                  *            of, the normal 'restart' call described at
                  *            the top of this configuration file.
                  */
-                "optimistic_deduplication": <%= node[:cloudoptimizer][:configuration][:optimistic_deduplication] %>,
-
+                "optimistic_deduplication": false,
+                
                 /*
                  * Enable cache promotion. If enabled, this will prevent
                  * frequently referenced content being pushed from the cache
                  * by newer traffic. This may impact performance in return
                  * for increased data deduplication over time.
                  */
-                "cache_promotion": <%= node[:cloudoptimizer][:configuration][:cache_promotion] %>,
+                "cache_promotion": true,
 
-                /*
+		/*
 		 * Compress data stored in the cache. With this option turned
 		 * on the cache will need less disk space, however there is
 		 * small performance penalty with respect to throughput.
 		 */
-                "compress_cache": <%= node[:cloudoptimizer][:configuration][:compress_cache] %>,
+		"compress_cache": true,
 
                 /*
                  * The number of threads to launch.
                  */
-                "thread_count": <%= node[:cloudoptimizer][:configuration][:thread_count] %>,
+                "thread_count": 1,
 
                 /*
                  * Enable intelligent mesh.  If enabled, this will attempt to
                  * accelerate to applications without any explicit config.
                  */
-                "intelligent_mesh": <%= node[:cloudoptimizer][:configuration][:intelligent_mesh] %>,
+                "intelligent_mesh": false,
 
                 /*
                  * The address for CloudOptimizer to listen for client
                  * connections on.
                  */
-                "local_proxy_address": "<%= node[:cloudoptimizer][:configuration][:local_proxy_address] %>",
+                "local_proxy_address": "0.0.0.0:9000",
 
                 /*
                  * The default port for CloudOptimzer to listen for connections
                  * from a peer system on.
                  */
-                "peer_proxy_port": <%= node[:cloudoptimizer][:configuration][:peer_proxy_port] %>,
+                "peer_proxy_port": 9001,
+
+
+		/*
+		 * Enable cloudoptimizer to act as a SOCKS4 proxy.
+		 */
+		"enable_socks": false,
+		"socks_proxy_port": 9002,
+		"socks_username": "",
+
+
+                /*
+                 * Connect to the origin server using the original source address.
+                 */
+                "source_transparency": false,
+
+
+                /*
+                 * Source address translation for transparency
+                 */
+                "source_remap": {
+                    "10.99.99.99": "176.34.68.253"
+                },
 
                 /*
                  * Should tunnels between peer systems be encrypted with SSL?
@@ -161,7 +181,7 @@
                  * If encryption is to be used, then see the section below,
                  * 'SSL certificate locations for peer encryption.' 
                  */
-                "peer_encryption": "<%= node[:cloudoptimizer][:configuration][:peer_encryption] %>",
+                "peer_encryption": "self_signed",
 
                 /*
                  * SSL certificate locations for peer encryption.
@@ -180,9 +200,35 @@
                  *         "ssl_cert": "/path/to/your/server-cert.pem",
                  *         "ssl_ca":   "/path/to/your/cacert.pem",
                  */
-                "ssl_key": "<%= node[:cloudoptimizer][:configuration][:ssl_key] %>",
-                "ssl_cert": "<%= node[:cloudoptimizer][:configuration][:ssl_cert] %>",
-                "ssl_ca": "<%= node[:cloudoptimizer][:configuration][:ssl_ca] %>",
+                "ssl_key": "",
+                "ssl_cert": "",
+                "ssl_ca": "",
+
+                /*
+                 * Terminate SSL connections. If enabled the local cloudoptimizer
+                 * will terminate any incoming SSL connections it detects using
+                 * its SSL certificate and SSL key. The local cloudoptimizer will
+                 * instruct the upstream cloudoptimizer to make an SSL connection
+                 * to the upstream Application Server.
+                 *
+                 * If verify_upstream_certificate is false the upstream cloudoptimizer
+                 * will not verify the Application Server's certificate, only an 
+                 * an error will be logged. If verify_upstream_certificate is true then
+                 * the upstream cloudoptimizer will check the Application Server's
+                 * certificate is signed by a recognised CA certificate.
+                 *
+                 * The upstream cloudoptimizer will use the CA certificates in
+                 * /etc/ssl/certs to authenticate the upstream Application Servers
+                 * certificate. 
+                 */
+                "terminate_ssl": false,
+                "verify_upstream_certificate": true,
+
+
+                /*
+                 * Intercept CIFS traffic and apply optimizations.
+                 */
+                "optimize_cifs": true,
 
                 /*
                  * Peer proxy addresses
@@ -211,12 +257,18 @@
                  *           }
                  *       }
                  */
-                "peers": [
-			<%= node[:cloudoptimizer][:configuration][:peer_statement] %>
-                ]
-        },
-        "logging": {
+                "peers": []
+        }, 
+        "webui": {
+                /*
+                 * WebUI Login
+                 */
 
+                "webui_login": "admin",
+                "webui_passwd": "letmein"
+        },
+
+        "logging": {
                 /*
                  * Logging can be to syslog, and the facility to which
                  * messages will be written can be configured in case
@@ -237,15 +289,17 @@
                         "license": "info",
                         "stats": "info"
                 },
+        
                 "cloudcopy": {
                         "default_level": "error",
                         "license": "info",
                         "stats": "info"
                 },
+        
                 "cloudlicense": {
                         "default_level": "error",
                         "license": "info",
                         "stats": "info"
                 }
-        }
+        }                
 }
