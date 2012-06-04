@@ -368,3 +368,17 @@ attribute "cloudoptimizer_configuration/encryption/upstream_verification",
   :default => "true",
   :choice => [ "true", "false" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
+
+attribute "cloudoptimizer/web_interface/webui_login",
+  :display_name => "Web interface login",
+  :description => "User name for the CloudOptimizer web interface",
+  :required => "optional",
+  :default => "admin",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer" ]
+
+attribute "cloudoptimizer/web_interface/webui_passwd",
+  :display_name => "Web interface password",
+  :description => "Password for the CloudOptimizer web interface",
+  :required => "optional",
+  :default => "letmein",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer" ]
