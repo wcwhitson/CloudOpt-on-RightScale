@@ -686,14 +686,14 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer/automatic_feedback": {
+    "cloudoptimizer/user_feedback": {
       "display_name": "Product Feedback",
       "description": "Automatically provide CloudOpt with information about how you use CloudOptimizer",
       "required": "optional",
-      "default": "Detailed feedback",
+      "default": "Basic feedback",
       "choice": [
-        "Detailed feedback",
         "Basic feedback",
+        "Detailed feedback",
         "No feedback"
       ],
       "recipes": [

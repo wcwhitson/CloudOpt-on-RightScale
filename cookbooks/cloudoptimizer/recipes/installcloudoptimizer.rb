@@ -25,7 +25,7 @@ def send_info (mail_body)
 end
 
 # Provide automatic feedback to cloudopt
-#if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
+if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   log "Sending detailed feedback."
   mail_body == Array.new
   mail_body << "Platform: #{node[:platform]}"
@@ -63,7 +63,7 @@ end
   mail_body << "Trans internal IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}"
   mail_body << "Trans external IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}"
   Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info(mail_body))
-elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
+elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
   mail_body == Array.new
   mail_body << "Platform: #{node[:platform]}"
@@ -646,7 +646,7 @@ rs_utils_monitor_process "cloudlicense"
 rs_utils_monitor_process "cloudoptimizer"
 
 # Provide automatic feedback to cloudopt
-#if node[:cloudoptimizer][:automatic_feedback] == "Detailed feedback"
+#if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
 #  log "Sending detailed feedback."
 #  mail_body == Array.new
 #  mail_body << "Platform: #{node[:platform]}"
@@ -655,7 +655,7 @@ rs_utils_monitor_process "cloudoptimizer"
 #  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}"
 #  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
 #  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - End', :html_body => send_info(mail_body))
-#elsif node[:cloudoptimizer][:automatic_feedback] == "Basic feedback"
+#elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
 #  log "Sending basic feedback."
 #  mail_body == Array.new
 #  mail_body << "Platform: #{node[:platform]}"
