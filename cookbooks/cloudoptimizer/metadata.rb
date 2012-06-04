@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.40"
+version "0.41"
 recipe "cloudoptimizer::cloudopt_setup_mail", "Alternate mail setup script"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::configurecloudoptimizer", "Post-installation configuration"
@@ -189,7 +189,7 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "0.9.4", "0.9.3.2", "0.9.3.1", "0.9.3", "0.9.2.3" ],
+  :choice => [ "latest", "1.1.5", "0.9.4", "0.9.3.2", "0.9.3.1" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer" ]
 
 attribute "cloudoptimizer_packages/optional/vtun",
@@ -276,9 +276,9 @@ attribute "cloudoptimizer_packages/additional/cloudoptimizertools",
   :choice => [ "Do not install", "Install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
 
-attribute "cloudoptimizer_packages/additional/cloudoptimizerstat",
-  :display_name => "CloudOptimizer Web Statistics",
-  :description => "Install a web statistics interface",
+attribute "cloudoptimizer_packages/additional/cloudoptimizerwebui",
+  :display_name => "CloudOptimizer Web Interface",
+  :description => "Install a web interface",
   :required => "optional",
   :default => "Do not install",
   :choice => [ "Do not install", "Install" ],
@@ -344,3 +344,27 @@ attribute "cloudoptimizer/security/securitygroup",
   :default => "Do not open ports",
   :choice => [ "Do not open ports", "Open ports" ],
   :recipes => [ "cloudoptimizer::addsecuritygroup" ]
+
+attribute "cloudoptimizer_configuration/cifs/optimize_cifs",
+  :display_name => "CIFS optimization",
+  :description => "Enable or disable CIFS optimization",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
+  
+attribute "cloudoptimizer_configuration/encryption/ssl_termination",
+  :display_name => "SSL termination",
+  :description => "CloudOptimizer will terminate HTTPS connections to allow optimization",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
+
+attribute "cloudoptimizer_configuration/encryption/upstream_verification",
+  :display_name => "Upstream certificate verification",
+  :description => "CloudOptimizer will verify a valid server certificate when SSL termination is enabled",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "true", "false" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer" ]
