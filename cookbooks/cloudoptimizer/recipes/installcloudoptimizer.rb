@@ -588,7 +588,7 @@ else
       :transp_int_ip => "$internal_ip",
       :transp_ext_ip => "$external_ip",
       :cifs_optimization => node[:cloudoptimizer_configuration][:cifs][:optimize_cifs],
-      :ssl_termination => node[:cloudoptimizer_configuration][:encryption][:terminate_ssl],
+      :ssl_termination => node[:cloudoptimizer_configuration][:encryption][:ssl_termination],
       :upstream_verification => node[:cloudoptimizer_configuration][:encryption][:upstream_verification]
     )
   end
