@@ -62,7 +62,7 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}"
   mail_body << "Trans internal IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}"
   mail_body << "Trans external IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}"
-  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info(mail_body))
+  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info #{mail_body})
 elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
   mail_body == Array.new
