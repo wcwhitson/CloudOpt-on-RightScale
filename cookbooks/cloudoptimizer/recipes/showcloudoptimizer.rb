@@ -236,4 +236,20 @@ execute "cloudconfig" do
 end
 log "--------------------------------------------------------------"
 
+log "--------------------------------------------------------------"
+log "CIFS OPTIMIZATION:"
+execute "cloudconfig" do
+  command "cloudconfig get /config/optimize_cifs"
+  returns [0, 1]
+end
+log "--------------------------------------------------------------"
+
+log "--------------------------------------------------------------"
+log "VERIFY UPSTREAM CERTIFICATE:"
+execute "cloudconfig" do
+  command "cloudconfig get /config/verify_upstream_certificate"
+  returns [0, 1]
+end
+log "--------------------------------------------------------------"
+
 log "========== Ending CloudOptimizer Configuration Retrieval =========="
