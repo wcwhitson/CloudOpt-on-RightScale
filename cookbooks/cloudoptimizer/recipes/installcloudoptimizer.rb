@@ -62,7 +62,11 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}"
   mail_body << "Trans internal IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}"
   mail_body << "Trans external IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}"
-  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info #{mail_body})
+  Pony.mail(
+  :to => 'bill@cloudopt.com',
+  :subject => 'RightScale ServerTemplate Feedback - Start',
+  :headers => { 'Content-Type' => 'text/html' },
+  :body => send_info mail_body )
 elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
   mail_body == Array.new
@@ -95,12 +99,20 @@ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   mail_body << "SOCKS proxy: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy]}"
   mail_body << "SOCKS port: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}"
   mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}"
-  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info(mail_body))
+  Pony.mail(
+  :to => 'bill@cloudopt.com',
+  :subject => 'RightScale ServerTemplate Feedback - Start',
+  :headers => { 'Content-Type' => 'text/html' },
+  :body => send_info mail_body )
 else
   log "Automatic feedback disabled."
   mail_body == Array.new
   mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
-  Pony.mail(:to => 'bill@cloudopt.com', :subject => 'RightScale ServerTemplate Feedback - Start', :html_body => send_info(mail_body))
+  Pony.mail(
+  :to => 'bill@cloudopt.com',
+  :subject => 'RightScale ServerTemplate Feedback - Start',
+  :headers => { 'Content-Type' => 'text/html' },
+  :body => send_info mail_body )
 end
 
 # Install AWS Keys
