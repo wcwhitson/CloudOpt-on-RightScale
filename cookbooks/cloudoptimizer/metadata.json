@@ -574,9 +574,9 @@
       "calculated": false,
       "type": "string"
     },
-    "cloudoptimizer_packages/additional/cloudoptimizerstat": {
-      "display_name": "CloudOptimizer Web Statistics",
-      "description": "Install a web statistics interface",
+    "cloudoptimizer_packages/additional/cloudoptimizerwebui": {
+      "display_name": "CloudOptimizer Web Interface",
+      "description": "Install the CloudOptimizer web interface",
       "required": "optional",
       "default": "Do not install",
       "choice": [
@@ -719,6 +719,57 @@
       "type": "string"
     }
   },
+    "cloudoptimizer_configuration/cifs/optimize_cifs": {
+      "display_name": "CIFS optimization",
+      "description": "Enable or disable CIFS optimization",
+      "required": "optional",
+      "default": "false",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    }
+  },
+    "cloudoptimizer_configuration/encryption/ssl_termination": {
+      "display_name": "SSL termination",
+      "description": "CloudOptimizer will terminate HTTPS connections to allow optimization",
+      "required": "optional",
+      "default": "false",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    }
+  },
+    "cloudoptimizer_configuration/encryption/upstream_verification": {
+      "display_name": "Upstream certificate verification",
+      "description": "CloudOptimizer will verify a valid server certificate when SSL termination is enabled",
+      "required": "optional",
+      "default": "true",
+      "choice": [
+        "true",
+        "false"
+      ],
+      "recipes": [
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    }
+  },  
   "groupings": {
   },
   "recipes": {
@@ -734,5 +785,5 @@
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports",
     "cloudoptimizer::showversion": "Show the CloudOptimizer version that is running on the server"
   },
-  "version": "0.40.0"
+  "version": "0.41.0"
 }
