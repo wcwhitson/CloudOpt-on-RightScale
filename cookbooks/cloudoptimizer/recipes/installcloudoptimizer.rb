@@ -15,12 +15,6 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
-def send_info(body)
-  body.each do |item|
-    puts "#{item}<br>"
-  end
-end
-
 # Provide automatic feedback to cloudopt
 if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   log "Sending detailed feedback."
@@ -657,39 +651,39 @@ rs_utils_monitor_process "cloudoptimizer"
  Provide automatic feedback to cloudopt
 if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   log "Sending detailed feedback."
-  mail_body = Array.new
-  mail_body << "Platform: #{node[:platform]}<br />"
-  mail_body << "Version: #{node[:platform_version]}<br />"
-  mail_body << "Uptime: #{node[:uptime]}<br />"
-  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}<br />"
-  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
+  mail_body_end = Array.new
+  mail_body_end << "Platform: #{node[:platform]}<br />"
+  mail_body_end << "Version: #{node[:platform_version]}<br />"
+  mail_body_end << "Uptime: #{node[:uptime]}<br />"
+  mail_body_end << "Architecture: #{node[:languages][:ruby][:host_cpu]}<br />"
+  mail_body_end << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
   Pony.mail(
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => mail_body)
+  :body => mail_body_end)
  elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
-  mail_body = Array.new
-  mail_body << "Platform: #{node[:platform]}<br />"
-  mail_body << "Version: #{node[:platform_version]}<br />"
-  mail_body << "Uptime: #{node[:uptime]}<br />"
-  mail_body << "Architecture: #{node[:languages][:ruby][:host_cpu]}<br />"
-  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
+  mail_body_end = Array.new
+  mail_body_end << "Platform: #{node[:platform]}<br />"
+  mail_body_end << "Version: #{node[:platform_version]}<br />"
+  mail_body_end << "Uptime: #{node[:uptime]}<br />"
+  mail_body_end << "Architecture: #{node[:languages][:ruby][:host_cpu]}<br />"
+  mail_body_end << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
   Pony.mail(
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => mail_body)
+  :body => mail_body_end)
 else
   log "Automatic feedback disabled."
-  mail_body = Array.new
-  mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
+  mail_body_end = Array.new
+  mail_body_end << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
   Pony.mail(
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => mail_body)
+  :body => mail_body_end)
 end
 
 rs_utils_marker :end
