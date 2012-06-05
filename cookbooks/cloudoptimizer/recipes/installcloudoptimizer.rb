@@ -63,7 +63,7 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info(mail_body))
+  :body => mail_body)
 elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
   mail_body = Array.new
@@ -100,7 +100,7 @@ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info(mail_body))
+  :body => mail_body)
 else
   log "Automatic feedback disabled."
   mail_body = Array.new
@@ -109,7 +109,7 @@ else
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info(mail_body))
+  :body => mail_body)
 end
 
 # Install AWS Keys
@@ -667,8 +667,8 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info(mail_body))
-elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
+  :body => mail_body)
+ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Sending basic feedback."
   mail_body = Array.new
   mail_body << "Platform: #{node[:platform]}<br />"
@@ -680,7 +680,7 @@ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info(mail_body))
+  :body => mail_body)
 else
   log "Automatic feedback disabled."
   mail_body = Array.new
@@ -689,7 +689,7 @@ else
   :to => 'bill@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback - Start',
   :headers => { 'Content-Type' => 'text/html' },
-  :body => send_info(mail_body))
+  :body => mail_body)
 end
 
 rs_utils_marker :end
