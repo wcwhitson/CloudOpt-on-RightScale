@@ -599,8 +599,8 @@ else
       :cifs_optimization => node[:cloudoptimizer_configuration][:cifs][:optimize_cifs],
       :ssl_termination => node[:cloudoptimizer_configuration][:encryption][:ssl_termination],
       :upstream_verification => node[:cloudoptimizer_configuration][:encryption][:upstream_verification],
-      :webui_login => node[:cloudoptimizer_configuration][:web_interface][:webui_login],
-      :webui_passwd => node[:cloudoptimizer_configuration][:web_interface][:webui_passwd]
+      :webui_login => node[:cloudoptimizer][:web_interface][:webui_login],
+      :webui_passwd => node[:cloudoptimizer][:web_interface][:webui_passwd]
     )
   end
 end
