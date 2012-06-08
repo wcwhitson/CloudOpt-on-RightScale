@@ -26,6 +26,7 @@
       "required": "optional",
       "default": "none",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -41,6 +42,7 @@
       "required": "optional",
       "default": "none",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -56,6 +58,7 @@
       "required": "optional",
       "default": "/home/cloudoptimizer",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer",
         "cloudoptimizer::supportview"
@@ -72,6 +75,7 @@
       "required": "optional",
       "default": "8000",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -87,6 +91,7 @@
       "required": "optional",
       "default": "/var/run/cloudoptimizer/cloudoptimizer_socket",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -102,6 +107,7 @@
       "required": "optional",
       "default": "512",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -117,6 +123,7 @@
       "required": "optional",
       "default": "384",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -132,6 +139,7 @@
       "required": "optional",
       "default": "/var/log/cloudoptimizer",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -147,6 +155,7 @@
       "required": "optional",
       "default": "12345678",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -167,6 +176,7 @@
         "null"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -207,6 +217,7 @@
         "true"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -223,6 +234,7 @@
         "false"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -239,6 +251,7 @@
         "false"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -251,6 +264,7 @@
       "required": "optional",
       "default": "1",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -270,6 +284,7 @@
         "true"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -282,6 +297,7 @@
       "required": "optional",
       "default": "0.0.0.0:9000",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -297,6 +313,7 @@
       "required": "optional",
       "default": "9001",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -317,6 +334,7 @@
         "off"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -329,6 +347,7 @@
       "required": "optional",
       "default": "",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -344,6 +363,7 @@
       "required": "optional",
       "default": "",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -359,6 +379,7 @@
       "required": "optional",
       "default": "",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -374,6 +395,7 @@
       "required": "optional",
       "default": "",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -412,6 +434,7 @@
         "Install"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -428,6 +451,7 @@
         "Install"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -444,6 +468,7 @@
         "Install"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -460,6 +485,7 @@
         "true"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -472,6 +498,7 @@
       "required": "optional",
       "default": "9002",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -487,6 +514,7 @@
       "required": "optional",
       "default": "",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -506,6 +534,7 @@
         "true"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -518,6 +547,7 @@
       "required": "optional",
       "default": "First private IP address",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -533,6 +563,7 @@
       "required": "optional",
       "default": "First public IP address",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -552,6 +583,7 @@
         "Install"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -568,6 +600,7 @@
         "Install"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -584,6 +617,7 @@
         "Install"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -618,6 +652,7 @@
         "Web GUI"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::removecloudoptimizer"
       ],
       "calculated": false,
@@ -629,6 +664,8 @@
       "required": "optional",
       "default": "Do not install",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer"
       ],
       "choice": [
@@ -643,6 +680,7 @@
       "required": "optional",
       "default": "None",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -658,6 +696,7 @@
       "required": "optional",
       "default": "None",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -680,6 +719,7 @@
         "Report to Audit Log only"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -697,6 +737,7 @@
         "No feedback"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -713,6 +754,7 @@
         "Open ports"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::addsecuritygroup"
       ],
       "calculated": false,
@@ -728,6 +770,7 @@
         "true"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -744,6 +787,7 @@
         "true"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -760,6 +804,7 @@
         "false"
       ],
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -772,6 +817,7 @@
       "required": "optional",
       "default": "admin",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -787,6 +833,7 @@
       "required": "optional",
       "default": "letmein",
       "recipes": [
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::installcloudoptimizer",
         "cloudoptimizer::configurecloudoptimizer"
       ],
@@ -800,6 +847,7 @@
   "groupings": {
   },
   "recipes": {
+    "cloudoptimizer::cloudoptcommon": "CloudOpt common functions and methods",
   	"cloudoptimizer::cloudopt_setup_mail": "Alternate mail setup script",
     "cloudoptimizer::installcloudoptimizer": "Main installer for cloudoptimizer package",
     "cloudoptimizer::configurecloudoptimizer": "Post-installation configuration",
@@ -812,5 +860,5 @@
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports",
     "cloudoptimizer::showversion": "Show the CloudOptimizer version that is running on the server"
   },
-  "version": "0.41.0"
+  "version": "0.42.0"
 }
