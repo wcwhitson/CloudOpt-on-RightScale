@@ -5,7 +5,7 @@
 
 rs_utils_marker :begin
 
-include_recipe "cloudoptcommon"
+include_recipe 'cloudoptimizer::cloudoptcommon'
 
 # Send feedback
 mail_feedback_start
