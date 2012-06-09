@@ -5,7 +5,7 @@
 
 rs_utils_marker :begin
 
-require "cloudoptcommon.rb"
+include_recipe "cloudoptcommon"
 
 # Send feedback
 mail_feedback_start
