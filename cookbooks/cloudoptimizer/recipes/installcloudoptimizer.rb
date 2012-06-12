@@ -171,6 +171,24 @@ def accept_eula
   end
 end
 
+# Fix syslog-ng
+def fix_syslogng
+  log "Adding syslog config to preempt older cloudoptimizer postinstall scripts with bad syslog-ng source name."
+  source = `grep -m1 ^source /etc/syslog-ng/syslog-ng.conf |cut -d' ' -f2`
+  
+  open('/etc/syslog-ng/syslog-ng.conf', 'a') { |f|
+    f << "destination d_cloudoptimizer { file(\"/var/log/cloudoptimizer/cloudoptimizer.log\" create_dirs(yes)); };\n"
+    f << "destination d_cloudcopy      { file(\"/var/log/cloudoptimizer/cloudcopy.log\" create_dirs(yes));      };\n"
+    f << "destination d_cloudlicense   { file(\"/var/log/cloudoptimizer/cloudlicense.log\" create_dirs(yes));   };\n"
+    f << "filter      f_cloudoptimizer { level(info..emerg) and program(\"cloudoptimizer\"); };\n"
+    f << "filter      f_cloudcopy      { level(info..emerg) and program(\"cloudcopy\"); };\n"
+    f << "filter      f_cloudlicense   { level(info..emerg) and program(\"cloudlicense\"); };\n"
+    f << "log { source(#{source}); filter(f_cloudoptimizer); destination(d_cloudoptimizer); };\n"
+    f << "log { source(#{source}); filter(f_cloudcopy);      destination(d_cloudcopy); };\n"
+    f << "log { source(#{source}); filter(f_cloudlicense);   destination(d_cloudlicense); };\n"
+  }
+end
+
 # rsyslog
 def install_rsyslog
   # Under certain circumstances, syslog-ng has caused problems with CloudOptimizer.
@@ -647,8 +665,13 @@ end
 make_default_config_dir
 accept_eula
 
-# Install rsyslog - hopefully no longer necessary
+# Fix syslog problems
 # install_rsyslog
+if exists?(/etc/syslog-ng/syslog-ng.conf)
+  fix_syslog
+else
+  log "syslog-ng is not installed."
+end
 
 # Set up CloudOpt repository
 #
