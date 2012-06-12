@@ -647,8 +647,8 @@ end
 make_default_config_dir
 accept_eula
 
-# Install rsyslog.
-install_rsyslog
+# Install rsyslog - hopefully no longer necessary
+# install_rsyslog
 
 # Set up CloudOpt repository
 #
