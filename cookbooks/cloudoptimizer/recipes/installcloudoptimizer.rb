@@ -57,7 +57,7 @@ def mail_feedback
     mail_body << "Trans external IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}<br />"
     Pony.mail(
     :to => 'bill@cloudopt.com',
-    :subject => 'RightScale ServerTemplate Feedback - Start',
+    :subject => 'RightScale ServerTemplate Feedback (Detailed)',
     :headers => { 'Content-Type' => 'text/html' },
     :body => mail_body)
   elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
@@ -94,7 +94,7 @@ def mail_feedback
     mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}<br />"
     Pony.mail(
     :to => 'bill@cloudopt.com',
-    :subject => 'RightScale ServerTemplate Feedback - Start',
+    :subject => 'RightScale ServerTemplate Feedback (Basic)',
     :headers => { 'Content-Type' => 'text/html' },
     :body => mail_body)
   else
@@ -103,7 +103,7 @@ def mail_feedback
     mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
     Pony.mail(
     :to => 'bill@cloudopt.com',
-    :subject => 'RightScale ServerTemplate Feedback - Start',
+    :subject => 'RightScale ServerTemplate Feedback (None)',
     :headers => { 'Content-Type' => 'text/html' },
     :body => mail_body)
   end
@@ -675,7 +675,8 @@ end
 install_firewall_rules
 
 # Install CloudOptimizer
-install_cloudoptimizer
+#install_cloudoptimizer
+package "cloudoptimizer"
 
 # Create alternate home directory
 unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "/home/cloudoptimizer"
