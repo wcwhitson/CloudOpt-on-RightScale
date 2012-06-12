@@ -668,7 +668,7 @@ accept_eula
 # Fix syslog problems
 # install_rsyslog
 if exists?(/etc/syslog-ng/syslog-ng.conf)
-  fix_syslog
+  fix_syslogng
 else
   log "syslog-ng is not installed."
 end
