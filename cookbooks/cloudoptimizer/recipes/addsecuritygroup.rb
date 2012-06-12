@@ -5,7 +5,7 @@
 
 require 'right_aws'
 
-log "========== Beginning Add Security Group  =========="
+rs_utils_marker :begin
 
 if node[:cloudoptimizer][:security][:securitygroup] == "Open ports"
   # Create group
@@ -17,5 +17,5 @@ if node[:cloudoptimizer][:security][:securitygroup] == "Open ports"
 @ec2.authorize_security_group_IP_ingress(@group, 9001,9001,'tcp','0.0.0.0/0')
 end
 
-log "========== Ending Add Security Group  =========="
+rs_utils_marker :end
 

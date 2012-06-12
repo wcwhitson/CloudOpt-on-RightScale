@@ -3,6 +3,8 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
+rs_utils_marker :begin
+
 log "========== Retrieving CloudOptimizer Configuration  =========="
 
 log "--------------------------------------------------------------"
@@ -252,4 +254,4 @@ execute "cloudconfig" do
 end
 log "--------------------------------------------------------------"
 
-log "========== Ending CloudOptimizer Configuration Retrieval =========="
+rs_utils_marker :end

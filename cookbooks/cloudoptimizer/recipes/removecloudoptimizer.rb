@@ -3,7 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "========== Beginning CloudOptimizer Removal  =========="
+rs_utils_marker :begin
 
 case node[:cloudoptimizer_packages][:remove]
 when "All Packages and Files"
@@ -28,5 +28,5 @@ when "Web GUI"
   end
 end
 
-log "========== Ending CloudOptimizer Removal  =========="
+rs_utils_marker :end
 

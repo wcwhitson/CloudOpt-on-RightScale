@@ -3,7 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "========== Beginning CloudOptimizer Configuration  =========="
+rs_utils_marker :begin
 
 # Alternate home and log directories
 # Unlike in the install script, here we do not delete the previous directories
@@ -246,4 +246,4 @@ service "cloudoptimizer" do
   action :restart
 end
 
-log "========== Ending CloudOptimizer Configuration =========="
+rs_utils_marker :end

@@ -5,7 +5,7 @@
 
 rs_utils_marker :begin
 
-def mail_feedback_start
+def mail_feedback
   log "Mailing feedback at start of script run"
   # Install pony for mail support
   g = gem_package "pony" do
@@ -623,54 +623,13 @@ def set_transparent_proxy_addresses
   end  
 end
 
-def mail_feedback_end
-  log "Mailing feedback at end of script run"
-  # Provide automatic feedback to cloudopt
-  if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
-    log "Sending detailed feedback."
-    mail_body_end = Array.new
-    mail_body_end << "Platform: #{node[:platform]}<br />"
-    mail_body_end << "Version: #{node[:platform_version]}<br />"
-    mail_body_end << "Uptime: #{node[:uptime]}<br />"
-    mail_body_end << "Architecture: #{node[:languages][:ruby][:host_cpu]}<br />"
-    mail_body_end << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
-    Pony.mail(
-    :to => 'bill@cloudopt.com',
-    :subject => 'RightScale ServerTemplate Feedback - Start',
-    :headers => { 'Content-Type' => 'text/html' },
-    :body => mail_body_end)
-  elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
-    log "Sending basic feedback."
-    mail_body_end = Array.new
-    mail_body_end << "Platform: #{node[:platform]}<br />"
-    mail_body_end << "Version: #{node[:platform_version]}<br />"
-    mail_body_end << "Uptime: #{node[:uptime]}<br />"
-    mail_body_end << "Architecture: #{node[:languages][:ruby][:host_cpu]}<br />"
-    mail_body_end << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
-    Pony.mail(
-    :to => 'bill@cloudopt.com',
-    :subject => 'RightScale ServerTemplate Feedback - Start',
-    :headers => { 'Content-Type' => 'text/html' },
-    :body => mail_body_end)
-  else
-    log "Automatic feedback disabled."
-    mail_body_end = Array.new
-    mail_body_end << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
-    Pony.mail(
-    :to => 'bill@cloudopt.com',
-    :subject => 'RightScale ServerTemplate Feedback - Start',
-    :headers => { 'Content-Type' => 'text/html' },
-    :body => mail_body_end)
-  end
-end
-
 
 #
 # Main script starts here
 #
 
 # Send feedback
-mail_feedback_start
+mail_feedback
 
 # Install AWS Keys
 #
@@ -812,7 +771,5 @@ cloudoptimizer_init_restart
 
 rs_utils_monitor_process "cloudlicense"
 rs_utils_monitor_process "cloudoptimizer"
-
-mail_feedback_end
 
 rs_utils_marker :end

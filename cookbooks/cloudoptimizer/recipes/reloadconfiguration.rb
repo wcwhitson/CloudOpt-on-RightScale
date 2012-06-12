@@ -3,10 +3,10 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "========== Beginning Reload CloudOptimizer Configuration  =========="
+rs_utils_marker :begin
 
 execute "service" do
   command "service cloudoptimizer reload"
 end
 
-log "========== Ending Reload CloudOptimizer Configuration  =========="
+rs_utils_marker :end

@@ -3,10 +3,10 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "========== Beginning Clear CloudOptimizer Cache  =========="
+rs_utils_marker :begin
 
 execute "service" do
   command "service cloudoptimizer clear-cache"
 end
 
-log "========== Ending Clear CloudOptimizer Cache  =========="
+rs_utils_marker :end

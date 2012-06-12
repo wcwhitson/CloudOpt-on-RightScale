@@ -3,7 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-log "========== Beginning SupportView  =========="
+rs_utils_marker :begin
 
 case node[:cloudoptimizer][:supportview]
 when "Upload a full archive"
@@ -101,5 +101,5 @@ unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   log "===== Ending SupportView for RightScale Audit Log ====="
 end
 
-log "========== Ending SupportView  =========="
+rs_utils_marker :end
 

@@ -3,7 +3,6 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-
 def mail_feedback_start
   log "Mailing feedback at start of script run"
   # Install pony for mail support
