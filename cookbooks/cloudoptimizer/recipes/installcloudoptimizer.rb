@@ -613,7 +613,7 @@ log "Transparent mapping: Ending"
 # added to the configuration file, we must add a new template to match.  When 
 # multiple versions of the configuration file are supported at the same time, we
 # must determine the CloudOptimizer version that we are installing and use the 
-appropriate template for that version.
+# appropriate template for that version.
 ################################################################################
 log "Template config: Starting"
 log "Template config: CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
