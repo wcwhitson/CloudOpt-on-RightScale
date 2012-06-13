@@ -330,6 +330,29 @@ log "Firewall rules: Ending"
 
 
 ################################################################################
+# Install python 2.6
+################################################################################
+# Python 2.6 is required for CloudOptimizer, but not available on Ubuntu 12.04.
+# Install it manually if we're running on 12.04.
+################################################################################
+if node[:platform_version] == '12.04'
+  log "Running on Ubuntu 12.04.  Installing python2.6 for compatibilty."
+  package "gdebi"
+  remote_file "/var/tmp/python2.6-minimal_2.6.7-4ubuntu1_i386.deb" do
+    source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6-minimal_2.6.7-4ubuntu1_i386.deb"
+  end
+  remote_file "/var/tmp/python2.6_2.6.7-4ubuntu1_i386.deb" do
+    source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6_2.6.7-4ubuntu1_i386.deb"
+  end
+  execute "gdebi" do
+    command "gdebi --n /var/tmp/python2.6-minimal_2.6.7-4ubuntu1_i386.deb"
+  end
+  execute "gdebi" do
+    command "gdebi --n /var/tmp/python2.6_2.6.7-4ubuntu1_i386.deb"
+  end
+end
+
+################################################################################
 # Install cloudoptimizer
 ################################################################################
 # Install and configure the CloudOptimizer packages.  This section must be 
