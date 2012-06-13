@@ -333,7 +333,8 @@ log "Firewall rules: Ending"
 # Install python 2.6
 ################################################################################
 # Python 2.6 is required for CloudOptimizer, but not available on Ubuntu 12.04.
-# Install it manually if we're running on 12.04.
+# Install it manually if we're running on 12.04.  Install and use gdebi in
+# order to manage the rather convoluted dependencies.
 ################################################################################
 if node[:platform_version] == '12.04'
   log "Running on Ubuntu 12.04.  Installing python2.6 for compatibilty."
