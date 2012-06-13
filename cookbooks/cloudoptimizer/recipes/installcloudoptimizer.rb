@@ -250,7 +250,6 @@ if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer
       execute "apt-get" do
         command "apt-get update"
       end
-    end
     when "centos"
       log "Repositories:Installing on CentOS; using yum repository."
       log "Repositories:Installing the test repository.  CloudOpt internal use only."
@@ -264,7 +263,6 @@ if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer
       execute "CloudOpt.selfextracting" do
         command "/var/tmp/CloudOpt-Testing.selfextracting"
       end
-    end
   end
 else
   case node[:platform]
@@ -289,7 +287,6 @@ else
       execute "apt-get" do
         command "apt-get update"
       end
-    end
     when "centos"
       log "Repositories: Installing on CentOS; using yum repository."
 
@@ -303,7 +300,6 @@ else
       execute "CloudOpt.selfextracting" do
         command "/var/tmp/CloudOpt.selfextracting"
       end
-    end
   end
 end
 log "Repositories: Ending"
