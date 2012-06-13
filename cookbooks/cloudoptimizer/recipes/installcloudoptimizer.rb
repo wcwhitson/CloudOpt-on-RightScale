@@ -683,22 +683,22 @@ end
 #
 # CloudOpt runs on both Ubuntu and CentOS linux, which require different repositories.  Here we detect
 # the linux distribution and then install the appropriate repository.
-log "Installing CloudOpt software repository."
-if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
-  case node[:platform]
-  when "ubuntu"
-    install_repo_test_ubuntu
-  when "centos"
-    install_repo_test_centos
-  end
-else
-  case node[:platform]
-  when "ubuntu"
-    install_repo_ubuntu
-  when "centos"
-    install_repo_centos
-  end
-end
+#log "Installing CloudOpt software repository."
+#if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
+#  case node[:platform]
+#  when "ubuntu"
+#    install_repo_test_ubuntu
+#  when "centos"
+#    install_repo_test_centos
+#  end
+#else
+#  case node[:platform]
+#  when "ubuntu"
+#    install_repo_ubuntu
+#  when "centos"
+#    install_repo_centos
+#  end
+#end
 
 # Set up firewall rules
 install_firewall_rules
