@@ -1,4 +1,4 @@
-#
+##
 # Cookbook Name: Install CloudOptimizer 
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
