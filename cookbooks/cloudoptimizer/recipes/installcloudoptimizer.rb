@@ -523,7 +523,12 @@ log "Install cloudoptimizer: Ending"
 log "Install CloudController: Starting"
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
   log "Install CloudController: Installing cloudoptimizer-s3 package."
-  package "cloudoptimizer-s3"
+  if node[:platform] == 'centos'
+    execute "yum" do
+      command "yum -y install cloudoptimizer-s3"
+    end
+  else
+    package "cloudoptimizer-s3"
 end
 log "Install CloudController: Ending"
 
@@ -537,7 +542,12 @@ log "Install CloudController: Ending"
 log "Install cloudoptimizer-tools: Starting"
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizertools] == 'Install'
   log "Install cloudoptimizer-tools: Installing cloudoptimizer-tools package."
-  package "cloudoptimizer-tools"
+  if node[:platform] == 'centos'
+    execute "yum" do
+      command "yum -y install cloudoptimizer-tools"
+    end
+  else
+    package "cloudoptimizer-tools"
 end
 log "Install cloudoptimizer-tools: Ending"
 
@@ -551,7 +561,12 @@ log "Install cloudoptimizer-tools: Ending"
 log "Install WebUI: Starting"
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
   log "Install WebUI: Installing cloudoptimizer-webui package."
-  package "cloudoptimizer-webui"
+  if node[:platform] == 'centos'
+    execute "yum" do
+      command "yum -y install cloudoptimizer-webui"
+    end
+  else
+    package "cloudoptimizer-webui"
 end
 log "Install WebUI: Ending"
 
