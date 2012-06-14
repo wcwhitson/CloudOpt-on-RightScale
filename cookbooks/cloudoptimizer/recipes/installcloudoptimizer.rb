@@ -529,6 +529,7 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
     end
   else
     package "cloudoptimizer-s3"
+  end
 end
 log "Install CloudController: Ending"
 
@@ -548,6 +549,7 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizertools] == 'Install
     end
   else
     package "cloudoptimizer-tools"
+  end
 end
 log "Install cloudoptimizer-tools: Ending"
 
@@ -567,6 +569,7 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install
     end
   else
     package "cloudoptimizer-webui"
+  end
 end
 log "Install WebUI: Ending"
 
