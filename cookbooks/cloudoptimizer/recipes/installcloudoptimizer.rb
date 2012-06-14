@@ -437,18 +437,19 @@ log "Install cloudoptimizer: Starting"
             action :install
           end
       end
-    when "0.9.3.1"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          package "cloudoptimizer" do
-            version "0.9.3.1"
-            action :install
-          end
-        when "i686"
-          package "cloudoptimizer" do
-            version "0.9.3.1"
-            action :install
-          end
+      when "0.9.3.1"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            package "cloudoptimizer" do
+              version "0.9.3.1"
+              action :install
+            end
+          when "i686"
+            package "cloudoptimizer" do
+              version "0.9.3.1"
+              action :install
+            end
+        end
       end
     end
   when "centos"
@@ -510,7 +511,7 @@ log "Install cloudoptimizer: Starting"
         end
       end
     end
-end
+  end
 log "Install cloudoptimizer: Ending"
 
 
