@@ -1,4 +1,4 @@
-#
+##
 # Cookbook Name: CloudOpt Setup Mail
 #
 # Copyright CloudOpt, Inc.  All rights reserved.

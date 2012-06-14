@@ -1,4 +1,4 @@
-#
+##
 # Cookbook Name: Configure CloudOptimizer 
 #
 # Copyright CloudOpt, Inc.  All rights reserved.

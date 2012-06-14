@@ -1,4 +1,4 @@
-#
+##
 # Cookbook Name: Clear CloudOptimizer Cache
 #
 # Copyright CloudOpt, Inc.  All rights reserved.

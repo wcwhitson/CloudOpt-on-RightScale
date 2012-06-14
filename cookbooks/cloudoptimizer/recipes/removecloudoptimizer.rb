@@ -1,4 +1,4 @@
-#
+##
 # Cookbook Name: Remove CloudOptimizer
 #
 # Copyright CloudOpt, Inc.  All rights reserved.

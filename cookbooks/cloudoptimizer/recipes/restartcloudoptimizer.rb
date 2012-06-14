@@ -1,4 +1,4 @@
-#
+##
 # Cookbook Name: Restart CloudOptimizer Service
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
