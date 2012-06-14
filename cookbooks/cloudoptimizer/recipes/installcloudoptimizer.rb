@@ -390,117 +390,123 @@ log "Install python: Ending"
 # labor here to determine which package to install when version locking is 
 # selected.  We should revisit this in the future and see if we can simplify.
 log "Install cloudoptimizer: Starting"
-if node[:cloudoptimizer][:version] == 'latest'
-  log "Install cloudoptimizer: Installing the latest cloudoptimizer package."
-  package "cloudoptimizer"
-else
   log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
   case node[:platform]
   when "ubuntu"
-    case node[:cloudoptimizer][:version]
-    when "1.1.5"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          package "cloudoptimizer" do
-            version "1.1.5"
+    if node[:cloudoptimizer][:version] == 'latest'
+      log "Install cloudoptimizer: Installing the latest cloudoptimizer package."
+      package "cloudoptimizer"
+    else
+      case node[:cloudoptimizer][:version]
+      when "1.1.5"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            package "cloudoptimizer" do
+              version "1.1.5"
+              action :install
+            end
+          when "i686"
+            package "cloudoptimizer" do
+              version "1.1.5"
+              action :install
+            end
+        end
+      when "0.9.4"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            package "cloudoptimizer" do
+              version "0.9.3.2-53"
+              action :install
+            end
+          when "i686"
+            package "cloudoptimizer" do
+              version "0.9.4-71"
+              action :install
+            end
+        end
+      when "0.9.3.2"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            package "cloudoptimizer" do
+              version "0.9.3.2-53"
             action :install
           end
         when "i686"
           package "cloudoptimizer" do
-            version "1.1.5"
+            version "0.9.3.2-49"
             action :install
           end
       end
-    when "0.9.4"
+    when "0.9.3.1"
       case node[:languages][:ruby][:host_cpu]
         when "x86_64"
           package "cloudoptimizer" do
-            version "0.9.3.2-53"
+            version "0.9.3.1"
             action :install
           end
         when "i686"
           package "cloudoptimizer" do
-            version "0.9.4-71"
+            version "0.9.3.1"
             action :install
           end
       end
-    when "0.9.3.2"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          package "cloudoptimizer" do
-            version "0.9.3.2-53"
-          action :install
-        end
-      when "i686"
-        package "cloudoptimizer" do
-          version "0.9.3.2-49"
-          action :install
-        end
     end
-  when "0.9.3.1"
-    case node[:languages][:ruby][:host_cpu]
-      when "x86_64"
-        package "cloudoptimizer" do
-          version "0.9.3.1"
-          action :install
-        end
-      when "i686"
-        package "cloudoptimizer" do
-          version "0.9.3.1"
-          action :install
-        end
-    end
-  end
   when "centos"
     # Install EPEL, since not every RightImage seems to have it installed
     log "Install cloudoptimizer: Installing EPEL."
     execute "rpm" do
       command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
     end
-    case node[:cloudoptimizer][:version] 
-    when "1.1.5"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          execute "yum" do
-            command "yum -y install cloudoptimizer_1.1.5"
-          end
-        when "i686"
-          execute "yum" do
-            command "yum -y install cloudoptimizer_1.1.5"
-          end
-        end
-    when "0.9.4"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.4"
-          end
-        when "i686"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.4"
-          end
+    if node[:cloudoptimizer][:version] == 'latest'
+      log "Install cloudoptimizer: Installing the latest cloudoptimizer package."
+      execute "yum" do
+        command "yum -y install cloudoptimizer"
       end
-    when "0.9.3.2"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.3.2"
+    else
+      case node[:cloudoptimizer][:version] 
+      when "1.1.5"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            execute "yum" do
+              command "yum -y install cloudoptimizer_1.1.5"
+            end
+          when "i686"
+            execute "yum" do
+              command "yum -y install cloudoptimizer_1.1.5"
+            end
           end
-        when "i686"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.3.2"
-          end
+      when "0.9.4"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            execute "yum" do
+              command "yum -y install cloudoptimizer-0.9.4"
+            end
+          when "i686"
+            execute "yum" do
+              command "yum -y install cloudoptimizer-0.9.4"
+            end
         end
-    when "0.9.3.1"
-      case node[:languages][:ruby][:host_cpu]
-        when "x86_64"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.3.1"
+      when "0.9.3.2"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            execute "yum" do
+              command "yum -y install cloudoptimizer-0.9.3.2"
+            end
+          when "i686"
+            execute "yum" do
+              command "yum -y install cloudoptimizer-0.9.3.2"
+            end
           end
-        when "i686"
-          execute "yum" do
-            command "yum -y install cloudoptimizer-0.9.3.1"
-          end
+      when "0.9.3.1"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            execute "yum" do
+              command "yum -y install cloudoptimizer-0.9.3.1"
+            end
+          when "i686"
+            execute "yum" do
+              command "yum -y install cloudoptimizer-0.9.3.1"
+            end
         end
       end
     end
