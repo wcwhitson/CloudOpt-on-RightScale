@@ -370,8 +370,10 @@ if node[:platform_version] == '12.04'
     end
   else
     log "Install python: Couldn't determine architecture."
+  end
 end
 log "Install python: Ending"
+
 
 ################################################################################
 # Install cloudoptimizer
