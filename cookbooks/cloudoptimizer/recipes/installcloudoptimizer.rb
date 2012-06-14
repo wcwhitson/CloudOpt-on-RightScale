@@ -452,6 +452,11 @@ else
     end
   end
   when "centos"
+    # Install EPEL, since not every RightImage seems to have it installed
+    log "Install cloudoptimizer: Installing EPEL."
+    execute "rpm" do
+      command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+    end
     case node[:cloudoptimizer][:version] 
     when "1.1.5"
       case node[:languages][:ruby][:host_cpu]

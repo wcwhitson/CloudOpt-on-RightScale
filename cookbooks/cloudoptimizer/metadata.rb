@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.45"
+version "0.46"
 recipe "cloudoptimizer::cloudoptcommon", "CloudOpt common functions and methods"
 recipe "cloudoptimizer::cloudopt_setup_mail", "Alternate mail setup script"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
@@ -281,8 +281,8 @@ attribute "cloudoptimizer_packages/additional/cloudoptimizerwebui",
   :display_name => "CloudOptimizer Web Interface",
   :description => "Install a web interface",
   :required => "optional",
-  :default => "Do not install",
-  :choice => [ "Do not install", "Install" ],
+  :default => "Install",
+  :choice => [ "Install", "Do not install" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_packages/beta",
