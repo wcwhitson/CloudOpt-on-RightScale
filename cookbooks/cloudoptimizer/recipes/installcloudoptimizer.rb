@@ -200,18 +200,19 @@ log "EULA: Ending"
 # install a fixed syslog-ng config stanza before the post-install script runs.
 ################################################################################
 log "Fix syslog: Starting"
-if File.exists?("/etc/syslog-ng/syslog-ng.conf")
-  log "Fix syslog: syslog-ng is installed; fixing config."
-else
-  log "Fix syslog: syslog-ng is not installed; nothing to do."
-end
-bash "fix_syslog" do
-  user "root"
-  cwd "/tmp"
-  code <<-EOH
-  CONF=/etc/syslog-ng/syslog-ng.conf
-  if [ -f "$CONF" ]
-    then
+if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2'
+  log "Fix syslog: Version 0.9.4 or earlier - fix required."
+  if File.exists?("/etc/syslog-ng/syslog-ng.conf")
+    log "Fix syslog: syslog-ng is installed; fixing config."
+  else
+    log "Fix syslog: syslog-ng is not installed; nothing to do."
+  end
+  bash "fix_syslog" do
+    user "root"
+    cwd "/tmp"
+    code <<-EOH
+    CONF=/etc/syslog-ng/syslog-ng.conf
+    if [ -f "$CONF" ]
       source=`grep -m1 ^source ${CONF} |cut -d' ' -f2`
       echo "destination d_cloudoptimizer { file(\"/var/log/cloudoptimizer/cloudoptimizer.log\" create_dirs(yes)); };" >>$CONF
       echo "destination d_cloudcopy { file(\"/var/log/cloudoptimizer/cloudcopy.log\" create_dirs(yes)); };" >>$CONF
@@ -222,11 +223,13 @@ bash "fix_syslog" do
       echo "log { source(${source}); filter(f_cloudoptimizer); destination(d_cloudoptimizer); };" >>$CONF
       echo "log { source(${source}); filter(f_cloudcopy); destination(d_cloudcopy); };" >>$CONF
       echo "log { source(${source}); filter(f_cloudlicense); destination(d_cloudlicense); };" >>$CONF
-  fi
-  EOH
+    fi
+    EOH
+  end
+  log "Fix syslog: Ending"
+else
+  log "Fix syslog: Version 1.1.5 or later - fix unnecessary."
 end
-log "Fix syslog: Ending"
-
 
 ################################################################################
 # Set up repositories
@@ -336,43 +339,45 @@ log "Firewall rules: Ending"
 # Install it manually if we're running on 12.04.  Install and use gdebi in
 # order to manage the rather convoluted dependencies.
 ################################################################################
-log "Install python: Starting"
-if node[:platform_version] == '12.04'
-  log "Install python: Running on Ubuntu 12.04.  Installing python2.6 for compatibilty."
-  package "gdebi"
-  if node[:languages][:ruby][:host_cpu] == 'i686'
-    log "Install python: Using the i386 packages."
-    remote_file "/var/tmp/python2.6-minimal_2.6.7-4ubuntu1_i386.deb" do
-      source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6-minimal_2.6.7-4ubuntu1_i386.deb"
+if node[:cloudoptimizer][:version] == 'latest' || node[:cloudoptimizer][:version] == '1.1.5' || node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2'
+  log "Install python: Starting"
+  if node[:platform_version] == '12.04'
+    log "Install python: Running on Ubuntu 12.04.  Installing python2.6 for compatibilty."
+    package "gdebi"
+    if node[:languages][:ruby][:host_cpu] == 'i686'
+      log "Install python: Using the i386 packages."
+      remote_file "/var/tmp/python2.6-minimal_2.6.7-4ubuntu1_i386.deb" do
+        source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6-minimal_2.6.7-4ubuntu1_i386.deb"
+      end
+      remote_file "/var/tmp/python2.6_2.6.7-4ubuntu1_i386.deb" do
+        source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6_2.6.7-4ubuntu1_i386.deb"
+      end
+      execute "gdebi" do
+        command "gdebi --n /var/tmp/python2.6-minimal_2.6.7-4ubuntu1_i386.deb"
+      end
+      execute "gdebi" do
+        command "gdebi --n /var/tmp/python2.6_2.6.7-4ubuntu1_i386.deb"
+      end
+    elsif node[:languages][:ruby][:host_cpu] == 'x86_64'
+      log "Install python: Using the amd64 packages."
+      remote_file "/var/tmp/python2.6-minimal_2.6.7-4ubuntu1_amd64.deb" do
+        source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6-minimal_2.6.7-4ubuntu1_amd64.deb"
+      end
+      remote_file "/var/tmp/python2.6_2.6.7-4ubuntu1_amd64.deb" do
+        source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6_2.6.7-4ubuntu1_amd64.deb"
+      end
+      execute "gdebi" do
+        command "gdebi --n /var/tmp/python2.6-minimal_2.6.7-4ubuntu1_amd64.deb"
+      end
+      execute "gdebi" do
+        command "gdebi --n /var/tmp/python2.6_2.6.7-4ubuntu1_amd64.deb"
+      end
+    else
+      log "Install python: Couldn't determine architecture."
     end
-    remote_file "/var/tmp/python2.6_2.6.7-4ubuntu1_i386.deb" do
-      source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6_2.6.7-4ubuntu1_i386.deb"
-    end
-    execute "gdebi" do
-      command "gdebi --n /var/tmp/python2.6-minimal_2.6.7-4ubuntu1_i386.deb"
-    end
-    execute "gdebi" do
-      command "gdebi --n /var/tmp/python2.6_2.6.7-4ubuntu1_i386.deb"
-    end
-  elsif node[:languages][:ruby][:host_cpu] == 'x86_64'
-    log "Install python: Using the amd64 packages."
-    remote_file "/var/tmp/python2.6-minimal_2.6.7-4ubuntu1_amd64.deb" do
-      source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6-minimal_2.6.7-4ubuntu1_amd64.deb"
-    end
-    remote_file "/var/tmp/python2.6_2.6.7-4ubuntu1_amd64.deb" do
-      source "http://us.archive.ubuntu.com/ubuntu/pool/main/p/python2.6/python2.6_2.6.7-4ubuntu1_amd64.deb"
-    end
-    execute "gdebi" do
-      command "gdebi --n /var/tmp/python2.6-minimal_2.6.7-4ubuntu1_amd64.deb"
-    end
-    execute "gdebi" do
-      command "gdebi --n /var/tmp/python2.6_2.6.7-4ubuntu1_amd64.deb"
-    end
-  else
-    log "Install python: Couldn't determine architecture."
   end
+  log "Install python: Ending"
 end
-log "Install python: Ending"
 
 
 ################################################################################
@@ -398,6 +403,19 @@ log "Install cloudoptimizer: Starting"
       package "cloudoptimizer"
     else
       case node[:cloudoptimizer][:version]
+      when "1.1.6"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            package "cloudoptimizer" do
+              version "1.1.6"
+              action :install
+            end
+          when "i686"
+            package "cloudoptimizer" do
+              version "1.1.6"
+              action :install
+            end
+        end
       when "1.1.5"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
@@ -465,6 +483,17 @@ log "Install cloudoptimizer: Starting"
       end
     else
       case node[:cloudoptimizer][:version] 
+      when "1.1.6"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            execute "yum" do
+              command "yum -y install cloudoptimizer_1.1.6"
+            end
+          when "i686"
+            execute "yum" do
+              command "yum -y install cloudoptimizer_1.1.6"
+            end
+          end
       when "1.1.5"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
