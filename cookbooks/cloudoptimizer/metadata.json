@@ -412,6 +412,8 @@
       "default": "latest",
       "choice": [
         "latest",
+        "1.1.6",
+        "1.1.5",
         "0.9.4",
         "0.9.3.2",
         "0.9.3.1",
@@ -860,5 +862,5 @@
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports",
     "cloudoptimizer::showversion": "Show the CloudOptimizer version that is running on the server"
   },
-  "version": "0.47.0"
+  "version": "0.48.0"
 }
