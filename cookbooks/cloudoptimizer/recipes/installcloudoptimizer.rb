@@ -472,10 +472,6 @@ log "Install cloudoptimizer: Starting"
     end
   when "centos"
     # Install EPEL, since not every RightImage seems to have it installed
-    log "Install cloudoptimizer: Installing EPEL."
-    execute "rpm" do
-      command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-    end
     if node[:cloudoptimizer][:version] == 'latest'
       log "Install cloudoptimizer: Installing the latest cloudoptimizer package."
       execute "yum" do
@@ -497,10 +493,18 @@ log "Install cloudoptimizer: Starting"
       when "1.1.5"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer_1.1.5"
             end
           when "i686"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer_1.1.5"
             end
@@ -508,10 +512,18 @@ log "Install cloudoptimizer: Starting"
       when "0.9.4"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer-0.9.4"
             end
           when "i686"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer-0.9.4"
             end
@@ -519,10 +531,18 @@ log "Install cloudoptimizer: Starting"
       when "0.9.3.2"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer-0.9.3.2"
             end
           when "i686"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer-0.9.3.2"
             end
@@ -530,10 +550,18 @@ log "Install cloudoptimizer: Starting"
       when "0.9.3.1"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer-0.9.3.1"
             end
           when "i686"
+            log "Install cloudoptimizer: Installing EPEL."
+            execute "rpm" do
+              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
+            end
             execute "yum" do
               command "yum -y install cloudoptimizer-0.9.3.1"
             end
