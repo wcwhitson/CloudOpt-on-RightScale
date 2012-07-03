@@ -200,7 +200,7 @@ log "EULA: Ending"
 # install a fixed syslog-ng config stanza before the post-install script runs.
 ################################################################################
 log "Fix syslog: Starting"
-if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2'
+if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1'
   log "Fix syslog: Version 0.9.4 or earlier - fix required."
   if File.exists?("/etc/syslog-ng/syslog-ng.conf")
     log "Fix syslog: syslog-ng is installed; fixing config."
