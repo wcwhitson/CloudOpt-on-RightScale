@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.47"
+version "0.48"
 recipe "cloudoptimizer::cloudoptcommon", "CloudOpt common functions and methods"
 recipe "cloudoptimizer::cloudopt_setup_mail", "Alternate mail setup script"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
@@ -190,7 +190,7 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "1.1.5", "0.9.4", "0.9.3.2", "0.9.3.1" ],
+  :choice => [ "latest", "1.1.6", "1.1.5", "0.9.4", "0.9.3.2", "0.9.3.1" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_packages/optional/vtun",
