@@ -22,6 +22,12 @@ g.run_action(:install)
 Gem.clear_paths
 require 'pony'
 
+if node[:platform] == 'centos' && node[:platform_version] == '6.2'
+  pony_args = ''
+else
+  pony_args = '-t'
+}
+
 # Provide automatic feedback to cloudopt
 if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   log "Feedback Sending detailed feedback."
@@ -64,6 +70,7 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   :to => 'autofeedback@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback (Detailed)',
   :headers => { 'Content-Type' => 'text/html' },
+  :via_options => { :arguments => pony_args },
   :body => mail_body)
 elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   log "Feedback: Sending basic feedback."
@@ -101,6 +108,7 @@ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   :to => 'autofeedback@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback (Basic)',
   :headers => { 'Content-Type' => 'text/html' },
+  :via_options => { :arguments => pony_args },
   :body => mail_body)
 else
   log "Feedback: Automatic feedback disabled."
@@ -110,6 +118,7 @@ else
   :to => 'autofeedback@cloudopt.com',
   :subject => 'RightScale ServerTemplate Feedback (None)',
   :headers => { 'Content-Type' => 'text/html' },
+  :via_options => { :arguments => pony_args },
   :body => mail_body)
 end
 log "Feedback: Ending"
