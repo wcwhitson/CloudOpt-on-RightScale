@@ -26,7 +26,7 @@ if node[:platform] == 'centos' && node[:platform_version] == '6.2'
   pony_args = ''
 else
   pony_args = '-t'
-}
+end
 
 # Provide automatic feedback to cloudopt
 if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
