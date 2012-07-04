@@ -862,5 +862,5 @@
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports",
     "cloudoptimizer::showversion": "Show the CloudOptimizer version that is running on the server"
   },
-  "version": "0.49.0"
+  "version": "0.50.0"
 }
