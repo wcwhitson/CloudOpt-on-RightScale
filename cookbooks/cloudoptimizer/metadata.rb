@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 #long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.50"
+version "0.51"
 recipe "cloudoptimizer::cloudoptcommon", "CloudOpt common functions and methods"
 recipe "cloudoptimizer::cloudopt_setup_mail", "Alternate mail setup script"
 recipe "cloudoptimizer::installcloudoptimizer", "Main installer for cloudoptimizer package"
@@ -382,4 +382,11 @@ attribute "cloudoptimizer/web_interface/webui_passwd",
   :description => "Password for the CloudOptimizer web interface",
   :required => "optional",
   :default => "letmein",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
+  :display_name => "EBS cache volume",
+  :description => "On Amazon AWS, specify an EBS volume size to use for the CloudOptimizer cache directory",
+  :required => "optional",
+  :default => "0",
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
