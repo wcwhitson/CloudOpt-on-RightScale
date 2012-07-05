@@ -21,6 +21,7 @@ g.run_action(:install)
  
 Gem.clear_paths
 require 'pony'
+require 'aws'
 
 if node[:platform] == 'centos' && node[:platform_version] == '6.2'
   pony_args = ''
