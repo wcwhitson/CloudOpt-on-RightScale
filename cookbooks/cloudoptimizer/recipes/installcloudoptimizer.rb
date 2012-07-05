@@ -5,6 +5,7 @@
 
 rs_utils_marker :begin
 
+require 'rubygems'
 require 'right_aws'
 
 ################################################################################
