@@ -125,6 +125,25 @@ log "Feedback: Ending"
 
 
 ################################################################################
+# Install and use an EBS volume for caching
+################################################################################
+# If the user chooses to use an EBS volume for caching, create, attach, and
+# mount the volume.  Set the cache directory to the mount point of the EBS
+# volume so that this script will later configure the cache directory correctly.
+################################################################################
+
+if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] > 0
+  log "EBS cache volume: creating EBS volume."
+  aws_ebs_volume "db_ebs_volume" do
+    aws_access_key aws['aws_access_key_id']
+    aws_secret_access_key aws['aws_secret_access_key']
+    size 50
+    device "/dev/sdi"
+    action [ :create, :attach ]
+  end
+end
+
+################################################################################
 # Install AWS Keys
 ################################################################################
 # If the user chooses to provide their AWS credentials, we can pick them up for
