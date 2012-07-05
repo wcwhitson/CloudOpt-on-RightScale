@@ -5,6 +5,12 @@
 
 rs_utils_marker :begin
 
+g = gem_package "aws" do
+  action :nothing
+end
+g.run_action(:install)
+require 'aws'
+
 ################################################################################
 # Send feedback
 ################################################################################
@@ -16,12 +22,10 @@ log "Feedback: Starting"
 g = gem_package "pony" do
   action :nothing
 end
-
 g.run_action(:install)
  
 Gem.clear_paths
 require 'pony'
-require 'aws'
 
 if node[:platform] == 'centos' && node[:platform_version] == '6.2'
   pony_args = ''
