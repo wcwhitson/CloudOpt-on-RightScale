@@ -142,12 +142,12 @@ log "Feedback: Ending"
 # volume so that this script will later configure the cache directory correctly.
 ################################################################################
 
-if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size].to_i > 0
+if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
   log "EBS cache volume: creating EBS volume."
   aws_ebs_volume "db_ebs_volume" do
     aws_access_key aws['aws_access_key_id']
     aws_secret_access_key aws['aws_secret_access_key']
-    size 50
+    size node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size]
     device "/dev/sdi"
     action [ :create, :attach ]
   end
