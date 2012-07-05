@@ -9,6 +9,7 @@ g = gem_package "aws" do
   action :nothing
 end
 g.run_action(:install)
+Gem.clear_paths
 require 'aws'
 
 ################################################################################
