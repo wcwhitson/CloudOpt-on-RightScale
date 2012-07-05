@@ -386,7 +386,7 @@ attribute "cloudoptimizer/web_interface/webui_passwd",
 
 attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
   :display_name => "EBS cache volume",
-  :description => "On Amazon AWS, specify an EBS volume size to use for the CloudOptimizer cache directory",
+  :description => "On Amazon AWS, specify an EBS volume size in GB to use for the CloudOptimizer cache directory",
   :required => "optional",
   :default => "0",
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
