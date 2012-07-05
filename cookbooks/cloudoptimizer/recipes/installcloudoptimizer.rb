@@ -144,13 +144,9 @@ log "Feedback: Ending"
 
 if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
   log "EBS cache volume: creating EBS volume."
-  aws_ebs_volume "db_ebs_volume" do
-    aws_access_key aws['aws_access_key_id']
-    aws_secret_access_key aws['aws_secret_access_key']
-    size node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size]
-    device "/dev/sdi"
-    action [ :create, :attach ]
-  end
+  @ec2   = RightAws::Ec2.new(aws_access_key_id,aws_secret_access_key)
+  @ec2.create_volume()
+     {:aws_size       => 50}
 end
 
 ################################################################################
