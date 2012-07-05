@@ -142,7 +142,7 @@ log "Feedback: Ending"
 # volume so that this script will later configure the cache directory correctly.
 ################################################################################
 
-if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] > 0
+if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size].to_i > 0
   log "EBS cache volume: creating EBS volume."
   aws_ebs_volume "db_ebs_volume" do
     aws_access_key aws['aws_access_key_id']
