@@ -6,6 +6,14 @@
 rs_utils_marker :begin
 
 require 'rubygems'
+
+g = gem_package "right_aws" do
+  action :nothing
+end
+g.run_action(:install)
+ 
+Gem.clear_paths
+
 require 'right_aws'
 
 ################################################################################
