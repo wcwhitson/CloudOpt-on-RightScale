@@ -813,7 +813,23 @@
       "calculated": false,
       "type": "string"
     },
-  "cloudoptimizer/web_interface/webui_login": {
+    "cloudoptimizer_configuration/byte_cache/ebs_volume_size": {
+      "display_name": "EBS cache volume",
+      "description": "On Amazon AWS, specify an EBS volume size to use for the CloudOptimizer cache directory",
+      "required": "optional",
+      "default": "0",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptcommon",
+        "cloudoptimizer::installcloudoptimizer",
+        "cloudoptimizer::configurecloudoptimizer"
+      ],
+      "calculated": false,
+      "type": "string"
+    },
+    "cloudoptimizer/web_interface/webui_login": {
       "display_name": "Web interface login",
       "description": "User name for the CloudOptimizer web interface",
       "required": "optional",
@@ -862,5 +878,5 @@
     "cloudoptimizer::addsecuritygroup": "Create a security group for CloudOptimizer ports",
     "cloudoptimizer::showversion": "Show the CloudOptimizer version that is running on the server"
   },
-  "version": "0.50.0"
+  "version": "0.51.0"
 }
