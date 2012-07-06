@@ -145,8 +145,7 @@ log "Feedback: Ending"
 if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
   log "EBS cache volume: creating EBS volume."
   @ec2   = RightAws::Ec2.new(node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey],node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey])
-  @ec2.create_volume()
-     {:aws_size       => 50}
+  @ec2.create_volume('',50,'us-east-1')
 end
 
 ################################################################################
