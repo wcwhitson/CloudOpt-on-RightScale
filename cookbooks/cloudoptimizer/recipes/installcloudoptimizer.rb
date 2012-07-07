@@ -965,9 +965,9 @@ log "Final restart: Ending"
 ################################################################################
 # Add the cloudoptimizer daemons for monitoring in the RightScale dashboard
 ################################################################################
-log "RightScale monitoring: Starting"
-rs_utils_monitor_process "cloudlicense"
-rs_utils_monitor_process "cloudoptimizer"
-log "RightScale monitoring: Ending"
+#log "RightScale monitoring: Starting"
+#rs_utils_monitor_process "cloudlicense"
+#rs_utils_monitor_process "cloudoptimizer"
+#log "RightScale monitoring: Ending"
 
 rightscale_marker :end
