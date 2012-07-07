@@ -3,7 +3,7 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 require 'rubygems'
 
@@ -970,4 +970,4 @@ rs_utils_monitor_process "cloudlicense"
 rs_utils_monitor_process "cloudoptimizer"
 log "RightScale monitoring: Ending"
 
-rs_utils_marker :end
+rightscale_marker :end
