@@ -18,7 +18,14 @@ attribute "mediawiki/cloud_credentials/aws/secretkey",
   :required => "optional",
   :default => "None",
   :recipes => [ "mediawiki::installmediawiki" ]
-  
+
+attribute "mediawiki/installation_directory",
+  :display_name => "Installation directory",
+  :description => "Path to directory where MediaWiki will be installed",
+  :required => "optional",
+  :default => "/var/www/",
+  :recipes => [ "mediawiki::installmediawiki" ]
+    
 attribute "mediawiki/output_compression",
   :display_name => "Output compression",
   :description => "Enable or disabled output compression",
