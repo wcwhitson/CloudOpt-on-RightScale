@@ -59,10 +59,10 @@ remote_file "/var/tmp/mediawiki-1.19.1.tar.gz" do
   source "http://download.wikimedia.org/mediawiki/1.19/mediawiki-1.19.1.tar.gz"
 end
 
-install_dir = node[:mediawiki][:installation_directory]
+$install_dir = node[:mediawiki][:installation_directory]
 
 execute "tar" do
-  command "tar --strip-components=1 -xvzf /var/tmp/mediawiki-1.19.1.tar.gz -C install_dir"
+  command "tar --strip-components=1 -xvzf /var/tmp/mediawiki-1.19.1.tar.gz -C ${install_dir}"
 end
 
 log "Repositories: Ending"
