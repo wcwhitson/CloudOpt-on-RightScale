@@ -389,7 +389,7 @@ attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
   :required => "optional",
   :default => "0",
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
-    
+
 attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
   :display_name => "Master MySQL CloudOptimizer",
   :description => "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",

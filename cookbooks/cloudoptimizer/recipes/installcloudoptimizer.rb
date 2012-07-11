@@ -780,21 +780,7 @@ else
   $external_ip = node[:cloudoptimizer_configuration][:transparency][:transp_extip]
 end
 log "Transparent mapping: Ending"
-
-attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
-  :display_name => "Master MySQL CloudOptimizer",
-  :description => "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",
-  :required => "optional",
-  :default => "",
-  :recipes => [ "cloudoptimizer::configuremysqlreplication" ]
-    
-attribute "cloudoptimizer_mysql/endpoints/master_db_address",
-  :display_name => "Master MySQL CloudOptimizer",
-  :description => "In a CloudOptimizer+MySQL deployment, enter the private IP address of the MySQL master",
-  :required => "optional",
-  :default => "",
-  :recipes => [ "cloudoptimizer::configuremysqlreplication" ]
-    
+  
 if node[:cloudoptimizer_mysql][:endpoints][:master_cloudoptimizer_address] != "ignore"  && node[:cloudoptimizer_mysql][:endpoints][:master_db_address] != "ignore"
   node[:cloudoptimizer_configuration][:peer_statement] = "\"enabled\": [\"#{node[:cloudoptimizer_mysql][:endpoints][:master_cloudoptimizer_address]}\"], \"endpoints\": { \"#{node[:cloudoptimizer_mysql][:endpoints][:master_cloudoptimizer_address]}\": { [\"#{node[:cloudoptimizer_mysql][:endpoints][:master_db_address]}\"] }"
 end
