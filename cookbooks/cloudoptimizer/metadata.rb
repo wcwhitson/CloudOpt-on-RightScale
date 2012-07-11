@@ -15,6 +15,7 @@ recipe "cloudoptimizer::removecloudoptimizer", "Remove CloudOptimizer packages"
 recipe "cloudoptimizer::supportview", "Create/upload a SupportView diagnostics archive"
 recipe "cloudoptimizer::addsecuritygroup", "Create a security group for CloudOptimizer ports"
 recipe "cloudoptimizer::showversion", "Show the CloudOptimizer version that is running on the server"
+recipe "cloudoptimizer::configuremysqlreplication", "In a CloudOptimizer+MySQL configuration, set the endpoints"
 
 attribute "cloudoptimizer/stored_configuration/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
@@ -389,3 +390,17 @@ attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
   :required => "optional",
   :default => "0",
   :recipes => [ "cloudoptimizer::installcloudoptimizer",  "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
+    
+attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
+  :display_name => "Master MySQL CloudOptimizer",
+  :description => "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",
+  :required => "optional",
+  :default => "ignore",
+  :recipes => [ "cloudoptimizer::configuremysqlreplication" ]
+    
+attribute "cloudoptimizer_mysql/endpoints/master_db_address",
+  :display_name => "Master MySQL CloudOptimizer",
+  :description => "In a CloudOptimizer+MySQL deployment, enter the private IP address of the MySQL master",
+  :required => "optional",
+  :default => "ignore",
+  :recipes => [ "cloudoptimizer::configuremysqlreplication" ]
