@@ -14,7 +14,6 @@ supports "ubuntu", "~> 10.04"
 supports "ubuntu", "~> 10.10"
 supports "ubuntu", "~> 12.04"
 
-depends "rightscale"
 depends "block_device"
 depends "sys_firewall"
 depends "rs_utils"
