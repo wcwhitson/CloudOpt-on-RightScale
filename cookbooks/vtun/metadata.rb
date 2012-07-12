@@ -39,6 +39,13 @@ attribute "cloudoptimizer/stored_configuration/cloudoptimizer",
   :default => "none",
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
 
+attribute "cloudoptimizer/stored_configuration/vtun",
+  :display_name => "Stored vtun configuration",
+  :description => "URL to a vtund.conf file containing your saved configuration",
+  :required => "optional",
+  :default => "none",
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
+
 attribute "cloudoptimizer_configuration/file_locations/home_directory",
   :display_name => "Home directory",
   :description => "CloudOptimizer home directory - contains byte cache",
@@ -200,6 +207,30 @@ attribute "cloudoptimizer/version",
   :default => "latest",
   :choice => [ "latest", "1.1.6", "1.1.5", "0.9.4", "0.9.3.2", "0.9.3.1" ],
   :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_packages/optional/vtun",
+  :display_name => "VTun",
+  :description => "Install the vtun package",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_packages/optional/frox",
+  :display_name => "Frox",
+  :description => "Install the frox package",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_packages/optional/mysql-proxy",
+  :display_name => "MySQL Proxy",
+  :description => "Install the mysql-proxy package",
+  :required => "optional",
+  :default => "Do not install",
+  :choice => [ "Do not install", "Install" ],
+  :recipes => [ "cloudoptimizer::installcloudoptimizer", "cloudoptimizer::configurecloudoptimizer", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/socks/socks_proxy",
   :display_name => "SOCKS proxy",

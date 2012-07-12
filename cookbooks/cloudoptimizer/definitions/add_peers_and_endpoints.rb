@@ -1,0 +1,3 @@
+if node[:cloudoptimizer_mysql][:endpoints][:master_cloudoptimizer_address] != "ignore"  && node[:cloudoptimizer_mysql][:endpoints][:master_db_address] != "ignore"
+  node[:cloudoptimizer_configuration][:peer_statement] = "\"enabled\": [\"#{node[:cloudoptimizer_mysql][:endpoints][:master_cloudoptimizer_address]}\"], \"endpoints\": { \"#{node[:cloudoptimizer_mysql][:endpoints][:master_cloudoptimizer_address]}\": [\"#{node[:cloudoptimizer_mysql][:endpoints][:master_db_address]}\"] }"
+end

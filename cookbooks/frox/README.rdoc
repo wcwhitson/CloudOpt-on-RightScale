@@ -3,7 +3,7 @@
 == DESCRIPTION:
 
 This cookbook provides a set of chef recipies that you can use to install,
-configure, and maintain MediaWiki on RightScale.
+configure, and maintain the frox plain FTP proxy on RightScale.
 
 The recipes in this cookbook are not tied to a particular ServerTemplate,
 but can be used in various combinations with other RightScale chef recipes.
@@ -23,16 +23,13 @@ Please see the <tt>metadata.rb</tt> file for the current dependencies.
 
 == KNOWN LIMITATIONS:
 
-This recipe does not perform first-time configuration of the MediaWiki
-database.
-
 Please see the <tt>metadata.rb</tt> file for the current list of supported
 operating systems.
 
 == SETUP:
 
-* Place the <tt>cloudoptimizer::install_mediawiki</tt> recipe into your 
-  runlist to install and set up MediaWiki.
+* Place the <tt>cloudoptimizer::install_frox</tt> recipe into your 
+  runlist to install and set up frox.
 
 = LICENSE:
 

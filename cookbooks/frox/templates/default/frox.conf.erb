@@ -1,0 +1,14 @@
+Port 2121
+BindToDevice eth0
+FromInetd no
+ResolvLoadHack wontresolve.doesntexist.abc
+User nobody
+Group nobody
+WorkingDir /var/tmp
+DontChroot Yes
+PidFile /var/run/frox.pid
+PassivePorts 60000-61000
+DoNTP yes
+MaxForks 10
+MaxForksPerHost 4
+ACL Allow * - *
