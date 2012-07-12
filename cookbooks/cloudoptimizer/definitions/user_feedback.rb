@@ -4,6 +4,9 @@
 # Unless the user disables feedback, collect those configuration settings that
 # don't reveal any customer-specific information and mail a report.
 ################################################################################
+feedback_address = "bill@cloudopt.com"
+#feedback_address = "autofeedback@cloudopt.com"
+
 log "Feedback: Starting"
 # Install pony for mail support
 g = gem_package "pony" do
@@ -59,7 +62,7 @@ if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
   mail_body << "Trans internal IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}<br />"
   mail_body << "Trans external IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}<br />"
   Pony.mail(
-  :to => 'autofeedback@cloudopt.com',
+  :to => "#{feedback_address}",
   :subject => 'RightScale ServerTemplate Feedback (Detailed)',
   :headers => { 'Content-Type' => 'text/html' },
   :via_options => { :arguments => pony_args },
@@ -97,7 +100,7 @@ elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
   mail_body << "SOCKS port: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}<br />"
   mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}<br />"
   Pony.mail(
-  :to => 'autofeedback@cloudopt.com',
+  :to => "#{feedback_address}",
   :subject => 'RightScale ServerTemplate Feedback (Basic)',
   :headers => { 'Content-Type' => 'text/html' },
   :via_options => { :arguments => pony_args },
@@ -107,7 +110,7 @@ else
   mail_body = Array.new
   mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
   Pony.mail(
-  :to => 'autofeedback@cloudopt.com',
+  :to => "#{feedback_address}",
   :subject => 'RightScale ServerTemplate Feedback (None)',
   :headers => { 'Content-Type' => 'text/html' },
   :via_options => { :arguments => pony_args },
