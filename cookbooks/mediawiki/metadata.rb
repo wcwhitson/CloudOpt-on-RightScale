@@ -2,7 +2,23 @@ maintainer "CloudOpt, Inc."
 maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
-version "0.01"
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
+version "0.02"
+
+supports "centos", "~> 5.6"
+supports "centos", "~> 5.7"
+supports "centos", "~> 5.8"
+supports "centos", "~> 6.0"
+supports "centos", "~> 6.2"
+supports "ubuntu", "~> 10.04"
+supports "ubuntu", "~> 10.10"
+supports "ubuntu", "~> 12.04"
+
+depends "rightscale"
+depends "block_device"
+depends "sys_firewall"
+depends "rs_utils"
+
 recipe "mediawiki::installmediawiki", "Install and configure MediaWiki"
 
 attribute "mediawiki/cloud_credentials/aws/accesskey",

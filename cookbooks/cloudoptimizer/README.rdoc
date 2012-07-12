@@ -1,0 +1,44 @@
+= CloudOpt CloudOptimizer RightScale Components
+
+== DESCRIPTION:
+
+This cookbook provides a set of chef recipies that you can use to install,
+configure, and maintain CloudOptimizer on RightScale.
+
+The recipes in this cookbook are not tied to a particular ServerTemplate,
+but can be used in various combinations with other RightScale chef recipes.
+
+We use these recipes in the CloudOptimizer Cloud VA and CloudOptimizer
+Client ServerTemplates.
+
+== REQUIREMENTS:
+
+* The RepoPath for the ServerTemplate that uses these recipes must include
+the rightscale_cookbooks repository.
+
+== COOKBOOKS DEPENDENCIES:
+
+Please see the <tt>metadata.rb</tt> file for the current dependencies.
+
+== KNOWN LIMITATIONS:
+
+Please see the <tt>metadata.rb</tt> file for the current list of supported
+operating systems.
+
+== SETUP:
+
+* Place the <tt>cloudoptimizer::installcloudoptimizer</tt> recipe into your 
+  runlist to install and set up CloudOptimizer.
+
+== Further Information:
+
+For a description of CloudOptimizer operational scripts, please see:
+http://kb.cloudopt.com/index.php/Managing_CloudOptimizer_on_RightScale
+
+For a description of CloudOptimizer inputs, please see:
+http://kb.cloudopt.com/index.php/CloudOptimizer_RightScale_Server_Template_Inputs
+
+= LICENSE:
+
+Copyright CloudOpt, Inc. All rights reserved.  All access and use subject to
+the CloudOptimizer End User License Agreement and CloudOpt Terms of Use.
