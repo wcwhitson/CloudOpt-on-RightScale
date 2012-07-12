@@ -1,19 +1,17 @@
 ################################################################################
-# restart_cloudoptimizer.rb
+# cloudoptimizer_clear_cache.rb
 ################################################################################
-# Chef definition, part of cloudoptimizer cookbook
+# Chef recipe, part of cloudoptimizer cookbook
 ################################################################################
 # Copyright 2012 CloudOpt, Inc.  All rights reserved.
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Restarts the CloudOptimizer daemons
+# Clear the CloudOptimizer byte cache and restart the system daemons
 ################################################################################
 
-define :restart_cloudoptimizer do
-  log "Restart CloudOptimizer: Starting"
-  service "cloudoptimizer" do
-    action :restart
-  end
-  log "Restart CloudOptimizer: Ending"
-end
+rs_utils_marker :begin
+
+cloudoptimizer_clear_cache
+
+rs_utils_marker :end

@@ -1,5 +1,5 @@
 ################################################################################
-# restart_cloudoptimizer.rb
+# reload_cloudoptimizer.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,13 +7,13 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Restarts the CloudOptimizer daemons
+# Reloads the CloudOptimizer configuration
 ################################################################################
 
-define :restart_cloudoptimizer do
-  log "Restart CloudOptimizer: Starting"
-  service "cloudoptimizer" do
-    action :restart
+define :reload_cloudoptimizer do
+  log "Reload CloudOptimizer: Starting"
+  execute "service" do
+    command "service cloudoptimizer reload"
   end
-  log "Restart CloudOptimizer: Ending"
+  log "Reload CloudOptimizer: Ending"
 end

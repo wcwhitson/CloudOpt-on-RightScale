@@ -1,5 +1,5 @@
 ################################################################################
-# restart_cloudoptimizer.rb
+# remove_cloudcontroller_package.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,13 +7,13 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Restarts the CloudOptimizer daemons
+# Remove the cloudcontroller package
 ################################################################################
 
-define :restart_cloudoptimizer do
-  log "Restart CloudOptimizer: Starting"
-  service "cloudoptimizer" do
-    action :restart
+define :remove_cloudcontroller_package do
+  log "Remove cloudcontroller package: Starting"
+  package "cloudoptimizer-s3" do
+    action params[:name]
   end
-  log "Restart CloudOptimizer: Ending"
+  log "Remove cloudcontroller package: Ending"
 end

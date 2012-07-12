@@ -1,7 +1,14 @@
-##
-# Cookbook Name: Show CloudOptimizer Configuration 
-#
-# Copyright CloudOpt, Inc.  All rights reserved.
+################################################################################
+# cloudoptimizer_show.rb
+################################################################################
+# Chef recipe, part of cloudoptimizer cookbook
+################################################################################
+# Copyright 2012 CloudOpt, Inc.  All rights reserved.
+################################################################################
+# Author: Bill Whitson <bill@cloudopt.com>
+################################################################################
+# Display CloudOptimizer configuration in the RightScale audit log
+################################################################################
 
 rs_utils_marker :begin
 

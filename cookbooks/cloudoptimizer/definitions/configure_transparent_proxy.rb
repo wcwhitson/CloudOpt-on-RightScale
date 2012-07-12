@@ -1,24 +1,31 @@
 ################################################################################
-# Set transparent proxy address mappings
+# configure_transparent_proxy.rb
+################################################################################
+# Chef definition, part of cloudoptimizer cookbook
+################################################################################
+# Copyright 2012 CloudOpt, Inc.  All rights reserved.
+################################################################################
+# Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
 # Get the first public and private IP addresses and use them as the default
 # values for the transparent proxy mapping unless the user has chosen to enter
 # addresses manually.
 ################################################################################
-log "Transparent mapping: Starting"
-if node[:cloudoptimizer_configuration][:transparency][:transp_intip] == 'First private IP address'
-  log "Transparent mapping: Setting internal IP address to #{node[:cloud][:private_ips][0]}"
-  $internal_ip = node[:cloud][:private_ips][0]
-else
-  log "Transparent mapping: Setting internal IP address to user specified: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}"
-  $internal_ip = node[:cloudoptimizer_configuration][:transparency][:transp_intip]
+
+define :configure_transparent_proxy do
+  log "Transparent mapping: Starting"
+  if node[:cloudoptimizer_configuration][:transparency][:transp_intip] == 'First private IP address'
+    log "Transparent mapping: Setting internal IP address to #{node[:cloud][:private_ips][0]}"
+    node[:cloudoptimizer_configuration][:transparency][:transp_intip] = node[:cloud][:private_ips][0]
+  else
+    log "Transparent mapping: Setting internal IP address to user specified: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}"
+  end
+  # Set the public/external IP address
+  if node[:cloudoptimizer_configuration][:transparency][:transp_extip] == 'First public IP address'
+    log "Transparent mapping: Setting external IP address to: #{node[:cloud][:public_ips][0]}"
+    node[:cloudoptimizer_configuration][:transparency][:transp_extip] = node[:cloud][:public_ips][0]
+  else
+    log "Transparent mapping: Setting external IP address to user specified: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}"
+  end
+  log "Transparent mapping: Ending"
 end
-# Set the public/external IP address
-if node[:cloudoptimizer_configuration][:transparency][:transp_extip] == 'First public IP address'
-  log "Transparent mapping: Setting external IP address to: #{node[:cloud][:public_ips][0]}"
-  $external_ip = node[:cloud][:public_ips][0]
-else
-  log "Transparent mapping: Setting external IP address to user specified: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}"
-  $external_ip = node[:cloudoptimizer_configuration][:transparency][:transp_extip]
-end
-log "Transparent mapping: Ending"

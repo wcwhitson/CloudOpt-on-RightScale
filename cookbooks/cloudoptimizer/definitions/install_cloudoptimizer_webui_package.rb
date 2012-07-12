@@ -1,5 +1,5 @@
 ################################################################################
-# install_cloudoptimizer_tools_package.rb
+# install_cloudoptimizer_webui_package.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,22 +7,21 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Install the cloudoptimizer-tools package if selected by input.  This is not
-# necessary on first install, but may be useful when cloudoptimizer-tools is
-# updated separately from cloudoptimizer.
+# Install the cloudoptimizer-webui package if selected by input.  Starting in
+# version 1.1.5, enable by default.
 ################################################################################
 
-define :install_cloudoptimizer_tools_package do
-  log "Install cloudoptimizer-tools: Starting"
-  if node[:cloudoptimizer_packages][:additional][:cloudoptimizertools] == 'Install'
-    log "Install cloudoptimizer-tools: Installing cloudoptimizer-tools package."
+define :install_cloudoptimizer_webui_package do
+  log "Install WebUI: Starting"
+  if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
+    log "Install WebUI: Installing cloudoptimizer-webui package."
     if node[:platform] == 'centos'
       execute "yum" do
-        command "yum -y install cloudoptimizer-tools"
+        command "yum -y install cloudoptimizer-webui"
       end
     else
-      package "cloudoptimizer-tools"
+      package "cloudoptimizer-webui"
     end
   end
-  log "Install cloudoptimizer-tools: Ending"
+  log "Install WebUI: Ending"
 end

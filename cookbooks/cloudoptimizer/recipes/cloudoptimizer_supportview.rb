@@ -1,7 +1,14 @@
-##
-# Cookbook Name: SupportView
-#
-# Copyright CloudOpt, Inc.  All rights reserved.
+################################################################################
+# cloudoptimizer_supportview.rb
+################################################################################
+# Chef recipe, part of cloudoptimizer cookbook
+################################################################################
+# Copyright 2012 CloudOpt, Inc.  All rights reserved.
+################################################################################
+# Author: Bill Whitson <bill@cloudopt.com>
+################################################################################
+# Create a supportview diagnostic archive and upload if requested
+################################################################################
 
 rs_utils_marker :begin
 

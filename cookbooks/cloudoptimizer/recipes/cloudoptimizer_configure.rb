@@ -1,7 +1,16 @@
-##
-# Cookbook Name: Configure CloudOptimizer 
-#
-# Copyright CloudOpt, Inc.  All rights reserved.
+################################################################################
+# cloudoptimizer_configure.rb
+################################################################################
+# Chef recipe, part of cloudoptimizer cookbook
+################################################################################
+# Copyright 2012 CloudOpt, Inc.  All rights reserved.
+################################################################################
+# Author: Bill Whitson <bill@cloudopt.com>
+################################################################################
+# General purpose reconfiguration of CloudOptimizer.  This recipe is only used
+# after initial configuration.  Primary configuration takes place in the
+# cloudoptimizer_install recipe.
+################################################################################
 
 rs_utils_marker :begin
 

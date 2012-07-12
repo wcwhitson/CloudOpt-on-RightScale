@@ -1,5 +1,5 @@
 ################################################################################
-# restart_cloudoptimizer.rb
+# clear_cloudoptimizer_cache.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -10,10 +10,11 @@
 # Restarts the CloudOptimizer daemons
 ################################################################################
 
-define :restart_cloudoptimizer do
-  log "Restart CloudOptimizer: Starting"
-  service "cloudoptimizer" do
-    action :restart
+define :clear_cloudoptimizer_cache do
+  log "Clear CloudOptimizer cache: Starting"
+  execute "service" do
+    command "service cloudoptimizer clear-cache"
   end
-  log "Restart CloudOptimizer: Ending"
+  log "Clear CloudOptimizer cache: Ending"
 end
+

@@ -1,17 +1,19 @@
 ################################################################################
-# Install cloudoptimizer
+# install_cloudoptimizer_package.rb
+################################################################################
+# Chef definition, part of cloudoptimizer cookbook
+################################################################################
+# Copyright 2012 CloudOpt, Inc.  All rights reserved.
+################################################################################
+# Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
 # Install and configure the CloudOptimizer packages.  This section must be 
 # updated for each new release.  If not updated, the version lock input will not
 # display new versions.  The RightScript will always install the latest version 
 # available when the version lock is set to "latest."
 ################################################################################
-# The version locking is kind of a pain the way it is done, but chef doesn't 
-# appear to honor architecture in the package command as it should, at least on 
-# RightScale.  I wasted a lot of time trying to get it to work before settling 
-# on manually specifying the package options.  Thus, we have a lot of manual 
-# labor here to determine which package to install when version locking is 
-# selected.  We should revisit this in the future and see if we can simplify.
+
+define :install_cloudoptimizer_package do
 log "Install cloudoptimizer: Starting"
   log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
   case node[:platform]
@@ -188,3 +190,4 @@ log "Install cloudoptimizer: Starting"
     end
   end
 log "Install cloudoptimizer: Ending"
+end

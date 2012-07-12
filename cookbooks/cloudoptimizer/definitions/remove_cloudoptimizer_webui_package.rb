@@ -1,5 +1,5 @@
 ################################################################################
-# restart_cloudoptimizer.rb
+# remove_cloudcontroller_webui_package.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,13 +7,13 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Restarts the CloudOptimizer daemons
+# Remove the cloudoptimizer-webui package
 ################################################################################
 
-define :restart_cloudoptimizer do
-  log "Restart CloudOptimizer: Starting"
-  service "cloudoptimizer" do
-    action :restart
+define :remove_cloudoptimizer_webui_package do
+  log "Remove cloudoptimizer-webui package: Starting"
+  package "cloudoptimizer-webui" do
+    action params[:name]
   end
-  log "Restart CloudOptimizer: Ending"
+  log "Remove cloudoptimizer-webui package: Ending"
 end
