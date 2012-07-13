@@ -38,11 +38,11 @@ end
 # Accept EULA
 if node[:platform] == 'ubuntu'
   accept_eula "ubuntu" do
-    distro ubuntu
+    distro 'ubuntu'
   end
 elsif node[:platform] == 'centos'
   accept_eula "centos" do
-    distro centos
+    distro 'centos'
   end
 else
   log "Unrecognized distribution when trying to accept EULA."

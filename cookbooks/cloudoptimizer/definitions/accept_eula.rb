@@ -26,7 +26,7 @@ define :accept_eula do
   # For whatever reason, the Ubuntu and CentOS installers check different EULA
   # files.  At some point the CentOS file was changed, while the Ubuntu file
   # remained the same.
-  if params[:distro] == ubuntu
+  if params[:distro] == 'ubuntu'
     # For 0.9.4 and earlier
     log "EULA: Creating Ubuntu / old style EULA acceptance file."
     file "#{node[:cloudoptimizer][:config_dir]}/accept-eula.txt" do
@@ -36,7 +36,7 @@ define :accept_eula do
       content "true"
       action :create
     end
-  elsif params[:distro] == centos
+  elsif params[:distro] == 'centos'
     # For 1.1.5 and later
     log "EULA: Creating CentOS / new style EULA acceptance file."
     file "#{node[:cloudoptimizer][:config_dir]}/accepted-cloudoptimizer-eula" do
