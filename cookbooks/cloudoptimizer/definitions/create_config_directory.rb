@@ -11,8 +11,8 @@
 ################################################################################
 
 define :create_config_directory do
-  log "Creating default config directory (node[:cloudoptimizer][:config_dir])."
-  directory "node[:cloudoptimizer][:config_dir]" do
+  log "Creating default config directory (#{node[:cloudoptimizer][:config_dir]})."
+  directory node[:cloudoptimizer][:config_dir] do
     owner "root"
     group "root"
     mode "0755"
