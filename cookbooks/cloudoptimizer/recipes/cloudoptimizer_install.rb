@@ -36,14 +36,16 @@ else
 end
 
 # Accept EULA
-if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1'
+if node[:platform] == 'ubuntu'
   accept_eula do
-    old true
+    distro ubuntu
+  end
+elsif node[:platform] == 'centos'
+  accept_eula do
+    distro centos
   end
 else
-  accept_eula do
-    old false
-  end
+  log "Unrecognized distribution when trying to accept EULA."
 end
 
 # Install Cloud Credentials
