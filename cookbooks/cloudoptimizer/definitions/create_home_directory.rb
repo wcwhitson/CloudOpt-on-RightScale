@@ -20,9 +20,14 @@ define :create_home_directory do
     mode "0711"
     action :create
   end
-  directory "/home/cloudoptimizer" do
-    recursive true
-    action :delete
+  if self.recipe_name == "cloudoptimizer_install"
+    log "Create home: Deleting old home directory, as this is initial configuration."
+    directory "/home/cloudoptimizer" do
+      recursive true
+      action :delete
+    end
+  else
+    log "Create home: Keeping old home directory, as this is not initial configuration."
   end
   log "Create home: Ending"
 end

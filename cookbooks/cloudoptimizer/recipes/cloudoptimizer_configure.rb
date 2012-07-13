@@ -14,61 +14,63 @@
 
 rs_utils_marker :begin
 
-# Alternate home and log directories
-# Unlike in the install script, here we do not delete the previous directories
-# under the assumption that they actually contain user data.
-
-# Create alternate home directory
-
-create_home_directory
-
-# Create alternate log directory
-
-create_log_directory
-
-# Install additional packages
-
-# Install the CloudController package if selected
-install_cloudcontroller_package
-
-# Install the cloudoptimizer-tools package if selected
-if node[:cloudoptimizer_packages][:additional][:cloudoptimizertools] == 'Install'
-  install_cloudoptimizer_tools_package
+# Install Cloud Credentials
+unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
+  install_aws_access_key
+end
+unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
+  install_aws_secret_key
 end
 
-# Install the CloudOptimizer stats GUI
-install_cloudoptimizer_webui_package
+# Add a cache volume
+if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
+  add_cache_volume
+end
 
-# Here we set the public and private addresses to use when the transparent proxy is enabled.  By default, we use the
-# first returned IP address for each, as there will generally be only one.  If the user has specified an address, we
-# use that instead.
+# Add CloudOpt repos
+# First clear existing repos in case we are changing to or from test or beta repos
+clear_cloudopt_repos
+if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
+  add_cloudopt_test_repos
+else
+  add_cloudopt_repos
+end
 
+# Open firewall ports
+open_cloudoptimizer_ports
+
+# Create alternate home directory
+unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "/home/cloudoptimizer"
+  create_home_directory
+end
+
+# Create alternate log directory
+unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/cloudoptimizer"
+  create_log_directory
+end
+
+# Install CloudController
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
+  install_cloudcontroller_package
+end
+
+# Install WebUI
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
+  install_cloudoptimizer_webui_package
+end
+
+# Set transparent proxy defaults
 configure_transparent_proxy
 
-# We use chef templates to build the configuration file.  When new options are added to the configuration file, we must
-# add a new template to match.  When multiple versions of the configuration file are supported at the same time, we must
-# determine the CloudOptimizer version that we are installing and use the appropriate template for that version.
+# Either install a stored config or build config from template and inputs
+if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'
+  write_configuration_template
+  add_peers_and_endpoints
+else
+  get_configuration_stored
+end
 
-write_configuration_template
-
-# Install stored configurations
-
-# Here we give the user the option to retrieve stored configuration files for a truly persistent CloudOptimizer
-# installation that can be stopped and started without requiring reconfiguration.  Files must be provided on an
-# unprotected HTTP server.
-
-# Stored configuration files take precedence over all other configuration.  Thus, if the user sets individual
-# configuration options, but also specifies a stored config file, the individual configuration options will be
-# ignored.
-
-# Stored CloudOptimizer configuration file
-get_configuration_stored
-
-
-# Reload the CloudOptimizer configuration.  This will put any changes into the running config and will 
-# be harmless otherwise.
-
-log "Restarting CloudOptimizer to pick up configuration changes."
+# Restart to pick up config
 restart_cloudoptimizer
 
 rs_utils_marker :end
