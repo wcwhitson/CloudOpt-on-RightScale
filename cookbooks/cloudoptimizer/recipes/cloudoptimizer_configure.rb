@@ -12,7 +12,7 @@
 # cloudoptimizer_install recipe.
 ################################################################################
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 # Alternate home and log directories
 # Unlike in the install script, here we do not delete the previous directories
@@ -69,4 +69,4 @@ get_configuration_stored
 log "Restarting CloudOptimizer to pick up configuration changes."
 restart_cloudoptimizer
 
-rightscale_marker :end
+rs_utils_marker :end

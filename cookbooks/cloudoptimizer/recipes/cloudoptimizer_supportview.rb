@@ -10,7 +10,7 @@
 # Create a supportview diagnostic archive and upload if requested
 ################################################################################
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 case node[:cloudoptimizer][:supportview]
 when "Upload a full archive"
@@ -108,5 +108,5 @@ unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   log "===== Ending SupportView for RightScale Audit Log ====="
 end
 
-rightscale_marker :end
+rs_utils_marker :end
 

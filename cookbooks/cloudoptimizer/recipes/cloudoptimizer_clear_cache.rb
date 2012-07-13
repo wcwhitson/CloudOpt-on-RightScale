@@ -10,8 +10,8 @@
 # Clear the CloudOptimizer byte cache and restart the system daemons
 ################################################################################
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 cloudoptimizer_clear_cache
 
-rightscale_marker :end
+rs_utils_marker :end

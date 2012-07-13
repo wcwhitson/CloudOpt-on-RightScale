@@ -10,7 +10,7 @@
 # Remove the CloudOptimizer packages
 ################################################################################
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 case node[:cloudoptimizer_packages][:remove]
 when "All Packages and Files"
@@ -27,5 +27,5 @@ when "Web GUI"
   remove_cloudoptimizer_webui_package :remove
 end
 
-rightscale_marker :end
+rs_utils_marker :end
 

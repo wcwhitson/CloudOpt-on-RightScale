@@ -10,7 +10,7 @@
 # First time installation and configuration of CloudOptimizer
 ################################################################################
 
-rightscale_marker :begin
+rs_utils_marker :begin
 
 require 'rubygems'
 
@@ -41,4 +41,4 @@ add_peers_and_endpoints
 get_configuration_stored
 restart_cloudoptimizer
 
-rightscale_marker :end
+rs_utils_marker :end
