@@ -20,8 +20,16 @@ define :add_cloudopt_repos do
         log "Repositories:Installing on Ubuntu; using apt repository."
         log "Repositories:Installing the test repository.  CloudOpt internal use only."
         # Retrieve and install the repository list
-        remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
-          source "http://50.16.207.155/cloudopt-test.maverick.list"
+        if node[:platform_version] == '12.04' || node[:platform_version] == '12.10'
+          log "Repositories: Installing on Ubuntu 12.x"
+          remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
+            source "http://50.16.207.155/cloudopt-test.precise.list"
+          end
+        else
+          log "Repositories: Installing on Ubuntu < 12.x"
+          remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
+            source "http://50.16.207.155/cloudopt-test.maverick.list"
+          end
         end
         # Retrieve the repository key file
         remote_file "/var/tmp/cloudopt.tc-key.asc" do
@@ -54,9 +62,17 @@ define :add_cloudopt_repos do
       when "ubuntu"
         log "Repositories: Installing on Ubuntu; using apt repository."
         # Retrieve and install the repository list
-        remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
-          source "http://apt.cloudopt.com/cloudopt.maverick.list"
-        end 
+        if node[:platform_version] == '12.04' || node[:platform_version] == '12.10'
+          log "Repositories: Installing on Ubuntu 12.x"
+          remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
+            source "http://apt.cloudopt.com/cloudopt-test.precise.list"
+          end
+        else
+          log "Repositories: Installing on Ubuntu < 12.x"
+          remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
+            source "http://apt.cloudopt.com/cloudopt-test.maverick.list"
+          end
+        end
 
         # Retrieve the repository key file
         remote_file "/var/tmp/cloudopt.key.asc" do
