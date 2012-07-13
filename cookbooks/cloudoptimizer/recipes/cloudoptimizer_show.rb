@@ -10,7 +10,7 @@
 # Display CloudOptimizer configuration in the RightScale audit log
 ################################################################################
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 log "========== Retrieving CloudOptimizer Configuration  =========="
 
@@ -261,4 +261,4 @@ execute "cloudconfig" do
 end
 log "--------------------------------------------------------------"
 
-rs_utils_marker :end
+rightscale_marker :end

@@ -10,8 +10,8 @@
 # Reload CloudOptimizer configuration
 ################################################################################
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 reload_cloudoptimizer
 
-rs_utils_marker :end
+rightscale_marker :end

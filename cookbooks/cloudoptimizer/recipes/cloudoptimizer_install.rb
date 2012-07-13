@@ -23,7 +23,7 @@ Gem.clear_paths
 
 require 'right_aws'
 
-user_feedback
+#user_feedback
 #fix_syslogng
 #accept_eula
 #install_keys
