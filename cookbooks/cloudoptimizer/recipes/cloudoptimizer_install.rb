@@ -12,16 +12,14 @@
 
 rightscale_marker :begin
 
-require 'rubygems'
+#require 'rubygems'
 
-g = gem_package "right_aws" do
-  action :nothing
-end
-g.run_action(:install)
+#g = gem_package "right_aws" do
+#  action :nothing
+#end
+#g.run_action(:install)
  
-Gem.clear_paths
-
-require 'right_aws'
+#Gem.clear_paths
 
 #user_feedback
 #fix_syslogng
