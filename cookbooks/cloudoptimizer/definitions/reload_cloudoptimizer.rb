@@ -10,10 +10,14 @@
 # Reloads the CloudOptimizer configuration
 ################################################################################
 
+# Currently set to perform a restart instead of reload, as reload returns an
+# exit status of 1 on success.
+
 define :reload_cloudoptimizer do
   log "Reload CloudOptimizer: Starting"
-  execute "service" do
-    command "service cloudoptimizer reload"
-  end
+  restart_cloudoptimizer
+#  execute "service" do
+#    command "service cloudoptimizer reload"
+#  end
   log "Reload CloudOptimizer: Ending"
 end
