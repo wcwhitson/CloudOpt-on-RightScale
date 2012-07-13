@@ -10,7 +10,7 @@
 # First time installation and configuration of CloudOptimizer
 ################################################################################
 
-rightscale_marker :begin
+#rightscale_marker :begin
 
 #require 'rubygems'
 
@@ -41,4 +41,4 @@ rightscale_marker :begin
 #get_configuration_stored
 #restart_cloudoptimizer
 
-rightscale_marker :end
+#rightscale_marker :end
