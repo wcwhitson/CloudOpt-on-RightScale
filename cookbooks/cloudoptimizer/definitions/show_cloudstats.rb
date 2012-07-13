@@ -1,5 +1,5 @@
 ################################################################################
-# reload_cloudoptimizer.rb
+# show_cloudstats.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,19 +7,11 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Reloads the CloudOptimizer configuration
+# Shows cloudstats in the RightScale audit log
 ################################################################################
 
-define :reload_cloudoptimizer do
-  log "Reload CloudOptimizer: Starting"
-  if node[:platform] == 'centos'
-    # Currently set to perform a restart instead of reload, as reload returns an
-    # exit status of 1 on success.  FB1381
-    restart_cloudoptimizer
-  else
-    execute "service" do
-      command "service cloudoptimizer reload"
-    end
+define :show_cloudstats do
+  execute "cloudstats" do
+    command "cloudstats"
   end
-  log "Reload CloudOptimizer: Ending"
 end

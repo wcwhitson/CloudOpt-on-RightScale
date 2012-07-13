@@ -1,5 +1,5 @@
 ################################################################################
-# reload_cloudoptimizer.rb
+# get_source_remap.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,19 +7,12 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Reloads the CloudOptimizer configuration
+# Gets CloudOptimizer source remap
 ################################################################################
 
-define :reload_cloudoptimizer do
-  log "Reload CloudOptimizer: Starting"
-  if node[:platform] == 'centos'
-    # Currently set to perform a restart instead of reload, as reload returns an
-    # exit status of 1 on success.  FB1381
-    restart_cloudoptimizer
-  else
-    execute "service" do
-      command "service cloudoptimizer reload"
-    end
+define :get_source_remap do
+  execute "cloudconfig" do
+    command "cloudconfig get /config/source_remap"
+    returns [0, 1]
   end
-  log "Reload CloudOptimizer: Ending"
 end

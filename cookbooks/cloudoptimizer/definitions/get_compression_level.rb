@@ -1,5 +1,5 @@
 ################################################################################
-# reload_cloudoptimizer.rb
+# get_compression_level.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,19 +7,12 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Reloads the CloudOptimizer configuration
+# Gets CloudOptimizer compression level
 ################################################################################
 
-define :reload_cloudoptimizer do
-  log "Reload CloudOptimizer: Starting"
-  if node[:platform] == 'centos'
-    # Currently set to perform a restart instead of reload, as reload returns an
-    # exit status of 1 on success.  FB1381
-    restart_cloudoptimizer
-  else
-    execute "service" do
-      command "service cloudoptimizer reload"
-    end
+define :get_compression_level do
+  execute "cloudconfig" do
+    command "cloudconfig get /config/default_compression_level"
+    returns [0, 1]
   end
-  log "Reload CloudOptimizer: Ending"
 end

@@ -16,249 +16,154 @@ log "========== Retrieving CloudOptimizer Configuration  =========="
 
 log "--------------------------------------------------------------"
 log "CLOUDOPTIMIZER VERSION:"
-execute "service" do
-        command "service cloudoptimizer show-version"
-end
+get_version
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "HOME DIRECTORY:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/home"
-  returns [0, 1]
-end
+get_home_dir
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "CACHE SIZE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/default_cache_size"
-  returns [0, 1]
-end
+get_cache_size
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOCKET LOCATION:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/socket_location"
-  returns [0, 1]
-end
+get_socket_location
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "BITMAP SIZE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/bitmap_size"
-  returns [0, 1]
-end
+get_bitmap_size
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "DB MEMORY SIZE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/db_memory_size"
-  returns [0, 1]
-end
+get_db_memory_size
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "LOG DIRECTORY:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/log_dir"
-  returns [0, 1]
-end
+get_log_dir
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "LOG KEY:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/log_key"
-  returns [0, 1]
-end
+get_log_key
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "COMPRESSION ENGINE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/compression_engine"
-  returns [0, 1]
-end
+get_compression_engine
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "COMPRESSION LEVEL:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/default_compression_level"
-  returns [0, 1]
-end
+get_compression_level
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "OPTIMISTIC DEDUPLICATION:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/optimistic_deduplication"
-  returns [0, 1]
-end
+get_optimistic_deduplication
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "CACHE PROMOTION:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/cache_promotion"
-  returns [0, 1]
-end
+get_cache_promotion
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "COMPRESS CACHE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/compress_cache"
-  returns [0, 1]
-end
+get_compress_cache
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "THREAD COUNT:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/thread_count"
-  returns [0, 1]
-end
+get_thread_count
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "INTELLIGENT MESH:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/intelligent_mesh"
-  returns [0, 1]
-end
+get_intelligent_mesh
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "LOCAL PROXY ADDRESS:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/local_proxy_address"
-  returns [0, 1]
-end
+get_local_proxy_address
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "PEER PROXY PORT:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/peer_proxy_port"
-  returns [0, 1]
-end
+get_peer_proxy_port
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "ENABLE SOCKS:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/enable_socks"
-  returns [0, 1]
-end
+get_socks_proxy
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOCKS PROXY PORT:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/socks_proxy_port"
-  returns [0, 1]
-end
+get_socks_proxy_port
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOCKS USERNAME:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/socks_username"
-  returns [0, 1]
-end
+get_socks_proxy_username
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOURCE TRANSPARENCY:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/source_transparency"
-  returns [0, 1]
-end
+get_transparent_proxy
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOURCE REMAP:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/source_remap"
-  returns [0, 1]
-end
+get_source_remap
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "PEER ENCRYPTION:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/peer_encryption"
-  returns [0, 1]
-end
+get_peer_encryption
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SSL KEY:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/ssl_key"
-  returns [0, 1]
-end
+get_ssl_key
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SSL CERT:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/ssl_cert"
-  returns [0, 1]
-end
+get_ssl_cert
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SSL CA:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/ssl_ca"
-  returns [0, 1]
-end
+get_ssl_ca
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "PEERS:"
-execute "cloudconfig" do
-  command "cloudconfig peer_list"
-  returns [0, 1]
-end
+get_peers
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "TERMINATE SSL:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/terminate_ssl"
-  returns [0, 1]
-end
+get_terminate_ssl
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "VERIFY UPSTREAM CERTIFICATE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/verify_upstream_certificate"
-  returns [0, 1]
-end
+get_verify_upstream_cert
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "CIFS OPTIMIZATION:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/optimize_cifs"
-  returns [0, 1]
-end
+get_cifs_optimization
 log "--------------------------------------------------------------"
 
-log "--------------------------------------------------------------"
-log "VERIFY UPSTREAM CERTIFICATE:"
-execute "cloudconfig" do
-  command "cloudconfig get /config/verify_upstream_certificate"
-  returns [0, 1]
-end
-log "--------------------------------------------------------------"
+log "============ End of CloudOptimizer Configuration  ============"
 
 rs_utils_marker :end

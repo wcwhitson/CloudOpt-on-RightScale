@@ -91,9 +91,7 @@ unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   end
 
   log "CLOUDSTATS:"
-  execute "cloudstats" do
-    command "cloudstats"
-  end
+  show_cloudstats
 
   log "CLOUDTRACE:"
   execute "cloudtrace" do
