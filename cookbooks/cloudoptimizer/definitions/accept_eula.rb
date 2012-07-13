@@ -23,7 +23,7 @@ define :accept_eula do
   # Create the EULA acceptance file.
   log "Creating EULA acceptance files."
 
-  if params[:old]
+  if params[:old] == true
     # For 0.9.4 and earlier
     log "EULA: Creating old style EULA acceptance file."
     file "#{node[:cloudoptimizer][:config_dir]}/accept-eula.txt" do

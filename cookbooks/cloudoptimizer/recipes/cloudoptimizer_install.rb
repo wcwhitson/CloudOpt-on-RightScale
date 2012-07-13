@@ -37,9 +37,13 @@ end
 
 # Accept EULA
 if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1'
-  accept_eula :old
+  accept_eula do
+    old true
+  end
 else
-  accept_eula
+  accept_eula do
+    old false
+  end
 end
 
 # Install Cloud Credentials
