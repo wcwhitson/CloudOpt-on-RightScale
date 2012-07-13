@@ -1,5 +1,5 @@
 ################################################################################
-# reload_cloudoptimizer.rb
+# create_config_directory.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,17 +7,16 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Reloads the CloudOptimizer configuration
+# Create the CloudOptimizer configuration directory in /etc.
 ################################################################################
 
-# Currently set to perform a restart instead of reload, as reload returns an
-# exit status of 1 on success.  FB1381
-
-define :reload_cloudoptimizer do
-  log "Reload CloudOptimizer: Starting"
-  restart_cloudoptimizer
-#  execute "service" do
-#    command "service cloudoptimizer reload"
-#  end
-  log "Reload CloudOptimizer: Ending"
+define :create_config_directory do
+  log "Creating default config directory (node[:cloudoptimizer][:config_dir])."
+  directory "node[:cloudoptimizer][:config_dir]" do
+    owner "root"
+    group "root"
+    mode "0755"
+    action :create
+  end
+  log "Create config directory: Ending"
 end

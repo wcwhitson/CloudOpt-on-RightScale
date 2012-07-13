@@ -18,13 +18,7 @@ define :accept_eula do
   # Create the Cloudoptimizer config directory.  This is normally created by the 
   # installer, but the installer requires that it already exist to contain the 
   # EULA acceptance file, we must create it before the installer runs.
-  log "Creating default config directory (/etc/cloudoptimizer)."
-  directory "/etc/cloudoptimizer" do
-    owner "root"
-    group "root"
-    mode "0755"
-    action :create
-  end
+  create_config_directory
 
   # Create the EULA acceptance file.  The content of the file doesn't matter, but we set it to
   # "RS Accepted EULA" so that we can tell how it was generated.
