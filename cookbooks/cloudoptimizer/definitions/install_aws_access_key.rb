@@ -1,5 +1,5 @@
 ################################################################################
-# create_home_directory.rb
+# install_aws_access_key.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,22 +7,20 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# If the user has specified a different home directory than the default, create
-# the directory and set ownership and permissions.
+# If the user chooses to provide their AWS credentials, we can pick them up for
+# use with CloudController.  This is less secure than entering the credentials 
+# directly into CloudController, since the credentials are not encrypted.
 ################################################################################
 
-define :create_home_directory do
-  log "Create home: Starting"
-  log "Create home: Creating CloudOptimizer home directory at #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]}."
-  directory node[:cloudoptimizer_configuration][:file_locations][:home_directory] do
-    owner "cloudoptimizer"
-    group "cloudoptimizer"
-    mode "0711"
+define :install_aws_access_key do
+  log "AWS Access Key: Starting"
+  log "AWS Keys: Installing AWS access key in /root/aws_access_key."
+  file "/root/aws_access_key" do
+    owner "root"
+    group "root"
+    mode "0700"
+    content "#{node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey]}"
     action :create
   end
-  directory "/home/cloudoptimizer" do
-    recursive true
-    action :delete
-  end
-  log "Create home: Ending"
+  log "AWS Access Key: Ending"
 end

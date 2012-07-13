@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.56"
+version "0.57"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -142,7 +142,14 @@ attribute "cloudoptimizer_configuration/local_proxy_address",
   :display_name => "Local proxy address",
   :description => "CloudOptimizer local proxy address",
   :required => "optional",
-  :default => "0.0.0.0:9000",
+  :default => "0.0.0.0",
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_configuration/local_proxy_port",
+  :display_name => "Local proxy port",
+  :description => "CloudOptimizer local proxy port",
+  :required => "optional",
+  :default => "9000",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/peer_proxy_port",
@@ -196,6 +203,21 @@ attribute "cloudoptimizer/version",
   :choice => [ "latest", "1.1.6", "1.1.5", "0.9.4", "0.9.3.2", "0.9.3.1" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptcommon" ]
 
+attribute "cloudoptimizer_configuration/http_proxy",
+  :display_name => "HTTP proxy (squid)",
+  :description => "CloudOptimizer acts as an HTTP proxy",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_configuration/http_proxy_port",
+  :display_name => "HTTP proxy port",
+  :description => "CloudOptimizer HTTP proxy listening port",
+  :required => "optional",
+  :default => "9003",
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
+    
 attribute "cloudoptimizer_configuration/socks/socks_proxy",
   :display_name => "SOCKS proxy",
   :description => "CloudOptimizer acts as a SOCKS4 proxy",

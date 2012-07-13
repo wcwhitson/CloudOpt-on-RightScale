@@ -32,7 +32,9 @@ create_log_directory
 install_cloudcontroller_package
 
 # Install the cloudoptimizer-tools package if selected
-install_cloudoptimizer_tools_package
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizertools] == 'Install'
+  install_cloudoptimizer_tools_package
+end
 
 # Install the CloudOptimizer stats GUI
 install_cloudoptimizer_webui_package

@@ -13,15 +13,13 @@
 
 define :install_cloudoptimizer_webui_package do
   log "Install WebUI: Starting"
-  if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
-    log "Install WebUI: Installing cloudoptimizer-webui package."
-    if node[:platform] == 'centos'
-      execute "yum" do
-        command "yum -y install cloudoptimizer-webui"
-      end
-    else
-      package "cloudoptimizer-webui"
+  log "Install WebUI: Installing cloudoptimizer-webui package."
+  if node[:platform] == 'centos'
+    execute "yum" do
+      command "yum -y install cloudoptimizer-webui"
     end
+  else
+    package "cloudoptimizer-webui"
   end
   log "Install WebUI: Ending"
 end

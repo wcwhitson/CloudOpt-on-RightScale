@@ -19,15 +19,11 @@
 
 define :get_configuration_stored do
   log "Stored configs: Starting"
-  if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'
-    log "Stored configs: No stored cloudoptimizer configuration specified."
-  else
-    log "Stored configs: Installing saved cloudoptimizer configuration from: #{node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]}"
-    remote_file "/etc/cloudoptimizer.conf" do
-      source node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]
-      owner "root"
-      group "root"
-      mode "0644"
-    end
+  log "Stored configs: Installing saved cloudoptimizer configuration from: #{node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]}"
+  remote_file "#{node[:cloudoptimizer][:config_file_path]}/#{[:cloudoptimizer][:config_file_name]}" do
+    source node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]
+    owner "root"
+    group "root"
+    mode "0644"
   end
 end

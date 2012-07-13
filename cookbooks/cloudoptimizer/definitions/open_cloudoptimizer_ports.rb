@@ -16,11 +16,25 @@ define :open_cloudoptimizer_ports do
   log "Modifying firewall rules to allow CloudOptimizer ports."
   if node[:sys_firewall][:enabled] == "enabled"
     include_recipe "iptables"
-    sys_firewall "9001"
-    sys_firewall "9002"
-    sys_firewall "9003"
+    # CloudOptimizer tunnel
+    log "Firewall rules: Opening port #{node[:cloudoptimizer_configuration][:local_proxy_port]}."
+    sys_firewall "#{node[:cloudoptimizer_configuration][:local_proxy_port]}"
+    log "Firewall rules: Opening port #{node[:cloudoptimizer_configuration][:peer_proxy_port]}."
+    sys_firewall "#{node[:cloudoptimizer_configuration][:peer_proxy_port]}"
+    # Squid
+    if node[:cloudoptimizer_configuration][:http_proxy] == 'true'
+      log "Firewall rules: Opening port #{node[:cloudoptimizer_configuration][:http_proxy_port]}."
+      sys_firewall "#{node[:cloudoptimizer_configuration][:http_proxy_port]}"
+    end
+    # SOCKS
+    if node[:cloudoptimizer_configuration][:socks][:socks_proxy] == 'true'
+      log "Firewall rules: Opening port #{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}."
+      sys_firewall "#{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}"
+    end
+    #WebUI
     if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
-      sys_firewall "8000"
+      log "Firewall rules: Opening port #{node[:cloudoptimizer][:webui_port]}."
+      sys_firewall "#{node[:cloudoptimizer][:webui_port]}"
     end
   end
   log "Firewall rules: Ending"

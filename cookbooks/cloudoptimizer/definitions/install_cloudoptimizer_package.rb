@@ -15,13 +15,14 @@
 
 define :install_cloudoptimizer_package do
 log "Install cloudoptimizer: Starting"
-  log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
+
   case node[:platform]
   when "ubuntu"
     if node[:cloudoptimizer][:version] == 'latest'
-      log "Install cloudoptimizer: Installing the latest cloudoptimizer package."
+      log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
       package "cloudoptimizer"
     else
+      log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
       case node[:cloudoptimizer][:version]
       when "1.1.6"
         case node[:languages][:ruby][:host_cpu]
@@ -93,11 +94,12 @@ log "Install cloudoptimizer: Starting"
   when "centos"
     # Install EPEL, since not every RightImage seems to have it installed
     if node[:cloudoptimizer][:version] == 'latest'
-      log "Install cloudoptimizer: Installing the latest cloudoptimizer package."
+      log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
       execute "yum" do
         command "yum -y install cloudoptimizer"
       end
     else
+      log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
       case node[:cloudoptimizer][:version] 
       when "1.1.6"
         case node[:languages][:ruby][:host_cpu]

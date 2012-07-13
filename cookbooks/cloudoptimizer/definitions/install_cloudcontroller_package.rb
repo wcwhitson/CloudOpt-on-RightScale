@@ -12,15 +12,13 @@
 
 define :install_cloudcontroller_package do
   log "Install CloudController: Starting"
-  if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
-    log "Install CloudController: Installing cloudoptimizer-s3 package."
-    if node[:platform] == 'centos'
-      execute "yum" do
-        command "yum -y install cloudoptimizer-s3"
-      end
-    else
-      package "cloudoptimizer-s3"
+  log "Install CloudController: Installing cloudoptimizer-s3 package."
+  if node[:platform] == 'centos'
+    execute "yum" do
+      command "yum -y install cloudoptimizer-s3"
     end
+  else
+    package "cloudoptimizer-s3"
   end
   log "Install CloudController: Ending"
 end

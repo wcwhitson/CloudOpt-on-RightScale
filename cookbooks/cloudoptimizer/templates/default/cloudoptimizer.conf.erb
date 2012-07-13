@@ -130,7 +130,7 @@
                  * The address for CloudOptimizer to listen for client
                  * connections on.
                  */
-                "local_proxy_address": "<%= node[:cloudoptimizer_configuration][:local_proxy_address] %>",
+                "local_proxy_address": "<%= node[:cloudoptimizer_configuration][:local_proxy_address] %>:<%= node[:cloudoptimizer_configuration][:local_proxy_port] %>",
 
                 /*
                  * The default port for CloudOptimzer to listen for connections
