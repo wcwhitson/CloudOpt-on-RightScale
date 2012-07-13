@@ -37,11 +37,11 @@ end
 
 # Accept EULA
 if node[:platform] == 'ubuntu'
-  accept_eula do
+  accept_eula "ubuntu" do
     distro ubuntu
   end
 elsif node[:platform] == 'centos'
-  accept_eula do
+  accept_eula "centos" do
     distro centos
   end
 else
