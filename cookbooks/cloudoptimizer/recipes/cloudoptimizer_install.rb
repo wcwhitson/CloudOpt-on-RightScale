@@ -24,7 +24,7 @@ Gem.clear_paths
 user_feedback
 fix_syslogng
 accept_eula
-install_keys
+install_cloud_credentials
 add_cache_volume
 add_cloudopt_repos
 open_cloudoptimizer_ports
@@ -34,7 +34,7 @@ create_log_directory
 install_cloudoptimizer_package
 install_cloudcontroller_package
 install_cloudoptimizer_tools_package
-install_cloudoptimizer_webui
+install_cloudoptimizer_webui_package
 configure_transparent_proxy
 write_configuration_template
 add_peers_and_endpoints
