@@ -27,6 +27,7 @@ recipe "cloudoptimizer::cloudoptimizer_reload", "Reload the CloudOptimizer confi
 recipe "cloudoptimizer::cloudoptimizer_restart", "Restart the CloudOptimizer service"
 recipe "cloudoptimizer::cloudoptimizer_remove", "Remove CloudOptimizer packages"
 recipe "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints", "Configure peers and endpoints"
+recipe "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer", "Add a MySQL master peer statement to a slave CloudOptimizer"
 recipe "cloudoptimizer::cloudoptimizer_supportview", "Create/upload a cloudoptimizer_supportview diagnostics archive"
 
 attribute "cloudoptimizer/stored_configuration/cloudoptimizer",
@@ -414,11 +415,11 @@ attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
   :description => "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",
   :required => "optional",
   :default => "ignore",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install" ]
+  :recipes => [ "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer" ]
     
 attribute "cloudoptimizer_mysql/endpoints/master_db_address",
   :display_name => "Master MySQL CloudOptimizer",
   :description => "In a CloudOptimizer+MySQL deployment, enter the private IP address of the MySQL master",
   :required => "optional",
   :default => "ignore",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install" ]
+  :recipes => [ "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer" ]
