@@ -411,14 +411,14 @@ attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
-  :display_name => "Master MySQL CloudOptimizer",
+  :display_name => "Master MySQL CloudOptimizer IP Address",
   :description => "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",
   :required => "optional",
   :default => "ignore",
   :recipes => [ "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer" ]
     
 attribute "cloudoptimizer_mysql/endpoints/master_db_address",
-  :display_name => "Master MySQL CloudOptimizer",
+  :display_name => "Master MySQL Database IP Address",
   :description => "In a CloudOptimizer+MySQL deployment, enter the private IP address of the MySQL master",
   :required => "optional",
   :default => "ignore",
