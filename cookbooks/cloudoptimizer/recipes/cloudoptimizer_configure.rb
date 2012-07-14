@@ -12,7 +12,7 @@
 # cloudoptimizer_install recipe.
 ################################################################################
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 # Install Cloud Credentials
 unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
@@ -72,4 +72,4 @@ end
 # Restart to pick up config
 restart_cloudoptimizer
 
-rs_utils_marker :end
+rightscale_marker :end

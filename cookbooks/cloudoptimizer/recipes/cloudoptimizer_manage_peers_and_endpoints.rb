@@ -11,7 +11,7 @@
 # configuration to build peer statements.
 ################################################################################
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 case node[:cloudoptimizer_configuration][:peers][:peer_operation]
 when "Add peer without endpoint"
@@ -31,4 +31,4 @@ end
 
 restart_cloudoptimizer
 
-rs_utils_marker :end
+rightscale_marker :end

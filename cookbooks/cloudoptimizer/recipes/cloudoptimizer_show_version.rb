@@ -10,11 +10,11 @@
 # Display CloudOptimizer version in the RightScale audit log
 ################################################################################
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 log "--------------------------------------------------------------"
 log "CLOUDOPTIMIZER VERSION:"
 get_version
 log "--------------------------------------------------------------"
 
-rs_utils_marker :end
+rightscale_marker :end

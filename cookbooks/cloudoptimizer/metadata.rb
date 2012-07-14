@@ -16,7 +16,7 @@ supports "ubuntu", "~> 12.04"
 
 depends "block_device"
 depends "sys_firewall"
-depends "rs_utils"
+depends "rightscale"
 
 recipe "cloudoptimizer::cloudoptimizer_install", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::cloudoptimizer_configure", "Post-installation configuration (everything but peers and endpoints)"

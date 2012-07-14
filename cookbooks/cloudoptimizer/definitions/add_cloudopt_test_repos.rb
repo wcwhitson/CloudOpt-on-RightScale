@@ -44,6 +44,10 @@ define :add_cloudopt_test_repos do
       end
     when "centos"
       log "Repositories:Installing on CentOS; using yum repository."
+      
+      # Replace the RightScale custom EPEL repo with the standard EPEL repo
+      fix_epel_repos
+      
       log "Repositories:Installing the test repository.  CloudOpt internal use only."
       # Retrieve the repository list
       remote_file "/var/tmp/CloudOpt-Testing.selfextracting" do

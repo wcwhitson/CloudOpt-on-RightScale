@@ -10,8 +10,8 @@
 # Restart the CloudOptimizer daemons
 ################################################################################
 
-rs_utils_marker :begin
+rightscale_marker :begin
 
 restart_cloudoptimizer
 
-rs_utils_marker :end
+rightscale_marker :end
