@@ -3,5 +3,5 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-set [:cloudoptimizer][:vendor_name] = "CloudOpt"
-set [:cloudoptimizer][:product_name] = "MediaWiki"
+set[:mediawiki][:vendor_name] = "CloudOpt"
+set[:mediawiki][:product_name] = "MediaWiki"

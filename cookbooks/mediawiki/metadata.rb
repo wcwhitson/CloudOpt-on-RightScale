@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.02"
+version "0.03"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -16,7 +16,7 @@ supports "ubuntu", "~> 12.04"
 
 depends "block_device"
 depends "sys_firewall"
-depends "rs_utils"
+depends "rightscale"
 
 recipe "mediawiki::installmediawiki", "Install and configure MediaWiki"
 
