@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.57"
+version "0.58"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -19,12 +19,13 @@ depends "sys_firewall"
 depends "rs_utils"
 
 recipe "cloudoptimizer::cloudoptimizer_install", "Main installer for cloudoptimizer package"
-recipe "cloudoptimizer::cloudoptimizer_configure", "Post-installation configuration"
+recipe "cloudoptimizer::cloudoptimizer_configure", "Post-installation configuration (everything but peers and endpoints)"
 recipe "cloudoptimizer::cloudoptimizer_show", "Display the CloudOptimizer configuration in the Audit Log"
 recipe "cloudoptimizer::cloudoptimizer_clear_cache", "Clear the CloudOptimizer byte cache"
 recipe "cloudoptimizer::cloudoptimizer_reload", "Reload the CloudOptimizer configuration"
 recipe "cloudoptimizer::cloudoptimizer_restart", "Restart the CloudOptimizer service"
 recipe "cloudoptimizer::cloudoptimizer_remove", "Remove CloudOptimizer packages"
+recipe "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints", "Configure peers and endpoints"
 recipe "cloudoptimizer::cloudoptimizer_supportview", "Create/upload a cloudoptimizer_supportview diagnostics archive"
 
 attribute "cloudoptimizer/stored_configuration/cloudoptimizer",
@@ -188,12 +189,27 @@ attribute "cloudoptimizer_configuration/encryption/ssl_ca",
   :default => "",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
-attribute "cloudoptimizer_configuration/peer_statement",
-  :display_name => "Peer statement",
-  :description => "CloudOptimizer peer statement for Client edition (for Cloud edition, use a stored configuration)",
+attribute "cloudoptimizer_configuration/peers/peer_operation",
+  :display_name => "Peer operation",
+  :description => "Set peer_to_modify and/or endpoint_to_modify and then select an operation",
   :required => "optional",
-  :default => "",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
+  :default => "No change",
+  :choice => [ "No change", "Add peer without endpoint", "Add peer with endpoint", "Add endpoint to peer", "Delete endpoint from peer", "Delete peer", "Clear all peers" ],
+  :recipes => [ "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints" ]
+
+attribute "cloudoptimizer_configuration/peers/peer_to_modify",
+  :display_name => "Peer to modify",
+  :description => "Set peer_to_modify and peer_operation to perform an action on a peer",
+  :required => "optional",
+  :default => "None",
+  :recipes => [ "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints" ]
+    
+attribute "cloudoptimizer_configuration/peers/endpoint_to_modify",
+  :display_name => "Endpoint to modify",
+  :description => "Set endpoint_to_modify, peer_to_modify, and peer_operation to perform an action on a peer",
+  :required => "optional",
+  :default => "None",
+  :recipes => [ "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints" ]  
 
 attribute "cloudoptimizer/version",
   :display_name => "Version lock",

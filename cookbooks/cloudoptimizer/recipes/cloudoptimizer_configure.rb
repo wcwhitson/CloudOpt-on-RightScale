@@ -65,7 +65,6 @@ configure_transparent_proxy
 # Either install a stored config or build config from template and inputs
 if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'
   write_configuration_template
-  add_peers_and_endpoints
 else
   get_configuration_stored
 end
