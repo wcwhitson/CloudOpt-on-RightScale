@@ -26,7 +26,7 @@ define :add_cloudopt_repos do
       else
         log "Repositories: Installing on Ubuntu < 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
-          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt-test.maverick.list"
+          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt-test.precise.list"
         end
       end
 
