@@ -13,7 +13,7 @@
 define :delete_peer do
   if node[:cloudoptimizer_configuration][:peers][:peer_to_modify] != "None"
     execute "cloudconfig" do
-      command "cloudconfig peer_delete node[:cloudoptimizer_configuration][:peers][:peer_to_modify]"
+      command "cloudconfig peer_delete #{node[:cloudoptimizer_configuration][:peers][:peer_to_modify]}"
     end
   end
 end
