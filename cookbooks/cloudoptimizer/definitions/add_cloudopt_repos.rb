@@ -21,12 +21,12 @@ define :add_cloudopt_repos do
       if node[:platform_version] == '12.04' || node[:platform_version] == '12.10'
         log "Repositories: Installing on Ubuntu 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
-          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt-test.precise.list"
+          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt.precise.list"
         end
       else
         log "Repositories: Installing on Ubuntu < 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
-          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt-test.precise.list"
+          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt.maverick.list"
         end
       end
 
