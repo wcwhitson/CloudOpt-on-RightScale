@@ -17,6 +17,7 @@ set[:cloudoptimizer][:config_file_name] = 'cloudoptimizer.conf'
 set[:cloudoptimizer][:test_repo_ubuntu] = '50.16.207.155'
 set[:cloudoptimizer][:test_repo_centos] = '50.16.196.194'
 set[:cloudoptimizer][:main_repo_ubuntu] = 'apt.cloudopt.com'
+set[:cloudoptimizer][:archive_repo_ubuntu] = 'rightscale.cloudopt.com.s3-website-us-east-1.amazonaws.com'
 set[:cloudoptimizer][:main_repo_centos] = 's3.amazonaws.com/rpm-cloudopt'
 
 set[:cloudoptimizer][:webui_port] = "8000"

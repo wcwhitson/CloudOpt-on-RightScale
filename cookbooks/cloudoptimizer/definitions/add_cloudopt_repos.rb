@@ -28,6 +28,10 @@ define :add_cloudopt_repos do
         remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
           source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt.maverick.list"
         end
+      log "Repositories: Installing the Ubuntu archive repo."
+      remote_file "/etc/apt/sources.list.d/cloudopt-rightscale.lucid.list" do
+        source "http://#{node[:cloudoptimizer][:archive_repo_ubuntu]}/cloudopt-rightscale.lucid.list"
+      end
       end
 
       # Retrieve the repository key file
