@@ -74,9 +74,6 @@ template "#{node[:mediawiki][:installation_directory]}/LocalSettings.php" do
   mode "0644"
   owner "root"
   group "root"
-  variables(
-    node[:mediawiki][:namespace_default]
-  )
 end
 
 rightscale_marker :end
