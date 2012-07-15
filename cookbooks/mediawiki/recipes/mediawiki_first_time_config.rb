@@ -58,7 +58,7 @@ end
 log "DNS name: Ending"
 
 # Set default namespace
-node[:mediawiki][:namespace_default] = node[:mediawiki][:site_name].gsub(" ", "_")
+node[:mediawiki][:namespace_default] = node[:mediawiki][:site_name][:name].gsub(" ", "_")
 log "Set defaults: Ending"
 
 
