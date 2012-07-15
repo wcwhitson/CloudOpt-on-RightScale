@@ -110,6 +110,11 @@ else
   get_configuration_stored
 end
 
+if node[:platform] == 'centos'
+  # Restore the RightScale custom EPEL repos
+  fix_epel_repos
+end
+
 # Restart to pick up config
 restart_cloudoptimizer
 

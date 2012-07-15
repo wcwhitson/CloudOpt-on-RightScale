@@ -1,5 +1,5 @@
 ################################################################################
-# fix_epel_repos.rb
+# unfix_epel_repos.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,24 +7,21 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# CloudOptimizer's WebUI depends on collectd and rrdtool.  RightScale also
-# depends on these packages, but installs them from its own repo, which is not
-# always up to date.  This causes unresolvable dependencies.  This script
-# removes RightScale's EPEL repo and replaces it with the standard EPEL repo.
+# Restore RightScale custom EPEL repos
 ################################################################################
 
-define :fix_epel_repos do
-  log "Fix EPEL repos: Starting"
+define :unfix_epel_repos do
+  log "Unfix EPEL repos: Starting"
   # Delete the existing EPEL repo
   execute "mv" do
-    command "mv /etc/yum.repos.d/Epel.repo /etc/cloudoptimizer/"
+    command "mv /etc/cloudoptimizer/Epel.repo /etc/yum.repos.d/"
   end
   execute "mv" do
-    command "mv /etc/yum.repos.d/RightScale-epel.repo /etc/cloudoptimizer/"
+    command "mv  /etc/cloudoptimizer/RightScale-epel.repo /etc/yum.repos.d/"
   end
   # Install the standard EPEL repo
   execute "rpm" do
-    command "rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm"
+    command "rpm -e epel-release-5-4.noarch"
   end
-  log "Fix EPEL repos: Ending"
+  log "Unfix EPEL repos: Ending"
 end
