@@ -19,25 +19,25 @@ rightscale_marker :begin
 # This calls the MediaWiki command line installer with arguments from inputs.
 ################################################################################
 
-log "Configure MediaWiki: Starting"
-execute "install.php" do
- command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php \
-  --dbname #{node[:mediawiki][:db_name]} \
-  --dbprefix #{node[:mediawiki][:db_prefix]} \
-  --dbserver #{node[:mediawiki][:db_server_address]} \
-  --dbtype #{node[:mediawiki][:db_type]} \
-  --dbuser #{node[:mediawiki][:db_user_account]} \
-  --dbpass #{node[:mediawiki][:db_user_password]} \
-  --installdbpass #{node[:mediawiki][:db_root_password]} \
-  --installdbuser #{node[:mediawiki][:db_root_account]} \
-  --admin #{node[:mediawiki][:mediawiki_admin_account]} \
-  --pass #{node[:mediawiki][:mediawiki_admin_password]} \
-  --email #{node[:mediawiki][:admin_email]} \
-  --scriptpath #{node[:mediawiki][:installation_directory]} \ 
-  --name #{node[:mediawiki][:site_name]} \
-  --confpath /var/tmp"
-end
-log "Configure MediaWiki: Ending"
+#log "Configure MediaWiki: Starting"
+#execute "install.php" do
+# command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php \
+#  --dbname #{node[:mediawiki][:db_name]} \
+#  --dbprefix #{node[:mediawiki][:db_prefix]} \
+#  --dbserver #{node[:mediawiki][:db_server_address]} \
+#  --dbtype #{node[:mediawiki][:db_type]} \
+#  --dbuser #{node[:mediawiki][:db_user_account]} \
+#  --dbpass #{node[:mediawiki][:db_user_password]} \
+#  --installdbpass #{node[:mediawiki][:db_root_password]} \
+#  --installdbuser #{node[:mediawiki][:db_root_account]} \
+#  --admin #{node[:mediawiki][:mediawiki_admin_account]} \
+#  --pass #{node[:mediawiki][:mediawiki_admin_password]} \
+#  --email #{node[:mediawiki][:admin_email]} \
+#  --scriptpath #{node[:mediawiki][:installation_directory]} \ 
+#  --name #{node[:mediawiki][:site_name]} \
+#  --confpath /var/tmp"
+#end
+#log "Configure MediaWiki: Ending"
 
 ################################################################################
 # Set defaults to public IP address
@@ -58,8 +58,8 @@ end
 log "DNS name: Ending"
 
 # Set default namespace
-node[:mediawiki][:namespace_default] = node[:mediawiki][:site_name]
-log "Set defaults: Ending"
+#node[:mediawiki][:namespace_default] = node[:mediawiki][:site_name]
+#log "Set defaults: Ending"
 
 
 ################################################################################
