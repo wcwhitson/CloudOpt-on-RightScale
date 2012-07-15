@@ -21,7 +21,7 @@ rightscale_marker :begin
 
 log "Configure MediaWiki: Starting"
 execute "install.php" do
- command "#{php node[:mediawiki][:installation_directory]}/maintenance/install.php \
+ command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php \
   --dbname #{node[:mediawiki][:db_name]} \
   --dbprefix #{node[:mediawiki][:db_prefix]} \
   --dbserver #{node[:mediawiki][:db_server_address]} \
