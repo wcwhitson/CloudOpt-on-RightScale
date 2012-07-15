@@ -81,9 +81,7 @@ unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   end
 
   log "NETSTAT:"
-  execute "netstat" do
-    command "netstat -a"
-  end
+  show_netstat
 
   log "HOME_DIR:"
   show_home_dir
