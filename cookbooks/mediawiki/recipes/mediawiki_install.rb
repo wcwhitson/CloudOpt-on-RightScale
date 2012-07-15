@@ -1,21 +1,16 @@
-#
-# Cookbook Name: Install CloudOptimizer 
-#
-# Copyright CloudOpt, Inc.  All rights reserved.
+################################################################################
+# mediawiki_install.rb
+################################################################################
+# Chef recipe, part of mediawiki cookbook
+################################################################################
+# Copyright 2012 CloudOpt, Inc.  All rights reserved.
+################################################################################
+# Author: Bill Whitson <bill@cloudopt.com>
+################################################################################
+# First time installation and configuration of mediawiki
+################################################################################
 
 rightscale_marker :begin
-
-require 'rubygems'
-
-g = gem_package "right_aws" do
-  action :nothing
-end
-g.run_action(:install)
- 
-Gem.clear_paths
-
-require 'right_aws'
-
 
 ################################################################################
 # Install AWS Keys
@@ -53,7 +48,7 @@ log "AWS Keys: Ending"
 ################################################################################
 # 
 ################################################################################
-log "Repositories: Starting"
+log "Install MediaWiki: Starting"
 
 remote_file "/var/tmp/mediawiki-1.19.1.tar.gz" do
   source "http://download.wikimedia.org/mediawiki/1.19/mediawiki-1.19.1.tar.gz"
@@ -65,42 +60,7 @@ execute "tar" do
   command "tar --strip-components=1 -xvzf /var/tmp/mediawiki-1.19.1.tar.gz -C #{install_dir}"
 end
 
-log "Repositories: Ending"
-
-
-################################################################################
-# Set defaults to public IP address
-################################################################################
-# 
-################################################################################
-log "Transparent mapping: Starting"
-if node[:mediawiki][:dns_name] == 'Public IP'
-  log "Setting DNS name to #{node[:cloud][:public_ips][0]}"
-  node[:mediawiki][:dns_name] = node[:cloud][:public_ips][0]
-end
-if node[:mediawiki][:admin_email] == 'apache@Public IP'
-  log "Setting admin email to apache@#{node[:cloud][:public_ips][0]}"
-  node[:mediawiki][:admin_email] = node[:cloud][:public_ips][0]
-end
-
-
-################################################################################
-# Build configuration from templates
-################################################################################
-# We use chef templates to build the configuration file.  When new options are 
-# added to the configuration file, we must add a new template to match.  When 
-# multiple versions of the configuration file are supported at the same time, we
-# must determine the CloudOptimizer version that we are installing and use the 
-# appropriate template for that version.
-################################################################################
-log "Template config: Starting"
-  log "Template config: Using template LocalSettings.php.erb."
-  template "/var/www/LocalSettings.php" do
-    source "LocalSettings.php.erb"
-    mode "0644"
-    owner "root"
-    group "root"
-  end
+log "Install MediaWiki: Ending"
 
 
 rightscale_marker :end

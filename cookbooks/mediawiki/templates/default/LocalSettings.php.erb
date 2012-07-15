@@ -19,7 +19,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $wgDisableOutputCompression = <%= node[:mediawiki][:output_compression] %>;
 
 $wgSitename      = "<%= node[:mediawiki][:site_name] %>";
-$wgMetaNamespace = "<%= node[:mediawiki][:site_name] %>";
+$wgMetaNamespace = "<%= node[:mediawiki][:namespace_default] %>";
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -51,8 +51,8 @@ $wgEnotifWatchlist     = false; # UPO
 $wgEmailAuthentication = true;
 
 ## Database settings
-$wgDBtype           = "mysql";
-$wgDBserver         = "localhost";
+$wgDBtype           = "<%= node[:mediawiki][:db_type] %>";
+$wgDBserver         = "<%= node[:mediawiki][:db_server_address] %>";
 $wgDBname           = "<%= node[:mediawiki][:db_name] %>";
 $wgDBuser           = "<%= node[:mediawiki][:db_root_account] %>";
 $wgDBpassword       = "<%= node[:mediawiki][:db_root_password] %>";
