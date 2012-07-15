@@ -52,6 +52,10 @@ if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
 end
 
 # Add CloudOpt repos
+if node[:platform] == 'centos'
+  # Replace the RightScale custom EPEL repo with the standard EPEL repo
+  fix_epel_repos
+end
 if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
   add_cloudopt_test_repos
 else

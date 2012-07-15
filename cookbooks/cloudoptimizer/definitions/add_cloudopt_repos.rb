@@ -50,10 +50,7 @@ define :add_cloudopt_repos do
       end
     when "centos"
       log "Repositories: Installing on CentOS; using yum repository."
-
-      # Replace the RightScale custom EPEL repo with the standard EPEL repo
-      fix_epel_repos
-      
+   
       # Retrieve the repository list
       remote_file "/var/tmp/CloudOpt.selfextracting" do
         source "https://#{node[:cloudoptimizer][:main_repo_centos]}/CloudOpt.selfextracting"
