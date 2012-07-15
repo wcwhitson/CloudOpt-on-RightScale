@@ -50,7 +50,7 @@ attribute "mediawiki/output_compression",
   :choice => [ "true", "false" ],
   :recipes => [ "mediawiki::mediawiki_first_time_config" ]
       
-attribute "mediawiki/site_name]",
+attribute "mediawiki/site_name",
   :display_name => "Site name",
   :description => "Name of the MediaWiki installation",
   :required => "optional",
