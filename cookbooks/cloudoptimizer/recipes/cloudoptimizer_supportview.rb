@@ -86,22 +86,16 @@ unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
   end
 
   log "HOME_DIR:"
-  execute "ls" do
-    command "ls -lR #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]}"
-  end
+  show_home_dir
 
   log "CLOUDSTATS:"
   show_cloudstats
 
   log "CLOUDTRACE:"
-  execute "cloudtrace" do
-    command "cloudtrace show"
-  end
+  show_cloudtrace
 
   log "CLOUDTRACE STATS:"
-  execute "cloudtrace stats" do
-    command "cloudtrace stats show"
-  end
+  show_cloudtrace_stats
 
   log "===== Ending SupportView for RightScale Audit Log ====="
 end
