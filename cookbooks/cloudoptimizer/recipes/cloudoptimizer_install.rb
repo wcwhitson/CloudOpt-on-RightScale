@@ -112,7 +112,7 @@ end
 
 if node[:platform] == 'centos'
   # Restore the RightScale custom EPEL repos
-  fix_epel_repos
+  unfix_epel_repos
 end
 
 # Restart to pick up config
