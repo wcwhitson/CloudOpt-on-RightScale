@@ -31,6 +31,18 @@ end
 
 log "Install MediaWiki: Ending"
 
+
+################################################################################
+# Install Logo
+################################################################################
+# Grab the logo from an HTTP URL and install in the default location
+################################################################################
+log "Install Logo: Starting"
+remote_file "#{node[:mediawiki][:installation_directory]}/skins/common/images/wiki.png" do
+  source "http://#{node[:mediawiki][:logo_url]}"
+end
+log "Install Logo: Ending"
+
 ################################################################################
 # Set defaults to public IP address
 ################################################################################

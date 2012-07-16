@@ -57,8 +57,6 @@ if node[:mediawiki][:admin_email] == 'apache@Public IP'
 end
 log "DNS name: Ending"
 
-# Set default namespace
-#node[:mediawiki][:namespace_default] = node[:mediawiki][:site_name]
 log "Set defaults: Ending"
 
 
