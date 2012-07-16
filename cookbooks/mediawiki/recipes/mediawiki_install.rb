@@ -39,7 +39,7 @@ log "Install MediaWiki: Ending"
 ################################################################################
 log "Install Logo: Starting"
 remote_file "#{node[:mediawiki][:installation_directory]}/skins/common/images/wiki.png" do
-  source "http://#{node[:mediawiki][:logo_url]}"
+  source "http://#{node[:mediawiki][:download_logo_url]}"
 end
 log "Install Logo: Ending"
 
