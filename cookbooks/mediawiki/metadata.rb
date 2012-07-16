@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.03"
+version "0.04"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -26,14 +26,14 @@ attribute "mediawiki/cloud_credentials/aws/accesskey",
   :description => "Install your AWS access key on the server",
   :required => "optional",
   :default => "None",
-  :recipes => [ "mediawiki::mediawiki_install" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
 
 attribute "mediawiki/cloud_credentials/aws/secretkey",
   :display_name => "AWS Secret Key",
   :description => "Install your AWS secret key on the server",
   :required => "optional",
   :default => "None",
-  :recipes => [ "mediawiki::mediawiki_install" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
 
 attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",

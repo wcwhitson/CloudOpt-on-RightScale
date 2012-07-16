@@ -13,37 +13,6 @@
 rightscale_marker :begin
 
 ################################################################################
-# Install AWS Keys
-################################################################################
-# If the user chooses to provide their AWS credentials, we can pick them up for
-# use with CloudController.  This is less secure than entering the credentials 
-# directly into CloudController, since the credentials are not encrypted.
-################################################################################
-log "AWS Keys: Starting"
-unless node[:mediawiki][:cloud_credentials][:aws][:accesskey] == "None"
-  log "AWS Keys: Installing AWS access key in /root/aws_access_key."
-  file "/root/aws_access_key" do
-    owner "root"
-    group "root"
-    mode "0700"
-    content "#{node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey]}"
-    action :create
-  end
-end
-unless node[:mediawiki][:cloud_credentials][:aws][:secretkey] == "None"
-  log "AWS Keys: Installing AWS secret key in /root/aws_secret_key."
-  file "/root/aws_secret_key" do
-    owner "root"
-    group "root"
-    mode "0700"
-    content "#{node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey]}"
-    action :create
-  end
-end
-log "AWS Keys: Ending"
-
-
-################################################################################
 # Install MediaWiki
 ################################################################################
 # 
@@ -62,5 +31,39 @@ end
 
 log "Install MediaWiki: Ending"
 
+################################################################################
+# Set defaults to public IP address
+################################################################################
+# Set the DNS name for Mediawiki to the public IP address as a default.  This
+# is not really what most users would want to run with, but it does ensure
+# that MediaWiki produces usable links if no DNS name is entered.
+################################################################################
+log "Set defaults: Starting"
+if node[:mediawiki][:dns_name] == 'Public IP'
+  log "Setting DNS name to #{node[:cloud][:public_ips][0]}"
+  node[:mediawiki][:dns_name] = node[:cloud][:public_ips][0]
+end
+if node[:mediawiki][:admin_email] == 'apache@Public IP'
+  log "Setting admin email to apache@#{node[:cloud][:public_ips][0]}"
+  node[:mediawiki][:admin_email] = node[:cloud][:public_ips][0]
+end
+log "DNS name: Ending"
+
+log "Set defaults: Ending"
+
+
+################################################################################
+# Build configuration from templates
+################################################################################
+# Build LocalSettings.php from inputs.
+################################################################################
+log "Template config: Starting"
+log "Template config: Using template LocalSettings.php.erb."
+template "#{node[:mediawiki][:installation_directory]}/LocalSettings.php" do
+  source "LocalSettings.php.erb"
+  mode "0644"
+  owner "root"
+  group "root"
+end
 
 rightscale_marker :end
