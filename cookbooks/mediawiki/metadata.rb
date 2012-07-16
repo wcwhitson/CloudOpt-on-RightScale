@@ -211,7 +211,7 @@ attribute "mediawiki/rights_icon",
   :recipes => [ "mediawiki::mediawiki_install" ]
     
 attribute "mediawiki/download_logo_url",
-  :display_name => "Logo",
+  :display_name => "Custom logo",
   :description => "URL to custom MediaWiki logo",
   :required => "optional",
   :default => "",
