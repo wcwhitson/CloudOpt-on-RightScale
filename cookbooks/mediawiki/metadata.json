@@ -1,439 +1,409 @@
 {
-  "version": "0.4.0",
-  "conflicting": {
+  "version": "0.5.0",
+  "platforms": {
+    "centos": "~> 6.2",
+    "ubuntu": "~> 12.04"
+  },
+  "recipes": {
+    "mediawiki::mediawiki_first_time_config": "Configure MediaWiki with a new database",
+    "mediawiki::mediawiki_install": "Install MediaWiki"
+  },
+  "license": "All rights reserved",
+  "groupings": {
+  },
+  "name": "mediawiki",
+  "maintainer": "CloudOpt, Inc.",
+  "suggestions": {
   },
   "recommendations": {
   },
+  "conflicting": {
+  },
+  "long_description": "= MediaWiki RightScale Components\n\n== DESCRIPTION:\n\nThis cookbook provides a set of chef recipies that you can use to install,\nconfigure, and maintain MediaWiki on RightScale.\n\nThe recipes in this cookbook are not tied to a particular ServerTemplate,\nbut can be used in various combinations with other RightScale chef recipes.\n\nCloudOpt developed and uses these recipes internally and does not offer any\nsupport, maintenance, or guarantee of fitness for any purpose.  Use these \nrecipes at your own risk.\n\n== REQUIREMENTS:\n\n* The RepoPath for the ServerTemplate that uses these recipes must include\nthe rightscale_cookbooks repository.\n\n== COOKBOOKS DEPENDENCIES:\n\nPlease see the <tt>metadata.rb</tt> file for the current dependencies.\n\n== KNOWN LIMITATIONS:\n\nThis recipe does not perform first-time configuration of the MediaWiki\ndatabase.\n\nPlease see the <tt>metadata.rb</tt> file for the current list of supported\noperating systems.\n\n== SETUP:\n\n* Place the <tt>cloudoptimizer::install_mediawiki</tt> recipe into your \n  runlist to install and set up MediaWiki.\n\n= LICENSE:\n\nCopyright CloudOpt, Inc. All rights reserved.",
+  "description": "Installs/Configures/Removes MediaWiki",
+  "replacing": {
+  },
   "attributes": {
-    "mediawiki/rights_icon": {
-      "description": "Path to the MediaWiki rights icon",
-      "calculated": false,
-      "default": "",
-      "display_name": "Rights icon",
+    "mediawiki/output_compression": {
       "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "true",
+      "display_name": "Output compression",
+      "calculated": false,
+      "description": "Enable or disabled output compression",
+      "choice": [
+        "true",
+        "false"
+      ],
+      "type": "string"
+    },
+    "mediawiki/mediawiki_admin_password": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Mediawiki admin password",
+      "calculated": false,
+      "description": "Password for the MediaWiki admin account",
       "choice": [
 
       ],
-      "type": "string",
+      "type": "string"
+    },
+    "mediawiki/mediawiki_admin_account": {
+      "required": "optional",
       "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "WikiSysop",
+      "display_name": "MediaWiki admin account",
+      "calculated": false,
+      "description": "Admin account name for MediaWiki",
+      "choice": [
+
+      ],
+      "type": "string"
     },
     "mediawiki/db_user_account": {
-      "description": "Database non-root account used for normal operations",
-      "calculated": false,
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "mediawiki",
       "display_name": "Database non-root account",
-      "required": "optional",
+      "calculated": false,
+      "description": "Database non-root account used for normal operations",
       "choice": [
 
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
     "mediawiki/site_name": {
-      "description": "Name of the MediaWiki installation",
-      "calculated": false,
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "mediawiki",
       "display_name": "Site name",
-      "required": "optional",
+      "calculated": false,
+      "description": "Name of the MediaWiki installation",
       "choice": [
 
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
-    "mediawiki/rights_text": {
-      "description": "MediaWiki rights text",
-      "calculated": false,
+    "mediawiki/rights_icon": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "",
-      "display_name": "Rights text",
-      "required": "optional",
+      "display_name": "Rights icon",
+      "calculated": false,
+      "description": "Path to the MediaWiki rights icon",
       "choice": [
 
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
-    "mediawiki/instant_commons": {
-      "description": "Enable or disable access to the MediaWiki instant commons",
-      "calculated": false,
-      "default": "false",
-      "display_name": "Instant commons",
+    "mediawiki/file_uploads": {
       "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "false",
+      "display_name": "File uploads",
+      "calculated": false,
+      "description": "Enable or disable file uploads",
       "choice": [
         "false",
         "true"
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
     "mediawiki/db_root_account": {
-      "description": "Root account name for the MediaWiki database",
-      "calculated": false,
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "root",
       "display_name": "Database root account",
-      "required": "optional",
+      "calculated": false,
+      "description": "Root account name for the MediaWiki database",
       "choice": [
 
       ],
-      "type": "string",
+      "type": "string"
+    },
+    "mediawiki/db_name": {
+      "required": "optional",
       "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "mediawiki",
+      "display_name": "Database name",
+      "calculated": false,
+      "description": "MediaWiki database name",
+      "choice": [
+
+      ],
+      "type": "string"
     },
     "mediawiki/db_type": {
-      "description": "MediaWiki database type",
-      "calculated": false,
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "mysql",
       "display_name": "Database type",
-      "required": "optional",
+      "calculated": false,
+      "description": "MediaWiki database type",
       "choice": [
         "mysql",
         "postgresql",
         "sqlite"
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
-    "mediawiki/file_uploads": {
-      "description": "Enable or disable file uploads",
-      "calculated": false,
-      "default": "false",
-      "display_name": "File uploads",
+    "mediawiki/instant_commons": {
       "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "false",
+      "display_name": "Instant commons",
+      "calculated": false,
+      "description": "Enable or disable access to the MediaWiki instant commons",
       "choice": [
         "false",
         "true"
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/mediawiki_admin_account": {
-      "description": "Admin account name for MediaWiki",
-      "calculated": false,
-      "default": "WikiSysop",
-      "display_name": "MediaWiki admin account",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/db_user_password": {
-      "description": "Password for database non-root account used for normal operations",
-      "calculated": false,
-      "default": "",
-      "display_name": "Database non-root account password",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/db_name": {
-      "description": "MediaWiki database name",
-      "calculated": false,
-      "default": "mediawiki",
-      "display_name": "Database name",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
     "mediawiki/admin_email": {
-      "description": "E-mail address of the MediaWiki site administrator",
-      "calculated": false,
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "apache@Public IP",
       "display_name": "Administrator e-mail address",
-      "required": "optional",
+      "calculated": false,
+      "description": "E-mail address of the MediaWiki site administrator",
       "choice": [
 
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/image_magick_path": {
-      "description": "Path to the Image Magick convert executable",
-      "calculated": false,
-      "default": "/usr/bin/convert",
-      "display_name": "Image Magick path",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/db_server_address": {
-      "description": "MediaWiki database server name or IP address",
-      "calculated": false,
-      "default": "localhost",
-      "display_name": "Database server address",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/installation_directory": {
-      "description": "Path to directory where MediaWiki will be installed",
-      "calculated": false,
-      "default": "/var/www/",
-      "display_name": "Installation directory",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_install",
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/db_prefix": {
-      "description": "MediaWiki database prefix",
-      "calculated": false,
-      "default": "",
-      "display_name": "Database prefix",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/mediawiki_admin_password": {
-      "description": "Password for the MediaWiki admin account",
-      "calculated": false,
-      "default": "",
-      "display_name": "Mediawiki admin password",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/rights_page": {
-      "description": "Title of the rights page",
-      "calculated": false,
-      "default": "",
-      "display_name": "Rights page",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/output_compression": {
-      "description": "Enable or disabled output compression",
-      "calculated": false,
-      "default": "true",
-      "display_name": "Output compression",
-      "required": "optional",
-      "choice": [
-        "true",
-        "false"
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/db_root_password": {
-      "description": "Password for the MediaWiki database root account",
-      "calculated": false,
-      "default": "",
-      "display_name": "Database root password",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/dns_name": {
-      "description": "DNS name of the MediaWiki site",
-      "calculated": false,
-      "default": "Public IP",
-      "display_name": "DNS name",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/rights_url": {
-      "description": "URL of the rights page",
-      "calculated": false,
-      "default": "",
-      "display_name": "Rights URL",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/image_magick": {
-      "description": "Enable or disable use of Image Magick to create thumbnails",
-      "calculated": false,
-      "default": "false",
-      "display_name": "Image Magick",
-      "required": "optional",
-      "choice": [
-        "false",
-        "true"
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/enable_email": {
-      "description": "Enable or disable site email",
-      "calculated": false,
-      "default": "false",
-      "display_name": "Site email",
-      "required": "optional",
-      "choice": [
-        "false",
-        "true"
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
-    },
-    "mediawiki/logo_url": {
-      "description": "Path to your MediaWiki site logo",
-      "calculated": false,
-      "default": "$wgStylePath/common/images/wiki.png",
-      "display_name": "Logo URL",
-      "required": "optional",
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
     "mediawiki/enable_user_email": {
-      "description": "Enable or disabled user email",
-      "calculated": false,
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
       "default": "true",
       "display_name": "User email",
-      "required": "optional",
+      "calculated": false,
+      "description": "Enable or disabled user email",
       "choice": [
         "false",
         "true"
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
-    "mediawiki/cloud_credentials/aws/secretkey": {
-      "description": "Install your AWS secret key on the server",
-      "calculated": false,
-      "default": "None",
-      "display_name": "AWS Secret Key",
+    "mediawiki/dns_name": {
       "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "Public IP",
+      "display_name": "DNS name",
+      "calculated": false,
+      "description": "DNS name of the MediaWiki site",
       "choice": [
 
       ],
-      "type": "string",
-      "recipes": [
-        "mediawiki::mediawiki_install",
-        "mediawiki::mediawiki_first_time_config"
-      ]
+      "type": "string"
     },
-    "mediawiki/cloud_credentials/aws/accesskey": {
-      "description": "Install your AWS access key on the server",
-      "calculated": false,
-      "default": "None",
-      "display_name": "AWS Access Key",
+    "mediawiki/rights_text": {
       "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Rights text",
+      "calculated": false,
+      "description": "MediaWiki rights text",
       "choice": [
 
       ],
-      "type": "string",
+      "type": "string"
+    },
+    "mediawiki/logo_url": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Logo",
+      "calculated": false,
+      "description": "URL to custom MediaWiki logo",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/rights_url": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Rights URL",
+      "calculated": false,
+      "description": "URL of the rights page",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/image_magick": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "false",
+      "display_name": "Image Magick",
+      "calculated": false,
+      "description": "Enable or disable use of Image Magick to create thumbnails",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "type": "string"
+    },
+    "mediawiki/db_prefix": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Database prefix",
+      "calculated": false,
+      "description": "MediaWiki database prefix",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/db_user_password": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Database non-root account password",
+      "calculated": false,
+      "description": "Password for database non-root account used for normal operations",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/enable_email": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "false",
+      "display_name": "Site email",
+      "calculated": false,
+      "description": "Enable or disable site email",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "type": "string"
+    },
+    "mediawiki/installation_directory": {
+      "required": "optional",
       "recipes": [
         "mediawiki::mediawiki_install",
         "mediawiki::mediawiki_first_time_config"
-      ]
+      ],
+      "default": "/var/www/",
+      "display_name": "Installation directory",
+      "calculated": false,
+      "description": "Path to directory where MediaWiki will be installed",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/image_magick_path": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "/usr/bin/convert",
+      "display_name": "Image Magick path",
+      "calculated": false,
+      "description": "Path to the Image Magick convert executable",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/db_root_password": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Database root password",
+      "calculated": false,
+      "description": "Password for the MediaWiki database root account",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/db_server_address": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "localhost",
+      "display_name": "Database server address",
+      "calculated": false,
+      "description": "MediaWiki database server name or IP address",
+      "choice": [
+
+      ],
+      "type": "string"
+    },
+    "mediawiki/rights_page": {
+      "required": "optional",
+      "recipes": [
+        "mediawiki::mediawiki_install"
+      ],
+      "default": "",
+      "display_name": "Rights page",
+      "calculated": false,
+      "description": "Title of the rights page",
+      "choice": [
+
+      ],
+      "type": "string"
     }
   },
-  "maintainer_email": "support@cloudopt.com",
-  "long_description": "= MediaWiki RightScale Components\n\n== DESCRIPTION:\n\nThis cookbook provides a set of chef recipies that you can use to install,\nconfigure, and maintain MediaWiki on RightScale.\n\nThe recipes in this cookbook are not tied to a particular ServerTemplate,\nbut can be used in various combinations with other RightScale chef recipes.\n\nCloudOpt developed and uses these recipes internally and does not offer any\nsupport, maintenance, or guarantee of fitness for any purpose.  Use these \nrecipes at your own risk.\n\n== REQUIREMENTS:\n\n* The RepoPath for the ServerTemplate that uses these recipes must include\nthe rightscale_cookbooks repository.\n\n== COOKBOOKS DEPENDENCIES:\n\nPlease see the <tt>metadata.rb</tt> file for the current dependencies.\n\n== KNOWN LIMITATIONS:\n\nThis recipe does not perform first-time configuration of the MediaWiki\ndatabase.\n\nPlease see the <tt>metadata.rb</tt> file for the current list of supported\noperating systems.\n\n== SETUP:\n\n* Place the <tt>cloudoptimizer::install_mediawiki</tt> recipe into your \n  runlist to install and set up MediaWiki.\n\n= LICENSE:\n\nCopyright CloudOpt, Inc. All rights reserved.",
-  "description": "Installs/Configures/Removes MediaWiki",
-  "groupings": {
-  },
-  "suggestions": {
-  },
-  "dependencies": {
-    "sys_firewall": ">= 0.0.0",
-    "block_device": ">= 0.0.0",
-    "rightscale": ">= 0.0.0"
-  },
-  "maintainer": "CloudOpt, Inc.",
   "providing": {
   },
-  "platforms": {
-    "ubuntu": "~> 12.04",
-    "centos": "~> 6.2"
+  "dependencies": {
+    "block_device": ">= 0.0.0",
+    "sys_firewall": ">= 0.0.0",
+    "rightscale": ">= 0.0.0"
   },
-  "license": "All rights reserved",
-  "name": "mediawiki",
-  "replacing": {
-  },
-  "recipes": {
-    "mediawiki::mediawiki_first_time_config": "Configure MediaWiki with a new database",
-    "mediawiki::mediawiki_install": "Install MediaWiki"
-  }
+  "maintainer_email": "support@cloudopt.com"
 }
