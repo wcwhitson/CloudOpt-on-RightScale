@@ -39,6 +39,20 @@ end
 
 log "Install MediaWiki: Ending"
 
+################################################################################
+# Install getmwconfig.php
+################################################################################
+# This script gets variables from the MediaWiki generated LocalSettings.php.  It
+# is not really a template; we're just treating it like a template in order to
+# install it.
+################################################################################
+log "Install getmwconfig.php: Starting"
+template "/usr/bin/getmwconfig.php.erb" do
+  source "getmwconfig.php"
+  mode "0754"
+  owner "root"
+  group "root"
+end
 
 ################################################################################
 # Install Logo

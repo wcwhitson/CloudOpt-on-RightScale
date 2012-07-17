@@ -13,6 +13,11 @@
 
 rightscale_marker :begin
 
+# Move the initial LocalSettings file out of the way
+if exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
+  File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.initial.php")
+end
+
 ################################################################################
 # Build the database
 ################################################################################
@@ -31,25 +36,15 @@ execute "install.php" do
   --pass #{node[:mediawiki][:mediawiki_admin_password]} \
   --scriptpath #{node[:mediawiki][:installation_directory]} \
   --server http://#{node[:mediawiki][:dns_name]} \
-  --confpath /var/tmp \
+  --confpath #{node[:mediawiki][:installation_directory]} \
   \"#{node[:mediawiki][:site_name]}\" \
   #{node[:mediawiki][:mediawiki_admin_account]}"
 end
 log "Configure MediaWiki Database: Ending"
 
-################################################################################
-# Install getmwconfig.php
-################################################################################
-# This script gets variables from the MediaWiki generated LocalSettings.php.  It
-# is not really a template; we're just treating it like a template in order to
-# install it.
-################################################################################
-log "Install getmwconfig.php: Starting"
-template "#{node[:mediawiki][:work_dir]}/getmwconfig.php" do
-  source "getmwconfig.php"
-  mode "0754"
-  owner "root"
-  group "root"
+# Move the auto-generated LocalSettings file out of the way
+if exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
+  File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.auto.php")
 end
 
 ################################################################################
@@ -59,9 +54,9 @@ end
 # LocalSettings.php file.
 ################################################################################
 
-node[:mediawiki][:namespace] = `php /var/tmp/getmwconfig.php wgMetaNamespace`
-node[:mediawiki][:secret_key] = `php /var/tmp/getmwconfig.php wgSecretKey`
-node[:mediawiki][:upgrade_key] = `php /var/tmp/getmwconfig.php wgUpgradeKey`
+node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace`
+node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey`
+node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey`
 
 ################################################################################
 # Set defaults to public IP address

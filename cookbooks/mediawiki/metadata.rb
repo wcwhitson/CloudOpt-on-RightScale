@@ -230,3 +230,10 @@ attribute "mediawiki/max_query_length",
   :required => "optional",
   :default => "/usr/bin/diff3",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+    
+attribute "mediawiki/script_path",
+  :display_name => "Script path",
+  :description => "The URL base path to the directory containing the wiki defaults for all runtime URL paths are based off of this.",
+  :required => "optional",
+  :default => "/",
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
