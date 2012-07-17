@@ -13,20 +13,28 @@
 rightscale_marker :begin
 
 ################################################################################
+# Install Dependencies
+################################################################################
+# 
+################################################################################
+
+package "ImageMagick"
+
+################################################################################
 # Install MediaWiki
 ################################################################################
 # 
 ################################################################################
 log "Install MediaWiki: Starting"
 
-remote_file "/var/tmp/mediawiki-1.19.1.tar.gz" do
-  source "http://download.wikimedia.org/mediawiki/1.19/mediawiki-1.19.1.tar.gz"
+remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name]}" do
+  source "#{node[:mediawiki][:package_url]}"
 end
 
 install_dir = node[:mediawiki][:installation_directory]
 
 execute "tar" do
-  command "tar --strip-components=1 -xvzf /var/tmp/mediawiki-1.19.1.tar.gz -C #{install_dir}"
+  command "tar --strip-components=1 -xvzf #{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name]} -C #{install_dir}"
 end
 
 log "Install MediaWiki: Ending"
@@ -38,7 +46,7 @@ log "Install MediaWiki: Ending"
 # Grab the logo from an HTTP URL and install in the default location
 ################################################################################
 log "Install Logo: Starting"
-remote_file "#{node[:mediawiki][:installation_directory]}/skins/common/images/wiki.png" do
+remote_file "#{node[:mediawiki][:installation_directory]}/skins/common/images/custom.png" do
   source "http://#{node[:mediawiki][:download_logo_url]}"
 end
 log "Install Logo: Ending"

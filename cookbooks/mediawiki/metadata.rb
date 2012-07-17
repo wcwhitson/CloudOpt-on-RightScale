@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.05"
+version "0.06"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -50,11 +50,11 @@ attribute "mediawiki/dns_name",
   :default => "Public IP",
   :recipes => [ "mediawiki::mediawiki_install" ]
 
-attribute "mediawiki/logo_url",
-  :display_name => "Logo URL",
+attribute "mediawiki/logo_path",
+  :display_name => "Logo path",
   :description => "Path to your MediaWiki site logo",
   :required => "optional",
-  :default => '$wgStylePath/common/images/wiki.png',
+  :default => '$wgStylePath/common/images/custom.png',
   :recipes => [ "mediawiki::mediawiki_install" ]
 
 attribute "mediawiki/enable_email",
@@ -144,16 +144,9 @@ attribute "mediawiki/mediawiki_admin_password",
   :default => "",
   :recipes => [ "mediawiki::mediawiki_install" ]
 
-attribute "mediawiki/db_prefix",
-  :display_name => "Database prefix",
-  :description => "MediaWiki database prefix",
-  :required => "optional",
-  :default => "",
-  :recipes => [ "mediawiki::mediawiki_install" ]
-
 attribute "mediawiki/file_uploads",
   :display_name => "File uploads",
-  :description => "Enable or disable file uploads",
+  :description => "To enable image uploads, make sure the 'images' directory is writable, then set this to true:",
   :required => "optional",
   :default => "false",
   :choice => [ "false", "true" ],
@@ -176,7 +169,7 @@ attribute "mediawiki/image_magick_path",
 
 attribute "mediawiki/instant_commons",
   :display_name => "Instant commons",
-  :description => "Enable or disable access to the MediaWiki instant commons",
+  :description => "InstantCommons allows wiki to use images from http://commons.wikimedia.org",
   :required => "optional",
   :default => "false",
   :choice => [ "false", "true" ],
@@ -184,7 +177,7 @@ attribute "mediawiki/instant_commons",
 
 attribute "mediawiki/rights_page",
   :display_name => "Rights page",
-  :description => "Title of the rights page",
+  :description => "Set to the title of a wiki page that describes your license/copyright",
   :required => "optional",
   :default => "",
   :recipes => [ "mediawiki::mediawiki_install" ]
@@ -212,7 +205,28 @@ attribute "mediawiki/rights_icon",
     
 attribute "mediawiki/download_logo_url",
   :display_name => "Custom logo",
-  :description => "URL to custom MediaWiki logo",
+  :description => "URL from which to download your custom MediaWiki logo",
   :required => "optional",
-  :default => "",
+  :default => "kb.cloudopt.com/coandrs.png",
+  :recipes => [ "mediawiki::mediawiki_install" ]
+    
+attribute "mediawiki/style_path",
+  :display_name => "Style path",
+  :description => "The relative URL path to the skins directory",
+  :required => "optional",
+  :default => "$wgScriptPath/skins",
+  :recipes => [ "mediawiki::mediawiki_install" ]
+    
+attribute "mediawiki/diff3_path",
+  :display_name => "diff3 path",
+  :description => "Path to the GNU diff3 utility. Used for conflict resolution.",
+  :required => "optional",
+  :default => "/usr/bin/diff3",
+  :recipes => [ "mediawiki::mediawiki_install" ]
+  
+attribute "mediawiki/max_query_length",
+  :display_name => "Max query length",
+  :description => "Query string length limit for ResourceLoader. You should only set this if your web server has a query string length limit (then set it to that limit), or if you have suhosin.get.max_value_length set in php.ini (then set it to that value)",
+  :required => "optional",
+  :default => "/usr/bin/diff3",
   :recipes => [ "mediawiki::mediawiki_install" ]
