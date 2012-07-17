@@ -14,7 +14,7 @@
 rightscale_marker :begin
 
 # Move the initial LocalSettings file out of the way
-if exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
+if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
   File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.initial.php")
 end
 
@@ -43,7 +43,7 @@ end
 log "Configure MediaWiki Database: Ending"
 
 # Move the auto-generated LocalSettings file out of the way
-if exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
+if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
   File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.auto.php")
 end
 
