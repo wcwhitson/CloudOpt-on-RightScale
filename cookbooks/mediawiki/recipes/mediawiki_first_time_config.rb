@@ -21,7 +21,19 @@ rightscale_marker :begin
 
 log "Configure MediaWiki Database: Starting"
 execute "install.php" do
- command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php --dbname #{node[:mediawiki][:db_name]} --dbserver #{node[:mediawiki][:db_server_address]} --dbtype #{node[:mediawiki][:db_type]} --dbuser #{node[:mediawiki][:db_user_account]} --dbpass #{node[:mediawiki][:db_user_password]} --installdbpass #{node[:mediawiki][:db_root_password]} --installdbuser #{node[:mediawiki][:db_root_account]} --pass #{node[:mediawiki][:mediawiki_admin_password]} --scriptpath #{node[:mediawiki][:installation_directory]} --server http://#{node[:mediawiki][:dns_name]} --confpath /var/tmp \"#{node[:mediawiki][:site_name]}\" #{node[:mediawiki][:mediawiki_admin_account]}"
+# command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php --dbname #{node[:mediawiki][:db_name]} --dbserver #{node[:mediawiki][:db_server_address]} --dbtype #{node[:mediawiki][:db_type]} --dbuser #{node[:mediawiki][:db_user_account]} --dbpass #{node[:mediawiki][:db_user_password]} --installdbpass #{node[:mediawiki][:db_root_password]} --installdbuser #{node[:mediawiki][:db_root_account]} --pass #{node[:mediawiki][:mediawiki_admin_password]} --scriptpath #{node[:mediawiki][:installation_directory]} --server http://#{node[:mediawiki][:dns_name]} --confpath /var/tmp \"#{node[:mediawiki][:site_name]}\" #{node[:mediawiki][:mediawiki_admin_account]}"
+  command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php \
+  --dbname #{node[:mediawiki][:db_name]} --dbserver #{node[:mediawiki][:db_server_address]} \
+  --dbtype #{node[:mediawiki][:db_type]} --dbuser #{node[:mediawiki][:db_user_account]} \
+  --dbpass #{node[:mediawiki][:db_user_password]} \
+  --installdbpass #{node[:mediawiki][:db_root_password]} \
+  --installdbuser #{node[:mediawiki][:db_root_account]} \
+  --pass #{node[:mediawiki][:mediawiki_admin_password]} \
+  --scriptpath #{node[:mediawiki][:installation_directory]} \
+  --server http://#{node[:mediawiki][:dns_name]} \
+  --confpath /var/tmp \
+  \"#{node[:mediawiki][:site_name]}\" \
+  #{node[:mediawiki][:mediawiki_admin_account]}"
 end
 log "Configure MediaWiki Database: Ending"
 
