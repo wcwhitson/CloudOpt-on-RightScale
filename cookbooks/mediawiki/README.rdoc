@@ -12,7 +12,29 @@ CloudOpt developed and uses these recipes internally and does not offer any
 support, maintenance, or guarantee of fitness for any purpose.  Use these 
 recipes at your own risk.
 
+== USE:
+
+Add mediawiki_install to the boot scripts for your ServerTemplate and set
+the MEDIAWIKI inputs.  Add mediawiki_first_time_config to the operational
+scrips for your ServerTemplate.
+
+If you already have a MediaWiki database, install it on the server, either
+manually, or by using RightScale database manager recipes such as
+db::do_primary_restore, db::do_secondary_restore, or db::do_dump_import.
+This script installs MediaWiki and creates a LocalSettings.php file, but
+does not configure the database.
+
+If you need to configure a new MediaWiki database, run the
+mediawiki_first_time_config operational script.  This script configures
+a new MediaWiki database and updates the LocalSettings.php file as 
+necessary.
+
 == REQUIREMENTS:
+
+This recipe installs only MediaWiki.  You must satisfy the normal 
+dependencies for MediaWiki by adding recipes to your ServerTemplate that
+install a database, PHP, and a web server.  The RightScale LAMP 
+ServerTemplate is a good base on which to add MediaWiki.
 
 * The RepoPath for the ServerTemplate that uses these recipes must include
 the rightscale_cookbooks repository.

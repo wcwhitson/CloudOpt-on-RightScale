@@ -228,7 +228,7 @@ attribute "mediawiki/max_query_length",
   :display_name => "Max query length",
   :description => "Query string length limit for ResourceLoader. You should only set this if your web server has a query string length limit (then set it to that limit), or if you have suhosin.get.max_value_length set in php.ini (then set it to that value)",
   :required => "optional",
-  :default => "/usr/bin/diff3",
+  :default => "-1",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
     
 attribute "mediawiki/script_path",

@@ -34,7 +34,7 @@ execute "install.php" do
   --installdbpass #{node[:mediawiki][:db_root_password]} \
   --installdbuser #{node[:mediawiki][:db_root_account]} \
   --pass #{node[:mediawiki][:mediawiki_admin_password]} \
-  --scriptpath #{node[:mediawiki][:installation_directory]} \
+  --scriptpath #{node[:mediawiki][:script_path]} \
   --server http://#{node[:mediawiki][:dns_name]} \
   --confpath #{node[:mediawiki][:installation_directory]} \
   \"#{node[:mediawiki][:site_name]}\" \
@@ -43,8 +43,12 @@ end
 log "Configure MediaWiki Database: Ending"
 
 # Move the auto-generated LocalSettings file out of the way
-if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
-  File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.auto.php")
+ruby_block "save_auto_config" do
+  block do
+    if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
+      File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.auto.php")
+    end
+  action :create
 end
 
 ################################################################################
