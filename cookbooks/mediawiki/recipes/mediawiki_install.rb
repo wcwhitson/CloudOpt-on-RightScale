@@ -47,8 +47,8 @@ log "Install MediaWiki: Ending"
 # install it.
 ################################################################################
 log "Install getmwconfig.php: Starting"
-template "/usr/bin/getmwconfig.php.erb" do
-  source "getmwconfig.php"
+template "/usr/bin/getmwconfig.php" do
+  source "getmwconfig.php.erb"
   mode "0754"
   owner "root"
   group "root"
