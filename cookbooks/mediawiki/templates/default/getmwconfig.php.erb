@@ -10,7 +10,7 @@
 ################################################################################
 # Pulls variable values from the MediaWiki LocalSettings.php file.
 ################################################################################
-$local_settings = "<%= node[:mediawiki][:installation_directory] %>/<%= node[:mediawiki][:auto_config] %>";
+$local_settings = $argv[2];
 define("MEDIAWIKI", "true");
 include "$local_settings";
 $get_var = $argv[1];

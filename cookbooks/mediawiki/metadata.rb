@@ -20,6 +20,7 @@ depends "rightscale"
 
 recipe "mediawiki::mediawiki_install", "Install MediaWiki"
 recipe "mediawiki::mediawiki_first_time_config", "Configure MediaWiki with a new database"
+recipe "mediawiki::update_settings", "Update MediaWiki settings after first time configuration"
 
 attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",
@@ -34,28 +35,28 @@ attribute "mediawiki/output_compression",
   :required => "optional",
   :default => "true",
   :choice => [ "true", "false" ],
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
         
 attribute "mediawiki/site_name",
   :display_name => "Site name",
   :description => "Name of the MediaWiki installation",
   :required => "optional",
   :default => "mediawiki",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/dns_name",
   :display_name => "DNS name",
   :description => "DNS name of the MediaWiki site",
   :required => "optional",
   :default => "Public IP",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/logo_path",
   :display_name => "Logo path",
   :description => "Path to your MediaWiki site logo",
   :required => "optional",
   :default => '$wgStylePath/common/images/custom.png',
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/enable_email",
   :display_name => "Site email",
@@ -63,7 +64,7 @@ attribute "mediawiki/enable_email",
   :required => "optional",
   :default => "false",
   :choice => [ "false", "true" ],
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/enable_user_email",
   :display_name => "User email",
@@ -71,14 +72,14 @@ attribute "mediawiki/enable_user_email",
   :required => "optional",
   :default => "true",
   :choice => [ "false", "true" ],
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/admin_email",
   :display_name => "Administrator e-mail address",
   :description => "E-mail address of the MediaWiki site administrator",
   :required => "optional",
   :default => "apache@Public IP",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/db_server_address",
   :display_name => "Database server address",
@@ -107,42 +108,42 @@ attribute "mediawiki/db_root_account",
   :description => "Root account name for the MediaWiki database",
   :required => "optional",
   :default => "root",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/db_root_password",
   :display_name => "Database root password",
   :description => "Password for the MediaWiki database root account",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/db_user_account",
   :display_name => "Database non-root account",
   :description => "Database non-root account used for normal operations",
   :required => "optional",
   :default => "mediawiki",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/db_user_password",
   :display_name => "Database non-root account password",
   :description => "Password for database non-root account used for normal operations",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/mediawiki_admin_account",
   :display_name => "MediaWiki admin account",
   :description => "Admin account name for MediaWiki",
   :required => "optional",
   :default => "WikiSysop",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/mediawiki_admin_password",
   :display_name => "Mediawiki admin password",
   :description => "Password for the MediaWiki admin account",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/file_uploads",
   :display_name => "File uploads",
@@ -150,7 +151,7 @@ attribute "mediawiki/file_uploads",
   :required => "optional",
   :default => "false",
   :choice => [ "false", "true" ],
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/image_magick",
   :display_name => "Image Magick",
@@ -158,14 +159,14 @@ attribute "mediawiki/image_magick",
   :required => "optional",
   :default => "false",
   :choice => [ "false", "true" ],
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/image_magick_path",
   :display_name => "Image Magick path",
   :description => "Path to the Image Magick convert executable",
   :required => "optional",
   :default => "/usr/bin/convert",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/instant_commons",
   :display_name => "Instant commons",
@@ -173,67 +174,75 @@ attribute "mediawiki/instant_commons",
   :required => "optional",
   :default => "false",
   :choice => [ "false", "true" ],
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/rights_page",
   :display_name => "Rights page",
   :description => "Set to the title of a wiki page that describes your license/copyright",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/rights_url",
   :display_name => "Rights URL",
   :description => "URL of the rights page",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/rights_text",
   :display_name => "Rights text",
   :description => "MediaWiki rights text",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/rights_icon",
   :display_name => "Rights icon",
   :description => "Path to the MediaWiki rights icon",
   :required => "optional",
   :default => "",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/download_logo_url",
   :display_name => "Custom logo",
   :description => "URL from which to download your custom MediaWiki logo",
   :required => "optional",
   :default => "kb.cloudopt.com/coandrs.png",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/style_path",
   :display_name => "Style path",
   :description => "The relative URL path to the skins directory",
   :required => "optional",
   :default => "$wgScriptPath/skins",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/diff3_path",
   :display_name => "diff3 path",
   :description => "Path to the GNU diff3 utility. Used for conflict resolution.",
   :required => "optional",
   :default => "/usr/bin/diff3",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
   
 attribute "mediawiki/max_query_length",
   :display_name => "Max query length",
   :description => "Query string length limit for ResourceLoader. You should only set this if your web server has a query string length limit (then set it to that limit), or if you have suhosin.get.max_value_length set in php.ini (then set it to that value)",
   :required => "optional",
   :default => "-1",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/script_path",
   :display_name => "Script path",
   :description => "The URL base path to the directory containing the wiki defaults for all runtime URL paths are based off of this.",
   :required => "optional",
   :default => "/",
-  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
+    
+attribute "mediawiki/default_skin",
+  :display_name => "Default skin",
+  :description => "Default skin: you can change the default skin. Use the internal symbolic names, ie 'standard', 'nostalgia', 'cologneblue', 'monobook', 'vector'",
+  :required => "optional",
+  :default => "vector",
+  :choice => [ "vector", "monobook", "cologneblue", "nostalgia", "standard" ],
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]

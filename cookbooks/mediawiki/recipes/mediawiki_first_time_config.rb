@@ -60,9 +60,9 @@ end
 
 ruby_block "get_auto_config" do
   block do
-    node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace`
-    node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey`
-    node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey`
+    node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace #{node[:mediawiki][:auto_config]}`
+    node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey #{node[:mediawiki][:auto_config]}`
+    node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey #{node[:mediawiki][:auto_config]}`
   end
   action :create
 end
