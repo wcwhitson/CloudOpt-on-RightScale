@@ -15,7 +15,7 @@ rightscale_marker :begin
 
 # Move the initial LocalSettings file out of the way
 if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
-  File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.initial.php")
+  File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:initial_config]}")
 end
 
 ################################################################################
@@ -26,7 +26,6 @@ end
 
 log "Configure MediaWiki Database: Starting"
 execute "install.php" do
-# command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php --dbname #{node[:mediawiki][:db_name]} --dbserver #{node[:mediawiki][:db_server_address]} --dbtype #{node[:mediawiki][:db_type]} --dbuser #{node[:mediawiki][:db_user_account]} --dbpass #{node[:mediawiki][:db_user_password]} --installdbpass #{node[:mediawiki][:db_root_password]} --installdbuser #{node[:mediawiki][:db_root_account]} --pass #{node[:mediawiki][:mediawiki_admin_password]} --scriptpath #{node[:mediawiki][:installation_directory]} --server http://#{node[:mediawiki][:dns_name]} --confpath /var/tmp \"#{node[:mediawiki][:site_name]}\" #{node[:mediawiki][:mediawiki_admin_account]}"
   command "php #{node[:mediawiki][:installation_directory]}/maintenance/install.php \
   --dbname #{node[:mediawiki][:db_name]} --dbserver #{node[:mediawiki][:db_server_address]} \
   --dbtype #{node[:mediawiki][:db_type]} --dbuser #{node[:mediawiki][:db_user_account]} \
@@ -46,7 +45,7 @@ log "Configure MediaWiki Database: Ending"
 ruby_block "save_auto_config" do
   block do
     if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
-      File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.auto.php")
+      File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:auto_config]}")
     end
   end
   action :create
