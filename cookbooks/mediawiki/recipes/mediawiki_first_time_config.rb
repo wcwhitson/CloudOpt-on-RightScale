@@ -58,9 +58,14 @@ end
 # LocalSettings.php file.
 ################################################################################
 
-node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace`
-node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey`
-node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey`
+ruby_block "get_auto_config" do
+  block do
+    node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace`
+    node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey`
+    node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey`
+  end
+  action :create
+end
 
 ################################################################################
 # Set defaults to public IP address
