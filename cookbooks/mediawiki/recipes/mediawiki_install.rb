@@ -93,7 +93,7 @@ log "Set defaults: Ending"
 ################################################################################
 log "Template config: Starting"
 log "Template config: Using template LocalSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/LocalSettings.php" do
+template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
   source "LocalSettings.php.erb"
   mode "0644"
   owner "root"

@@ -26,12 +26,12 @@ rightscale_marker :begin
 
 ruby_block "get_auto_config" do
   block do
-    node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace #{node[:mediawiki][:running_config]}`
-    node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey #{node[:mediawiki][:running_config]}`
-    node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey #{node[:mediawiki][:running_config]}`
-    node[:mediawiki][:db_type] = `php /usr/bin/getmwconfig.php wgDBtype #{node[:mediawiki][:running_config]}`
-    node[:mediawiki][:db_server_address] = `php /usr/bin/getmwconfig.php wgDBserver #{node[:mediawiki][:running_config]}`
-    node[:mediawiki][:db_name] = `php /usr/bin/getmwconfig.php wgDBname #{node[:mediawiki][:running_config]}`
+    node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+    node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+    node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+    node[:mediawiki][:db_type] = `php /usr/bin/getmwconfig.php wgDBtype #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+    node[:mediawiki][:db_server_address] = `php /usr/bin/getmwconfig.php wgDBserver #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+    node[:mediawiki][:db_name] = `php /usr/bin/getmwconfig.php wgDBname #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
   end
   action :create
 end
@@ -43,7 +43,7 @@ end
 ################################################################################
 log "Template config: Starting"
 log "Template config: Using template LocalSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/LocalSettings.php" do
+template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
   source "LocalSettings.php.erb"
   mode "0644"
   owner "root"
