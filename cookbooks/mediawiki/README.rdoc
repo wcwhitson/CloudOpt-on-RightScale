@@ -36,7 +36,7 @@ dependencies for MediaWiki by adding recipes to your ServerTemplate that
 install a database, PHP, and a web server.  The RightScale LAMP 
 ServerTemplate is a good base on which to add MediaWiki.
 
-* The RepoPath for the ServerTemplate that uses these recipes must include
+* The RepoPath for the ServerTemplate that uses these recipes must include 
 the rightscale_cookbooks repository.
 
 == COOKBOOKS DEPENDENCIES:

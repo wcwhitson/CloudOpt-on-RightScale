@@ -48,6 +48,7 @@ ruby_block "save_auto_config" do
     if File.exists?("#{node[:mediawiki][:installation_directory]}/LocalSettings.php")
       File.rename("#{node[:mediawiki][:installation_directory]}/LocalSettings.php","#{node[:mediawiki][:installation_directory]}/LocalSettings.auto.php")
     end
+  end
   action :create
 end
 
