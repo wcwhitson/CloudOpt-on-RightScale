@@ -3,7 +3,11 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-set[:cloudoptimizer][:current_version] = '1.1.6'
+set[:cloudoptimizer][:current_version] = '1.1.7'
+set[:cloudoptimizer][:previous_version_1] = '1.1.5'
+set[:cloudoptimizer][:previous_version_2] = '0.9.4'
+set[:cloudoptimizer][:previous_version_3] = '0.9.3.2'
+set[:cloudoptimizer][:previous_version_4] = '0.9.2.3'
 
 set[:cloudoptimizer][:vendor_name] = "CloudOpt"
 set[:cloudoptimizer][:product_name] = "CloudOptimizer"

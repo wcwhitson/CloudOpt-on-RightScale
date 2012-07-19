@@ -24,75 +24,73 @@ log "Install cloudoptimizer: Starting"
     else
       log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
       case node[:cloudoptimizer][:version]
-      when "1.1.6"
+      when "#{node[:cloudoptimizer][:current_version]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
             package "cloudoptimizer" do
-              version "1.1.6"
+              version "#{node[:cloudoptimizer][:current_version]}"
               action :install
             end
           when "i686"
             package "cloudoptimizer" do
-              version "1.1.6"
+              version "#{node[:cloudoptimizer][:current_version]}"
               action :install
             end
         end
-      when "1.1.5"
+      when "#{node[:cloudoptimizer][:previous_version_1]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
             package "cloudoptimizer" do
-              version "1.1.5"
+              version "#{node[:cloudoptimizer][:previous_version_1]}"
               action :install
             end
           when "i686"
             package "cloudoptimizer" do
-              version "1.1.5"
+              version "#{node[:cloudoptimizer][:previous_version_1]}"
               action :install
             end
         end
-      when "0.9.4"
+      when "#{node[:cloudoptimizer][:previous_version_2]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
             package "cloudoptimizer" do
-              version "0.9.3.2-53"
+              version "#{node[:cloudoptimizer][:previous_version_2]}"
               action :install
             end
           when "i686"
             package "cloudoptimizer" do
-              version "0.9.4-71"
+              version "#{node[:cloudoptimizer][:previous_version_2]}"
               action :install
             end
         end
-      when "0.9.3.2"
+      when "#{node[:cloudoptimizer][:previous_version_3]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
             package "cloudoptimizer" do
-              version "0.9.3.2-53"
+              version "#{node[:cloudoptimizer][:previous_version_3]}"
+              action :install
+            end
+          when "i686"
+            package "cloudoptimizer" do
+              version "#{node[:cloudoptimizer][:previous_version_3]}"
+              action :install
+            end
+        end
+      when "#{node[:cloudoptimizer][:previous_version_4]}"
+        case node[:languages][:ruby][:host_cpu]
+          when "x86_64"
+            package "cloudoptimizer" do
+              version "#{node[:cloudoptimizer][:previous_version_4]}"
             action :install
           end
         when "i686"
           package "cloudoptimizer" do
-            version "0.9.3.2-49"
+            version "#{node[:cloudoptimizer][:previous_version_4]}"
             action :install
           end
       end
-      when "0.9.3.1"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            package "cloudoptimizer" do
-              version "0.9.3.1"
-              action :install
-            end
-          when "i686"
-            package "cloudoptimizer" do
-              version "0.9.3.1"
-              action :install
-            end
-        end
-      end
     end
   when "centos"
-    # Install EPEL, since not every RightImage seems to have it installed
     if node[:cloudoptimizer][:version] == 'latest'
       log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
       execute "yum" do
@@ -101,91 +99,59 @@ log "Install cloudoptimizer: Starting"
     else
       log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
       case node[:cloudoptimizer][:version] 
-      when "1.1.6"
+      when "#{node[:cloudoptimizer][:current_version]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
             execute "yum" do
-              command "yum -y install cloudoptimizer_1.1.6"
+              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:current_version]}"
             end
           when "i686"
             execute "yum" do
-              command "yum -y install cloudoptimizer_1.1.6"
+              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:current_version]}"
             end
           end
-      when "1.1.5"
+      when "#{node[:cloudoptimizer][:previous_version_1]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer_1.1.5"
+              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:previous_version_1]}"
             end
           when "i686"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer_1.1.5"
+              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:previous_version_1]}"
             end
           end
-      when "0.9.4"
+      when "#{node[:cloudoptimizer][:previous_version_2]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer-0.9.4"
+              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_2]}"
             end
           when "i686"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer-0.9.4"
+              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_2]}"
             end
         end
-      when "0.9.3.2"
+      when "#{node[:cloudoptimizer][:previous_version_3]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer-0.9.3.2"
+              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_3]}"
             end
           when "i686"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer-0.9.3.2"
+              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_3]}"
             end
           end
-      when "0.9.3.1"
+      when "#{node[:cloudoptimizer][:previous_version_4]}"
         case node[:languages][:ruby][:host_cpu]
           when "x86_64"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer-0.9.3.1"
+              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_4]}"
             end
           when "i686"
-            log "Install cloudoptimizer: Installing EPEL."
-            execute "rpm" do
-              command "rpm -Uvh http://mirror.chpc.utah.edu/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
-            end
             execute "yum" do
-              command "yum -y install cloudoptimizer-0.9.3.1"
+              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_4]}"
             end
         end
       end

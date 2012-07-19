@@ -220,7 +220,7 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "1.1.6", "1.1.5", "0.9.4", "0.9.3.2", "0.9.3.1" ],
+  :choice => [ "latest", "1.1.7", "1.1.5", "0.9.4", "0.9.3.2", "0.9.2.3" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/http_proxy",
