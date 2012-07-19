@@ -14,82 +14,83 @@
 ################################################################################
 
 define :install_cloudoptimizer_package do
-log "Install cloudoptimizer: Starting"
-
+  log "Install cloudoptimizer: Starting"
+  
   case node[:platform]
-  when "ubuntu"
-    if node[:cloudoptimizer][:version] == 'latest'
-      log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
-      package "cloudoptimizer"
-    else
-      log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
-      case node[:cloudoptimizer][:version]
-      when "#{node[:cloudoptimizer][:current_version]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:current_version]}"
-              action :install
+    when "ubuntu"
+      if node[:cloudoptimizer][:version] == 'latest'
+        log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
+        package "cloudoptimizer"
+      else
+        log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
+        case node[:cloudoptimizer][:version]
+          when "#{node[:cloudoptimizer][:current_version]}"
+            case node[:languages][:ruby][:host_cpu]
+            when "x86_64"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:current_version]}"
+                  action :install
+                end
+              when "i686"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:current_version]}"
+                  action :install
+                end
             end
-          when "i686"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:current_version]}"
-              action :install
+          when "#{node[:cloudoptimizer][:previous_version_1]}"
+            case node[:languages][:ruby][:host_cpu]
+              when "x86_64"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_1]}"
+                  action :install
+                end
+              when "i686"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_1]}"
+                  action :install
+                end
+            end
+          when "#{node[:cloudoptimizer][:previous_version_2]}"
+            case node[:languages][:ruby][:host_cpu]
+              when "x86_64"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_2]}"
+                  action :install
+                end
+              when "i686"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_2]}"
+                  action :install
+                end
+            end
+          when "#{node[:cloudoptimizer][:previous_version_3]}"
+            case node[:languages][:ruby][:host_cpu]
+              when "x86_64"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_3]}"
+                  action :install
+                end
+              when "i686"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_3]}"
+                  action :install
+                end
+            end
+          when "#{node[:cloudoptimizer][:previous_version_4]}"
+            case node[:languages][:ruby][:host_cpu]
+              when "x86_64"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_4]}"
+                  action :install
+                end
+              when "i686"
+                package "cloudoptimizer" do
+                  version "#{node[:cloudoptimizer][:previous_version_4]}"
+                  action :install
+                end
             end
         end
-      when "#{node[:cloudoptimizer][:previous_version_1]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_1]}"
-              action :install
-            end
-          when "i686"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_1]}"
-              action :install
-            end
-        end
-      when "#{node[:cloudoptimizer][:previous_version_2]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_2]}"
-              action :install
-            end
-          when "i686"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_2]}"
-              action :install
-            end
-        end
-      when "#{node[:cloudoptimizer][:previous_version_3]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_3]}"
-              action :install
-            end
-          when "i686"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_3]}"
-              action :install
-            end
-        end
-      when "#{node[:cloudoptimizer][:previous_version_4]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            package "cloudoptimizer" do
-              version "#{node[:cloudoptimizer][:previous_version_4]}"
-            action :install
-          end
-        when "i686"
-          package "cloudoptimizer" do
-            version "#{node[:cloudoptimizer][:previous_version_4]}"
-            action :install
-          end
       end
-    end
   when "centos"
     if node[:cloudoptimizer][:version] == 'latest'
       log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
@@ -99,63 +100,63 @@ log "Install cloudoptimizer: Starting"
     else
       log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:version]}"
       case node[:cloudoptimizer][:version] 
-      when "#{node[:cloudoptimizer][:current_version]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            execute "yum" do
-              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:current_version]}"
-            end
-          when "i686"
-            execute "yum" do
-              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:current_version]}"
-            end
+        when "#{node[:cloudoptimizer][:current_version]}"
+          case node[:languages][:ruby][:host_cpu]
+            when "x86_64"
+              execute "yum" do
+                command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:current_version]}"
+              end
+            when "i686"
+              execute "yum" do
+                command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:current_version]}"
+              end
           end
-      when "#{node[:cloudoptimizer][:previous_version_1]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            execute "yum" do
-              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:previous_version_1]}"
-            end
-          when "i686"
-            execute "yum" do
-              command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:previous_version_1]}"
-            end
+        when "#{node[:cloudoptimizer][:previous_version_1]}"
+          case node[:languages][:ruby][:host_cpu]
+            when "x86_64"
+              execute "yum" do
+                command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:previous_version_1]}"
+              end
+            when "i686"
+              execute "yum" do
+                command "yum -y install cloudoptimizer_#{node[:cloudoptimizer][:previous_version_1]}"
+              end
           end
-      when "#{node[:cloudoptimizer][:previous_version_2]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            execute "yum" do
-              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_2]}"
-            end
-          when "i686"
-            execute "yum" do
-              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_2]}"
-            end
-        end
-      when "#{node[:cloudoptimizer][:previous_version_3]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            execute "yum" do
-              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_3]}"
-            end
-          when "i686"
-            execute "yum" do
-              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_3]}"
-            end
+        when "#{node[:cloudoptimizer][:previous_version_2]}"
+          case node[:languages][:ruby][:host_cpu]
+            when "x86_64"
+              execute "yum" do
+                command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_2]}"
+              end
+            when "i686"
+              execute "yum" do
+                command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_2]}"
+              end
           end
-      when "#{node[:cloudoptimizer][:previous_version_4]}"
-        case node[:languages][:ruby][:host_cpu]
-          when "x86_64"
-            execute "yum" do
-              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_4]}"
-            end
-          when "i686"
-            execute "yum" do
-              command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_4]}"
-            end
-        end
+        when "#{node[:cloudoptimizer][:previous_version_3]}"
+          case node[:languages][:ruby][:host_cpu]
+            when "x86_64"
+              execute "yum" do
+                command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_3]}"
+              end
+            when "i686"
+              execute "yum" do
+                command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_3]}"
+              end
+          end
+        when "#{node[:cloudoptimizer][:previous_version_4]}"
+          case node[:languages][:ruby][:host_cpu]
+            when "x86_64"
+              execute "yum" do
+                command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_4]}"
+              end
+            when "i686"
+              execute "yum" do
+                command "yum -y install cloudoptimizer-#{node[:cloudoptimizer][:previous_version_4]}"
+              end
+          end
       end
     end
   end
-log "Install cloudoptimizer: Ending"
+  log "Install cloudoptimizer: Ending"
 end
