@@ -10,7 +10,7 @@
 # Shows a netstat -a in the RightScale audit log
 ################################################################################
 
-define :show_home_dir do
+define :show_netstat do
   execute "netstat" do
     command "netstat -a"
   end
