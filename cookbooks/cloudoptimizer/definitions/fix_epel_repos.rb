@@ -38,5 +38,6 @@ define :fix_epel_repos do
     execute "rpm" do
       command "rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm"
     end
+  end
   log "Fix EPEL repos: Ending"
 end
