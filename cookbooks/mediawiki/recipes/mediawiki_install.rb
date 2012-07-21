@@ -153,5 +153,6 @@ elsif node[:mediawiki][:mw_version] = '1.18.4'
   end
   else
     log "Unknown MediaWiki version.  This error should never happen."
-  end
+end
+
 rightscale_marker :end

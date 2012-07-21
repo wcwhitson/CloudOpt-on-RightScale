@@ -128,12 +128,29 @@ log "Set defaults: Ending"
 # Build LocalSettings.php from inputs.
 ################################################################################
 log "Template config: Starting"
-log "Template config: Using template LocalSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
-  source "LocalSettings.php.erb"
-  mode "0644"
-  owner "root"
-  group "root"
+
+if node[:mediawiki][:mw_version] = '1.19.1'
+  log "Template config: Using template LocalSettings.php.119.erb."
+  template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+    source "LocalSettings.php.119.erb"
+    mode "0644"
+    owner "root"
+    group "root"
+  end
+  template "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
+    source "Installer.php.erb"
+    mode "0644"
+  end
+elsif node[:mediawiki][:mw_version] = '1.18.4'
+  log "Template config: Using template LocalSettings.php.118.erb."
+  template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+    source "LocalSettings.php.118.erb"
+    mode "0644"
+    owner "root"
+    group "root"
+  end
+  else
+    log "Unknown MediaWiki version.  This error should never happen."
 end
 
 rightscale_marker :end
