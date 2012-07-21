@@ -203,14 +203,28 @@ attribute "mediawiki/rights_icon",
   :required => "optional",
   :default => "",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
-    
+
+attribute "mediawiki/favicon",
+  :display_name => "Favorites icon",
+  :description => "Path to the favorites icon",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
+  
 attribute "mediawiki/download_logo_url",
   :display_name => "Custom logo",
   :description => "URL from which to download your custom MediaWiki logo",
   :required => "optional",
   :default => "kb.cloudopt.com/coandrs.png",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
-    
+
+attribute "mediawiki/download_favicon",
+  :display_name => "Download favorites icon",
+  :description => "URL from which to download your custom favorites icon",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
+  
 attribute "mediawiki/style_path",
   :display_name => "Style path",
   :description => "The relative URL path to the skins directory",
