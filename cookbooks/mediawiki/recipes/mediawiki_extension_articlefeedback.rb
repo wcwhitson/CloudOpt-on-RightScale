@@ -21,7 +21,7 @@ log "Install Extension ArticleFeedback: Starting"
 
 ext_name = "AddThis"
 
-install_dir = "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:extensions_dir]}/ext_name"
+install_dir = "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:extensions_dir]}/#{ext_name}"
   
 directory install_dir do
   action :create

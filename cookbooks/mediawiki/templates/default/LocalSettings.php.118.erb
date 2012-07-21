@@ -142,6 +142,6 @@ $wgResourceLoaderMaxQueryLength = <%= node[:mediawiki][:max_query_length] %>;
 # Include extension configuration files from the localsettings directory.  This
 # makes it easier to manage extensions with chef, compared to putting everything
 # in LocalSettings.php.
-foreach (glob("{$wgScriptPath/localsettings}/*.php") as $file) {
+foreach (glob("${wgScriptPath/localsettings}/*.php") as $file) {
 	include $file;
 }
