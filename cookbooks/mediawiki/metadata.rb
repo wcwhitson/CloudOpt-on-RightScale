@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.07"
+version "0.08"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -21,6 +21,9 @@ depends "rightscale"
 recipe "mediawiki::mediawiki_install", "Install MediaWiki"
 recipe "mediawiki::mediawiki_first_time_config", "Configure MediaWiki with a new database"
 recipe "mediawiki::mediawiki_update_settings", "Update MediaWiki settings after first time configuration"
+recipe "mediawiki::mediawiki_extension_addthis", "Install and configure the AddThis extension"
+recipe "mediawiki::mediawiki_extension_articlefeedback", "Install and configure the ArticleFeedback extension"
+recipe "mediawiki::mediawiki_extension_categorytree", "Install and configure the CategoryTree extension"
 
 attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",
