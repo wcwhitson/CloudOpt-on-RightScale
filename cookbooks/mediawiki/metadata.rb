@@ -224,6 +224,13 @@ attribute "mediawiki/download_favicon",
   :required => "optional",
   :default => "",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
+    
+attribute "mediawiki/download_localsettings",
+  :display_name => "Download LocalSettings.php",
+  :description => "If you intend to install an existing MediaWiki database, supply a URL to download the LocalSettings.php that was generated with that database.  It will be used to populate the new LocalSettings.php.",
+  :required => "optional",
+  :default => "ignore",
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
   
 attribute "mediawiki/style_path",
   :display_name => "Style path",
@@ -248,9 +255,9 @@ attribute "mediawiki/max_query_length",
     
 attribute "mediawiki/script_path",
   :display_name => "Script path",
-  :description => "The URL base path to the directory containing the wiki defaults for all runtime URL paths are based off of this.",
+  :description => "The URL base path to the directory containing the wiki defaults for all runtime URL paths are based off of this.  This must be a full URL including protocol (e.g. http://mywikiserver.com).",
   :required => "optional",
-  :default => "/",
+  :default => "/wiki",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/default_skin",

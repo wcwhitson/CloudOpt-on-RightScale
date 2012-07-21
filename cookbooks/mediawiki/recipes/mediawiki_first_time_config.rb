@@ -19,6 +19,25 @@ if File.exists?("#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki]
 end
 
 ################################################################################
+# Validate inputs
+################################################################################
+# Make sure we can successfully build the database
+################################################################################
+
+if node[:mediawiki][:script_path] == "/" || node[:mediawiki][:script_path] == ""
+  log "ERROR: The MediaWiki command line installer cannot install to the web server root. You must supply a subdirectory relative to the web server root directory."
+  exit 1
+else
+  log "MediaWiki script path looks OK."
+end
+if "#{node[:mediawiki][:dns_name]}".starts_with?('http://', 'HTTP://', 'https://', 'HTTPS://')
+  log "MediaWiki server URL looks OK."
+else
+  log "ERROR: The server statement (dns_name) must include protocol."
+  exit
+end
+  
+################################################################################
 # Build the database
 ################################################################################
 # This calls the MediaWiki command line installer with arguments from inputs.
@@ -37,7 +56,7 @@ execute "install.php" do
   --installdbuser #{node[:mediawiki][:db_root_account]} \
   --pass #{node[:mediawiki][:mediawiki_admin_password]} \
   --scriptpath #{node[:mediawiki][:script_path]} \
-  --server http://#{node[:mediawiki][:dns_name]} \
+  --server #{node[:mediawiki][:dns_name]} \
   --confpath #{node[:mediawiki][:installation_directory]} \
   \"#{node[:mediawiki][:site_name]}\" \
   #{node[:mediawiki][:mediawiki_admin_account]}"

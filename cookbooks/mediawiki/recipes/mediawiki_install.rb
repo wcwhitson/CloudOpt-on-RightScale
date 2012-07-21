@@ -7,7 +7,8 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# First time installation and configuration of mediawiki
+# First time installation and configuration of mediawiki.  This script installs
+# everything necessary to run MediaWiki except the database
 ################################################################################
 
 rightscale_marker :begin
@@ -68,6 +69,26 @@ template "/usr/bin/getmwconfig.php" do
   mode "0754"
   owner "root"
   group "root"
+end
+
+################################################################################
+# Get a saved LocalSettings.php file
+################################################################################
+# If the user specifies a LocalSettings.php file to download, get it and use it
+# to set auto-generated values in the new config file.
+################################################################################
+
+if node[:mediawiki][:download_localsettings] != 'ignore'
+  remote_file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:auto_config]}" do
+    source "#{node[:mediawiki][:download_localsettings]}"
+  end
+  node[:mediawiki][:namespace] = `php /usr/bin/getmwconfig.php wgMetaNamespace #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+  node[:mediawiki][:secret_key] = `php /usr/bin/getmwconfig.php wgSecretKey #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+  node[:mediawiki][:upgrade_key] = `php /usr/bin/getmwconfig.php wgUpgradeKey #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+  node[:mediawiki][:db_type] = `php /usr/bin/getmwconfig.php wgDBtype #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+  node[:mediawiki][:db_name] = `php /usr/bin/getmwconfig.php wgDBname #{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}`
+else
+  log "You did not install a LocalSettings.php, so you will need to initialize a new database by running mediawiki_first_time_config."
 end
 
 ################################################################################
