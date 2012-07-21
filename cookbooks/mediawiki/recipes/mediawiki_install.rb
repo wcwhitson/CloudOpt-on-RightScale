@@ -37,7 +37,7 @@ execute "tar" do
   command "tar --strip-components=1 -xvzf #{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name]} -C #{install_dir}"
 end
 
-remote_file "node[:mediawiki][:installation_directory]/includes/installer/Installer.php" do
+remote_file "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
   source "http://kb.cloudopt.com/Installer.php"
 end
 
