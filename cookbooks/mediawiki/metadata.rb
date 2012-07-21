@@ -26,7 +26,7 @@ attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",
   :description => "Path to directory where MediaWiki will be installed",
   :required => "optional",
-  :default => "/var/www/",
+  :default => "/var/www/wiki",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config" ]
     
 attribute "mediawiki/output_compression",

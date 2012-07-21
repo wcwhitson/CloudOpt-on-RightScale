@@ -29,6 +29,10 @@ package "ImageMagick"
 log "Install MediaWiki: Starting"
 
 install_dir = node[:mediawiki][:installation_directory]
+  
+directory install_dir do
+  action :create
+end
 
 if node[:mediawiki][:mw_version] = '1.19.1'
   remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_current]}" do
