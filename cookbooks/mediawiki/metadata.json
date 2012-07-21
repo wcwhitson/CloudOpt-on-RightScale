@@ -481,6 +481,23 @@
         "mediawiki::update_settings"
       ]
     },
+    "mediawiki/mw_version": {
+      "calculated": false,
+      "required": "optional",
+      "default": "1.19.1",
+      "display_name": "MediaWiki version",
+      "description": "Select the version of MediaWiki that you want to install",
+      "type": "string",
+      "choice": [
+        "1.19.1",
+        "1.18.4"
+      ],
+      "recipes": [
+        "mediawiki::mediawiki_install",
+        "mediawiki::mediawiki_first_time_config",
+        "mediawiki::update_settings"
+      ]
+    },    
     "mediawiki/image_magick": {
       "calculated": false,
       "required": "optional",
@@ -534,7 +551,7 @@
     "block_device": ">= 0.0.0"
   },
   "maintainer_email": "support@cloudopt.com",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "license": "All rights reserved",
   "providing": {
   }
