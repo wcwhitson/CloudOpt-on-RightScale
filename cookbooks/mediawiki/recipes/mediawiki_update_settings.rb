@@ -36,6 +36,18 @@ ruby_block "get_auto_config" do
 end
 
 ################################################################################
+# Install Logo
+################################################################################
+# Grab the logo from an HTTP URL and install in the default location
+################################################################################
+log "Install Logo: Starting"
+remote_file "#{node[:mediawiki][:installation_directory]}/skins/common/images/custom.png" do
+  source "http://#{node[:mediawiki][:download_logo_url]}"
+  mode "0644"
+end
+log "Install Logo: Ending"
+
+################################################################################
 # Build configuration from templates
 ################################################################################
 # Build LocalSettings.php from inputs.

@@ -53,9 +53,9 @@ attribute "mediawiki/dns_name",
 
 attribute "mediawiki/logo_path",
   :display_name => "Logo path",
-  :description => "Path to your MediaWiki site logo",
+  :description => "Path to your MediaWiki site logo, relative to style_path (e.g. common/images/custom.png)",
   :required => "optional",
-  :default => '$wgStylePath/common/images/custom.png',
+  :default => 'common/images/custom.png',
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/enable_email",
@@ -215,7 +215,7 @@ attribute "mediawiki/download_logo_url",
   :display_name => "Custom logo",
   :description => "URL from which to download your custom MediaWiki logo",
   :required => "optional",
-  :default => "kb.cloudopt.com/coandrs.png",
+  :default => "http://kb.cloudopt.com/coandrs.png",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
 
 attribute "mediawiki/download_favicon",
@@ -234,9 +234,9 @@ attribute "mediawiki/download_localsettings",
   
 attribute "mediawiki/style_path",
   :display_name => "Style path",
-  :description => "The relative URL path to the skins directory",
+  :description => "The path to the skins directory, relative to script_path (e.g. skins/)",
   :required => "optional",
-  :default => "$wgScriptPath/skins",
+  :default => "skins",
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
     
 attribute "mediawiki/diff3_path",

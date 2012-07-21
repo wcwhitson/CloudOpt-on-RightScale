@@ -40,11 +40,11 @@ $wgScriptExtension  = ".php";
 $wgServer           = "http://<%= node[:mediawiki][:dns_name] %>";
 
 ## The relative URL path to the skins directory
-$wgStylePath        = "<%= node[:mediawiki][:style_path] %>";
+$wgStylePath        = "$wgScriptPath/<%= node[:mediawiki][:style_path] %>";
 
 ## The relative URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo             = "<%= node[:mediawiki][:logo_path] %>";
+$wgLogo             = "$wgStylePath/<%= node[:mediawiki][:logo_path] %>";
 
 ## UPO means: this is also a user preference option
 

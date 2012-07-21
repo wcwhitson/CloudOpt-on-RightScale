@@ -42,10 +42,6 @@ if node[:mediawiki][:mw_version] = '1.19.1'
   execute "tar" do
     command "tar --strip-components=1 -xvzf #{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_current]} -C #{install_dir}"
   end
-  
-  remote_file "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
-    source "http://kb.cloudopt.com/Installer.txt"
-  end
 elsif node[:mediawiki][:mw_version] = '1.18.4'
   remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_previous]}" do
     source "#{node[:mediawiki][:package_url_previous]}"
@@ -102,7 +98,8 @@ end
 ################################################################################
 log "Install Logo: Starting"
 remote_file "#{node[:mediawiki][:installation_directory]}/skins/common/images/custom.png" do
-  source "http://#{node[:mediawiki][:download_logo_url]}"
+  source "#{node[:mediawiki][:download_logo_url]}"
+  mode "0644"
 end
 log "Install Logo: Ending"
 
@@ -133,12 +130,28 @@ log "Set defaults: Ending"
 # Build LocalSettings.php from inputs.
 ################################################################################
 log "Template config: Starting"
-log "Template config: Using template LocalSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
-  source "LocalSettings.php.erb"
-  mode "0644"
-  owner "root"
-  group "root"
-end
 
+if node[:mediawiki][:mw_version] = '1.19.1'
+  log "Template config: Using template LocalSettings.php.119.erb."
+  template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+    source "LocalSettings.php.119.erb"
+    mode "0644"
+    owner "root"
+    group "root"
+  end
+  template "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
+    source "Installer.php.erb"
+    mode "0644"
+  end
+elsif node[:mediawiki][:mw_version] = '1.18.4'
+  log "Template config: Using template LocalSettings.php.118.erb."
+  template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+    source "LocalSettings.php.118.erb"
+    mode "0644"
+    owner "root"
+    group "root"
+  end
+  else
+    log "Unknown MediaWiki version.  This error should never happen."
+  end
 rightscale_marker :end
