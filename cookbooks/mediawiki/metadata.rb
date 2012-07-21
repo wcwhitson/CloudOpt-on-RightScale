@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.06"
+version "0.07"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -245,4 +245,12 @@ attribute "mediawiki/default_skin",
   :required => "optional",
   :default => "vector",
   :choice => [ "vector", "monobook", "cologneblue", "nostalgia", "standard" ],
+  :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
+  
+attribute "mediawiki/mw_version",
+  :display_name => "MediaWiki version",
+  :description => "Select the version of MediaWiki that you want to install",
+  :required => "optional",
+  :default => "1.19.1",
+  :choice => [ "1.19.1", "1.18.4" ],
   :recipes => [ "mediawiki::mediawiki_install", "mediawiki::mediawiki_first_time_config", "mediawiki::update_settings" ]
