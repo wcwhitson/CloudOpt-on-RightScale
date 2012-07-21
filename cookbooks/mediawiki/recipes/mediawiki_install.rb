@@ -155,4 +155,10 @@ elsif node[:mediawiki][:mw_version] = '1.18.4'
     log "Unknown MediaWiki version.  This error should never happen."
 end
 
+# Add directory for extensions config files
+directory "#{node[:mediawiki][:installation_directory]}/localsettings" do
+  action :create
+  mode "0644"
+end
+
 rightscale_marker :end
