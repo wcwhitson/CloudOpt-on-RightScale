@@ -30,12 +30,12 @@ if node[:mediawiki][:script_path] == "/" || node[:mediawiki][:script_path] == ""
 else
   log "MediaWiki script path looks OK."
 end
-if "#{node[:mediawiki][:dns_name]}".starts_with?('http://', 'HTTP://', 'https://', 'HTTPS://')
-  log "MediaWiki server URL looks OK."
-else
-  log "ERROR: The server statement (dns_name) must include protocol."
-  exit
-end
+#if "#{node[:mediawiki][:dns_name]}".starts_with?('http://', 'HTTP://', 'https://', 'HTTPS://')
+#  log "MediaWiki server URL looks OK."
+#else
+#  log "ERROR: The server statement (dns_name) must include protocol."
+#  exit
+#end
   
 ################################################################################
 # Build the database
