@@ -39,7 +39,7 @@ if node[:mediawiki][:mw_version] = '1.19.1'
   end
   
   remote_file "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
-    source "http://kb.cloudopt.com/Installer.php"
+    source "http://kb.cloudopt.com/Installer.txt"
   end
 elsif node[:mediawiki][:mw_version] = '1.18.4'
   remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_previous]}" do
