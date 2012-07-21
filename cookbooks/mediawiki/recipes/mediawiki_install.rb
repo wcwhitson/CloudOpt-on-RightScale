@@ -27,18 +27,30 @@ package "ImageMagick"
 ################################################################################
 log "Install MediaWiki: Starting"
 
-remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name]}" do
-  source "#{node[:mediawiki][:package_url]}"
-end
-
 install_dir = node[:mediawiki][:installation_directory]
 
-execute "tar" do
-  command "tar --strip-components=1 -xvzf #{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name]} -C #{install_dir}"
-end
-
-remote_file "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
-  source "http://kb.cloudopt.com/Installer.php"
+if node[:mediawiki][:mw_version] = '1.19.1'
+  remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_current]}" do
+    source "#{node[:mediawiki][:package_url_current]}"
+  end
+  
+  execute "tar" do
+    command "tar --strip-components=1 -xvzf #{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_current]} -C #{install_dir}"
+  end
+  
+  remote_file "#{node[:mediawiki][:installation_directory]}/includes/installer/Installer.php" do
+    source "http://kb.cloudopt.com/Installer.php"
+  end
+elsif node[:mediawiki][:mw_version] = '1.18.4'
+  remote_file "#{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_previous]}" do
+    source "#{node[:mediawiki][:package_url_previous]}"
+  end
+  
+  execute "tar" do
+    command "tar --strip-components=1 -xvzf #{node[:mediawiki][:work_dir]}/#{node[:mediawiki][:package_name_previous]} -C #{install_dir}"
+  end
+else
+  log "Unknown MediaWiki version.  This error should never happen."
 end
 
 log "Install MediaWiki: Ending"
