@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.08"
+version "0.09"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -24,6 +24,17 @@ recipe "mediawiki::mediawiki_update_settings", "Update MediaWiki settings after 
 recipe "mediawiki::mediawiki_extension_addthis", "Install and configure the AddThis extension"
 recipe "mediawiki::mediawiki_extension_articlefeedback", "Install and configure the ArticleFeedback extension"
 recipe "mediawiki::mediawiki_extension_categorytree", "Install and configure the CategoryTree extension"
+recipe "mediawiki::mediawiki_extension_clicktracking", "Install and configure the ClickTracking extension"
+recipe "mediawiki::mediawiki_extension_collection", "Install and configure the Collection extension"
+recipe "mediawiki::mediawiki_extension_confirmedit", "Install and configure the ConfirmEdit extension"
+recipe "mediawiki::mediawiki_extension_contactpage", "Install and configure the ContactPage extension"
+recipe "mediawiki::mediawiki_extension_dynamicpagelist2", "Install and configure the Dynamic Page List (third party) extension"
+recipe "mediawiki::mediawiki_extension_emailcapture", "Install and configure the EmailCapture extension"
+recipe "mediawiki::mediawiki_extension_gadgets", "Install and configure the Gadgets extension"
+recipe "mediawiki::mediawiki_extension_googleanalytics", "Install and configure the googleAnalytics extension"
+recipe "mediawiki::mediawiki_extension_liquidthreads", "Install and configure the LiquidThreads extension"
+recipe "mediawiki::mediawiki_extension_nuke", "Install and configure the Nuke extension"
+recipe "mediawiki::mediawiki_extension_openid", "Install and configure the OpenID extension"
 
 attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",
