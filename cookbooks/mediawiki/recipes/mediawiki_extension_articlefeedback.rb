@@ -43,7 +43,7 @@ log "Install Extension ArticleFeedback: Ending"
 log "Template config: Starting"
 
 log "Template config: Using template ArticleFeedbackSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/ArticleFeedbackSettings.php" do
   source "ArticleFeedbackSettings.php.erb"
   mode "0644"
   owner "root"

@@ -43,7 +43,7 @@ log "Install Extension AddThis: Ending"
 log "Template config: Starting"
 
 log "Template config: Using template AddThisSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/AddThisSettings.php" do
   source "AddThisSettings.php.erb"
   mode "0644"
   owner "root"

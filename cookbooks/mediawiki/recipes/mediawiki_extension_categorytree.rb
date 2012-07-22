@@ -43,7 +43,7 @@ log "Install Extension CategoryTree: Ending"
 log "Template config: Starting"
 
 log "Template config: Using template CategoryTreeSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:running_config]}" do
+template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/CategoryTreeSettings.php" do
   source "CategoryTreeSettings.php.erb"
   mode "0644"
   owner "root"
