@@ -1,5 +1,5 @@
 ################################################################################
-# mediawiki_extension_articlefeedback.rb
+# mediawiki_extension_confirmedit.rb
 ################################################################################
 # Chef recipe, part of mediawiki cookbook
 ################################################################################
@@ -7,7 +7,7 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Install and configure the ArticleFeedback MediaWiki extension.
+# Install and configure the ConfirmEdit MediaWiki extension.
 ################################################################################
 
 rightscale_marker :begin
@@ -17,7 +17,7 @@ rightscale_marker :begin
 ################################################################################
 # 
 ################################################################################
-log "Install Extension ArticleFeedback: Starting"
+log "Install Extension ConfirmEdit: Starting"
 
 ext_name = "AddThis"
 
@@ -28,11 +28,11 @@ directory install_dir do
 end
 
 git install_dir do
-  repository "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/ArticleFeedback.git"
+  repository "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/AddThis.git"
   action :checkout
 end
 
-log "Install Extension ArticleFeedback: Ending"
+log "Install Extension ConfirmEdit: Ending"
 
 
 ################################################################################
@@ -42,9 +42,9 @@ log "Install Extension ArticleFeedback: Ending"
 ################################################################################
 log "Template config: Starting"
 
-log "Template config: Using template ArticleFeedbackSettings.php.erb."
-template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/ArticleFeedbackSettings.php" do
-  source "ArticleFeedbackSettings.php.erb"
+log "Template config: Using template AddThisSettings.php.erb."
+template "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/ConfirmEditSettings.php" do
+  source "ConfirmEditSettings.php.erb"
   mode "0644"
   owner "root"
   group "root"
