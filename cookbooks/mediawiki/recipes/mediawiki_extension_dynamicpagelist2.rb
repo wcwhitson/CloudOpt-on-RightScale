@@ -1,5 +1,5 @@
 ################################################################################
-# mediawiki_extension_categorytree.rb
+# mediawiki_extension_dynamicpagelist2.rb
 ################################################################################
 # Chef recipe, part of mediawiki cookbook
 ################################################################################
@@ -7,13 +7,13 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Install and configure the CategoryTree MediaWiki extension.
+# Install and configure the DynamicPageList (third party) MediaWiki extension.
 ################################################################################
 
 rightscale_marker :begin
 
-mediawiki_install_extension "CategoryTree" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/CategoryTree.git"
+mediawiki_install_extension "DynamicPageList" do
+     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/DynamicPageList.git"
 end
 
 rightscale_marker :end
