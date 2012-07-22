@@ -158,7 +158,7 @@ end
 # Add directory for extensions config files
 directory "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}" do
   action :create
-  mode "0644"
+  mode "0755"
 end
 
 rightscale_marker :end
