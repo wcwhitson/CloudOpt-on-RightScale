@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "ConfirmEdit" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/ConfirmEdit.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ConfirmEdit.git"
 end
 
 rightscale_marker :end
