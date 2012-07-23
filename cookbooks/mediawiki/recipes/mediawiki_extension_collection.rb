@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "Collection" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Collection.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Collection.git"
 end
 
 rightscale_marker :end
