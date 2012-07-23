@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "Nuke" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Nuke.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Nuke.git"
 end
 
 rightscale_marker :end
