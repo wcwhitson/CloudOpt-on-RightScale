@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "CategoryTree" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/CategoryTree.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/CategoryTree.git"
 end
 
 rightscale_marker :end
