@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "LiquidThreads" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/LiquidThreads.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/LiquidThreads.git"
 end
 
 rightscale_marker :end
