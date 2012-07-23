@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "OpenID" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/OpenID.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/OpenID.git"
 end
 
 rightscale_marker :end
