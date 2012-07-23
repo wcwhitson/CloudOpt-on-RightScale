@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "DynamicPageList" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/DynamicPageList.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/DynamicPageList.git"
 end
 
 rightscale_marker :end
