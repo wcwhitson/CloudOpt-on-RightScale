@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "ContactPage" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/ContactPage.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ContactPage.git"
 end
 
 rightscale_marker :end
