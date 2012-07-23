@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "ArticleFeedback" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/ArticleFeedback.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ArticleFeedback.git"
 end
 
 rightscale_marker :end
