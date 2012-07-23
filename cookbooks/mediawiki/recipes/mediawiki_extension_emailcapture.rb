@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "EmailCapture" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/EmailCapture.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/EmailCapture.git"
 end
 
 rightscale_marker :end
