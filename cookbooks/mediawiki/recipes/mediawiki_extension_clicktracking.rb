@@ -13,7 +13,7 @@
 rightscale_marker :begin
 
 mediawiki_install_extension "ClickTracking" do
-     repo "https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/ClickTracking.git"
+     repo "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ClickTracking.git"
 end
 
 rightscale_marker :end
