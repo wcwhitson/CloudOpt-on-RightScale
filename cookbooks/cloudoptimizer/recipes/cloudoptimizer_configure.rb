@@ -52,6 +52,13 @@ end
 # Install CloudController
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
   install_cloudcontroller_package
+  write_squid_template
+  if node[:cloudoptimizer_configuration][:http_proxy] == 'false'
+    stop_squid
+  else
+    stop_squid
+    start_squid
+  end
 end
 
 # Install WebUI
@@ -61,6 +68,9 @@ end
 
 # Set transparent proxy defaults
 configure_transparent_proxy
+
+# Configure log rotation
+configure_log_rotation
 
 # Either install a stored config or build config from template and inputs
 if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'

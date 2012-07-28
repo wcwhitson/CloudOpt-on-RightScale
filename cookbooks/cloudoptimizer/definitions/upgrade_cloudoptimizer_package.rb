@@ -1,5 +1,5 @@
 ################################################################################
-# upgrade_cloudoptimizer_webui_package.rb
+# uograde_cloudoptimizer_package.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,17 +7,17 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Upgrade the cloudoptimizer-webui package
+# Upgrade the cloudoptimizer package
 ################################################################################
 
-define :upgrade_cloudoptimizer_webui_package do
-  log "Upgrade cloudoptimizer-webui: Starting"
+define :upgrade_cloudoptimizer_package do
+  log "Upgrade cloudoptimizer: Starting"
   if node[:cloudoptimizer][:version] == 'latest'
-    package "cloudoptimizer-webui" do
+    package "cloudoptimizer" do
       action :upgrade
     end
   else
     log "ERROR: Updater was called but version lock is not set to 'latest'.  This should never happen."
   end
-  log "Upgrade cloudoptimizer-webui: Ending"
+  log "Upgrade cloudoptimizer: Ending"
 end

@@ -14,6 +14,9 @@
 
 define :add_cloudopt_repos do
   log "Add main repos: Starting"
+  # First clear old CloudOpt repos, just in case
+  clear_cloudopt_repos
+  # Now install new repos
   case node[:platform]
     when "ubuntu"
       log "Repositories: Installing on Ubuntu; using apt repository."

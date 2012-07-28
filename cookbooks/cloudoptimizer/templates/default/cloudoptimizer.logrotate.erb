@@ -1,0 +1,9 @@
+/var/log/cloudoptimizer/*.log {
+    <%= node[:cloudoptimizer_configuration][:logs][:log_rotation][:compress] %>
+    copytruncate
+    <%= node[:cloudoptimizer_configuration][:logs][:log_rotation][:period] %>
+    missingok
+    rotate <%= node[:cloudoptimizer_configuration][:logs][:log_rotation][:save_days] %>
+    <%= node[:cloudoptimizer_configuration][:logs][:log_rotation][:date_stamp] %>
+    <%= node[:cloudoptimizer_configuration][:logs][:log_rotation][:mail_logs] %>
+}

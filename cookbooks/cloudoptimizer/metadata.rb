@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.59"
+version "0.61"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -23,14 +23,18 @@ recipe "cloudoptimizer::cloudoptimizer_clear_cache", "Clear the CloudOptimizer b
 recipe "cloudoptimizer::cloudoptimizer_cloudstats", "Show cloudstats output in the audit log"
 recipe "cloudoptimizer::cloudoptimizer_cloudtrace_stats", "Show cloudtrace stats output in the audit log"
 recipe "cloudoptimizer::cloudoptimizer_configure", "Post-installation configuration (everything but peers and endpoints)"
+recipe "cloudoptimizer::cloudoptimizer_dump_core", "Make CloudOptimizer dump core and restart.  Only use at the direction of CloudOpt Support"
 recipe "cloudoptimizer::cloudoptimizer_install", "Main installer for cloudoptimizer package"
 recipe "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints", "Configure peers and endpoints"
 recipe "cloudoptimizer::cloudoptimizer_reload", "Reload the CloudOptimizer configuration"
 recipe "cloudoptimizer::cloudoptimizer_remove", "Remove CloudOptimizer packages"
 recipe "cloudoptimizer::cloudoptimizer_restart", "Restart the CloudOptimizer service"
-recipe "cloudoptimizer::cloudoptimizer_show", "Display the CloudOptimizer configuration in the Audit Log"
 recipe "cloudoptimizer::cloudoptimizer_show_version", "Display the CloudOptimizer version in the Audit Log"
+recipe "cloudoptimizer::cloudoptimizer_show", "Display the CloudOptimizer configuration in the Audit Log"
+recipe "cloudoptimizer::cloudoptimizer_start", "Start the CloudOptimizer service"
+recipe "cloudoptimizer::cloudoptimizer_stop", "Stop the CloudOptimizer service"
 recipe "cloudoptimizer::cloudoptimizer_supportview", "Create/upload a cloudoptimizer_supportview diagnostics archive"
+recipe "cloudoptimizer::cloudoptimizer_upgrade", "Upgrade CloudOptimizer without changing its configuration"
 
 attribute "cloudoptimizer/stored_configuration/cloudoptimizer",
   :display_name => "Stored CloudOptimizer configuration",
@@ -343,12 +347,12 @@ attribute "cloudoptimizer/cloud_credentials/aws/secretkey",
   :default => "None",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
-attribute "cloudoptimizer/cloudoptimizer_supportview",
-  :display_name => "cloudoptimizer_supportview",
+attribute "cloudoptimizer/supportview",
+  :display_name => "SupportView",
   :description => "Create a support diagnostics file and, optionally, upload to CloudOpt",
   :required => "optional",
-  :default => "Do not run cloudoptimizer_supportview",
-  :choice => [ "Do not run cloudoptimizer_supportview", "Upload a full archive", "Upload a light archive", "Create a local archive", "Report to Audit Log only" ],
+  :default => "Do not run SupportView",
+  :choice => [ "Do not run SupportView", "Upload a full archive", "Upload a light archive", "Create a local archive", "Report to Audit Log only" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer/user_feedback",
@@ -425,3 +429,41 @@ attribute "cloudoptimizer_mysql/endpoints/master_db_address",
   :required => "optional",
   :default => "ignore",
   :recipes => [ "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer" ]
+    
+attribute "cloudoptimizer_configuration/logs/log_rotation/compress",
+  :display_name => "Compress rotated logs",
+  :description => "When CloudOptimizer logs are rotated, compress the old log",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "true", "false" ],
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", ]
+    
+attribute "cloudoptimizer_configuration/logs/log_rotation/period",
+  :display_name => "Log rotation period",
+  :description => "How often CloudOptimizer should rotate its log files",
+  :required => "optional",
+  :default => "daily",
+  :choice => [ "daily", "weekly", "monthly", "yearly" ],
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", ]
+    
+attribute "cloudoptimizer_configuration/logs/log_rotation/save_days",
+  :display_name => "Number of saved logs",
+  :description => "How many archived logs CloudOptimizer should save",
+  :required => "optional",
+  :default => "10",
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", ]
+    
+attribute "cloudoptimizer_configuration/logs/log_rotation/date_stamp",
+  :display_name => "Log date stamp",
+  :description => "When CloudOptimizer logs are rotated, a date stamp is added to the name",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "true", "false" ],
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", ]
+    
+attribute "cloudoptimizer_configuration/logs/log_rotation/mail_logs",
+  :display_name => "Log mailing address",
+  :description => "If you enter an email address, CloudOptimizer will mail archived logs to that address before they are deleted",
+  :required => "optional",
+  :default => "none",
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", ]

@@ -1,5 +1,5 @@
 ################################################################################
-# upgrade_cloudoptimizer_webui_package.rb
+# write_squid_template.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,17 +7,17 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Upgrade the cloudoptimizer-webui package
+# Build the squid config file from template
 ################################################################################
 
-define :upgrade_cloudoptimizer_webui_package do
-  log "Upgrade cloudoptimizer-webui: Starting"
-  if node[:cloudoptimizer][:version] == 'latest'
-    package "cloudoptimizer-webui" do
-      action :upgrade
-    end
-  else
-    log "ERROR: Updater was called but version lock is not set to 'latest'.  This should never happen."
+define :write_squid_template do
+  log "Template config: Starting"
+  log "Template config: Using template squid.conf.erb."
+  template "/etc/squid/squid.conf" do
+    source "squid.conf.erb"
+    mode "0644"
+    owner "root"
+    group "root"
   end
-  log "Upgrade cloudoptimizer-webui: Ending"
+  log "Template config: Ending"
 end

@@ -1,0 +1,11 @@
+acl all src all
+http_access allow all
+http_port <%= node[:cloudoptimizer_configuration][:http_proxy_port] %>
+
+access_log /var/log/squid/access.log squid
+
+hosts_file /etc/hosts
+
+ignore_expect_100 on
+
+cache deny all

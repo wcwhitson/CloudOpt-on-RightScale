@@ -16,6 +16,7 @@ case node[:cloudoptimizer_packages][:remove]
 when "All Packages and Files"
   log "Removing all CloudOptimizer packages and files."
   remove_cloudoptimizer_package :purge
+  clear_cloudopt_repos
 when "All Packages (Retain Files)"
   log "Removing all CloudOptimizer packages, but retaining configuration."
   remove_cloudoptimizer_package :remove
