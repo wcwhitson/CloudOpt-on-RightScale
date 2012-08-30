@@ -103,9 +103,10 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
 end
 
 # Install WebUI
+# Temporarily disabled due to collectd dependencies conflict
 #if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
 #  install_cloudoptimizer_webui_package
-##end
+#end
 
 # Set transparent proxy defaults
 configure_transparent_proxy
