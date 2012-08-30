@@ -105,7 +105,7 @@ end
 # Install WebUI
 #if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
 #  install_cloudoptimizer_webui_package
-#end
+##end
 
 # Set transparent proxy defaults
 configure_transparent_proxy
