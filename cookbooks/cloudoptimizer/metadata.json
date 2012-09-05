@@ -478,11 +478,11 @@
       "calculated": false,
       "choice": [
         "latest",
+        "1.2.0",
         "1.1.7",
         "1.1.5",
         "0.9.4",
-        "0.9.3.2",
-        "0.9.2.3"
+        "0.9.3.2"
       ],
       "type": "string",
       "recipes": [
@@ -1005,7 +1005,7 @@
   },
   "suggestions": {
   },
-  "version": "0.61.0",
+  "version": "0.62.0",
   "groupings": {
   },
   "description": "Installs/Configures/Removes CloudOptimizer",
