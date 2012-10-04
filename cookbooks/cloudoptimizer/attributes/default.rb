@@ -3,16 +3,15 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-set[:cloudoptimizer][:current_version] = '1.2.0'
-set[:cloudoptimizer][:previous_version_1] = '1.1.7'
-set[:cloudoptimizer][:previous_version_2] = '1.1.5'
-set[:cloudoptimizer][:previous_version_3] = '0.9.4'
-set[:cloudoptimizer][:previous_version_4] = '0.9.3.2'
+set[:cloudoptimizer][:current_version] = '1.2.1'
+set[:cloudoptimizer][:previous_version_1] = '1.2.0'
+set[:cloudoptimizer][:previous_version_2] = '1.1.7'
+set[:cloudoptimizer][:previous_version_3] = '1.1.5'
+set[:cloudoptimizer][:previous_version_4] = '0.9.4'
 
 set[:cloudoptimizer][:vendor_name] = "CloudOpt"
 set[:cloudoptimizer][:product_name] = "CloudOptimizer"
-set[:cloudoptimizer][:feedback_address] = 'bill@cloudopt.com'
-#set[:cloudoptimizer][:feedback_address] = 'autofeedback@cloudopt.com'
+set[:cloudoptimizer][:feedback_address] = 'autofeedback@cloudopt.com'
   
 set[:cloudoptimizer][:config_dir] = '/etc/cloudoptimizer'
 set[:cloudoptimizer][:config_file_path] = '/etc'
