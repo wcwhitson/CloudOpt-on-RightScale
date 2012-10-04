@@ -772,22 +772,6 @@
       "default": "0",
       "required": "optional"
     },
-    "cloudoptimizer/web_interface/webui_login": {
-      "calculated": false,
-      "choice": [
-
-      ],
-      "type": "string",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "description": "User name for the CloudOptimizer web interface",
-      "display_name": "Web interface login",
-      "default": "admin",
-      "required": "optional"
-    },
     "cloudoptimizer_configuration/transparency/transp_intip": {
       "calculated": false,
       "choice": [
@@ -1005,7 +989,7 @@
   },
   "suggestions": {
   },
-  "version": "0.62.0",
+  "version": "0.63.0",
   "groupings": {
   },
   "description": "Installs/Configures/Removes CloudOptimizer",
