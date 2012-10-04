@@ -29,9 +29,11 @@ Please see the <tt>metadata.rb</tt> file for the current list of supported opera
 Please see kb.cloudopt.com for more information about CloudOptimizer.
 
 For a description of CloudOptimizer operational scripts, please see:
+
 http://kb.cloudopt.com/index.php/Managing_CloudOptimizer_on_RightScale
 
 For a description of CloudOptimizer inputs, please see:
+
 http://kb.cloudopt.com/index.php/CloudOptimizer_RightScale_Server_Template_Inputs
 
 = LICENSE:
