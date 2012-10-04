@@ -6,7 +6,7 @@ This cookbook provides a set of chef recipies that you can use to install, confi
 
 The recipes in this cookbook are not tied to a particular ServerTemplate, but can be used in various combinations with other RightScale chef recipes.
 
-We use these recipes in the CloudOptimizer Cloud VA and CloudOptimizer Client ServerTemplates.
+We use these recipes in the CloudOptimizer Cloud Edition, CloudOptimizer Client Edition, and CloudOptimizer MySQL Edition ServerTemplates.
 
 == REQUIREMENTS:
 
