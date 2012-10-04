@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.62"
+version "0.63"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -394,13 +394,6 @@ attribute "cloudoptimizer_configuration/encryption/upstream_verification",
   :default => "true",
   :choice => [ "true", "false" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
-attribute "cloudoptimizer/web_interface/webui_login",
-  :display_name => "Web interface login",
-  :description => "User name for the CloudOptimizer web interface",
-  :required => "optional",
-  :default => "admin",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer/web_interface/webui_passwd",
   :display_name => "Web interface password",
