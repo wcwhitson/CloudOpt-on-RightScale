@@ -87,6 +87,10 @@ unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/c
   create_log_directory
 end
 
+# Unlock collectd
+
+awk 'match($0,"exclude=collectd") == 0 {print $0}' Epel.repo> test
+
 # Install CloudOptimizer
 install_cloudoptimizer_package
 
