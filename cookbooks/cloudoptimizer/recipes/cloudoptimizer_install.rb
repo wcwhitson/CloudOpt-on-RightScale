@@ -52,10 +52,10 @@ if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
 end
 
 # Add CloudOpt repos
-if node[:platform] == 'centos'
-  # Replace the RightScale custom EPEL repo with the standard EPEL repo
-  fix_epel_repos
-end
+#if node[:platform] == 'centos'
+#  # Replace the RightScale custom EPEL repo with the standard EPEL repo
+#  fix_epel_repos
+#end
 if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
   add_cloudopt_test_repos
 else
@@ -88,8 +88,15 @@ unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/c
 end
 
 # Unlock collectd
-
-awk 'match($0,"exclude=collectd") == 0 {print $0}' Epel.repo> test
+if node[:platform] == 'centos'
+  execute "awk" do
+    command "awk \'match($0,\"exclude=collectd\") == 0 {print $0}\' /etc/yum.repos.d/Epel.repo > /etc/yum.repos.d/Epel.repo"
+  end
+else
+  execute "mv" do
+    command "mv /etc/apt/preferences.d/00rightscale /etc/cloudoptimizer/00rightscale"
+  end
+end
 
 # Install CloudOptimizer
 install_cloudoptimizer_package
@@ -125,10 +132,10 @@ else
   get_configuration_stored
 end
 
-if node[:platform] == 'centos'
-  # Restore the RightScale custom EPEL repos
-  unfix_epel_repos
-end
+#if node[:platform] == 'centos'
+#  # Restore the RightScale custom EPEL repos
+#  unfix_epel_repos
+#end
 
 # Restart to pick up config
 restart_cloudoptimizer
