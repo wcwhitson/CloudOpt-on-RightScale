@@ -62,7 +62,7 @@ end
 # For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked
 # it is impossible to install the CloudOptimizer WebUI.
 unlock_package "collectd" do
-  package "collectd"
+  package_name "collectd"
 end
 
 # Open firewall ports
