@@ -399,7 +399,7 @@ attribute "cloudoptimizer/web_interface/webui_passwd",
   :display_name => "Web interface password",
   :description => "Password for the CloudOptimizer web interface",
   :required => "optional",
-  :default => "letmein",
+  :default => "disabled",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
