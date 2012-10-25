@@ -119,6 +119,9 @@ end
 # Install WebUI
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
   install_cloudoptimizer_webui_package
+  if node[:cloudoptimizer][:web_interface][:webui_passwd] != "disabled"
+    set_webui_password
+  end
 end
 
 # Set transparent proxy defaults
