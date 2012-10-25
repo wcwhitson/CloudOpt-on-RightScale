@@ -16,7 +16,7 @@ define :unlock_package do
   # Delete the existing EPEL repo
   if node[:platform] == 'centos'
     execute "sed" do
-      command "sed '/\/exclude=collectd/s/^/#/'"
+      command "sed -e '/\/exclude=#{package}/s/^/#/' </etc/yum.repos.d/Epel.repo >/etc/yum.repos.d/Epel.repo"
     end
   else
     execute "mv" do

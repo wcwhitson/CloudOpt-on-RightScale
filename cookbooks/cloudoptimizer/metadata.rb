@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.63"
+version "0.64"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -224,7 +224,7 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "1.2.0", "1.1.7", "1.1.5", "0.9.4", "0.9.3.2" ],
+  :choice => [ "latest", "1.2.1", "1.2.0", "1.1.7", "1.1.5", "0.9.4" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/http_proxy",
