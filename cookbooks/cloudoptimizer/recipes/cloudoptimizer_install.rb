@@ -52,14 +52,24 @@ if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
 end
 
 # Add CloudOpt repos
+<<<<<<< HEAD
 #if node[:platform] == 'centos'
 #  # Replace the RightScale custom EPEL repo with the standard EPEL repo
 #  fix_epel_repos
 #end
+=======
+>>>>>>> WebUI fix
 if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
   add_cloudopt_test_repos
 else
   add_cloudopt_repos
+end
+
+# Unlock collectd
+# For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked
+# it is impossible to install the CloudOptimizer WebUI.
+unlock_package "collectd" do
+  package "collectd"
 end
 
 # Open firewall ports
@@ -114,10 +124,16 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
 end
 
 # Install WebUI
+<<<<<<< HEAD
 # Temporarily disabled due to dependencies conflict with RightScale
 #if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
 #  install_cloudoptimizer_webui_package
 #end
+=======
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
+  install_cloudoptimizer_webui_package
+end
+>>>>>>> WebUI fix
 
 # Set transparent proxy defaults
 configure_transparent_proxy
@@ -132,11 +148,14 @@ else
   get_configuration_stored
 end
 
+<<<<<<< HEAD
 #if node[:platform] == 'centos'
 #  # Restore the RightScale custom EPEL repos
 #  unfix_epel_repos
 #end
 
+=======
+>>>>>>> WebUI fix
 # Restart to pick up config
 restart_cloudoptimizer
 

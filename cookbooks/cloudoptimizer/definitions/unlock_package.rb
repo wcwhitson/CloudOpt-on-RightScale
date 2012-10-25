@@ -1,5 +1,5 @@
 ################################################################################
-# unfix_epel_repos.rb
+# unlock_package.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,21 +7,21 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Restore RightScale custom EPEL repos
+# Unlock a package that was previously designated as locked in a repository
+# configuration file.
 ################################################################################
 
-define :unfix_epel_repos do
-  log "Unfix EPEL repos: Starting"
+define :unlock_package do
+  log "Unlock a package: Starting"
   # Delete the existing EPEL repo
-  execute "mv" do
-    command "mv /etc/cloudoptimizer/Epel.repo /etc/yum.repos.d/"
+  if node[:platform] == 'centos'
+    execute "sed" do
+      command "sed '/\/exclude=collectd/s/^/#/'"
+    end
+  else
+    execute "mv" do
+      command "mv /etc/apt/preferences.d/00rightscale /etc/cloudoptimizer/"
+    end
   end
-  execute "mv" do
-    command "mv  /etc/cloudoptimizer/RightScale-epel.repo /etc/yum.repos.d/"
-  end
-  # Install the standard EPEL repo
-  execute "rpm" do
-    command "rpm -e epel-release-5-4.noarch"
-  end
-  log "Unfix EPEL repos: Ending"
+  log "Unlock a package: Ending"
 end
