@@ -90,17 +90,6 @@ unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/c
   create_log_directory
 end
 
-# Unlock collectd
-if node[:platform] == 'centos'
-  execute "awk" do
-    command "awk \'match($0,\"exclude=collectd\") == 0 {print $0}\' /etc/yum.repos.d/Epel.repo > /etc/yum.repos.d/Epel.repo"
-  end
-else
-  execute "mv" do
-    command "mv /etc/apt/preferences.d/00rightscale /etc/cloudoptimizer/00rightscale"
-  end
-end
-
 # Install CloudOptimizer
 install_cloudoptimizer_package
 
@@ -119,7 +108,7 @@ end
 # Install WebUI
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
   install_cloudoptimizer_webui_package
-  if node[:cloudoptimizer][:web_interface][:webui_passwd] != "disabled"
+  if node[:cloudoptimizer][:web_interface][:webui_passwd] != 'disabled'
     set_webui_password
   end
 end
