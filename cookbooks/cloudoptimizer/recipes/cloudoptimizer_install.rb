@@ -66,11 +66,11 @@ if node[:platform] == 'centos'
 #  elsif node[:platform_version] == '6.2'
 #    log "Installing EPEL for CentOS 6.x"
 #    execute "rpm" do
-#      command "rpm -Uvh http://mirror.clarkson.edu/epel/6/i386/epel-release-6-7.noarch.rpm"
+#      command "rpm -Uvh http://fedora-epel.mirror.lstn.net/6/i386/epel-release-6-7.noarch.rpm"
 #    end
 #  else
 #    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
-#  end
+  end
 end
 
 # Unlock collectd
