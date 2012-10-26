@@ -57,12 +57,12 @@ if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer
 else
   add_cloudopt_repos
 end
-#if node[:platform] == 'centos'
-#  if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
-#    log "Installing EPEL for CentOS 5.x"
-#    execute "rpm" do
-#      command "rpm -Uvh http://mirrors.servercentral.net/fedora/epel/5/i386/epel-release-5-4.noarch.rpm"
-#    end
+if node[:platform] == 'centos'
+  if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
+    log "Installing EPEL for CentOS 5.x"
+    execute "rpm" do
+      command "rpm -Uvh http://mirrors.servercentral.net/fedora/epel/5/i386/epel-release-5-4.noarch.rpm"
+    end
 #  elsif node[:platform_version] == '6.2'
 #    log "Installing EPEL for CentOS 6.x"
 #    execute "rpm" do
@@ -71,7 +71,7 @@ end
 #  else
 #    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
 #  end
-#end
+end
 
 # Unlock collectd
 # For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked

@@ -1,215 +1,76 @@
 {
-  "dependencies": {
-    "rightscale": ">= 0.0.0",
-    "sys_firewall": ">= 0.0.0",
-    "block_device": ">= 0.0.0"
+  "suggestions": {
   },
-  "long_description": "= CloudOpt CloudOptimizer RightScale Components\n\n== DESCRIPTION:\n\nThis cookbook provides a set of chef recipies that you can use to install, configure, and maintain CloudOptimizer on RightScale.\n\nThe recipes in this cookbook are not tied to a particular ServerTemplate, but can be used in various combinations with other RightScale chef recipes.\n\nWe use these recipes in the CloudOptimizer Cloud Edition, CloudOptimizer Client Edition, and CloudOptimizer MySQL Edition ServerTemplates.\n\n== REQUIREMENTS:\n\n* The RepoPath for the ServerTemplate that uses these recipes must include the rightscale_cookbooks repository.\n\n== COOKBOOKS DEPENDENCIES:\n\nPlease see the <tt>metadata.rb</tt> file for the current dependencies.\n\n== KNOWN LIMITATIONS:\n\nPlease see the <tt>metadata.rb</tt> file for the current list of supported operating systems.\n\n== SETUP:\n\n* Place the <tt>cloudoptimizer::installcloudoptimizer</tt> recipe into your runlist to install and set up CloudOptimizer.\n\n== Further Information:\n\nPlease see kb.cloudopt.com for more information about CloudOptimizer.\n\nFor a description of CloudOptimizer operational scripts, please see:\n\nhttp://kb.cloudopt.com/index.php/Managing_CloudOptimizer_on_RightScale\n\nFor a description of CloudOptimizer inputs, please see:\n\nhttp://kb.cloudopt.com/index.php/CloudOptimizer_RightScale_Server_Template_Inputs\n\n= LICENSE:\n\nCopyright CloudOpt, Inc. All rights reserved.  All access and use subject to the CloudOptimizer End User License Agreement and CloudOpt Terms of Use.",
-  "recipes": {
-    "cloudoptimizer::cloudoptimizer_show": "Display the CloudOptimizer configuration in the Audit Log",
-    "cloudoptimizer::cloudoptimizer_remove": "Remove CloudOptimizer packages",
-    "cloudoptimizer::cloudoptimizer_clear_cache": "Clear the CloudOptimizer byte cache",
-    "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints": "Configure peers and endpoints",
-    "cloudoptimizer::cloudoptimizer_dump_core": "Make CloudOptimizer dump core and restart.  Only use at the direction of CloudOpt Support",
-    "cloudoptimizer::cloudoptimizer_cloudtrace_stats": "Show cloudtrace stats output in the audit log",
-    "cloudoptimizer::cloudoptimizer_stop": "Stop the CloudOptimizer service",
-    "cloudoptimizer::cloudoptimizer_restart": "Restart the CloudOptimizer service",
-    "cloudoptimizer::cloudoptimizer_upgrade": "Upgrade CloudOptimizer without changing its configuration",
-    "cloudoptimizer::cloudoptimizer_cloudstats": "Show cloudstats output in the audit log",
-    "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer": "Add a MySQL master peer statement to a slave CloudOptimizer",
-    "cloudoptimizer::cloudoptimizer_supportview": "Create/upload a cloudoptimizer_supportview diagnostics archive",
-    "cloudoptimizer::cloudoptimizer_reload": "Reload the CloudOptimizer configuration",
-    "cloudoptimizer::cloudoptimizer_install": "Main installer for cloudoptimizer package",
-    "cloudoptimizer::cloudoptimizer_start": "Start the CloudOptimizer service",
-    "cloudoptimizer::cloudoptimizer_configure": "Post-installation configuration (everything but peers and endpoints)",
-    "cloudoptimizer::cloudoptimizer_show_version": "Display the CloudOptimizer version in the Audit Log"
-  },
-  "conflicting": {
-  },
-  "platforms": {
-    "centos": "~> 6.2",
-    "ubuntu": "~> 12.04"
-  },
-  "version": "0.64.0",
-  "replacing": {
-  },
-  "recommendations": {
-  },
-  "license": "All rights reserved",
   "groupings": {
   },
+  "description": "Installs/Configures/Removes CloudOptimizer",
   "attributes": {
-    "cloudoptimizer_configuration/logs/log_rotation/period": {
-      "type": "string",
+    "cloudoptimizer/security/securitygroup": {
       "calculated": false,
-      "required": "optional",
-      "default": "daily",
+      "description": "Create a security group for AWS that opens the CloudOptimizer TCP ports",
+      "choice": [
+        "Do not open ports",
+        "Open ports"
+      ],
+      "recipes": [
+        "cloudoptimizer::addsecuritygroupcloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Create AWS Security Group",
+      "default": "Do not open ports",
+      "required": "optional"
+    },
+    "cloudoptimizer/cloud_credentials/aws/accesskey": {
+      "calculated": false,
+      "description": "Install your AWS access key on the server",
+      "choice": [
+
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure"
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Log rotation period",
-      "description": "How often CloudOptimizer should rotate its log files",
-      "choice": [
-        "daily",
-        "weekly",
-        "monthly",
-        "yearly"
-      ]
+      "type": "string",
+      "display_name": "AWS Access Key",
+      "default": "None",
+      "required": "optional"
     },
     "cloudoptimizer_packages/special": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "Do not install",
+      "description": "Install special versions of CloudOptimizer packages",
+      "choice": [
+
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::cloudoptcommon"
       ],
+      "type": "string",
       "display_name": "Install Special Versions",
-      "description": "Install special versions of CloudOptimizer packages",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_packages/additional/cloudoptimizerwebui": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "Install",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "CloudOptimizer Web Interface",
-      "description": "Install a web interface",
-      "choice": [
-        "Install",
-        "Do not install"
-      ]
-    },
-    "cloudoptimizer_packages/additional/cloudoptimizertools": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
       "default": "Do not install",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/byte_cache/cache_promotion": {
+      "calculated": false,
+      "description": "CloudOptimizer cache promotion",
+      "choice": [
+        "true",
+        "false"
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "CloudOptimizer Tools",
-      "description": "Install additional scripts and tools for the command line",
-      "choice": [
-        "Do not install",
-        "Install"
-      ]
-    },
-    "cloudoptimizer_configuration/socks/socks_proxy_port": {
       "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "9002",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "SOCKS proxy port",
-      "description": "CloudOptimizer SOCKS4 proxy listening port",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/peer_proxy_port": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "9001",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Peer proxy port",
-      "description": "CloudOptimizer peer proxy port",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/file_locations/home_directory": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "/home/cloudoptimizer",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptimizer_supportview",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Home directory",
-      "description": "CloudOptimizer home directory - contains byte cache",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_mysql/endpoints/master_db_address": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "ignore",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer"
-      ],
-      "display_name": "Master MySQL Database IP Address",
-      "description": "In a CloudOptimizer+MySQL deployment, enter the private IP address of the MySQL master",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "ignore",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer"
-      ],
-      "display_name": "Master MySQL CloudOptimizer IP Address",
-      "description": "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer/security/securitygroup": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "Do not open ports",
-      "recipes": [
-        "cloudoptimizer::addsecuritygroupcloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Create AWS Security Group",
-      "description": "Create a security group for AWS that opens the CloudOptimizer TCP ports",
-      "choice": [
-        "Do not open ports",
-        "Open ports"
-      ]
+      "display_name": "Cache promotion",
+      "default": "true",
+      "required": "optional"
     },
     "cloudoptimizer/supportview": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "Do not run SupportView",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "SupportView",
       "description": "Create a support diagnostics file and, optionally, upload to CloudOpt",
       "choice": [
         "Do not run SupportView",
@@ -217,35 +78,19 @@
         "Upload a light archive",
         "Create a local archive",
         "Report to Audit Log only"
-      ]
-    },
-    "cloudoptimizer/cloud_credentials/aws/secretkey": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "None",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "AWS Secret Key",
-      "description": "Install your AWS secret key on the server",
-      "choice": [
-
-      ]
+      "type": "string",
+      "display_name": "SupportView",
+      "default": "Do not run SupportView",
+      "required": "optional"
     },
     "cloudoptimizer_packages/remove": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "Do not remove",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_remove",
-        "cloudoptimizer::cloudoptcommon",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Remove CloudOptimizer Packages",
       "description": "Remove all or part of the CloudOptimizer configuration",
       "choice": [
         "Do not remove",
@@ -253,557 +98,330 @@
         "All Packages (Retain Files)",
         "CloudController",
         "Web GUI"
-      ]
-    },
-    "cloudoptimizer_packages/additional/cloudoptimizers3": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "Do not install",
+      ],
       "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptimizer_remove",
+        "cloudoptimizer::cloudoptcommon",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "CloudController",
-      "description": "Install the CloudController package for Amazon S3",
-      "choice": [
-        "Do not install",
-        "Install"
-      ]
-    },
-    "cloudoptimizer_configuration/transparency/transp_intip": {
       "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "First private IP address",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Internal IP address",
-      "description": "Internal/private IP address to use with source transparency",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/peers/endpoint_to_modify": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "None",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints"
-      ],
-      "display_name": "Endpoint to modify",
-      "description": "Set endpoint_to_modify, peer_to_modify, and peer_operation to perform an action on a peer",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/thread_count": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "1",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Thread count",
-      "description": "CloudOptimizer thread count",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/logs/log_rotation/save_days": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "10",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure"
-      ],
-      "display_name": "Number of saved logs",
-      "description": "How many archived logs CloudOptimizer should save",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/encryption/ssl_key": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "SSL key",
-      "description": "CloudOptimizer SSL key file",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/byte_cache/db_memory_size": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "384",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Index size",
-      "description": "CloudOptimizer cache memory index size",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/byte_cache/bitmap_size": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "512",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Bitmap size",
-      "description": "CloudOptimizer cache memory map size",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/file_locations/socket_location": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "/var/run/cloudoptimizer/cloudoptimizer_socket",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Socket location",
-      "description": "Location of the CloudOptimizer socket file",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer/user_feedback": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "Basic feedback",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Product Feedback",
-      "description": "Automatically provide CloudOpt with information about how you use CloudOptimizer",
-      "choice": [
-        "Basic feedback",
-        "Detailed feedback",
-        "No feedback"
-      ]
-    },
-    "cloudoptimizer_configuration/socks/socks_username": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "SOCKS proxy user name",
-      "description": "CloudOptimizer SOCKS4 proxy user name",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/socks/socks_proxy": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "SOCKS proxy",
-      "description": "CloudOptimizer acts as a SOCKS4 proxy",
-      "choice": [
-        "false",
-        "true"
-      ]
-    },
-    "cloudoptimizer_configuration/encryption/ssl_ca": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "SSL CA certificate",
-      "description": "CloudOptimizer SSL CA certificate file",
-      "choice": [
-
-      ]
+      "display_name": "Remove CloudOptimizer Packages",
+      "default": "Do not remove",
+      "required": "optional"
     },
     "cloudoptimizer_configuration/encryption/peer_encryption": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "self_signed",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Peer encryption",
       "description": "CloudOptimizer peer encryption",
       "choice": [
         "self_signed",
         "ca_signed",
         "off"
-      ]
-    },
-    "cloudoptimizer_configuration/byte_cache/cache_promotion": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "true",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Cache promotion",
-      "description": "CloudOptimizer cache promotion",
-      "choice": [
-        "true",
-        "false"
-      ]
-    },
-    "cloudoptimizer_configuration/logs/log_directory": {
       "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "/var/log/cloudoptimizer",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Log directory",
-      "description": "Location of CloudOptimizer log files",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/encryption/upstream_verification": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "true",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Upstream certificate verification",
-      "description": "CloudOptimizer will verify a valid server certificate when SSL termination is enabled",
-      "choice": [
-        "true",
-        "false"
-      ]
-    },
-    "cloudoptimizer_configuration/peers/peer_to_modify": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "None",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints"
-      ],
-      "display_name": "Peer to modify",
-      "description": "Set peer_to_modify and peer_operation to perform an action on a peer",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/intelligent_mesh": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Intelligent mesh",
-      "description": "CloudOptimizer intelligent mesh",
-      "choice": [
-        "false",
-        "true"
-      ]
+      "display_name": "Peer encryption",
+      "default": "self_signed",
+      "required": "optional"
     },
     "cloudoptimizer_configuration/compression/compression_engine": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "snappy",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Compression engine",
       "description": "CloudOptimizer compression engine",
       "choice": [
         "snappy",
         "zlib",
         "null"
-      ]
-    },
-    "cloudoptimizer_configuration/byte_cache/default_cache_size": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "8000",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Byte cache size",
-      "description": "CloudOptimizer byte cache size in megabytes",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer/stored_configuration/cloudoptimizer": {
       "type": "string",
+      "display_name": "Compression engine",
+      "default": "snappy",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/encryption/upstream_verification": {
       "calculated": false,
-      "required": "optional",
-      "default": "none",
+      "description": "CloudOptimizer will verify a valid server certificate when SSL termination is enabled",
+      "choice": [
+        "true",
+        "false"
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Stored CloudOptimizer configuration",
-      "description": "URL to a cloudoptimizer.conf file containing your saved configuration",
+      "type": "string",
+      "display_name": "Upstream certificate verification",
+      "default": "true",
+      "required": "optional"
+    },
+    "cloudoptimizer/cloud_credentials/aws/secretkey": {
+      "calculated": false,
+      "description": "Install your AWS secret key on the server",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer/web_interface/webui_passwd": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "disabled",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Web interface password",
-      "description": "Password for the CloudOptimizer web interface",
+      "type": "string",
+      "display_name": "AWS Secret Key",
+      "default": "None",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/socks/socks_proxy_port": {
+      "calculated": false,
+      "description": "CloudOptimizer SOCKS4 proxy listening port",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer_configuration/transparency/transp_extip": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "First public IP address",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "External IP address",
-      "description": "External/public IP address to use with source transparency",
+      "type": "string",
+      "display_name": "SOCKS proxy port",
+      "default": "9002",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/http_proxy": {
+      "calculated": false,
+      "description": "CloudOptimizer acts as an HTTP proxy",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "HTTP proxy (squid)",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/encryption/ssl_ca": {
+      "calculated": false,
+      "description": "CloudOptimizer SSL CA certificate file",
       "choice": [
 
-      ]
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "SSL CA certificate",
+      "default": "",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_directory": {
+      "calculated": false,
+      "description": "Location of CloudOptimizer log files",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Log directory",
+      "default": "/var/log/cloudoptimizer",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/byte_cache/bitmap_size": {
+      "calculated": false,
+      "description": "CloudOptimizer cache memory map size",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Bitmap size",
+      "default": "512",
+      "required": "optional"
     },
     "cloudoptimizer_configuration/optimistic_deduplication": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "false",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "First pass optimization",
       "description": "CloudOptimizer first pass optimization",
       "choice": [
         "false",
         "true"
-      ]
-    },
-    "cloudoptimizer/cloud_credentials/aws/accesskey": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "None",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "AWS Access Key",
-      "description": "Install your AWS access key on the server",
+      "type": "string",
+      "display_name": "First pass optimization",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/file_locations/socket_location": {
+      "calculated": false,
+      "description": "Location of the CloudOptimizer socket file",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer_configuration/transparency/source_transparency": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Source transparency",
-      "description": "CloudOptimizer acts as a transparent proxy",
+      "type": "string",
+      "display_name": "Socket location",
+      "default": "/var/run/cloudoptimizer/cloudoptimizer_socket",
+      "required": "optional"
+    },
+    "cloudoptimizer_mysql/endpoints/master_db_address": {
+      "calculated": false,
+      "description": "In a CloudOptimizer MySQL Edition deployment, enter the private IP address (or associated DNS name) of the MySQL master instance.",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer"
+      ],
+      "type": "string",
+      "display_name": "Master MySQL Database IP Address or DNS Name",
+      "default": "ignore",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/cifs/optimize_cifs": {
+      "calculated": false,
+      "description": "Enable or disable CIFS optimization",
       "choice": [
         "false",
         "true"
-      ]
-    },
-    "cloudoptimizer_configuration/encryption/ssl_cert": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "SSL certificate",
-      "description": "CloudOptimizer SSL certificate file",
+      "type": "string",
+      "display_name": "CIFS optimization",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/byte_cache/default_cache_size": {
+      "calculated": false,
+      "description": "CloudOptimizer byte cache size in megabytes",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer_configuration/local_proxy_address": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "0.0.0.0",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Local proxy address",
-      "description": "CloudOptimizer local proxy address",
+      "type": "string",
+      "display_name": "Byte cache size",
+      "default": "8000",
+      "required": "optional"
+    },
+    "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address": {
+      "calculated": false,
+      "description": "In a CloudOptimizer MySQL Edition deployment, enter the public IP address (or associated DNS name) of the CloudOptimizer that the master database server uses for outbound traffic.  When CloudOptimizer is installed on the same instance as the master database server, this is the public IP address (or associated DNS name) of the instance.",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer_configuration/logs/log_rotation/compress": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "true",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure"
       ],
-      "display_name": "Compress rotated logs",
-      "description": "When CloudOptimizer logs are rotated, compress the old log",
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer"
+      ],
+      "type": "string",
+      "display_name": "MySQL Master CloudOptimizer IP Address or DNS Name",
+      "default": "ignore",
+      "required": "optional"
+    },
+    "cloudoptimizer/user_feedback": {
+      "calculated": false,
+      "description": "Automatically provide CloudOpt with information about how you use CloudOptimizer",
       "choice": [
-        "true",
-        "false"
-      ]
-    },
-    "cloudoptimizer_configuration/logs/log_rotation/mail_logs": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "none",
+        "Basic feedback",
+        "Detailed feedback",
+        "No feedback"
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure"
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Log mailing address",
-      "description": "If you enter an email address, CloudOptimizer will mail archived logs to that address before they are deleted",
+      "type": "string",
+      "display_name": "Product Feedback",
+      "default": "Basic feedback",
+      "required": "optional"
+    },
+    "cloudoptimizer_packages/additional/cloudoptimizerwebui": {
+      "calculated": false,
+      "description": "Install a web interface",
+      "choice": [
+        "Install",
+        "Do not install"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "CloudOptimizer Web Interface",
+      "default": "Install",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/transparency/transp_intip": {
+      "calculated": false,
+      "description": "Internal/private IP address to use with source transparency",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer_packages/beta": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "Do not install",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptcommon",
+        "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Install Beta Versions",
-      "description": "Install beta versions of CloudOptimizer packages",
-      "choice": [
-        "Do not install",
-        "Install"
-      ]
-    },
-    "cloudoptimizer/version": {
       "type": "string",
+      "display_name": "Internal IP address",
+      "default": "First private IP address",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/http_proxy_port": {
       "calculated": false,
-      "required": "optional",
-      "default": "latest",
+      "description": "CloudOptimizer HTTP proxy listening port",
+      "choice": [
+
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Version lock",
-      "description": "Lock this server to a particular CloudOptimizer version",
-      "choice": [
-        "latest",
-        "1.2.1",
-        "1.2.0",
-        "1.1.7",
-        "1.1.5",
-        "0.9.4"
-      ]
+      "type": "string",
+      "display_name": "HTTP proxy port",
+      "default": "9003",
+      "required": "optional"
     },
     "cloudoptimizer_configuration/peers/peer_operation": {
-      "type": "string",
       "calculated": false,
-      "required": "optional",
-      "default": "No change",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints"
-      ],
-      "display_name": "Peer operation",
       "description": "Set peer_to_modify and/or endpoint_to_modify and then select an operation",
       "choice": [
         "No change",
@@ -813,36 +431,490 @@
         "Delete endpoint from peer",
         "Delete peer",
         "Clear all peers"
-      ]
-    },
-    "cloudoptimizer_configuration/byte_cache/compress_cache": {
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints"
+      ],
       "type": "string",
+      "display_name": "Peer operation",
+      "default": "No change",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_key": {
       "calculated": false,
-      "required": "optional",
-      "default": "true",
+      "description": "Key for CloudOptimizer shared memory",
+      "choice": [
+
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Cache compression",
+      "type": "string",
+      "display_name": "Log key",
+      "default": "12345678",
+      "required": "optional"
+    },
+    "cloudoptimizer/web_interface/webui_passwd": {
+      "calculated": false,
+      "description": "Password for the CloudOptimizer web interface",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Web interface password",
+      "default": "disabled",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/encryption/ssl_key": {
+      "calculated": false,
+      "description": "CloudOptimizer SSL key file",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "SSL key",
+      "default": "",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_rotation/mail_logs": {
+      "calculated": false,
+      "description": "If you enter an email address, CloudOptimizer will mail archived logs to that address before they are deleted",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure"
+      ],
+      "type": "string",
+      "display_name": "Log mailing address",
+      "default": "none",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_rotation/save_days": {
+      "calculated": false,
+      "description": "How many archived logs CloudOptimizer should save",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure"
+      ],
+      "type": "string",
+      "display_name": "Number of saved logs",
+      "default": "10",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/byte_cache/ebs_volume_size": {
+      "calculated": false,
+      "description": "On Amazon AWS, specify an EBS volume size in GB to use for the CloudOptimizer cache directory",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "EBS cache volume",
+      "default": "0",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/encryption/ssl_termination": {
+      "calculated": false,
+      "description": "CloudOptimizer will terminate HTTPS connections to allow optimization",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "SSL termination",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_packages/additional/cloudoptimizers3": {
+      "calculated": false,
+      "description": "Install the CloudController package for Amazon S3",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "CloudController",
+      "default": "Do not install",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/peers/endpoint_to_modify": {
+      "calculated": false,
+      "description": "Set endpoint_to_modify, peer_to_modify, and peer_operation to perform an action on a peer",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints"
+      ],
+      "type": "string",
+      "display_name": "Endpoint to modify",
+      "default": "None",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/local_proxy_address": {
+      "calculated": false,
+      "description": "CloudOptimizer local proxy address",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Local proxy address",
+      "default": "0.0.0.0",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/file_locations/home_directory": {
+      "calculated": false,
+      "description": "CloudOptimizer home directory - contains byte cache",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptimizer_supportview",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Home directory",
+      "default": "/home/cloudoptimizer",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/transparency/transp_extip": {
+      "calculated": false,
+      "description": "External/public IP address to use with source transparency",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "External IP address",
+      "default": "First public IP address",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/local_proxy_port": {
+      "calculated": false,
+      "description": "CloudOptimizer local proxy port",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Local proxy port",
+      "default": "9000",
+      "required": "optional"
+    },
+    "cloudoptimizer/stored_configuration/cloudoptimizer": {
+      "calculated": false,
+      "description": "URL to a cloudoptimizer.conf file containing your saved configuration",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Stored CloudOptimizer configuration",
+      "default": "none",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_rotation/date_stamp": {
+      "calculated": false,
+      "description": "When CloudOptimizer logs are rotated, a date stamp is added to the name",
+      "choice": [
+        "true",
+        "false"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure"
+      ],
+      "type": "string",
+      "display_name": "Log date stamp",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_rotation/period": {
+      "calculated": false,
+      "description": "How often CloudOptimizer should rotate its log files",
+      "choice": [
+        "daily",
+        "weekly",
+        "monthly",
+        "yearly"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure"
+      ],
+      "type": "string",
+      "display_name": "Log rotation period",
+      "default": "daily",
+      "required": "optional"
+    },
+    "cloudoptimizer_packages/beta": {
+      "calculated": false,
+      "description": "Install beta versions of CloudOptimizer packages",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptcommon",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Install Beta Versions",
+      "default": "Do not install",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/socks/socks_username": {
+      "calculated": false,
+      "description": "CloudOptimizer SOCKS4 proxy user name",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "SOCKS proxy user name",
+      "default": "",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/socks/socks_proxy": {
+      "calculated": false,
+      "description": "CloudOptimizer acts as a SOCKS4 proxy",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "SOCKS proxy",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer/version": {
+      "calculated": false,
+      "description": "Lock this server to a particular CloudOptimizer version",
+      "choice": [
+        "latest",
+        "1.2.1",
+        "1.2.0",
+        "1.1.7",
+        "1.1.5",
+        "0.9.4"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Version lock",
+      "default": "latest",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/intelligent_mesh": {
+      "calculated": false,
+      "description": "CloudOptimizer intelligent mesh",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Intelligent mesh",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/byte_cache/compress_cache": {
+      "calculated": false,
       "description": "CloudOptimizer byte cache compression",
       "choice": [
         "true",
         "false"
-      ]
-    },
-    "cloudoptimizer_configuration/compression/default_compression_level": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "0",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "Compression level",
+      "type": "string",
+      "display_name": "Cache compression",
+      "default": "true",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/logs/log_rotation/compress": {
+      "calculated": false,
+      "description": "When CloudOptimizer logs are rotated, compress the old log",
+      "choice": [
+        "true",
+        "false"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure"
+      ],
+      "type": "string",
+      "display_name": "Compress rotated logs",
+      "default": "true",
+      "required": "optional"
+    },
+    "cloudoptimizer_packages/additional/cloudoptimizertools": {
+      "calculated": false,
+      "description": "Install additional scripts and tools for the command line",
+      "choice": [
+        "Do not install",
+        "Install"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "CloudOptimizer Tools",
+      "default": "Do not install",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/transparency/source_transparency": {
+      "calculated": false,
+      "description": "CloudOptimizer acts as a transparent proxy",
+      "choice": [
+        "false",
+        "true"
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Source transparency",
+      "default": "false",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/peers/peer_to_modify": {
+      "calculated": false,
+      "description": "Set peer_to_modify and peer_operation to perform an action on a peer",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints"
+      ],
+      "type": "string",
+      "display_name": "Peer to modify",
+      "default": "None",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/encryption/ssl_cert": {
+      "calculated": false,
+      "description": "CloudOptimizer SSL certificate file",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "SSL certificate",
+      "default": "",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/peer_proxy_port": {
+      "calculated": false,
+      "description": "CloudOptimizer peer proxy port",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Peer proxy port",
+      "default": "9001",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/thread_count": {
+      "calculated": false,
+      "description": "CloudOptimizer thread count",
+      "choice": [
+
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
+      "type": "string",
+      "display_name": "Thread count",
+      "default": "1",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/compression/default_compression_level": {
+      "calculated": false,
       "description": "CloudOptimizer compression level",
       "choice": [
         "0",
@@ -855,146 +927,74 @@
         "7",
         "8",
         "9"
-      ]
-    },
-    "cloudoptimizer_configuration/byte_cache/ebs_volume_size": {
+      ],
+      "recipes": [
+        "cloudoptimizer::cloudoptimizer_install",
+        "cloudoptimizer::cloudoptimizer_configure",
+        "cloudoptimizer::cloudoptcommon"
+      ],
       "type": "string",
-      "calculated": false,
-      "required": "optional",
+      "display_name": "Compression level",
       "default": "0",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "EBS cache volume",
-      "description": "On Amazon AWS, specify an EBS volume size in GB to use for the CloudOptimizer cache directory",
+      "required": "optional"
+    },
+    "cloudoptimizer_configuration/byte_cache/db_memory_size": {
+      "calculated": false,
+      "description": "CloudOptimizer cache memory index size",
       "choice": [
 
-      ]
-    },
-    "cloudoptimizer_configuration/encryption/ssl_termination": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
+      ],
       "recipes": [
         "cloudoptimizer::cloudoptimizer_install",
         "cloudoptimizer::cloudoptimizer_configure",
         "cloudoptimizer::cloudoptcommon"
       ],
-      "display_name": "SSL termination",
-      "description": "CloudOptimizer will terminate HTTPS connections to allow optimization",
-      "choice": [
-        "false",
-        "true"
-      ]
-    },
-    "cloudoptimizer_configuration/cifs/optimize_cifs": {
       "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "CIFS optimization",
-      "description": "Enable or disable CIFS optimization",
-      "choice": [
-        "false",
-        "true"
-      ]
-    },
-    "cloudoptimizer_configuration/http_proxy": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "HTTP proxy (squid)",
-      "description": "CloudOptimizer acts as an HTTP proxy",
-      "choice": [
-        "false",
-        "true"
-      ]
-    },
-    "cloudoptimizer_configuration/logs/log_rotation/date_stamp": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "false",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure"
-      ],
-      "display_name": "Log date stamp",
-      "description": "When CloudOptimizer logs are rotated, a date stamp is added to the name",
-      "choice": [
-        "true",
-        "false"
-      ]
-    },
-    "cloudoptimizer_configuration/http_proxy_port": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "9003",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "HTTP proxy port",
-      "description": "CloudOptimizer HTTP proxy listening port",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/local_proxy_port": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "9000",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Local proxy port",
-      "description": "CloudOptimizer local proxy port",
-      "choice": [
-
-      ]
-    },
-    "cloudoptimizer_configuration/logs/log_key": {
-      "type": "string",
-      "calculated": false,
-      "required": "optional",
-      "default": "12345678",
-      "recipes": [
-        "cloudoptimizer::cloudoptimizer_install",
-        "cloudoptimizer::cloudoptimizer_configure",
-        "cloudoptimizer::cloudoptcommon"
-      ],
-      "display_name": "Log key",
-      "description": "Key for CloudOptimizer shared memory",
-      "choice": [
-
-      ]
+      "display_name": "Index size",
+      "default": "384",
+      "required": "optional"
     }
   },
-  "maintainer_email": "support@cloudopt.com",
-  "name": "cloudoptimizer",
-  "maintainer": "CloudOpt, Inc.",
-  "description": "Installs/Configures/Removes CloudOptimizer",
-  "suggestions": {
+  "recipes": {
+    "cloudoptimizer::cloudoptimizer_start": "Start the CloudOptimizer service",
+    "cloudoptimizer::cloudoptimizer_restart": "Restart the CloudOptimizer service",
+    "cloudoptimizer::cloudoptimizer_upgrade": "Upgrade CloudOptimizer without changing its configuration",
+    "cloudoptimizer::cloudoptimizer_show": "Display the CloudOptimizer configuration in the Audit Log",
+    "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints": "Configure peers and endpoints",
+    "cloudoptimizer::cloudoptimizer_cloudtrace_stats": "Show cloudtrace stats output in the audit log",
+    "cloudoptimizer::cloudoptimizer_stop": "Stop the CloudOptimizer service",
+    "cloudoptimizer::cloudoptimizer_show_version": "Display the CloudOptimizer version in the Audit Log",
+    "cloudoptimizer::cloudoptimizer_install": "Main installer for cloudoptimizer package",
+    "cloudoptimizer::cloudoptimizer_configure": "Post-installation configuration (everything but peers and endpoints)",
+    "cloudoptimizer::cloudoptimizer_clear_cache": "Clear the CloudOptimizer byte cache",
+    "cloudoptimizer::cloudoptimizer_reload": "Reload the CloudOptimizer configuration",
+    "cloudoptimizer::cloudoptimizer_supportview": "Create/upload a cloudoptimizer_supportview diagnostics archive",
+    "cloudoptimizer::cloudoptimizer_dump_core": "Make CloudOptimizer dump core and restart.  Only use at the direction of CloudOpt Support",
+    "cloudoptimizer::cloudoptimizer_cloudstats": "Show cloudstats output in the audit log",
+    "cloudoptimizer::cloudoptimizer_remove": "Remove CloudOptimizer packages",
+    "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer": "Add a MySQL master peer statement to a slave CloudOptimizer"
   },
+  "replacing": {
+  },
+  "maintainer_email": "support@cloudopt.com",
+  "platforms": {
+    "ubuntu": "~> 12.04",
+    "centos": "~> 6.2"
+  },
+  "name": "cloudoptimizer",
   "providing": {
-  }
+  },
+  "conflicting": {
+  },
+  "recommendations": {
+  },
+  "long_description": "= CloudOpt CloudOptimizer RightScale Components\n\n== DESCRIPTION:\n\nThis cookbook provides a set of chef recipies that you can use to install, configure, and maintain CloudOptimizer on RightScale.\n\nThe recipes in this cookbook are not tied to a particular ServerTemplate, but can be used in various combinations with other RightScale chef recipes.\n\nWe use these recipes in the CloudOptimizer Cloud Edition, CloudOptimizer Client Edition, and CloudOptimizer MySQL Edition ServerTemplates.\n\n== REQUIREMENTS:\n\n* The RepoPath for the ServerTemplate that uses these recipes must include the rightscale_cookbooks repository.\n\n== COOKBOOKS DEPENDENCIES:\n\nPlease see the <tt>metadata.rb</tt> file for the current dependencies.\n\n== KNOWN LIMITATIONS:\n\nPlease see the <tt>metadata.rb</tt> file for the current list of supported operating systems.\n\n== SETUP:\n\n* Place the <tt>cloudoptimizer::installcloudoptimizer</tt> recipe into your runlist to install and set up CloudOptimizer.\n\n== Further Information:\n\nPlease see kb.cloudopt.com for more information about CloudOptimizer.\n\nFor a description of CloudOptimizer operational scripts, please see:\n\nhttp://kb.cloudopt.com/index.php/Managing_CloudOptimizer_on_RightScale\n\nFor a description of CloudOptimizer inputs, please see:\n\nhttp://kb.cloudopt.com/index.php/CloudOptimizer_RightScale_Server_Template_Inputs\n\n= LICENSE:\n\nCopyright CloudOpt, Inc. All rights reserved.  All access and use subject to the CloudOptimizer End User License Agreement and CloudOpt Terms of Use.",
+  "dependencies": {
+    "rightscale": ">= 0.0.0",
+    "sys_firewall": ">= 0.0.0",
+    "block_device": ">= 0.0.0"
+  },
+  "version": "0.64.0",
+  "license": "All rights reserved",
+  "maintainer": "CloudOpt, Inc."
 }

@@ -410,15 +410,15 @@ attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
-  :display_name => "Master MySQL CloudOptimizer IP Address",
-  :description => "In a CloudOptimizer+MySQL deployment, enter the public IP address of the CloudOptimizer closest to the MySQL master",
+  :display_name => "MySQL Master CloudOptimizer IP Address or DNS Name",
+  :description => "In a CloudOptimizer MySQL Edition deployment, enter the public IP address (or associated DNS name) of the CloudOptimizer that the master database server uses for outbound traffic.  When CloudOptimizer is installed on the same instance as the master database server, this is the public IP address (or associated DNS name) of the instance.",
   :required => "optional",
   :default => "ignore",
   :recipes => [ "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer" ]
     
 attribute "cloudoptimizer_mysql/endpoints/master_db_address",
-  :display_name => "Master MySQL Database IP Address",
-  :description => "In a CloudOptimizer+MySQL deployment, enter the private IP address of the MySQL master",
+  :display_name => "Master MySQL Database IP Address or DNS Name",
+  :description => "In a CloudOptimizer MySQL Edition deployment, enter the private IP address (or associated DNS name) of the MySQL master instance.",
   :required => "optional",
   :default => "ignore",
   :recipes => [ "cloudoptimizer::cloudoptimizer_add_mysql_master_as_peer" ]
