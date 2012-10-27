@@ -92,6 +92,18 @@ define :install_cloudoptimizer_package do
         end
       end
   when "centos"
+    if node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
+      log "Installing fake python26 package for CentOS 6.x compatibility."
+      cookbook_file "/var/tmp/fakepy-1-1.rpm" do
+       source "fakepy-1-1.rpm"
+       mode 0755
+       owner "root"
+       group "root"
+      end
+      execute "rpm" do
+        command "rpm -i /var/tmp/fakepy-1-1.rpm"
+      end
+    end
     if node[:cloudoptimizer][:version] == 'latest'
       log "Install cloudoptimizer: Installing CloudOptimizer version #{node[:cloudoptimizer][:current_version]}"
       execute "yum" do
