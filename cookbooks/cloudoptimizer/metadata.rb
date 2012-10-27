@@ -3,7 +3,7 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.64"
+version "0.65"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -402,12 +402,12 @@ attribute "cloudoptimizer/web_interface/webui_passwd",
   :default => "disabled",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
-attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
-  :display_name => "EBS cache volume",
-  :description => "On Amazon AWS, specify an EBS volume size in GB to use for the CloudOptimizer cache directory",
-  :required => "optional",
-  :default => "0",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
+#attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
+#  :display_name => "EBS cache volume",
+#  :description => "On Amazon AWS, specify an EBS volume size in GB to use for the CloudOptimizer cache directory",
+#  :required => "optional",
+#  :default => "0",
+#  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
   :display_name => "MySQL Master CloudOptimizer IP Address or DNS Name",

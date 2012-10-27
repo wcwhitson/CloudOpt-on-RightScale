@@ -14,16 +14,18 @@ rightscale_marker :begin
 
 require 'rubygems'
 
-g = gem_package "right_aws" do
-  action :nothing
-end
-g.run_action(:install)
-Gem.clear_paths
+#g = gem_package "right_aws" do
+#  action :nothing
+#end
+#g.run_action(:install)
+#Gem.clear_paths
 
 # User feedback
+# collect configuration data unless disabled by the user
 user_feedback
 
 # Fix syslog-ng
+# required on CloudOptimizer versions up to 0.9.4 - can be removed after 10/31/2012
 if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1'
   if File.exists?("/etc/syslog-ng/syslog-ng.conf")
     log "Fix syslog: syslog-ng is installed on CloudOptimizer version 0.9.4 or earlier; fixing config."
@@ -39,6 +41,7 @@ end
 accept_eula
 
 # Install Cloud Credentials
+# this is used to install the credentials on the instance for easy use with CloudController.
 unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
   install_aws_access_key
 end
@@ -47,9 +50,10 @@ unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
 end
 
 # Add a cache volume
-if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
-  add_cache_volume
-end
+# Currently unused
+#if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
+#  add_cache_volume
+#end
 
 # Add CloudOpt repos
 if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
@@ -57,19 +61,22 @@ if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer
 else
   add_cloudopt_repos
 end
+# Install EPEL
+# We seem to have a lot of problems with the EPEL repos that RightScale installs by
+# default.  Installing the default repos makes those problems go away.
 if node[:platform] == 'centos'
   if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
     log "Installing EPEL for CentOS 5.x"
     execute "rpm" do
       command "rpm -Uvh http://mirrors.servercentral.net/fedora/epel/5/i386/epel-release-5-4.noarch.rpm"
     end
-#  elsif node[:platform_version] == '6.2'
-#    log "Installing EPEL for CentOS 6.x"
-#    execute "rpm" do
-#      command "rpm -Uvh http://fedora-epel.mirror.lstn.net/6/i386/epel-release-6-7.noarch.rpm"
-#    end
-#  else
-#    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
+  elsif node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
+    log "Installing EPEL for CentOS 6.x"
+    execute "rpm" do
+      command "rpm -Uvh http://fedora-epel.mirror.lstn.net/6/i386/epel-release-6-7.noarch.rpm"
+    end
+  else
+    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
   end
 end
 
@@ -77,6 +84,7 @@ end
 # For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked
 # it is impossible to install the CloudOptimizer WebUI.
 unlock_package "collectd" do
+  log "Unlock collectd: removing the default RightScale lock on the collectd package."
   package_name "collectd"
 end
 
@@ -109,7 +117,8 @@ end
 install_cloudoptimizer_package
 
 # Install CloudController
-if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'
+# Install the cloudoptimizer-s3 package if the user chooses to install either CloudController or squid
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install' || node[:cloudoptimizer_configuration][:http_proxy] == 'true'
   install_cloudcontroller_package
   write_squid_template
   if node[:cloudoptimizer_configuration][:http_proxy] == 'false'

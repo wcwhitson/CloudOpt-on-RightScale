@@ -12,6 +12,8 @@
 # volume so that this script will later configure the cache directory correctly.
 ################################################################################
 
+# Currently unused
+
 define :add_cache_volume do
   #if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
   #  log "EBS cache volume: creating EBS volume."
