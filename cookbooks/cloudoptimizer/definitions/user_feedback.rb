@@ -22,7 +22,7 @@ define :user_feedback do
   Gem.clear_paths
   require 'pony'
 
-  if node[:platform] == 'centos' && node[:platform_version] == '6.2'
+  if node[:platform] == 'centos' && node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
     pony_args = ''
   else
     pony_args = '-t'
