@@ -22,6 +22,7 @@ require 'rubygems'
 
 # User feedback
 # collect configuration data unless disabled by the user
+package "sendmail"
 user_feedback
 
 # Fix syslog-ng
