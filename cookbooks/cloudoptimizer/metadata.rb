@@ -3,15 +3,15 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.65"
+version "0.66"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
 supports "centos", "~> 5.8"
 supports "centos", "~> 6.0"
 supports "centos", "~> 6.2"
+supports "centos", "~> 6.3"
 supports "ubuntu", "~> 10.04"
-supports "ubuntu", "~> 10.10"
 supports "ubuntu", "~> 12.04"
 
 depends "block_device"
