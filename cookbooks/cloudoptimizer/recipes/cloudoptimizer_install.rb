@@ -77,8 +77,8 @@ end
 # Unlock collectd
 # For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked
 # it is impossible to install the CloudOptimizer WebUI.
+log "Unlock collectd: removing the default RightScale lock on the collectd package."
 unlock_package "collectd" do
-  log "Unlock collectd: removing the default RightScale lock on the collectd package."
   package_name "collectd"
 end
 
@@ -147,6 +147,10 @@ end
 # Install RightScale compatible collectd-mysql
 execute "rpm" do
   command "rpm --nodeps -Uvh ftp://ftp.sunet.se/pub/Linux/distributions/fedora/epel/epel/5/x86_64/collectd-mysql-4.10.0-4.el5.x86_64.rpm"
+end
+
+lock_package "collectd-mysql" do
+  package_name "collectd-mysql"
 end
 
 # Restart to pick up config
