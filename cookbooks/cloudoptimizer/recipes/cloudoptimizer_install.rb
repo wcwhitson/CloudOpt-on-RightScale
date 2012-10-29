@@ -145,6 +145,7 @@ else
 end
 
 # Install RightScale compatible collectd-mysql
+<<<<<<< HEAD
 package "collectd-mysql" do
   action :remove
 end
@@ -152,10 +153,15 @@ end
 execute "rpm" do
   command "rpm --nodeps -Uvh ftp://ftp.sunet.se/pub/Linux/distributions/fedora/epel/epel/5/x86_64/collectd-mysql-4.10.0-4.el5.x86_64.rpm"
 end
+=======
+#execute "rpm" do
+#  command "rpm --nodeps -Uvh ftp://ftp.sunet.se/pub/Linux/distributions/fedora/epel/epel/5/x86_64/collectd-mysql-4.10.0-4.el5.x86_64.rpm"
+#end
+>>>>>>> Testing
 
-lock_package "collectd-mysql" do
-  package_name "collectd-mysql"
-end
+#lock_package "collectd-mysql" do
+#  package_name "collectd-mysql"
+#end
 
 # Restart to pick up config
 restart_cloudoptimizer
