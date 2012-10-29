@@ -58,14 +58,14 @@ define :add_cloudopt_repos do
         log "Repositories: Installing on CentOS 6.x; using yum repository."
    
         # Retrieve the repository list
-        remote_file "/var/tmp/CloudOpt.selfextracting" do
+        remote_file "/var/tmp/CloudOpt.CentOS6.selfextracting" do
           source "https://#{node[:cloudoptimizer][:main_repo_centos]}/CloudOpt.CentOS6.selfextracting"
           mode "0755"
         end
 
         # Install the repository list
-        execute "CloudOpt.selfextracting" do
-          command "/var/tmp/CloudOpt.selfextracting"
+        execute "CloudOpt.CentOS6.selfextracting" do
+          command "/var/tmp/CloudOpt.CentOS6.selfextracting"
         end
       elsif node[:platform_version] == '5.8'
         log "Repositories: Installing on CentOS 5.x; using yum repository."

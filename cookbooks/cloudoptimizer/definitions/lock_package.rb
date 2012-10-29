@@ -15,7 +15,7 @@ define :lock_package do
   # Delete the existing EPEL repo
   if node[:platform] == 'centos'
     execute "echo" do
-      command "echo \"exclude=#{params[:package_name]}\" >/etc/yum.repos.d/Epel.repo"
+      command "echo \"exclude=#{params[:package_name]}\" >>/etc/yum.repos.d/epel.repo"
     end
   else
     log "Not CentOS"

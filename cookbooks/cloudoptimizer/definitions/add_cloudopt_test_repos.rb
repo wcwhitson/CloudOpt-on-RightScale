@@ -20,12 +20,12 @@ define :add_cloudopt_test_repos do
       log "Repositories:Installing the test repository.  CloudOpt internal use only."
       # Retrieve and install the repository list
       if node[:platform_version] == '12.04' || node[:platform_version] == '12.10'
-        log "Repositories: Installing on Ubuntu 12.x"
+        log "Repositories: Installing test repo on Ubuntu 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
           source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.precise.list"
         end
       else
-        log "Repositories: Installing on Ubuntu < 12.x"
+        log "Repositories: Installing test repo on Ubuntu < 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
           source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.maverick.list"
         end
@@ -43,18 +43,34 @@ define :add_cloudopt_test_repos do
         command "apt-get update"
       end
     when "centos"
-      log "Repositories:Installing on CentOS; using yum repository."
-      
-      log "Repositories:Installing the test repository.  CloudOpt internal use only."
-      # Retrieve the repository list
-      remote_file "/var/tmp/CloudOpt-Testing.selfextracting" do
-        source "http://#{node[:cloudoptimizer][:test_repo_centos]}/CloudOpt-Testing.selfextracting"
-        mode "0755"
-      end
+      if node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
+        log "Repositories: Installing test repo on CentOS 6.x; using yum repository."
+   
+        # Retrieve the repository list
+        remote_file "/var/tmp/CloudOpt-Testing.CentOS6.selfextracting" do
+          source "https://#{node[:cloudoptimizer][:test_repo_centos]}/CloudOpt-Testing.CentOS6.selfextracting"
+          mode "0755"
+        end
 
-      # Install the repository list
-      execute "CloudOpt.selfextracting" do
-        command "/var/tmp/CloudOpt-Testing.selfextracting"
+        # Install the repository list
+        execute "CloudOpt.CentOS6.selfextracting" do
+          command "/var/tmp/CloudOpt.CentOS6.selfextracting"
+        end
+      elsif node[:platform_version] == '5.8'
+        log "Repositories: Installing test repo on CentOS 5.x; using yum repository."
+   
+        # Retrieve the repository list
+        remote_file "/var/tmp/CloudOpt-Testing.selfextracting" do
+          source "https://#{node[:cloudoptimizer][:test_repo_centos]}/CloudOpt-Testing.selfextracting"
+          mode "0755"
+        end
+
+        # Install the repository list
+        execute "CloudOpt.selfextracting" do
+          command "/var/tmp/CloudOpt.selfextracting"
+        end
+      else
+        log "Not a recognized version of CentOS"
       end
   end
   log "Add test repos: Ending"

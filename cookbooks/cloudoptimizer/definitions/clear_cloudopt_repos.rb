@@ -23,6 +23,10 @@ define :clear_cloudopt_repos do
       execute "rm" do
         command "rm -f /etc/yum.repos.d/cloudopt*"
       end
+      # Removed the cached repo files as well
+      execute "rm" do
+        command "rm -rf /var/cache/yum/x86_64/6/CloudOpt*"
+      end
   end
   log "Clear repos: Ending"
 end
