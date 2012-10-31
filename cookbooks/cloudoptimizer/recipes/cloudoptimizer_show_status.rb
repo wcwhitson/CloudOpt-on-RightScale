@@ -1,22 +1,21 @@
 ################################################################################
-# create_config_directory.rb
+# cloudoptimizer_show_status.rb
 ################################################################################
-# Chef definition, part of cloudoptimizer cookbook
+# Chef recipe, part of cloudoptimizer cookbook
 ################################################################################
 # Copyright 2012 CloudOpt, Inc.  All rights reserved.
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Create the CloudOptimizer configuration directory
+# Display CloudOptimizer status in the RightScale audit log
 ################################################################################
 
-define :create_config_directory do
-  log "Creating default config directory (#{node[:cloudoptimizer][:defaults][:config_dir]})."
-  directory node[:cloudoptimizer][:defaults][:config_dir] do
-    owner "root"
-    group "root"
-    mode "0755"
-    action :create
-  end
-  log "Create config directory: Ending"
-end
+rightscale_marker :begin
+
+log "--------------------------------------------------------------"
+log "CLOUDOPTIMIZER STATUS:"
+show_cloudoptimizer_status
+show_cloudoptimizer_webui_status
+log "--------------------------------------------------------------"
+
+rightscale_marker :end

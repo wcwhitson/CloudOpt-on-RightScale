@@ -36,7 +36,7 @@ define :add_cloudopt_repos do
           source "http://#{node[:cloudoptimizer][:archive_repo_ubuntu]}/cloudopt-rightscale.lucid.list"
         end
         else
-          log "Not a recognized version of Ubuntu."
+          log "This is not a supported version of Ubuntu.  Skipping repo installation."
       end
 
       # Retrieve the repository key file
@@ -81,7 +81,7 @@ define :add_cloudopt_repos do
           command "/var/tmp/CloudOpt.selfextracting"
         end
       else
-        log "Not a recognized version of CentOS"
+        log "This is not a supported version of CentOS.  Skipping repo installation."
       end
   end
   log "Add main repos: Ending"

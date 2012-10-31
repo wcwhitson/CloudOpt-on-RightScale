@@ -14,6 +14,10 @@
 
 rightscale_marker :begin
 
+# User feedback
+# collect configuration data unless disabled by the user
+user_feedback
+
 # Install Cloud Credentials
 unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
   install_aws_access_key
@@ -23,9 +27,10 @@ unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
 end
 
 # Add a cache volume
-if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
-  add_cache_volume
-end
+# Currently unused
+#if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
+#  add_cache_volume
+#end
 
 # Add CloudOpt repos
 # First clear existing repos in case we are changing to or from test or beta repos
@@ -64,7 +69,7 @@ end
 # Install WebUI
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
   install_cloudoptimizer_webui_package
-  if node[:cloudoptimizer][:web_interface][:webui_passwd] != "disabled"
+  if node[:cloudoptimizer][:web_interface][:webui_passwd] != 'disabled'
     set_webui_password
   end
 end

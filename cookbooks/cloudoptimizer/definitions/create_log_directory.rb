@@ -22,7 +22,7 @@ define :create_log_directory do
   end
   if self.recipe_name == "cloudoptimizer_install"
     log "Create home: Deleting old log directory, as this is initial configuration."
-    directory "/var/log/cloudoptimizer" do
+    directory node[:cloudoptimizer][:defaults][:log_dir] do
       recursive true
       action :delete
     end

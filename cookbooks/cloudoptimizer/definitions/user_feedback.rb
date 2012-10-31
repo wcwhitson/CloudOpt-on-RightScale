@@ -12,6 +12,9 @@
 ################################################################################
 
 define :user_feedback do
+  
+  require 'rubygems'
+  
   log "Feedback: Starting"
   # Install pony for mail support
   g = gem_package "pony" do

@@ -24,11 +24,13 @@ define :add_cloudopt_test_repos do
         remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
           source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.precise.list"
         end
-      else
+      elsif node[:platform_version] == '10.04'
         log "Repositories: Installing test repo on Ubuntu < 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
           source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.maverick.list"
         end
+      else
+        log "This is not a supported version of Ubuntu.  Skipping repo installation."
       end
       # Retrieve the repository key file
       remote_file "/var/tmp/cloudopt.tc-key.asc" do
@@ -70,7 +72,7 @@ define :add_cloudopt_test_repos do
           command "/var/tmp/CloudOpt.selfextracting"
         end
       else
-        log "Not a recognized version of CentOS"
+        log "This is not a supported version of CentOS.  Skipping repo installation."
       end
   end
   log "Add test repos: Ending"

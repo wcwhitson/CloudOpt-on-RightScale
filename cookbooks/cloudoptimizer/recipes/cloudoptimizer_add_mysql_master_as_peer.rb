@@ -8,7 +8,12 @@
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
 # Add a peer statement for the MySQL master database on the CloudOptimizer
-# associated with the slave MySQL server.
+# associated with the slave MySQL server.  This recipe should be run on every
+# slave that will connect to the master.
+#
+# This recipe is a shortcut for adding peers with manage_peers_and_endpoints.
+# More complex configurations, such as master-master replication, must use
+# the conventional peer configuration recipes.
 ################################################################################
 
 rightscale_marker :begin

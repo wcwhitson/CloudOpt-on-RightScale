@@ -12,24 +12,9 @@
 
 rightscale_marker :begin
 
-require 'rubygems'
-
 # User feedback
 # collect configuration data unless disabled by the user
 user_feedback
-
-# Fix syslog-ng
-# required on CloudOptimizer versions up to 0.9.4 - can be removed after 10/31/2012
-if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2' || node[:cloudoptimizer][:version] == '0.9.3.1'
-  if File.exists?("/etc/syslog-ng/syslog-ng.conf")
-    log "Fix syslog: syslog-ng is installed on CloudOptimizer version 0.9.4 or earlier; fixing config."
-    fix_syslogng
-  else
-    log "Fix syslog: syslog-ng is not installed; nothing to do."
-  end
-else
-  log "Fix syslog: Not running on an affected version.  Nothing to fix."
-end
 
 # Accept EULA
 accept_eula
@@ -55,6 +40,7 @@ if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer
 else
   add_cloudopt_repos
 end
+
 # Install EPEL
 # We seem to have a lot of problems with the EPEL repos that RightScale installs by
 # default.  Installing the default repos makes those problems go away.
@@ -62,12 +48,12 @@ if node[:platform] == 'centos'
   if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
     log "Installing EPEL for CentOS 5.x"
     execute "rpm" do
-      command "rpm -Uvh http://mirrors.servercentral.net/fedora/epel/5/i386/epel-release-5-4.noarch.rpm"
+      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_5_repo]}"
     end
   elsif node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
     log "Installing EPEL for CentOS 6.x"
     execute "rpm" do
-      command "rpm -Uvh http://fedora-epel.mirror.lstn.net/6/i386/epel-release-6-7.noarch.rpm"
+      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_6_repo]}"
     end
   else
     log "Not CentOS 5.x or 6.x, so not installing EPEL." 
@@ -86,7 +72,8 @@ end
 open_cloudoptimizer_ports
 
 # Install compatible Python
-if node[:cloudoptimizer][:version] == '1.1.5' || node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '0.9.3.2'
+# We can remove this when 1.1.5 goes out of support
+if node[:cloudoptimizer][:version] == '1.1.5'
   if node[:platform_version] == '12.04'
     log "Install python: Running an affected version on Ubuntu 12.04.  Installing Python 2.6 for compatibilty."
     install_python26
@@ -98,12 +85,12 @@ else
 end
 
 # Create alternate home directory
-unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "/home/cloudoptimizer"
+unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "node[:cloudoptimizer][:defaults][:home_dir]"
   create_home_directory
 end
 
 # Create alternate log directory
-unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/cloudoptimizer"
+unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "node[:cloudoptimizer][:defaults][:log_dir]"
   create_log_directory
 end
 
@@ -137,13 +124,6 @@ configure_transparent_proxy
 # Configure log rotation
 configure_log_rotation
 
-# Either install a stored config or build config from template and inputs
-if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'
-  write_configuration_template
-else
-  get_configuration_stored
-end
-
 # Install RightScale compatible collectd-mysql
 log "Remove the default collectd-mysql"
 package "collectd-mysql" do
@@ -152,12 +132,15 @@ end
 
 log "Install RightScale compatible collectd-mysql"
 execute "rpm" do
-  command "rpm --nodeps -Uvh ftp://ftp.sunet.se/pub/Linux/distributions/fedora/epel/epel/5/x86_64/collectd-mysql-4.10.0-4.el5.x86_64.rpm"
+  command "rpm --nodeps -Uvh node[:cloudoptimizer][:defaults][:compatible_collectd_mysql]"
 end
 
-#lock_package "collectd-mysql" do
-#  package_name "collectd-mysql"
-#end
+# Either install a stored config or build config from template and inputs
+if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'
+  write_configuration_template
+else
+  get_configuration_stored
+end
 
 # Restart to pick up config
 restart_cloudoptimizer

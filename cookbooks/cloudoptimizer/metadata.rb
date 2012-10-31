@@ -3,12 +3,9 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.66"
+version "0.67"
 
-supports "centos", "~> 5.6"
-supports "centos", "~> 5.7"
 supports "centos", "~> 5.8"
-supports "centos", "~> 6.0"
 supports "centos", "~> 6.2"
 supports "centos", "~> 6.3"
 supports "ubuntu", "~> 10.04"
@@ -29,6 +26,7 @@ recipe "cloudoptimizer::cloudoptimizer_manage_peers_and_endpoints", "Configure p
 recipe "cloudoptimizer::cloudoptimizer_reload", "Reload the CloudOptimizer configuration"
 recipe "cloudoptimizer::cloudoptimizer_remove", "Remove CloudOptimizer packages"
 recipe "cloudoptimizer::cloudoptimizer_restart", "Restart the CloudOptimizer service"
+recipe "cloudoptimizer::cloudoptimizer_show_status", "Display the CloudOptimizer operational status in the Audit Log"
 recipe "cloudoptimizer::cloudoptimizer_show_version", "Display the CloudOptimizer version in the Audit Log"
 recipe "cloudoptimizer::cloudoptimizer_show", "Display the CloudOptimizer configuration in the Audit Log"
 recipe "cloudoptimizer::cloudoptimizer_start", "Start the CloudOptimizer service"
@@ -224,7 +222,7 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "1.2.1", "1.2.0", "1.1.7", "1.1.5", "0.9.4" ],
+  :choice => [ "latest", "1.2.1", "1.2.0", "1.1.7", "1.1.5" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/http_proxy",
@@ -289,14 +287,6 @@ attribute "cloudoptimizer_configuration/transparency/transp_extip",
 attribute "cloudoptimizer_packages/additional/cloudoptimizers3",
   :display_name => "CloudController",
   :description => "Install the CloudController package for Amazon S3",
-  :required => "optional",
-  :default => "Do not install",
-  :choice => [ "Do not install", "Install" ],
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
-attribute "cloudoptimizer_packages/additional/cloudoptimizertools",
-  :display_name => "CloudOptimizer Tools",
-  :description => "Install additional scripts and tools for the command line",
   :required => "optional",
   :default => "Do not install",
   :choice => [ "Do not install", "Install" ],

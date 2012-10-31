@@ -17,17 +17,9 @@
 define :write_configuration_template do
   log "Template config: Starting"
   log "Template config: CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
-  if node[:cloudoptimizer][:version] == '0.9.3.2' or node[:cloudoptimizer][:version] == '0.9.3.1'
-    log "Template config: Using template cloudoptimizer.conf.0.9.3.erb."
-    template "#{node[:cloudoptimizer][:config_file_path]}/#{node[:cloudoptimizer][:config_file_name]}" do
-      source "cloudoptimizer.conf.0.9.3.erb"
-      mode "0644"
-      owner "root"
-      group "root"
-    end
-  elsif node[:cloudoptimizer][:version] == '0.9.4'
+  if node[:cloudoptimizer][:version] == '0.9.4'
     log "Template config: Using template cloudoptimizer.conf.0.9.4.erb."
-    template "#{node[:cloudoptimizer][:config_file_path]}/#{node[:cloudoptimizer][:config_file_name]}" do
+    template "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][:defaults][:config_file_name]}" do
       source "cloudoptimizer.conf.0.9.4.erb"
       mode "0644"
       owner "root"
@@ -35,7 +27,7 @@ define :write_configuration_template do
     end
   else
     log "Template config: Using template cloudoptimizer.conf.erb."
-    template "#{node[:cloudoptimizer][:config_file_path]}/#{node[:cloudoptimizer][:config_file_name]}" do
+    template "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][defaults][:config_file_name]}" do
       source "cloudoptimizer.conf.erb"
       mode "0644"
       owner "root"

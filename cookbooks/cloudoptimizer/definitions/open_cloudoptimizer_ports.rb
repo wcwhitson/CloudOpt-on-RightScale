@@ -33,8 +33,8 @@ define :open_cloudoptimizer_ports do
     end
     #WebUI
     if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
-      log "Firewall rules: Opening port #{node[:cloudoptimizer][:webui_port]}."
-      sys_firewall "#{node[:cloudoptimizer][:webui_port]}"
+      log "Firewall rules: Opening port #{node[:cloudoptimizer][:defaults][:webui_port]}."
+      sys_firewall "#{node[:cloudoptimizer][:defaults][:webui_port]}"
     end
   end
   log "Firewall rules: Ending"

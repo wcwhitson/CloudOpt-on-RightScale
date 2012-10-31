@@ -28,9 +28,9 @@ define :accept_eula do
   # remained the same.  We just create both, as a hedge against future changes
   # that would appear on upgrade and require reacceptance of the EULA.
   
-  # For 0.9.4 and earlier / Ubuntu
+  # Ubuntu
   log "EULA: Creating Ubuntu / old style EULA acceptance file."
-  file "#{node[:cloudoptimizer][:config_dir]}/accept-eula.txt" do
+  file "#{node[:cloudoptimizer][:defaults][:config_dir]}/accept-eula.txt" do
     owner "root"
     group "root"
     mode "0755"
@@ -38,9 +38,9 @@ define :accept_eula do
     action :create
   end
 
-  # For 1.1.5 and later / CentOS
+  # CentOS
   log "EULA: Creating CentOS / new style EULA acceptance file."
-  file "#{node[:cloudoptimizer][:config_dir]}/accepted-cloudoptimizer-eula" do
+  file "#{node[:cloudoptimizer][:defaults][:config_dir]}/accepted-cloudoptimizer-eula" do
     owner "root"
     group "root"
     mode "0755"

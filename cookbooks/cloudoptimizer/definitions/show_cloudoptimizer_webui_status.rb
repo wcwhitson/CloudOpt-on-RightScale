@@ -1,5 +1,5 @@
 ################################################################################
-# create_config_directory.rb
+# show_cloudoptimizer_webui_status.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,16 +7,11 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Create the CloudOptimizer configuration directory
+# Shows service cloudoptimizer-webui status in the RightScale audit log
 ################################################################################
 
-define :create_config_directory do
-  log "Creating default config directory (#{node[:cloudoptimizer][:defaults][:config_dir]})."
-  directory node[:cloudoptimizer][:defaults][:config_dir] do
-    owner "root"
-    group "root"
-    mode "0755"
-    action :create
+define :show_cloudoptimizer_webui_status do
+  execute "service" do
+    command "service cloudoptimizer-webui status"
   end
-  log "Create config directory: Ending"
 end

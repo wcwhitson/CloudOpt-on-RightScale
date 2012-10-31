@@ -15,11 +15,17 @@ rightscale_marker :begin
 case node[:cloudoptimizer_packages][:remove]
 when "All Packages and Files"
   log "Removing all CloudOptimizer packages and files."
+  remove_cloudoptimizer_webui_package :purge
+  remove_cloudcontroller_package :purge
   remove_cloudoptimizer_package :purge
+  remove_cloudoptimizer_tools_package :purge  
   clear_cloudopt_repos
 when "All Packages (Retain Files)"
   log "Removing all CloudOptimizer packages, but retaining configuration."
+  remove_cloudoptimizer_webui_package :remove
+  remove_cloudcontroller_package :remove
   remove_cloudoptimizer_package :remove
+  remove_cloudoptimizer_tools_package :remove 
 when "CloudController"
   log "Removing CloudController only."
   remove_cloudcontroller_package :remove
