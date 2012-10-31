@@ -35,30 +35,30 @@ end
 #end
 
 # Add CloudOpt repos
-#if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
-#  add_cloudopt_test_repos
-#else
-#  add_cloudopt_repos
-#end
+if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
+  add_cloudopt_test_repos
+else
+  add_cloudopt_repos
+end
 
 # Install EPEL
 # We seem to have a lot of problems with the EPEL repos that RightScale installs by
 # default.  Installing the default repos makes those problems go away.
-#if node[:platform] == 'centos'
-#  if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
-#    log "Installing EPEL for CentOS 5.x"
-#    execute "rpm" do
-#      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_5_repo]}"
-#    end
-#  elsif node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
-#    log "Installing EPEL for CentOS 6.x"
-#    execute "rpm" do
-#      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_6_repo]}"
-#    end
-#  else
-#    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
-#  end
-#end
+if node[:platform] == 'centos'
+  if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
+    log "Installing EPEL for CentOS 5.x"
+    execute "rpm" do
+      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_5_repo]}"
+    end
+  elsif node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
+    log "Installing EPEL for CentOS 6.x"
+    execute "rpm" do
+      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_6_repo]}"
+    end
+  else
+    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
+  end
+end
 
 # Unlock collectd
 # For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked
