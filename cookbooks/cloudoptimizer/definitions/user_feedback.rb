@@ -25,7 +25,7 @@ define :user_feedback do
   Gem.clear_paths
   require 'pony'
 
-  if node[:platform] == 'centos' && node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
+  if node[:platform] == 'centos' && node[:platform_version] != '5.8'
     pony_args = ''
   else
     pony_args = '-t'
@@ -70,7 +70,7 @@ define :user_feedback do
     mail_body << "Trans internal IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_int_ip]}<br />"
     mail_body << "Trans external IP: #{node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip]}<br />"
     Pony.mail(
-    :to => "#{node[:cloudoptimizer][:feedback_address]}",
+    :to => "#{node[:cloudoptimizer][:defaults][:feedback_address]}",
     :subject => 'RightScale ServerTemplate Feedback (Detailed)',
     :headers => { 'Content-Type' => 'text/html' },
     :via_options => { :arguments => pony_args },
@@ -108,7 +108,7 @@ define :user_feedback do
     mail_body << "SOCKS port: #{node[:cloudoptimizer_configuration][:socks][:socks_proxy_port]}<br />"
     mail_body << "Source transparency: #{node[:cloudoptimizer_configuration][:transparency][:source_transparency]}<br />"
     Pony.mail(
-    :to => "#{node[:cloudoptimizer][:feedback_address]}",
+    :to => "#{node[:cloudoptimizer][:defaults][:feedback_address]}",
     :subject => 'RightScale ServerTemplate Feedback (Basic)',
     :headers => { 'Content-Type' => 'text/html' },
     :via_options => { :arguments => pony_args },
@@ -118,7 +118,7 @@ define :user_feedback do
     mail_body = Array.new
     mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
     Pony.mail(
-    :to => "#{node[:cloudoptimizer][:feedback_address]}",
+    :to => "#{node[:cloudoptimizer][:defaults][:feedback_address]}",
     :subject => 'RightScale ServerTemplate Feedback (None)',
     :headers => { 'Content-Type' => 'text/html' },
     :via_options => { :arguments => pony_args },
