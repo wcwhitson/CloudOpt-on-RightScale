@@ -27,7 +27,7 @@ define :write_configuration_template do
     end
   else
     log "Template config: Using template cloudoptimizer.conf.erb."
-    template "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][defaults][:config_file_name]}" do
+    template "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][:defaults][:config_file_name]}" do
       source "cloudoptimizer.conf.erb"
       mode "0644"
       owner "root"

@@ -20,7 +20,7 @@
 define :get_configuration_stored do
   log "Stored configs: Starting"
   log "Stored configs: Installing saved cloudoptimizer configuration from: #{node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]}"
-  remote_file "#{node[:cloudoptimizer][:config_file_path]}/#{node[:cloudoptimizer][:config_file_name]}" do
+  remote_file "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][:defaults][:config_file_name]}" do
     source node[:cloudoptimizer][:stored_configuration][:cloudoptimizer]
     owner "root"
     group "root"

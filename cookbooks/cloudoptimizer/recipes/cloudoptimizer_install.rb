@@ -131,9 +131,9 @@ package "collectd-mysql" do
 end
 
 log "Install RightScale compatible collectd-mysql package"
-#execute "rpm" do
-#  command "rpm --nodeps -Uvh #{node[:cloudoptimizer][:defaults][:compatible_collectd_mysql]}"
-#end
+execute "rpm" do
+  command "rpm --nodeps -Uvh #{node[:cloudoptimizer][:defaults][:compatible_collectd_mysql]}"
+end
 
 # Either install a stored config or build config from template and inputs
 if node[:cloudoptimizer][:stored_configuration][:cloudoptimizer] == 'none'
