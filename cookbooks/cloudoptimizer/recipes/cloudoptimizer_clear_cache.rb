@@ -12,6 +12,6 @@
 
 rightscale_marker :begin
 
-cloudoptimizer_clear_cache
+clear_cloudoptimizer_cache
 
 rightscale_marker :end
