@@ -17,16 +17,16 @@ rightscale_marker :begin
 user_feedback
 
 # Accept EULA
-#accept_eula
+accept_eula
 
 # Install Cloud Credentials
 # this is used to install the credentials on the instance for easy use with CloudController.
-#unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
-#  install_aws_access_key
-#end
-#unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
-#  install_aws_secret_key
-#end
+unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
+  install_aws_access_key
+end
+unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
+  install_aws_secret_key
+end
 
 # Add a cache volume
 # Currently unused
