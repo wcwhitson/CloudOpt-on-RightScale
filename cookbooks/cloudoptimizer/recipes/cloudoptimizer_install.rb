@@ -125,14 +125,14 @@ configure_transparent_proxy
 configure_log_rotation
 
 # Install RightScale compatible collectd-mysql
-log "Remove the default collectd-mysql"
+log "Remove the default collectd-mysql package"
 package "collectd-mysql" do
   action :remove
 end
 
-log "Install RightScale compatible collectd-mysql"
+log "Install RightScale compatible collectd-mysql package"
 execute "rpm" do
-  command "rpm --nodeps -Uvh node[:cloudoptimizer][:defaults][:compatible_collectd_mysql]"
+  command "rpm --nodeps -Uvh #{node[:cloudoptimizer][:defaults][:compatible_collectd_mysql]}"
 end
 
 # Either install a stored config or build config from template and inputs

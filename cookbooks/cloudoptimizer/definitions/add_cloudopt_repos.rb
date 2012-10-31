@@ -24,16 +24,16 @@ define :add_cloudopt_repos do
       if node[:platform_version] == '12.04' || node[:platform_version] == '12.10'
         log "Repositories: Installing on Ubuntu 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
-          source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt.precise.list"
+          source "http://#{node[:cloudoptimizer][:defaults][:main_repo_ubuntu]}/cloudopt.precise.list"
         end
         elsif node[:platform_version] == '10.04'
           log "Repositories: Installing on Ubuntu < 12.x"
           remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
-            source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt.maverick.list"
+            source "http://#{node[:cloudoptimizer][:defaults][:main_repo_ubuntu]}/cloudopt.maverick.list"
           end
         log "Repositories: Installing the Ubuntu archive repo."
         remote_file "/etc/apt/sources.list.d/cloudopt-rightscale.lucid.list" do
-          source "http://#{node[:cloudoptimizer][:archive_repo_ubuntu]}/cloudopt-rightscale.lucid.list"
+          source "http://#{node[:cloudoptimizer][:defaults][:archive_repo_ubuntu]}/cloudopt-rightscale.lucid.list"
         end
         else
           log "This is not a supported version of Ubuntu.  Skipping repo installation."
@@ -41,7 +41,7 @@ define :add_cloudopt_repos do
 
       # Retrieve the repository key file
       remote_file "/var/tmp/cloudopt.key.asc" do
-        source "http://#{node[:cloudoptimizer][:main_repo_ubuntu]}/cloudopt.key.asc"
+        source "http://#{node[:cloudoptimizer][:defaults][:main_repo_ubuntu]}/cloudopt.key.asc"
       end
 
       # Install the repository key file
@@ -59,7 +59,7 @@ define :add_cloudopt_repos do
    
         # Retrieve the repository list
         remote_file "/var/tmp/CloudOpt.CentOS6.selfextracting" do
-          source "https://#{node[:cloudoptimizer][:main_repo_centos]}/CloudOpt.CentOS6.selfextracting"
+          source "https://#{node[:cloudoptimizer][:defaults][:main_repo_centos]}/CloudOpt.CentOS6.selfextracting"
           mode "0755"
         end
 
@@ -72,7 +72,7 @@ define :add_cloudopt_repos do
    
         # Retrieve the repository list
         remote_file "/var/tmp/CloudOpt.selfextracting" do
-          source "https://#{node[:cloudoptimizer][:main_repo_centos]}/CloudOpt.selfextracting"
+          source "https://#{node[:cloudoptimizer][:defaults][:main_repo_centos]}/CloudOpt.selfextracting"
           mode "0755"
         end
 

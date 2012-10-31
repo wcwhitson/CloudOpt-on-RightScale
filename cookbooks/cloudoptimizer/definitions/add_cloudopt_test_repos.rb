@@ -22,19 +22,19 @@ define :add_cloudopt_test_repos do
       if node[:platform_version] == '12.04' || node[:platform_version] == '12.10'
         log "Repositories: Installing test repo on Ubuntu 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.precise.list" do
-          source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.precise.list"
+          source "http://#{node[:cloudoptimizer][:defaults][:test_repo_ubuntu]}/cloudopt-test.precise.list"
         end
       elsif node[:platform_version] == '10.04'
         log "Repositories: Installing test repo on Ubuntu < 12.x"
         remote_file "/etc/apt/sources.list.d/cloudopt.maverick.list" do
-          source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.maverick.list"
+          source "http://#{node[:cloudoptimizer][:defaults][:test_repo_ubuntu]}/cloudopt-test.maverick.list"
         end
       else
         log "This is not a supported version of Ubuntu.  Skipping repo installation."
       end
       # Retrieve the repository key file
       remote_file "/var/tmp/cloudopt.tc-key.asc" do
-        source "http://#{node[:cloudoptimizer][:test_repo_ubuntu]}/cloudopt-test.gpg.key"
+        source "http://#{node[:cloudoptimizer][:defaults][:test_repo_ubuntu]}/cloudopt-test.gpg.key"
       end
       # Install the repository key file
       execute "apt-key" do
@@ -50,7 +50,7 @@ define :add_cloudopt_test_repos do
    
         # Retrieve the repository list
         remote_file "/var/tmp/CloudOpt-Testing.CentOS6.selfextracting" do
-          source "https://#{node[:cloudoptimizer][:test_repo_centos]}/CloudOpt-Testing.CentOS6.selfextracting"
+          source "https://#{node[:cloudoptimizer][:defaults][:test_repo_centos]}/CloudOpt-Testing.CentOS6.selfextracting"
           mode "0755"
         end
 
@@ -63,7 +63,7 @@ define :add_cloudopt_test_repos do
    
         # Retrieve the repository list
         remote_file "/var/tmp/CloudOpt-Testing.selfextracting" do
-          source "https://#{node[:cloudoptimizer][:test_repo_centos]}/CloudOpt-Testing.selfextracting"
+          source "https://#{node[:cloudoptimizer][:defaults][:test_repo_centos]}/CloudOpt-Testing.selfextracting"
           mode "0755"
         end
 
