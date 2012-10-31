@@ -99,30 +99,30 @@ end
 
 # Install CloudController
 # Install the cloudoptimizer-s3 package if the user chooses to install either CloudController or squid
-#if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install' || node[:cloudoptimizer_configuration][:http_proxy] == 'true'
-#  install_cloudcontroller_package
-#  write_squid_template
-#  if node[:cloudoptimizer_configuration][:http_proxy] == 'false'
-#    stop_squid
-#  else
-#    stop_squid
-#    start_squid
-#  end
-#end
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install' || node[:cloudoptimizer_configuration][:http_proxy] == 'true'
+  install_cloudcontroller_package
+  write_squid_template
+  if node[:cloudoptimizer_configuration][:http_proxy] == 'false'
+    stop_squid
+  else
+    stop_squid
+    start_squid
+  end
+end
 
 # Install WebUI
-#if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
-#  install_cloudoptimizer_webui_package
-#  if node[:cloudoptimizer][:web_interface][:webui_passwd] != 'disabled'
-#    set_webui_password
-#  end
-#end
+if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
+  install_cloudoptimizer_webui_package
+  if node[:cloudoptimizer][:web_interface][:webui_passwd] != 'disabled'
+    set_webui_password
+  end
+end
 
 # Set transparent proxy defaults
-#configure_transparent_proxy
+configure_transparent_proxy
 
 # Configure log rotation
-#configure_log_rotation
+configure_log_rotation
 
 # Install RightScale compatible collectd-mysql
 #log "Remove the default collectd-mysql package"
