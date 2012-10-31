@@ -85,17 +85,17 @@ else
 end
 
 # Create alternate home directory
-#unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "node[:cloudoptimizer][:defaults][:home_dir]"
-#  create_home_directory
-#end
+unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "node[:cloudoptimizer][:defaults][:home_dir]"
+  create_home_directory
+end
 
 # Create alternate log directory
-#unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "node[:cloudoptimizer][:defaults][:log_dir]"
-#  create_log_directory
-#end
+unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "node[:cloudoptimizer][:defaults][:log_dir]"
+  create_log_directory
+end
 
 # Install CloudOptimizer
-#install_cloudoptimizer_package
+install_cloudoptimizer_package
 
 # Install CloudController
 # Install the cloudoptimizer-s3 package if the user chooses to install either CloudController or squid
