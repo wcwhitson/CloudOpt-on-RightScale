@@ -63,26 +63,26 @@ end
 # Unlock collectd
 # For reasons that aren't entirely clear, RightScale locks collectd in the repo spec.  When locked
 # it is impossible to install the CloudOptimizer WebUI.
-#log "Unlock collectd: removing the default RightScale lock on the collectd package."
-#unlock_package "collectd" do
-#  package_name "collectd"
-#end
+log "Unlock collectd: removing the default RightScale lock on the collectd package."
+unlock_package "collectd" do
+  package_name "collectd"
+end
 
 # Open firewall ports
-#open_cloudoptimizer_ports
+open_cloudoptimizer_ports
 
 # Install compatible Python
 # We can remove this when 1.1.5 goes out of support
-#if node[:cloudoptimizer][:version] == '1.1.5'
-#  if node[:platform_version] == '12.04'
-#    log "Install python: Running an affected version on Ubuntu 12.04.  Installing Python 2.6 for compatibilty."
-#    install_python26
-#  else
-#    log "Install python: Not running on Ubuntu 12.x.  Skipping Python 2.6 install."
-#  end
-#else
-#  log "Install python: Not running on an affected version.  Skipping Python 2.6 install."
-#end
+if node[:cloudoptimizer][:version] == '1.1.5'
+  if node[:platform_version] == '12.04'
+    log "Install python: Running an affected version on Ubuntu 12.04.  Installing Python 2.6 for compatibilty."
+    install_python26
+  else
+    log "Install python: Not running on Ubuntu 12.x.  Skipping Python 2.6 install."
+  end
+else
+  log "Install python: Not running on an affected version.  Skipping Python 2.6 install."
+end
 
 # Create alternate home directory
 #unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "node[:cloudoptimizer][:defaults][:home_dir]"
