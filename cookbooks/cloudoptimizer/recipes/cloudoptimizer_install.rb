@@ -88,12 +88,12 @@ end
 install_cloudoptimizer_package
 
 # Create alternate home directory
-unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "node[:cloudoptimizer][:defaults][:home_dir]"
+unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == node[:cloudoptimizer][:defaults][:home_dir]
   create_home_directory
 end
 
 # Create alternate log directory
-unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "node[:cloudoptimizer][:defaults][:log_dir]"
+unless node[:cloudoptimizer_configuration][:logs][:log_directory] == node[:cloudoptimizer][:defaults][:log_dir]
   create_log_directory
 end
 
