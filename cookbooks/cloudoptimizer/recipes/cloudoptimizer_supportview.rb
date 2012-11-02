@@ -13,18 +13,18 @@
 rightscale_marker :begin
 
 case node[:cloudoptimizer][:supportview]
-when "Upload a full archive"
-  execute "supportview" do
-    command "supportview -u"
-  end
-when "Upload a light archive"
-  execute "supportview" do
-    command "supportview -l"
-  end
-when "Create a local archive"
-  execute "supportview" do
-    command "supportview"
-  end
+  when "Upload a full archive"
+    execute "supportview" do
+      command "supportview -u"
+    end
+  when "Upload a light archive"
+    execute "supportview" do
+      command "supportview -l"
+    end
+  when "Create a local archive"
+    execute "supportview" do
+      command "supportview"
+    end
 end
 
 unless node[:cloudoptimizer][:supportview] == "Do not run SupportView"
