@@ -13,7 +13,7 @@
 define :add_endpoint do
 if node[:cloudoptimizer_configuration][:peers][:endpoint_to_modify] != "None" && node[:cloudoptimizer_configuration][:peers][:peer_to_modify] != "None"
     execute "cloudconfig" do
-      command "cloudconfig peer_add #{node[:cloudoptimizer_configuration][:peers][:peer_to_modify]} #{node[:cloudoptimizer_configuration][:peers][:peer_to_modify]}"
+      command "cloudconfig peer_add #{node[:cloudoptimizer_configuration][:peers][:peer_to_modify]} #{node[:cloudoptimizer_configuration][:peers][:endpoint_to_modify]}"
     end
   end
 end
