@@ -31,6 +31,7 @@ define :user_feedback do
     pony_args = '-t'
   end
 
+  File.open("foo.txt", "w") {}
   st_name = File.read("/var/tmp/st_name")
 
   # Provide automatic feedback to cloudopt
