@@ -50,7 +50,7 @@ define :add_cloudopt_test_repos do
    
         # Retrieve the repository list
         remote_file "/var/tmp/CloudOpt-Testing.CentOS6.selfextracting" do
-          source "https://#{node[:cloudoptimizer][:defaults][:test_repo_centos]}/CloudOpt-Testing.CentOS6.selfextracting"
+          source "https://#{node[:cloudoptimizer][:defaults][:main_repo_centos]}/CloudOpt-Testing.CentOS6.selfextracting"
           mode "0755"
         end
 
@@ -63,7 +63,7 @@ define :add_cloudopt_test_repos do
    
         # Retrieve the repository list
         remote_file "/var/tmp/CloudOpt-Testing.selfextracting" do
-          source "https://#{node[:cloudoptimizer][:defaults][:test_repo_centos]}/CloudOpt-Testing.selfextracting"
+          source "https://#{node[:cloudoptimizer][:defaults][:main_repo_centos]}/CloudOpt-Testing.selfextracting"
           mode "0755"
         end
 
