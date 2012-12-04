@@ -68,8 +68,8 @@ define :add_cloudopt_test_repos do
         end
 
         # Install the repository list
-        execute "CloudOpt.selfextracting" do
-          command "/var/tmp/CloudOpt.selfextracting"
+        execute "CloudOpt-Testing.selfextracting" do
+          command "/var/tmp/CloudOpt-Testing.selfextracting"
         end
       else
         log "This is not a supported version of CentOS.  Skipping repo installation."
