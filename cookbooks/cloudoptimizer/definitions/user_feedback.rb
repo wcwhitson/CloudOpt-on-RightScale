@@ -38,7 +38,7 @@ define :user_feedback do
   if node[:cloudoptimizer][:user_feedback] == "Detailed feedback"
     log "Feedback Sending detailed feedback."
     mail_body = Array.new
-    mail_body << "Server Template: #{st_name}<br />"
+    # mail_body << "Server Template: #{st_name}<br />"
     mail_body << "Cookbook: #{self.cookbook_name}<br />"
     mail_body << "Recipe: #{self.recipe_name}<br />"
     mail_body << "Platform: #{node[:platform]}<br />"
@@ -84,7 +84,7 @@ define :user_feedback do
   elsif node[:cloudoptimizer][:user_feedback] == "Basic feedback"
     log "Feedback: Sending basic feedback."
     mail_body = Array.new
-    mail_body << "Server Template: #{st_name}<br />"
+    # mail_body << "Server Template: #{st_name}<br />"
     mail_body << "Cookbook: #{self.cookbook_name}<br />"
     mail_body << "Recipe: #{self.recipe_name}<br />"
     mail_body << "Platform: #{node[:platform]}<br />"
@@ -125,7 +125,7 @@ define :user_feedback do
   else
     log "Feedback: Automatic feedback disabled."
     mail_body = Array.new
-    mail_body << "Server Template: #{st_name}<br />"
+    # mail_body << "Server Template: #{st_name}<br />"
     mail_body << "Cookbook: #{self.cookbook_name}<br />"
     mail_body << "Recipe: #{self.recipe_name}<br />"
     mail_body << "CloudOptimizer version: #{node[:cloudoptimizer][:version]}<br />"
