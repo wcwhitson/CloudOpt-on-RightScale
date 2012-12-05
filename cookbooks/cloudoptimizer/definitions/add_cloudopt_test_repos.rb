@@ -55,8 +55,8 @@ define :add_cloudopt_test_repos do
         end
 
         # Install the repository list
-        execute "CloudOpt.CentOS6.selfextracting" do
-          command "/var/tmp/CloudOpt.CentOS6.selfextracting"
+        execute "CloudOpt-Testing.CentOS6.selfextracting" do
+          command "/var/tmp/CloudOpt-Testing.CentOS6.selfextracting"
         end
       elsif node[:platform_version] == '5.8'
         log "Repositories: Installing test repo on CentOS 5.x; using yum repository."
