@@ -31,7 +31,7 @@ end
 
 log "Unpacking CloudOptimizer installer"
 execute "tar" do
-  command "tar -pzxvf /var/tmp/cloudoptimizer-install.tar.gz"
+  command "tar -C /var/tmp -pzxvf /var/tmp/cloudoptimizer-install.tar.gz"
 end
 
 # Create alternate home directory
