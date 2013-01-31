@@ -12,20 +12,29 @@
 
 rightscale_marker :begin
 
+remote_file "/var/tmp/cloudoptimizer-install.tar.gz" do
+  source "http://#{node[:cloudoptimizer][:defaults][:download_site]}/#{node[:cloudoptimizer][:defaults][:installer]}"
+  owner "root"
+  group "root"
+  mode "0755"
+end
+
+log "Unpacking CloudOptimizer installer"
+execute "tar" do
+  command "tar -pzxvf /var/tmp/cloudoptimizer-install.tar.gz"
+end
+
 case node[:cloudoptimizer_packages][:remove]
 when "All Packages and Files"
   log "Removing all CloudOptimizer packages and files."
-  remove_cloudoptimizer_webui_package :purge
-  remove_cloudcontroller_package :purge
-  remove_cloudoptimizer_package :purge
-  remove_cloudoptimizer_tools_package :purge  
-  clear_cloudopt_repos
+  execute "cloudoptimizer-install.sh" do
+    command "bash /var/tmp/cloudoptimizer-install.sh --auto --quiet --purge"
+  end
 when "All Packages (Retain Files)"
   log "Removing all CloudOptimizer packages, but retaining configuration."
-  remove_cloudoptimizer_webui_package :remove
-  remove_cloudcontroller_package :remove
-  remove_cloudoptimizer_package :remove
-  remove_cloudoptimizer_tools_package :remove 
+  execute "cloudoptimizer-install.sh" do
+    command "bash /var/tmp/cloudoptimizer-install.sh --auto --quiet --remove"
+  end
 when "CloudController"
   log "Removing CloudController only."
   remove_cloudcontroller_package :remove

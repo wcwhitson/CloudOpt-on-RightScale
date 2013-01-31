@@ -18,20 +18,6 @@ rightscale_marker :begin
 # collect configuration data unless disabled by the user
 user_feedback
 
-# Install Cloud Credentials
-unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
-  install_aws_access_key
-end
-unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
-  install_aws_secret_key
-end
-
-# Add a cache volume
-# Currently unused
-#if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
-#  add_cache_volume
-#end
-
 # Add CloudOpt repos
 # First clear existing repos in case we are changing to or from test or beta repos
 clear_cloudopt_repos
@@ -43,16 +29,6 @@ end
 
 # Open firewall ports
 open_cloudoptimizer_ports
-
-# Create alternate home directory
-unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == "/home/cloudoptimizer"
-  create_home_directory
-end
-
-# Create alternate log directory
-unless node[:cloudoptimizer_configuration][:logs][:log_directory] == "/var/log/cloudoptimizer"
-  create_log_directory
-end
 
 # Install CloudController
 if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install'

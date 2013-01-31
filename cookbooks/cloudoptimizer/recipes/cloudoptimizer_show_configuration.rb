@@ -21,127 +21,163 @@ log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "HOME DIRECTORY:"
-get_home_dir
+get_cloudconfig "home" do
+  setting "/config/home"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "CACHE SIZE:"
-get_cache_size
+get_cloudconfig "default_cache_size" do
+  setting "/config/default_cache_size"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOCKET LOCATION:"
-get_socket_location
-log "--------------------------------------------------------------"
-
-log "--------------------------------------------------------------"
-log "BITMAP SIZE:"
-get_bitmap_size
-log "--------------------------------------------------------------"
-
-log "--------------------------------------------------------------"
-log "DB MEMORY SIZE:"
-get_db_memory_size
+get_cloudconfig "socket_location" do
+  setting "/config/socket_location"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "LOG DIRECTORY:"
-get_log_dir
+get_cloudconfig "log_dir" do
+  setting "/config/log_dir"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "LOG KEY:"
-get_log_key
+get_cloudconfig "log_key" do
+  setting "/config/log_key"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "COMPRESSION ENGINE:"
-get_compression_engine
+get_cloudconfig "compression_engine" do
+  setting "/config/compression_engine"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "COMPRESSION LEVEL:"
-get_compression_level
+get_cloudconfig "compression_level" do
+  setting "/config/compression_level"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "OPTIMISTIC DEDUPLICATION:"
-get_optimistic_deduplication
+get_cloudconfig "optimistic_deduplication" do
+  setting "/config/optimistic_deduplication"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "CACHE PROMOTION:"
-get_cache_promotion
+get_cloudconfig "cache_promotion" do
+  setting "/config/cache_promotion"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "COMPRESS CACHE:"
-get_compress_cache
+get_cloudconfig "compress_cache" do
+  setting "/config/compress_cache"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "THREAD COUNT:"
-get_thread_count
+get_cloudconfig "thread_count" do
+  setting "/config/thread_count"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "INTELLIGENT MESH:"
-get_intelligent_mesh
+get_cloudconfig "intelligent_mesh" do
+  setting "/config/intelligent_mesh"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "LOCAL PROXY ADDRESS:"
-get_local_proxy_address
+get_cloudconfig "local_proxy_address" do
+  setting "/config/local_proxy_address"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "PEER PROXY PORT:"
-get_peer_proxy_port
+get_cloudconfig "peer_proxy_port" do
+  setting "/config/peer_proxy_port"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "ENABLE SOCKS:"
-get_socks_proxy
+get_cloudconfig "enable_socks" do
+  setting "/config/enable_socks"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOCKS PROXY PORT:"
-get_socks_proxy_port
+get_cloudconfig "socks_proxy_port" do
+  setting "/config/socks_proxy_port"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOCKS USERNAME:"
-get_socks_proxy_username
+get_cloudconfig "socks_username" do
+  setting "/config/socks_username"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOURCE TRANSPARENCY:"
-get_transparent_proxy
+get_cloudconfig "source_transparency" do
+  setting "/config/source_transparency"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SOURCE REMAP:"
-get_source_remap
+get_cloudconfig "source_remap" do
+  setting "/config/source_remap"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "PEER ENCRYPTION:"
-get_peer_encryption
+get_cloudconfig "peer_encryption" do
+  setting "/config/peer_encryption"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SSL KEY:"
-get_ssl_key
+get_cloudconfig "ssl_key" do
+  setting "/config/ssk_key"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SSL CERT:"
-get_ssl_cert
+get_cloudconfig "ssl_cert" do
+  setting "/config/ssl_cert"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "SSL CA:"
-get_ssl_ca
+get_cloudconfig "ssl_ca" do
+  setting "/config/ssl_ca"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
@@ -151,17 +187,23 @@ log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "TERMINATE SSL:"
-get_terminate_ssl
+get_cloudconfig "terminate_ssl" do
+  setting "/config/terminate_ssl"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "VERIFY UPSTREAM CERTIFICATE:"
-get_verify_upstream_cert
+get_cloudconfig "verify_upstream" do
+  setting "/config/verify_upstream"
+end
 log "--------------------------------------------------------------"
 
 log "--------------------------------------------------------------"
 log "CIFS OPTIMIZATION:"
-get_cifs_optimization
+get_cloudconfig "cifs_optimization" do
+  setting "/config/cifs_optimization"
+end
 log "--------------------------------------------------------------"
 
 log "============ End of CloudOptimizer Configuration  ============"

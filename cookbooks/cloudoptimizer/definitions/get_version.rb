@@ -12,6 +12,6 @@
 
 define :get_version do
   execute "service" do
-          command "service cloudoptimizer show-version"
+    command "service cloudoptimizer show-version"
   end
 end

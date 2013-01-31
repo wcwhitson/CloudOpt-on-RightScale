@@ -16,48 +16,16 @@ rightscale_marker :begin
 # collect configuration data unless disabled by the user
 user_feedback
 
-# Accept EULA
-accept_eula
-
-# Install Cloud Credentials
-# this is used to install the credentials on the instance for easy use with CloudController.
-unless node[:cloudoptimizer][:cloud_credentials][:aws][:accesskey] == "None"
-  install_aws_access_key
-end
-unless node[:cloudoptimizer][:cloud_credentials][:aws][:secretkey] == "None"
-  install_aws_secret_key
+remote_file "/var/tmp/cloudoptimizer-install.tar.gz" do
+  source "http://#{node[:cloudoptimizer][:defaults][:download_site]}/#{node[:cloudoptimizer][:defaults][:installer]}"
+  owner "root"
+  group "root"
+  mode "0755"
 end
 
-# Add a cache volume
-# Currently unused
-#if node[:cloudoptimizer_configuration][:byte_cache][:ebs_volume_size] != '0'
-#  add_cache_volume
-#end
-
-# Add CloudOpt repos
-if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
-  add_cloudopt_test_repos
-else
-  add_cloudopt_repos
-end
-
-# Install EPEL
-# We seem to have a lot of problems with the EPEL repos that RightScale installs by
-# default.  Installing the default repos makes those problems go away.
-if node[:platform] == 'centos'
-  if node[:platform_version] == '5.4' || node[:platform_version] == '5.6' || node[:platform_version] == '5.8'
-    log "Installing EPEL for CentOS 5.x"
-    execute "rpm" do
-      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_5_repo]}"
-    end
-  elsif node[:platform_version] == '6.2' || node[:platform_version] == '6.3'
-    log "Installing EPEL for CentOS 6.x"
-    execute "rpm" do
-      command "rpm -Uvh #{node[:cloudoptimizer][:defaults][:epel_6_repo]}"
-    end
-  else
-    log "Not CentOS 5.x or 6.x, so not installing EPEL." 
-  end
+log "Unpacking CloudOptimizer installer"
+execute "tar" do
+  command "tar -pzxvf /var/tmp/cloudoptimizer-install.tar.gz"
 end
 
 # Unlock collectd
@@ -71,30 +39,31 @@ end
 # Open firewall ports
 open_cloudoptimizer_ports
 
-# Install compatible Python
-# We can remove this when 1.1.5 goes out of support
-if node[:cloudoptimizer][:version] == '1.1.5'
-  if node[:platform_version] == '12.04'
-    log "Install python: Running an affected version on Ubuntu 12.04.  Installing Python 2.6 for compatibilty."
-    install_python26
-  else
-    log "Install python: Not running on Ubuntu 12.x.  Skipping Python 2.6 install."
-  end
-else
-  log "Install python: Not running on an affected version.  Skipping Python 2.6 install."
-end
-
-# Install CloudOptimizer
-install_cloudoptimizer_package
-
 # Create alternate home directory
 unless node[:cloudoptimizer_configuration][:file_locations][:home_directory] == node[:cloudoptimizer][:defaults][:home_dir]
-  create_home_directory
+  install_arg1 = "--home_dir #{node[:cloudoptimizer_configuration][:file_locations][:home_directory]}"
 end
 
 # Create alternate log directory
 unless node[:cloudoptimizer_configuration][:logs][:log_directory] == node[:cloudoptimizer][:defaults][:log_dir]
-  create_log_directory
+  install_arg2 = "--log_dir #{node[:cloudoptimizer_configuration][:logs][:log_directory]}"
+end
+
+# Install WebUI
+if node[:cloudoptimizer][:web_interface][:webui_passwd] != 'disabled'
+  install_arg3 = "--password #{node[:cloudoptimizer][:web_interface][:webui_passwd]}"
+end
+
+# Install test or beta build
+if node[:cloudoptimizer_packages][:special] == 'use tcs' && node[:cloudoptimizer][:version] == 'latest'
+  install_arg4 = "--testing"
+end
+
+# Install cloudoptimizer
+# Run the install script
+log "Running CloudOptimizer install script"
+execute "cloudoptimizer-install.sh" do
+  command "bash /var/tmp/cloudoptimizer-install.sh --auto --quiet #{install_arg1} #{install_arg2} #{install_arg3} #{install_arg4}"
 end
 
 # Install CloudController
@@ -107,14 +76,6 @@ if node[:cloudoptimizer_packages][:additional][:cloudoptimizers3] == 'Install' |
   else
     stop_squid
     start_squid
-  end
-end
-
-# Install WebUI
-if node[:cloudoptimizer_packages][:additional][:cloudoptimizerwebui] == 'Install'
-  install_cloudoptimizer_webui_package
-  if node[:cloudoptimizer][:web_interface][:webui_passwd] != 'disabled'
-    set_webui_password
   end
 end
 

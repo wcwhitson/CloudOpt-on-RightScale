@@ -3,10 +3,10 @@
 #
 # Copyright CloudOpt, Inc.  All rights reserved.
 
-set[:cloudoptimizer][:defaults][:current_version] = '1.2.1'
-set[:cloudoptimizer][:defaults][:previous_version_1] = '1.2.0'
-set[:cloudoptimizer][:defaults][:previous_version_2] = '1.1.7'
-set[:cloudoptimizer][:defaults][:previous_version_3] = '1.1.5'
+set[:cloudoptimizer][:defaults][:current_version] = '1.3.0'
+set[:cloudoptimizer][:defaults][:previous_version_1] = '1.2.1'
+set[:cloudoptimizer][:defaults][:previous_version_2] = '1.2.0'
+set[:cloudoptimizer][:defaults][:previous_version_3] = '1.1.7'
 set[:cloudoptimizer][:defaults][:previous_version_4] = '1.1.5'
 
 set[:cloudoptimizer][:defaults][:vendor_name] = "CloudOpt"
@@ -22,6 +22,8 @@ set[:cloudoptimizer][:defaults][:test_repo_centos] = '50.16.196.194'
 set[:cloudoptimizer][:defaults][:main_repo_ubuntu] = 'apt.cloudopt.com'
 set[:cloudoptimizer][:defaults][:archive_repo_ubuntu] = 'rightscale.cloudopt.com.s3-website-us-east-1.amazonaws.com'
 set[:cloudoptimizer][:defaults][:main_repo_centos] = 'yum.cloudopt.com'
+set[:cloudoptimizer][:defaults][:download_site] = 'download.cloudopt.com'
+set[:cloudoptimizer][:defaults][:installer] = 'cloudoptimizer-install.tar.gz'
 
 set[:cloudoptimizer][:defaults][:webui_port] = "8000"
   

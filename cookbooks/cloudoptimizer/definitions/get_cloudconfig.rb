@@ -1,5 +1,5 @@
 ################################################################################
-# get_socket_location.rb
+# get_cloudconfig.rb
 ################################################################################
 # Chef definition, part of cloudoptimizer cookbook
 ################################################################################
@@ -7,12 +7,12 @@
 ################################################################################
 # Author: Bill Whitson <bill@cloudopt.com>
 ################################################################################
-# Gets CloudOptimizer socket file location
+# Gets a setting from the configuration
 ################################################################################
 
-define :get_socket_location do
+define :get_cloudconfig do
   execute "cloudconfig" do
-    command "cloudconfig get /config/socket_location"
-    returns [0, 1]
+    command "cloudconfig get #{params[:setting]}"
+    returns [0,1]
   end
 end

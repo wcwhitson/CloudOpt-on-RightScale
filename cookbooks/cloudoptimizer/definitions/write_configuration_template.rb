@@ -17,10 +17,18 @@
 define :write_configuration_template do
   log "Template config: Starting"
   log "Template config: CloudOptimizer version: #{node[:cloudoptimizer][:version]}"
-  if node[:cloudoptimizer][:version] == '0.9.4'
+  if node[:cloudoptimizer][:version] == '0.9.4' || node[:cloudoptimizer][:version] == '1.1.5'
     log "Template config: Using template cloudoptimizer.conf.0.9.4.erb."
     template "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][:defaults][:config_file_name]}" do
       source "cloudoptimizer.conf.0.9.4.erb"
+      mode "0644"
+      owner "root"
+      group "root"
+    end
+  elsif node[:cloudoptimizer][:version] == '1.1.7' || node[:cloudoptimizer][:version] == '1.2.0' || node[:cloudoptimizer][:version] == '1.2.1'
+    log "Template config: Using template cloudoptimizer.conf.1.1.7.erb."
+    template "#{node[:cloudoptimizer][:defaults][:config_file_path]}/#{node[:cloudoptimizer][:defaults][:config_file_name]}" do
+      source "cloudoptimizer.conf.1.1.7.erb"
       mode "0644"
       owner "root"
       group "root"

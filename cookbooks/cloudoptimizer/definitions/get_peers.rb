@@ -13,6 +13,5 @@
 define :get_peers do
   execute "cloudconfig" do
     command "cloudconfig peer_list"
-    returns [0, 1]
   end
 end

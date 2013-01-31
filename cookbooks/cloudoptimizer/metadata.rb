@@ -3,13 +3,22 @@ maintainer_email "support@cloudopt.com"
 license "All rights reserved"
 description "Installs/Configures/Removes CloudOptimizer"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.70"
+version "0.71"
 
+supports "centos", "~> 5.5"
+supports "centos", "~> 5.6"
+supports "centos", "~> 5.7"
 supports "centos", "~> 5.8"
+supports "centos", "~> 6.0"
+supports "centos", "~> 6.1"
 supports "centos", "~> 6.2"
 supports "centos", "~> 6.3"
 supports "ubuntu", "~> 10.04"
+supports "ubuntu", "~> 11.04"
+supports "ubuntu", "~> 11.10"
 supports "ubuntu", "~> 12.04"
+supports "ubuntu", "~> 12.10"
+supports "ubuntu", "~> 13.04"
 
 depends "block_device"
 depends "sys_firewall"
@@ -62,20 +71,6 @@ attribute "cloudoptimizer_configuration/file_locations/socket_location",
   :default => "/var/run/cloudoptimizer/cloudoptimizer_socket",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
-attribute "cloudoptimizer_configuration/byte_cache/bitmap_size",
-  :display_name => "Bitmap size",
-  :description => "CloudOptimizer cache memory map size",
-  :required => "optional",
-  :default => "512",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
-attribute "cloudoptimizer_configuration/byte_cache/db_memory_size",
-  :display_name => "Index size",
-  :description => "CloudOptimizer cache memory index size",
-  :required => "optional",
-  :default => "384",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
 attribute "cloudoptimizer_configuration/logs/log_directory",
   :display_name => "Log directory",
   :description => "Location of CloudOptimizer log files",
@@ -120,6 +115,14 @@ attribute "cloudoptimizer_configuration/byte_cache/cache_promotion",
   :required => "optional",
   :default => "true",
   :choice => [ "true", "false" ],
+  :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
+
+attribute "cloudoptimizer_configuration/shared_cache",
+  :display_name => "Shared cache",
+  :description => "If true, all clients that connect to CloudOptimizer will use the same cache",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/byte_cache/compress_cache",
@@ -222,7 +225,7 @@ attribute "cloudoptimizer/version",
   :description => "Lock this server to a particular CloudOptimizer version",
   :required => "optional",
   :default => "latest",
-  :choice => [ "latest", "1.2.1", "1.2.0", "1.1.7", "1.1.5" ],
+  :choice => [ "latest", "1.3.0", "1.2.1" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/http_proxy",
@@ -323,20 +326,6 @@ attribute "cloudoptimizer_packages/special",
   :default => "Do not install",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install", "cloudoptimizer::cloudoptcommon", "cloudoptimizer::cloudoptcommon" ]
 
-attribute "cloudoptimizer/cloud_credentials/aws/accesskey",
-  :display_name => "AWS Access Key",
-  :description => "Install your AWS access key on the server",
-  :required => "optional",
-  :default => "None",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
-attribute "cloudoptimizer/cloud_credentials/aws/secretkey",
-  :display_name => "AWS Secret Key",
-  :description => "Install your AWS secret key on the server",
-  :required => "optional",
-  :default => "None",
-  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
 attribute "cloudoptimizer/supportview",
   :display_name => "SupportView",
   :description => "Create a support diagnostics file and, optionally, upload to CloudOpt",
@@ -352,14 +341,6 @@ attribute "cloudoptimizer/user_feedback",
   :default => "Basic feedback",
   :choice => [ "Basic feedback", "Detailed feedback", "No feedback" ],
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
-attribute "cloudoptimizer/security/securitygroup",
-  :display_name => "Create AWS Security Group",
-  :description => "Create a security group for AWS that opens the CloudOptimizer TCP ports",
-  :required => "optional",
-  :default => "Do not open ports",
-  :choice => [ "Do not open ports", "Open ports" ],
-  :recipes => [ "cloudoptimizer::addsecuritygroup" "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_configuration/cifs/optimize_cifs",
   :display_name => "CIFS optimization",
@@ -391,13 +372,6 @@ attribute "cloudoptimizer/web_interface/webui_passwd",
   :required => "optional",
   :default => "disabled",
   :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
-
-#attribute "cloudoptimizer_configuration/byte_cache/ebs_volume_size",
-#  :display_name => "EBS cache volume",
-#  :description => "On Amazon AWS, specify an EBS volume size in GB to use for the CloudOptimizer cache directory",
-#  :required => "optional",
-#  :default => "0",
-#  :recipes => [ "cloudoptimizer::cloudoptimizer_install",  "cloudoptimizer::cloudoptimizer_configure", "cloudoptimizer::cloudoptcommon" ]
 
 attribute "cloudoptimizer_mysql/endpoints/master_cloudoptimizer_address",
   :display_name => "MySQL Master CloudOptimizer IP Address or DNS Name",

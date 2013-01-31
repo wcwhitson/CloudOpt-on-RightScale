@@ -34,6 +34,17 @@
                 "socket_location": "<%= node[:cloudoptimizer_configuration][:file_locations][:socket_location] %>",
 
                 /*
+                 * Memory allocated for bitmap.
+                 * Must be power of 2.
+                 */
+                "bitmap_size": <%= node[:cloudoptimizer_configuration][:byte_cache][:bitmap_size] %>,
+
+                /*
+                 * How much memory in MB to use the db index.
+                 */
+                "db_memory_size": <%= node[:cloudoptimizer_configuration][:byte_cache][:db_memory_size] %>,
+
+                /*
                  * Which directory should log files go to?
                  */
                 "log_dir": "<%= node[:cloudoptimizer_configuration][:logs][:log_directory] %>",
@@ -90,13 +101,6 @@
                 "optimistic_deduplication": <%= node[:cloudoptimizer_configuration][:optimistic_deduplication] %>,
                 
                 /*
-                 * Enabled Shared cache. All clients use the same cache,
-                 * this will save cache space if the clients are transferring
-                 * the same data.                 
-                 */
-                "shared_cache": <%= node[:cloudoptimizer_configuration][:shared_cache] %>,
-                
-                /*
                  * Enable cache promotion. If enabled, this will prevent
                  * frequently referenced content being pushed from the cache
                  * by newer traffic. This may impact performance in return
@@ -104,11 +108,11 @@
                  */
                 "cache_promotion": <%= node[:cloudoptimizer_configuration][:byte_cache][:cache_promotion] %>,
 
-		        /*
-		         * Compress data stored in the cache. With this option turned
-		         * on the cache will need less disk space, however there is
-		         * small performance penalty with respect to throughput.
-		         */
+		/*
+		 * Compress data stored in the cache. With this option turned
+		 * on the cache will need less disk space, however there is
+		 * small performance penalty with respect to throughput.
+		 */
                 "compress_cache": <%= node[:cloudoptimizer_configuration][:byte_cache][:compress_cache] %>,
 
                 /*
@@ -135,9 +139,9 @@
                 "peer_proxy_port": <%= node[:cloudoptimizer_configuration][:peer_proxy_port] %>,
 
 
-		        /*
-		         * Enable cloudoptimizer to act as a SOCKS4 proxy.
-		         */
+		/*
+		 * Enable cloudoptimizer to act as a SOCKS4 proxy.
+		 */
                 "enable_socks": <%= node[:cloudoptimizer_configuration][:socks][:socks_proxy] %>,
                 "socks_proxy_port": <%= node[:cloudoptimizer_configuration][:socks][:socks_proxy_port] %>,
                 "socks_username": "<%= node[:cloudoptimizer_configuration][:socks][:socks_username] %>",
@@ -153,7 +157,7 @@
                  * Source address translation for transparency
                  */
                 "source_remap": {
-   			            "<%= node[:cloudoptimizer_configuration][:transparency][:transp_int_ip] %>": "<%= node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip] %>"
+   			"<%= node[:cloudoptimizer_configuration][:transparency][:transp_int_ip] %>": "<%= node[:cloudoptimizer_configuration][:transparency][:transp_ext_ip] %>"
                 },
 
                 /*
@@ -220,6 +224,7 @@
                 "terminate_ssl": "<%= node[:cloudoptimizer_configuration][:encryption][:ssl_termination] %>",
                 "verify_upstream_certificate": "<%= node[:cloudoptimizer_configuration][:encryption][:upstream_verification] %>",
 
+
                 /*
                  * Intercept CIFS traffic and apply optimizations.
                  */
@@ -253,9 +258,17 @@
                  *       }
                  */
                 "peers": {
-		             <%= node[:cloudoptimizer_configuration][:peer_statement] %>
+		<%= node[:cloudoptimizer_configuration][:peer_statement] %>
                 }
         }, 
+        "webui": {
+                /*
+                 * WebUI Login
+                 */
+
+                "webui_login": "<%= node[:cloudoptimizer][:web_interface][:webui_login] %>",
+                "webui_passwd": "<%= node[:cloudoptimizer][:web_interface][:webui_passwd] %>"
+        },
 
         "logging": {
                 /*
