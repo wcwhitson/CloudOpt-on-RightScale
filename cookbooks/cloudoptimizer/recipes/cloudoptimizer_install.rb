@@ -62,8 +62,8 @@ end
 # Install cloudoptimizer
 # Run the install script
 log "Running CloudOptimizer install script"
-execute "cloudoptimizer-install.sh" do
-  command "bash /var/tmp/cloudoptimizer-install.sh --auto --quiet #{install_arg1} #{install_arg2} #{install_arg3} #{install_arg4}"
+bash "cloudoptimizer-install.sh" do
+  /var/tmp/cloudoptimizer-install.sh --auto --quiet install_arg1 install_arg2 install_arg3 install_arg4
 end
 
 # Install CloudController
